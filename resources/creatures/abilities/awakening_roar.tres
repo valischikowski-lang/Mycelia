@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_qt7rv"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_0wrd8"]
+[ext_resource type="Resource" path="res://resources/status_effects/golem_roar.tres" id="3_f403o"]
+
+[resource]
+script = ExtResource("1_qt7rv")
+id = "awakening_roar"
+display_name = "Awakening Roar"
+description = "Every mushroom in the arena turns to face you."
+element = "fungal"
+mana_cost = 0
+base_damage = 0
+damage_variance = 0.1
+healing_value = 0
+accuracy = 0.95
+target_type = 2
+target_count = 1
+status_effects = Array[ExtResource("2_0wrd8")]([ExtResource("3_f403o")])
+duration = 3
+rarity = 0
+armor_pierce = 0.0
+mana_gain = 0
+draw_cards = 0
+special = ""
+vfx_style = "cosmic_gravity"
+icon_glyph = "✺"
+sound_cast = "cast_fungal"
+sound_impact = "impact_fungal"
+animation = {
+"cast_time": 0.45,
+"travel_time": 0.5
+}
+cooldown = 5
+ai_tags = PackedStringArray("buff")
+min_phase = 1
+charge_turns = 0

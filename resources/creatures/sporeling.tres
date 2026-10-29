@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="CreatureData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_o3v4l"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/nibble.tres" id="2_cwfys"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/spore_puff.tres" id="3_m6st5"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="4_dwrbd"]
+
+[resource]
+script = ExtResource("4_dwrbd")
+id = "sporeling"
+display_name = "Sporeling"
+description = "A curious little walking mushroom."
+element = "fungal"
+level = 1
+max_health = 30
+defense = 2
+power = 0
+speed = 12
+abilities = Array[ExtResource("1_o3v4l")]([ExtResource("2_cwfys"), ExtResource("3_m6st5")])
+personality = 0
+phase_thresholds = PackedFloat32Array()
+xp_reward = 22
+glimmer_min = 2
+glimmer_max = 5
+loot_table = Array[Dictionary]([{
+"chance": 0.6,
+"item_id": "sporeling_cap",
+"max": 2,
+"min": 1
+}, {
+"chance": 0.2,
+"item_id": "mana_moss",
+"max": 1,
+"min": 1
+}])
+visual_kind = "sporeling"
+visual_scale = 1.0
+tint = Color(1, 1, 1, 1)
+world_behavior = "hostile"
+lore = "Sporelings are the Mycelium's way of looking around. They chirp when they find something interesting, which is everything."

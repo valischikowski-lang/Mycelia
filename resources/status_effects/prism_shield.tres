@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_nug0f"]
+
+[resource]
+script = ExtResource("1_nug0f")
+id = "prism_shield"
+display_name = "Prism Ward"
+description = "A refracting barrier absorbs incoming damage."
+kind = 2
+magnitude = 16.0
+duration = 3
+element = "crystal"
+color = Color(0.309804, 0.952941, 1, 1)
+glyph = "◆"
+chance = 1.0
+stacks = false
+apply_to_self = true

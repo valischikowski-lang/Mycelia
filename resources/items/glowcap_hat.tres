@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_20y3w"]
+
+[resource]
+script = ExtResource("1_20y3w")
+id = "glowcap_hat"
+display_name = "Glowcap Hat"
+description = "Purely decorative. Purely magnificent."
+category = 5
+rarity = 1
+max_stack = 1
+value = 20
+icon_color = Color(0.211765, 1, 0.941176, 1)
+icon_glyph = "♛"
+equip_slot = "hat"
+stat_bonuses = {}
+use_effect = {}

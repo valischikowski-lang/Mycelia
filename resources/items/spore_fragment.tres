@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_onvu2"]
+
+[resource]
+script = ExtResource("1_onvu2")
+id = "spore_fragment"
+display_name = "Spore Fragment"
+description = "A seed-shaped shard of the Mycelium's memory. It hums when you hold it near your ear."
+category = 0
+rarity = 2
+max_stack = 9
+value = 1
+icon_color = Color(0.211765, 1, 0.941176, 1)
+icon_glyph = "✺"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {}

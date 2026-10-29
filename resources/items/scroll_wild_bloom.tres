@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_8odmn"]
+
+[resource]
+script = ExtResource("1_8odmn")
+id = "scroll_wild_bloom"
+display_name = "Scroll: Wild Bloom"
+description = "Reading it aloud makes your palms smell like spring. Teaches Wild Bloom."
+category = 3
+rarity = 1
+max_stack = 5
+value = 30
+icon_color = Color(0.490196, 1, 0.352941, 1)
+icon_glyph = "✿"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {
+"unlock_spell": "wild_bloom"
+}

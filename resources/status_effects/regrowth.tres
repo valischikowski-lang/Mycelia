@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_8iyf2"]
+
+[resource]
+script = ExtResource("1_8iyf2")
+id = "regrowth"
+display_name = "Regrowth"
+description = "Living sap restores health each turn."
+kind = 1
+magnitude = 6.0
+duration = 3
+element = "nature"
+color = Color(0.490196, 1, 0.352941, 1)
+glyph = "❦"
+chance = 1.0
+stacks = false
+apply_to_self = false

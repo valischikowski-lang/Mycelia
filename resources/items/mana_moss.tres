@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_xsosp"]
+
+[resource]
+script = ExtResource("1_xsosp")
+id = "mana_moss"
+display_name = "Mana Moss"
+description = "Chew slowly. Restores 4 mana."
+category = 6
+rarity = 0
+max_stack = 20
+value = 6
+icon_color = Color(0.247059, 0.847059, 1, 1)
+icon_glyph = "❖"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {
+"mana": 4
+}

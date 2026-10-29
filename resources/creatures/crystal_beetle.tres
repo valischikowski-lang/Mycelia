@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="CreatureData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_0nwmq"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/mandible_snap.tres" id="2_nydxm"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/carapace_shine.tres" id="3_r2yqk"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/refracting_charge.tres" id="4_xbs6s"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="5_k1vju"]
+
+[resource]
+script = ExtResource("5_k1vju")
+id = "crystal_beetle"
+display_name = "Crystal Beetle"
+description = "An armored insect that eats light."
+element = "crystal"
+level = 2
+max_health = 46
+defense = 8
+power = 0
+speed = 8
+abilities = Array[ExtResource("1_0nwmq")]([ExtResource("2_nydxm"), ExtResource("3_r2yqk"), ExtResource("4_xbs6s")])
+personality = 1
+phase_thresholds = PackedFloat32Array()
+xp_reward = 34
+glimmer_min = 4
+glimmer_max = 8
+loot_table = Array[Dictionary]([{
+"chance": 0.7,
+"item_id": "beetle_shard",
+"max": 2,
+"min": 1
+}, {
+"chance": 0.15,
+"item_id": "dewdrop_tonic",
+"max": 1,
+"min": 1
+}])
+visual_kind = "crystal_beetle"
+visual_scale = 1.0
+tint = Color(1, 1, 1, 1)
+world_behavior = "hostile"
+lore = "Crystal Beetles grow their shells from moonlight they swallow. Their song is a single, very patient note."

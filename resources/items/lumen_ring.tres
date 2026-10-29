@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_pc4mj"]
+
+[resource]
+script = ExtResource("1_pc4mj")
+id = "lumen_ring"
+display_name = "Lumen Ring"
+description = "A ring of hardened moonlight from a beetle's nest."
+category = 4
+rarity = 2
+max_stack = 1
+value = 45
+icon_color = Color(0.309804, 0.952941, 1, 1)
+icon_glyph = "◯"
+equip_slot = "ring"
+stat_bonuses = {
+"crit_chance": 4,
+"magic_power": 2
+}
+use_effect = {}

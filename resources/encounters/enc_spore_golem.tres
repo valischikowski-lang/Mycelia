@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EncounterData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_bl316"]
+[ext_resource type="Resource" path="res://resources/creatures/spore_golem.tres" id="2_oknc4"]
+[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="3_tr2ub"]
+
+[resource]
+script = ExtResource("3_tr2ub")
+id = "enc_spore_golem"
+display_name = "Ancient Spore Golem"
+enemies = Array[ExtResource("1_bl316")]([ExtResource("2_oknc4")])
+arena_theme = "meadow"
+music = "music_boss"
+can_flee = true
+ambush = false
+bonus_xp = 100
+bonus_glimmer = 50
+bonus_items = {}
+intro_text = "The hill stands up."
+unique = true

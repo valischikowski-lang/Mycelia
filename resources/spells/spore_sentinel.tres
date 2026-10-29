@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_dmt1i"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_jwmqk"]
+[ext_resource type="Resource" path="res://resources/status_effects/sentinel.tres" id="3_8ctvh"]
+
+[resource]
+script = ExtResource("1_dmt1i")
+id = "spore_sentinel"
+display_name = "Spore Sentinel"
+description = "Grow a tiny fungal guardian that strikes an enemy each turn for 3 turns."
+element = "fungal"
+mana_cost = 3
+base_damage = 0
+damage_variance = 0.1
+healing_value = 0
+accuracy = 0.95
+target_type = 2
+target_count = 1
+status_effects = Array[ExtResource("2_jwmqk")]([ExtResource("3_8ctvh")])
+duration = 3
+rarity = 2
+armor_pierce = 0.0
+mana_gain = 0
+draw_cards = 0
+special = ""
+vfx_style = "fungal_summon"
+icon_glyph = "♟"
+sound_cast = "cast_fungal"
+sound_impact = "impact_fungal"
+animation = {
+"cast_time": 0.45,
+"travel_time": 0.5
+}
+cooldown = 0
+ai_tags = PackedStringArray()
+min_phase = 0
+charge_turns = 0

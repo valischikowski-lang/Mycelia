@@ -1,0 +1,115 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_sgbx1"]
+[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_pq6bn"]
+
+[sub_resource type="Resource" id="Resource_i2eng"]
+script = ExtResource("1_sgbx1")
+id = "wake_up"
+description = "Wake up in the Dreaming Meadow"
+type = 3
+target_id = "awakening_hollow"
+required_amount = 1
+map_hint = Vector3(0, 0, 92)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_ynfbr"]
+script = ExtResource("1_sgbx1")
+id = "find_keeper"
+description = "Follow the glowing path to the giant mushroom house"
+type = 3
+target_id = "keeper_grove"
+required_amount = 1
+map_hint = Vector3(12, 0, -42)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_67jyw"]
+script = ExtResource("1_sgbx1")
+id = "talk_keeper"
+description = "Speak with the Mushroom Keeper"
+type = 0
+target_id = "mushroom_keeper"
+required_amount = 1
+map_hint = Vector3(12, 0, -40)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_w3y2x"]
+script = ExtResource("1_sgbx1")
+id = "collect_fragments"
+description = "Collect Spore Fragments (look for the beams of light)"
+type = 1
+target_id = "spore_fragment"
+required_amount = 3
+map_hint = Vector3(0, 0, 0)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_vkg40"]
+script = ExtResource("1_sgbx1")
+id = "return_keeper"
+description = "Return the fragments to the Mushroom Keeper"
+type = 0
+target_id = "mushroom_keeper"
+required_amount = 1
+map_hint = Vector3(12, 0, -40)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_1c800"]
+script = ExtResource("1_sgbx1")
+id = "learn_fungal"
+description = "Learn Fungal Magic from Umbel"
+type = 4
+target_id = "learn_fungal_magic"
+required_amount = 1
+map_hint = Vector3(12, 0, -40)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_2nhbf"]
+script = ExtResource("1_sgbx1")
+id = "spot_creature"
+description = "Investigate the strange chirping near the house"
+type = 3
+target_id = "corrupted_sighting"
+required_amount = 1
+map_hint = Vector3(-14, 0, -58)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_0e8jg"]
+script = ExtResource("1_sgbx1")
+id = "defeat_creature"
+description = "Defeat the Hollow-Eyed Sporeling"
+type = 2
+target_id = "enc_corrupted_sporeling"
+required_amount = 1
+map_hint = Vector3(-14, 0, -58)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_2whoi"]
+script = ExtResource("1_sgbx1")
+id = "report_keeper"
+description = "Tell Umbel what you saw"
+type = 0
+target_id = "mushroom_keeper"
+required_amount = 1
+map_hint = Vector3(12, 0, -40)
+hint_region = "dreaming_meadow"
+
+[resource]
+script = ExtResource("2_pq6bn")
+id = "first_awakening"
+title = "The First Awakening"
+description = "You woke in a meadow you have never seen, which somehow remembers you. Find out where you are — and why the ground is humming."
+category = 0
+prerequisites = PackedStringArray()
+min_level = 1
+objectives = Array[ExtResource("1_sgbx1")]([SubResource("Resource_i2eng"), SubResource("Resource_ynfbr"), SubResource("Resource_67jyw"), SubResource("Resource_w3y2x"), SubResource("Resource_vkg40"), SubResource("Resource_1c800"), SubResource("Resource_2nhbf"), SubResource("Resource_0e8jg"), SubResource("Resource_2whoi")])
+sequential = true
+auto_start = true
+reward_xp = 80
+reward_glimmer = 25
+reward_items = {
+"dewdrop_tonic": 2,
+"moss_woven_robe": 1
+}
+reward_spells = PackedStringArray()
+reward_skill_points = 1
+completion_text = "The Mycelium noticed you. You noticed it back."

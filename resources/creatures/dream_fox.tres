@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CreatureData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_tp4l7"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/starlit_pounce.tres" id="2_0r3is"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/moon_veil.tres" id="3_blwki"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/moonlight_lick.tres" id="4_qw7hb"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="5_iejf7"]
+
+[resource]
+script = ExtResource("5_iejf7")
+id = "dream_fox"
+display_name = "Dream Fox"
+description = "Neither friendly nor not. It is deciding."
+element = "cosmic"
+level = 3
+max_health = 52
+defense = 4
+power = 5
+speed = 18
+abilities = Array[ExtResource("1_tp4l7")]([ExtResource("2_0r3is"), ExtResource("3_blwki"), ExtResource("4_qw7hb")])
+personality = 2
+phase_thresholds = PackedFloat32Array()
+xp_reward = 55
+glimmer_min = 8
+glimmer_max = 14
+loot_table = Array[Dictionary]([{
+"chance": 0.8,
+"item_id": "fox_starfur",
+"max": 1,
+"min": 1
+}])
+visual_kind = "dream_fox"
+visual_scale = 1.0
+tint = Color(1, 1, 1, 1)
+world_behavior = "neutral"
+lore = "The Dream Fox appears in the dreams of everyone who has ever slept in the meadow. Nobody remembers inviting it."

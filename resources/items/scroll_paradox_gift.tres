@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_52oi3"]
+
+[resource]
+script = ExtResource("1_52oi3")
+id = "scroll_paradox_gift"
+display_name = "Scroll: Paradox Gift"
+description = "Written tomorrow. Teaches Paradox Gift."
+category = 3
+rarity = 2
+max_stack = 5
+value = 45
+icon_color = Color(1, 0.372549, 0.784314, 1)
+icon_glyph = "∞"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {
+"unlock_spell": "paradox_gift"
+}

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_ybyc1"]
+
+[resource]
+script = ExtResource("1_ybyc1")
+id = "golem_heartspore"
+display_name = "Golem Heartspore"
+description = "The beating, glowing heart of an ancient gardener. Still warm."
+category = 2
+rarity = 3
+max_stack = 5
+value = 60
+icon_color = Color(1, 0.541176, 0.164706, 1)
+icon_glyph = "❂"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {}

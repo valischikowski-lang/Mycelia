@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_3rt0i"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_6lxae"]
+[ext_resource type="Resource" path="res://resources/status_effects/carapace.tres" id="3_64l8h"]
+[ext_resource type="Resource" path="res://resources/status_effects/beetle_glint.tres" id="4_g68fr"]
+
+[resource]
+script = ExtResource("1_3rt0i")
+id = "carapace_shine"
+display_name = "Carapace Shine"
+description = "Its shell catches the moonlight and hardens."
+element = "crystal"
+mana_cost = 0
+base_damage = 0
+damage_variance = 0.1
+healing_value = 0
+accuracy = 0.95
+target_type = 2
+target_count = 1
+status_effects = Array[ExtResource("2_6lxae")]([ExtResource("3_64l8h"), ExtResource("4_g68fr")])
+duration = 2
+rarity = 0
+armor_pierce = 0.0
+mana_gain = 0
+draw_cards = 0
+special = ""
+vfx_style = "crystal_shield"
+icon_glyph = "◆"
+sound_cast = "cast_crystal"
+sound_impact = "impact_crystal"
+animation = {
+"cast_time": 0.45,
+"travel_time": 0.5
+}
+cooldown = 3
+ai_tags = PackedStringArray("shield", "buff")
+min_phase = 0
+charge_turns = 0

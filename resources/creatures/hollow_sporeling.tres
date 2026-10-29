@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="CreatureData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_241it"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/glitch_bite.tres" id="2_ctd85"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/void_puff.tres" id="3_1tmi5"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/quiver.tres" id="4_3g7bx"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="5_drn87"]
+
+[resource]
+script = ExtResource("5_drn87")
+id = "hollow_sporeling"
+display_name = "Hollow-Eyed Sporeling"
+description = "A sporeling whose eyes have gone dark and hollow."
+element = "chaos"
+level = 2
+max_health = 42
+defense = 2
+power = 10
+speed = 14
+abilities = Array[ExtResource("1_241it")]([ExtResource("2_ctd85"), ExtResource("3_1tmi5"), ExtResource("4_3g7bx")])
+personality = 0
+phase_thresholds = PackedFloat32Array()
+xp_reward = 45
+glimmer_min = 6
+glimmer_max = 10
+loot_table = Array[Dictionary]([{
+"chance": 1.0,
+"item_id": "sporeling_cap",
+"max": 2,
+"min": 1
+}, {
+"chance": 0.5,
+"item_id": "dewdrop_tonic",
+"max": 1,
+"min": 1
+}])
+visual_kind = "sporeling"
+visual_scale = 1.0
+tint = Color(0.55, 0.5, 0.65, 1)
+world_behavior = "hostile"
+lore = "Something has scooped the curiosity out of it. What remains still moves."

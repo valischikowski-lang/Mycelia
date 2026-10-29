@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_4xs1t"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_va2tq"]
+
+[resource]
+script = ExtResource("1_4xs1t")
+id = "photosynthesis"
+display_name = "Photosynthesis"
+description = "It turns its face to the moon and drinks."
+element = "nature"
+mana_cost = 0
+base_damage = 0
+damage_variance = 0.1
+healing_value = 22
+accuracy = 0.95
+target_type = 2
+target_count = 1
+status_effects = Array[ExtResource("2_va2tq")]([])
+duration = 0
+rarity = 0
+armor_pierce = 0.0
+mana_gain = 0
+draw_cards = 0
+special = ""
+vfx_style = "nature_bloom"
+icon_glyph = "❦"
+sound_cast = "cast_nature"
+sound_impact = "impact_nature"
+animation = {
+"cast_time": 0.45,
+"travel_time": 0.5
+}
+cooldown = 3
+ai_tags = PackedStringArray("heal")
+min_phase = 0
+charge_turns = 0

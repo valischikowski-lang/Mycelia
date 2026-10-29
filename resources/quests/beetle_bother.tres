@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_8u4pf"]
+[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_py1xt"]
+
+[sub_resource type="Resource" id="Resource_fbt54"]
+script = ExtResource("1_8u4pf")
+id = "defeat_beetles"
+description = "Defeat Crystal Beetles"
+type = 2
+target_id = "crystal_beetle"
+required_amount = 3
+map_hint = Vector3(0, 0, 0)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_bik2h"]
+script = ExtResource("1_8u4pf")
+id = "return_ollo"
+description = "Return to Ollo"
+type = 0
+target_id = "ollo"
+required_amount = 1
+map_hint = Vector3(-8, 0, 30)
+hint_region = "dreaming_meadow"
+
+[resource]
+script = ExtResource("2_py1xt")
+id = "beetle_bother"
+title = "Beetle Bother"
+description = "Ollo the snail-merchant's wares keep getting eaten by Crystal Beetles. He would deal with them himself, but he would get there next week."
+category = 4
+prerequisites = PackedStringArray()
+min_level = 1
+objectives = Array[ExtResource("1_8u4pf")]([SubResource("Resource_fbt54"), SubResource("Resource_bik2h")])
+sequential = true
+auto_start = false
+reward_xp = 100
+reward_glimmer = 50
+reward_items = {
+"lumen_ring": 1
+}
+reward_spells = PackedStringArray()
+reward_skill_points = 0
+completion_text = "Ollo is so grateful he almost moves."

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_on350"]
+
+[resource]
+script = ExtResource("1_on350")
+id = "moss_woven_robe"
+display_name = "Moss-Woven Robe"
+description = "Soft, warm, and slightly alive."
+category = 4
+rarity = 1
+max_stack = 1
+value = 25
+icon_color = Color(0.247059, 0.847059, 0.627451, 1)
+icon_glyph = "♜"
+equip_slot = "robe"
+stat_bonuses = {
+"defense": 2,
+"max_health": 15
+}
+use_effect = {}

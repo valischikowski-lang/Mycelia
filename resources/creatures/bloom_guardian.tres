@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="CreatureData" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_hme3l"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/thorn_crush.tres" id="2_4y2cb"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/petal_storm.tres" id="3_mbcb3"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/photosynthesis.tres" id="4_vh5e8"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/bark_up.tres" id="5_pug15"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="6_uqhrp"]
+
+[resource]
+script = ExtResource("6_uqhrp")
+id = "bloom_guardian"
+display_name = "Bloom Guardian"
+description = "An ancient flower that guards the Rootstone Circle."
+element = "nature"
+level = 4
+max_health = 120
+defense = 6
+power = 8
+speed = 6
+abilities = Array[ExtResource("1_hme3l")]([ExtResource("2_4y2cb"), ExtResource("3_mbcb3"), ExtResource("4_vh5e8"), ExtResource("5_pug15")])
+personality = 2
+phase_thresholds = PackedFloat32Array()
+xp_reward = 120
+glimmer_min = 20
+glimmer_max = 30
+loot_table = Array[Dictionary]([{
+"chance": 1.0,
+"item_id": "bloom_petal",
+"max": 3,
+"min": 2
+}, {
+"chance": 0.6,
+"item_id": "dewdrop_tonic",
+"max": 2,
+"min": 1
+}])
+visual_kind = "bloom_guardian"
+visual_scale = 1.0
+tint = Color(1, 1, 1, 1)
+world_behavior = "hostile"
+lore = "Bloom Guardians were planted by whoever built the circles. They have been waiting so long they forgot for what."

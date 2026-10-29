@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_x2t11"]
+
+[resource]
+script = ExtResource("1_x2t11")
+id = "dream_veil"
+display_name = "Dream Veil"
+description = "Half-real: 45% chance to avoid attacks."
+kind = 7
+magnitude = 0.45
+duration = 2
+element = "cosmic"
+color = Color(0.705882, 0.627451, 1, 1)
+glyph = "☾"
+chance = 1.0
+stacks = false
+apply_to_self = true

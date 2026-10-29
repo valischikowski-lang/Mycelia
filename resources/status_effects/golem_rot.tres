@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_brod1"]
+
+[resource]
+script = ExtResource("1_brod1")
+id = "golem_rot"
+display_name = "Ancient Rot"
+description = "Old, patient spores. Damage each turn."
+kind = 0
+magnitude = 4.0
+duration = 3
+element = "fungal"
+color = Color(0.615686, 0.235294, 1, 1)
+glyph = "✺"
+chance = 1.0
+stacks = true
+apply_to_self = false

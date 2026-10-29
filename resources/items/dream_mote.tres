@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_7mvtg"]
+
+[resource]
+script = ExtResource("1_7mvtg")
+id = "dream_mote"
+display_name = "Dream Mote"
+description = "A drifting speck of someone's forgotten dream. Madame Petalune collects them."
+category = 1
+rarity = 1
+max_stack = 99
+value = 5
+icon_color = Color(1, 0.882353, 0.309804, 1)
+icon_glyph = "✦"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {}

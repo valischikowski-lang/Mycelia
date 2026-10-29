@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_qt3ec"]
+
+[resource]
+script = ExtResource("1_qt3ec")
+id = "beetle_shard"
+display_name = "Beetle Shard"
+description = "A sliver of crystal carapace, still faintly singing."
+category = 2
+rarity = 1
+max_stack = 99
+value = 5
+icon_color = Color(0.262745, 0.721569, 1, 1)
+icon_glyph = "◆"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {}

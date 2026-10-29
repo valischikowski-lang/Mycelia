@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_0wj55"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_3t1an"]
+[ext_resource type="Resource" path="res://resources/status_effects/dream_veil.tres" id="3_kx2ai"]
+
+[resource]
+script = ExtResource("1_0wj55")
+id = "moon_veil"
+display_name = "Moon Veil"
+description = "The fox becomes mostly a rumour."
+element = "cosmic"
+mana_cost = 0
+base_damage = 0
+damage_variance = 0.1
+healing_value = 0
+accuracy = 0.95
+target_type = 2
+target_count = 1
+status_effects = Array[ExtResource("2_3t1an")]([ExtResource("3_kx2ai")])
+duration = 2
+rarity = 0
+armor_pierce = 0.0
+mana_gain = 0
+draw_cards = 0
+special = ""
+vfx_style = "cosmic_gravity"
+icon_glyph = "✶"
+sound_cast = "cast_cosmic"
+sound_impact = "impact_cosmic"
+animation = {
+"cast_time": 0.45,
+"travel_time": 0.5
+}
+cooldown = 3
+ai_tags = PackedStringArray("buff", "defend")
+min_phase = 0
+charge_turns = 0

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_e4bkn"]
+
+[resource]
+script = ExtResource("1_e4bkn")
+id = "beetle_glint"
+display_name = "Shell Glint"
+description = "Absorbs damage."
+kind = 2
+magnitude = 10.0
+duration = 2
+element = "crystal"
+color = Color(0.262745, 0.721569, 1, 1)
+glyph = "◆"
+chance = 1.0
+stacks = false
+apply_to_self = true

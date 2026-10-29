@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_bppgt"]
+
+[resource]
+script = ExtResource("1_bppgt")
+id = "sentinel"
+display_name = "Spore Sentinel"
+description = "A small fungal guardian strikes an enemy each turn."
+kind = 10
+magnitude = 7.0
+duration = 3
+element = "fungal"
+color = Color(0.878431, 0.482353, 1, 1)
+glyph = "♟"
+chance = 1.0
+stacks = false
+apply_to_self = true

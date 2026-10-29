@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_2rxen"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_03uqm"]
+[ext_resource type="Resource" path="res://resources/status_effects/mycelial_armor.tres" id="3_g2pxk"]
+
+[resource]
+script = ExtResource("1_2rxen")
+id = "mycelial_armor_up"
+display_name = "Mycelial Armor"
+description = "Threads weave over its body."
+element = "fungal"
+mana_cost = 0
+base_damage = 0
+damage_variance = 0.1
+healing_value = 0
+accuracy = 0.95
+target_type = 2
+target_count = 1
+status_effects = Array[ExtResource("2_03uqm")]([ExtResource("3_g2pxk")])
+duration = 3
+rarity = 0
+armor_pierce = 0.0
+mana_gain = 0
+draw_cards = 0
+special = ""
+vfx_style = "crystal_shield"
+icon_glyph = "✺"
+sound_cast = "cast_fungal"
+sound_impact = "impact_fungal"
+animation = {
+"cast_time": 0.45,
+"travel_time": 0.5
+}
+cooldown = 4
+ai_tags = PackedStringArray("shield")
+min_phase = 1
+charge_turns = 0

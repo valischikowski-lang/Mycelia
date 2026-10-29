@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_0f8eg"]
+
+[resource]
+script = ExtResource("1_0f8eg")
+id = "heartspore_amulet"
+display_name = "Heartspore Amulet"
+description = "It beats in time with the meadow."
+category = 4
+rarity = 3
+max_stack = 1
+value = 120
+icon_color = Color(1, 0.541176, 0.164706, 1)
+icon_glyph = "❂"
+equip_slot = "artifact"
+stat_bonuses = {
+"max_health": 30,
+"max_mana": 1,
+"spell_power": 6
+}
+use_effect = {}

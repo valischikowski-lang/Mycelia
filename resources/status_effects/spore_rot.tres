@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_6ijud"]
+
+[resource]
+script = ExtResource("1_6ijud")
+id = "spore_rot"
+display_name = "Spore Rot"
+description = "Spores feed on the target: damage each turn."
+kind = 0
+magnitude = 3.0
+duration = 3
+element = "fungal"
+color = Color(0.768627, 0.301961, 1, 1)
+glyph = "✺"
+chance = 1.0
+stacks = true
+apply_to_self = false

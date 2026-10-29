@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_xlw2g"]
+
+[resource]
+script = ExtResource("1_xlw2g")
+id = "glitter_curse"
+display_name = "Glitter Curse"
+description = "Reality sparkles wrongly around the target: +20% damage taken."
+kind = 5
+magnitude = 0.2
+duration = 2
+element = "chaos"
+color = Color(1, 0.372549, 0.784314, 1)
+glyph = "✹"
+chance = 1.0
+stacks = false
+apply_to_self = false

@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_k5r86"]
+[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_mtyye"]
+
+[sub_resource type="Resource" id="Resource_m11ep"]
+script = ExtResource("1_k5r86")
+id = "reach_gate"
+description = "Reach the Northern Gate"
+type = 3
+target_id = "north_gate"
+required_amount = 1
+map_hint = Vector3(0, 0, -124)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_jeb45"]
+script = ExtResource("1_k5r86")
+id = "wake_golem"
+description = "Face the Ancient Spore Golem at the Hollow Gate"
+type = 2
+target_id = "enc_spore_golem"
+required_amount = 1
+map_hint = Vector3(-58, 0, -96)
+hint_region = "dreaming_meadow"
+
+[resource]
+script = ExtResource("2_mtyye")
+id = "sealed_gate"
+title = "The Sealed Gate"
+description = "Umbel says the trouble comes from beyond the meadow's northern gate — and from the caves beneath the Hollow Gate, where the oldest gardener sleeps."
+category = 0
+prerequisites = PackedStringArray("hum_beneath")
+min_level = 1
+objectives = Array[ExtResource("1_k5r86")]([SubResource("Resource_m11ep"), SubResource("Resource_jeb45")])
+sequential = true
+auto_start = true
+reward_xp = 300
+reward_glimmer = 120
+reward_items = {}
+reward_spells = PackedStringArray()
+reward_skill_points = 2
+completion_text = "The Golem's heartspore beats in your hand. Beyond the gates, the Whispering Forest waits. (To be continued...)"

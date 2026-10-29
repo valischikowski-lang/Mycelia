@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_p0gxt"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_m6kee"]
+
+[resource]
+script = ExtResource("1_p0gxt")
+id = "starfall_seed"
+display_name = "Starfall Seed"
+description = "Plant a seed in the sky. A star grows from it — and falls."
+element = "cosmic"
+mana_cost = 5
+base_damage = 34
+damage_variance = 0.1
+healing_value = 0
+accuracy = 0.85
+target_type = 0
+target_count = 1
+status_effects = Array[ExtResource("2_m6kee")]([])
+duration = 0
+rarity = 3
+armor_pierce = 0.0
+mana_gain = 0
+draw_cards = 0
+special = ""
+vfx_style = "cosmic_star"
+icon_glyph = "✶"
+sound_cast = "cast_cosmic"
+sound_impact = "impact_cosmic"
+animation = {
+"cast_time": 0.45,
+"travel_time": 0.5
+}
+cooldown = 0
+ai_tags = PackedStringArray()
+min_phase = 0
+charge_turns = 0

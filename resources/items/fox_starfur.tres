@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_tquhf"]
+
+[resource]
+script = ExtResource("1_tquhf")
+id = "fox_starfur"
+display_name = "Fox Starfur"
+description = "A tuft of fur with tiny stars caught in it."
+category = 2
+rarity = 2
+max_stack = 99
+value = 15
+icon_color = Color(0.705882, 0.627451, 1, 1)
+icon_glyph = "✶"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {}

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_dbwak"]
+
+[resource]
+script = ExtResource("1_dbwak")
+id = "empowered"
+display_name = "Empowered"
+description = "Deals 35% more damage."
+kind = 6
+magnitude = 0.35
+duration = 2
+element = "cosmic"
+color = Color(1, 0.835294, 0.290196, 1)
+glyph = "☼"
+chance = 1.0
+stacks = false
+apply_to_self = true

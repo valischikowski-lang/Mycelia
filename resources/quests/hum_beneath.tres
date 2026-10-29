@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_njwga"]
+[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_sexpy"]
+
+[sub_resource type="Resource" id="Resource_j47nf"]
+script = ExtResource("1_njwga")
+id = "inspect_rift"
+description = "Inspect the Mycelial Rift where the sporeling fell"
+type = 4
+target_id = "mycelial_rift"
+required_amount = 1
+map_hint = Vector3(-14, 0, -58)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_558pu"]
+script = ExtResource("1_njwga")
+id = "attune_circle"
+description = "Attune the Rootstone Circle to the west"
+type = 4
+target_id = "rootstone_circle"
+required_amount = 1
+map_hint = Vector3(-72, 0, -18)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_uqr2n"]
+script = ExtResource("1_njwga")
+id = "defeat_guardian"
+description = "Calm the Bloom Guardian"
+type = 2
+target_id = "enc_bloom_guardian"
+required_amount = 1
+map_hint = Vector3(-72, 0, -18)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_qj5wb"]
+script = ExtResource("1_njwga")
+id = "tell_keeper"
+description = "Return to Umbel"
+type = 0
+target_id = "mushroom_keeper"
+required_amount = 1
+map_hint = Vector3(12, 0, -40)
+hint_region = "dreaming_meadow"
+
+[resource]
+script = ExtResource("2_sexpy")
+id = "hum_beneath"
+title = "The Hum Beneath"
+description = "Where the hollow-eyed sporeling fell, the ground split open. Something in the Mycelium is wrong, and it seems to be spreading from below."
+category = 0
+prerequisites = PackedStringArray("first_awakening")
+min_level = 1
+objectives = Array[ExtResource("1_njwga")]([SubResource("Resource_j47nf"), SubResource("Resource_558pu"), SubResource("Resource_uqr2n"), SubResource("Resource_qj5wb")])
+sequential = true
+auto_start = true
+reward_xp = 160
+reward_glimmer = 60
+reward_items = {
+"keeper_staff": 1
+}
+reward_spells = PackedStringArray("wild_bloom")
+reward_skill_points = 1
+completion_text = "The circle sings again. Far below, something heard it."

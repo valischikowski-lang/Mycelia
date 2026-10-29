@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_wgtaj"]
+
+[resource]
+script = ExtResource("1_wgtaj")
+id = "driftwalker_boots"
+display_name = "Driftwalker Boots"
+description = "They remember how to float, a little."
+category = 4
+rarity = 1
+max_stack = 1
+value = 30
+icon_color = Color(0.607843, 0.482353, 1, 1)
+icon_glyph = "♞"
+equip_slot = "boots"
+stat_bonuses = {
+"defense": 2,
+"max_mana": 1
+}
+use_effect = {}

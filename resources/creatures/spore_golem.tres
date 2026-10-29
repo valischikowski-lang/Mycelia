@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="CreatureData" load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_18eqt"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/fungal_slam.tres" id="2_pajp6"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/spore_cloud.tres" id="3_aota3"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/network_pulse.tres" id="4_cke3p"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/mycelial_armor_up.tres" id="5_8b5yi"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/awakening_roar.tres" id="6_85wki"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="7_xh2jy"]
+
+[resource]
+script = ExtResource("7_xh2jy")
+id = "spore_golem"
+display_name = "Ancient Spore Golem"
+description = "A hill that stood up."
+element = "fungal"
+level = 6
+max_health = 260
+defense = 8
+power = 10
+speed = 4
+abilities = Array[ExtResource("1_18eqt")]([ExtResource("2_pajp6"), ExtResource("3_aota3"), ExtResource("4_cke3p"), ExtResource("5_8b5yi"), ExtResource("6_85wki")])
+personality = 3
+phase_thresholds = PackedFloat32Array(0.5)
+xp_reward = 300
+glimmer_min = 60
+glimmer_max = 90
+loot_table = Array[Dictionary]([{
+"chance": 1.0,
+"item_id": "golem_heartspore",
+"max": 1,
+"min": 1
+}, {
+"chance": 1.0,
+"item_id": "heartspore_amulet",
+"max": 1,
+"min": 1
+}])
+visual_kind = "spore_golem"
+visual_scale = 1.0
+tint = Color(1, 1, 1, 1)
+world_behavior = "neutral"
+lore = "The Spore Golem was the meadow's first gardener. It sleeps at the Hollow Gate and dreams of the caves below."

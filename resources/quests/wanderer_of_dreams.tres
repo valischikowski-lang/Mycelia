@@ -1,0 +1,84 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_qyys1"]
+[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_6g7j5"]
+
+[sub_resource type="Resource" id="Resource_ape3n"]
+script = ExtResource("1_qyys1")
+id = "d_lantern"
+description = "Discover the Lantern Cap"
+type = 5
+target_id = "lantern_cap"
+required_amount = 1
+map_hint = Vector3(-28, 0, -2)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_b4cpa"]
+script = ExtResource("1_qyys1")
+id = "d_lake"
+description = "Discover Glimmermere"
+type = 5
+target_id = "glimmermere"
+required_amount = 1
+map_hint = Vector3(68, 0, 12)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_3cvw6"]
+script = ExtResource("1_qyys1")
+id = "d_circle"
+description = "Discover the Rootstone Circle"
+type = 5
+target_id = "rootstone_circle"
+required_amount = 1
+map_hint = Vector3(-72, 0, -18)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_ovkqj"]
+script = ExtResource("1_qyys1")
+id = "d_hollow"
+description = "Discover the Hidden Hollow"
+type = 5
+target_id = "hidden_hollow"
+required_amount = 1
+map_hint = Vector3(0, 0, 0)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_qllus"]
+script = ExtResource("1_qyys1")
+id = "d_isle"
+description = "Reach the Drift Isle"
+type = 5
+target_id = "drift_isle"
+required_amount = 1
+map_hint = Vector3(0, 0, 0)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_gegcg"]
+script = ExtResource("1_qyys1")
+id = "d_gate"
+description = "Find the Northern Gate"
+type = 5
+target_id = "north_gate"
+required_amount = 1
+map_hint = Vector3(0, 0, -124)
+hint_region = "dreaming_meadow"
+
+[resource]
+script = ExtResource("2_6g7j5")
+id = "wanderer_of_dreams"
+title = "Wanderer of Dreams"
+description = "The meadow is bigger than it looks, and it looks enormous. Discover its hidden places."
+category = 5
+prerequisites = PackedStringArray()
+min_level = 1
+objectives = Array[ExtResource("1_qyys1")]([SubResource("Resource_ape3n"), SubResource("Resource_b4cpa"), SubResource("Resource_3cvw6"), SubResource("Resource_ovkqj"), SubResource("Resource_qllus"), SubResource("Resource_gegcg")])
+sequential = false
+auto_start = true
+reward_xp = 120
+reward_glimmer = 30
+reward_items = {
+"dreamers_cap": 1
+}
+reward_spells = PackedStringArray()
+reward_skill_points = 0
+completion_text = "You have walked every dream the meadow had."

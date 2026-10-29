@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_v5agw"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_s4fqj"]
+[ext_resource type="Resource" path="res://resources/status_effects/golem_rot.tres" id="3_7ddrf"]
+
+[resource]
+script = ExtResource("1_v5agw")
+id = "spore_cloud"
+display_name = "Spore Cloud"
+description = "Ancient spores fill the air."
+element = "fungal"
+mana_cost = 0
+base_damage = 6
+damage_variance = 0.1
+healing_value = 0
+accuracy = 0.95
+target_type = 0
+target_count = 1
+status_effects = Array[ExtResource("2_s4fqj")]([ExtResource("3_7ddrf")])
+duration = 3
+rarity = 0
+armor_pierce = 0.0
+mana_gain = 0
+draw_cards = 0
+special = ""
+vfx_style = "fungal_spore"
+icon_glyph = "✺"
+sound_cast = "cast_fungal"
+sound_impact = "impact_fungal"
+animation = {
+"cast_time": 0.45,
+"travel_time": 0.5
+}
+cooldown = 3
+ai_tags = PackedStringArray("damage", "dot")
+min_phase = 0
+charge_turns = 0

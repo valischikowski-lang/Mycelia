@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_asthr"]
+
+[resource]
+script = ExtResource("1_asthr")
+id = "weightless"
+display_name = "Weightless"
+description = "Gravity forgets the target: its attacks deal 30% less."
+kind = 4
+magnitude = 0.3
+duration = 2
+element = "cosmic"
+color = Color(1, 0.890196, 0.415686, 1)
+glyph = "✶"
+chance = 1.0
+stacks = false
+apply_to_self = false

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_m7esm"]
+
+[resource]
+script = ExtResource("1_m7esm")
+id = "bloom_petal"
+display_name = "Guardian Petal"
+description = "Heavy as a shield, soft as a whisper."
+category = 2
+rarity = 1
+max_stack = 99
+value = 8
+icon_color = Color(1, 0.372549, 0.682353, 1)
+icon_glyph = "✿"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {}

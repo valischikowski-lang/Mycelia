@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_rixpa"]
+
+[resource]
+script = ExtResource("1_rixpa")
+id = "sporeling_cap"
+display_name = "Sporeling Cap"
+description = "A shed cap. Sporelings grow a new one by morning."
+category = 2
+rarity = 0
+max_stack = 99
+value = 2
+icon_color = Color(0.768627, 0.301961, 1, 1)
+icon_glyph = "◒"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {}

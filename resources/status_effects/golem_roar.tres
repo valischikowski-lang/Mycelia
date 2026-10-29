@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_plk0y"]
+
+[resource]
+script = ExtResource("1_plk0y")
+id = "golem_roar"
+display_name = "Awakened"
+description = "The golem's network roars awake: +40% damage."
+kind = 6
+magnitude = 0.4
+duration = 3
+element = "fungal"
+color = Color(1, 0.541176, 0.164706, 1)
+glyph = "☼"
+chance = 1.0
+stacks = false
+apply_to_self = true

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EncounterData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_grmqq"]
+[ext_resource type="Resource" path="res://resources/creatures/crystal_beetle.tres" id="2_imxun"]
+[ext_resource type="Resource" path="res://resources/creatures/sporeling.tres" id="3_4vkuu"]
+[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="4_rtsvq"]
+
+[resource]
+script = ExtResource("4_rtsvq")
+id = "enc_beetle_pair"
+display_name = "Glittering Nest"
+enemies = Array[ExtResource("1_grmqq")]([ExtResource("2_imxun"), ExtResource("3_4vkuu")])
+arena_theme = "meadow"
+music = "music_combat"
+can_flee = true
+ambush = false
+bonus_xp = 0
+bonus_glimmer = 0
+bonus_items = {}
+intro_text = ""
+unique = false
