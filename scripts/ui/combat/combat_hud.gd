@@ -460,8 +460,9 @@ func show_result(victory: bool, summary: Dictionary, level_before: int) -> void:
 	_result_panel.set_anchors_preset(Control.PRESET_CENTER)
 	_result_panel.offset_left = -300
 	_result_panel.offset_right = 300
-	_result_panel.offset_top = -200
-	_result_panel.offset_bottom = 200
+	_result_panel.offset_top = -170
+	_result_panel.offset_bottom = -170
+	_result_panel.grow_vertical = Control.GROW_DIRECTION_END
 	add_child(_result_panel)
 	var v := VBoxContainer.new()
 	v.add_theme_constant_override("separation", 10)

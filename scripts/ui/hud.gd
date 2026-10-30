@@ -161,6 +161,8 @@ func _build_tracker() -> void:
 	_tracker_panel.offset_left = -380
 	_tracker_panel.offset_right = -20
 	_tracker_panel.offset_top = 80
+	_tracker_panel.offset_bottom = 80
+	_tracker_panel.grow_vertical = Control.GROW_DIRECTION_END
 	_tracker_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	_tracker_panel.gui_input.connect(func(ev: InputEvent) -> void:
 		if ev is InputEventMouseButton and (ev as InputEventMouseButton).pressed:

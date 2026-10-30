@@ -30,6 +30,7 @@ func _ready() -> void:
 	world_root = Node3D.new()
 	world_root.name = "World"
 	add_child(world_root)
+	add_child(PerfLogger.new())
 	_build_ui()
 	Settings.apply_to_viewport(get_viewport())
 	Settings.changed.connect(func(section: String) -> void:

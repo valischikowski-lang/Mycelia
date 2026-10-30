@@ -104,7 +104,7 @@ func build(state: BattleState, player_opts: Dictionary) -> void:
 	for i in n:
 		var e := state.enemies[i]
 		var rig := CreatureBuilder.build(e.data.visual_kind, e.data.tint)
-		rig.scale = Vector3.ONE * e.data.visual_scale * (1.15 if e.data.visual_kind == "sporeling" else 1.0)
+		rig.scale = Vector3.ONE * e.data.visual_scale * (1.7 if e.data.visual_kind == "sporeling" else 1.0)
 		var x := (i - (n - 1) * 0.5) * 4.2
 		var pos := Vector3(x, 0, -4.5 + absf(x) * 0.15)
 		rig.position = pos
@@ -126,7 +126,7 @@ func build(state: BattleState, player_opts: Dictionary) -> void:
 	camera.fov = 62.0
 	camera.far = 600.0
 	add_child(camera)
-	_cam_home = _framing(Vector3(6.5, 5.2, 14.5), Vector3(0, 1.4, -2.5))
+	_cam_home = _framing(Vector3(5.5, 4.4, 12.5), Vector3(0, 1.2, -3.0))
 	camera.transform = _cam_home
 	_cam_base = _cam_home
 
@@ -287,7 +287,8 @@ func _play_cast(e: Dictionary, state: BattleState) -> void:
 	var target_uid: int = int(targets[0]) if not targets.is_empty() else caster
 	var self_cast := targets.size() == 1 and target_uid == caster
 	if is_player and not summon:
-		var focus := _framing(Vector3(3.5, 3.0, 10.5), world_pos(target_uid) + Vector3.UP * (0.5 if not self_cast else 1.2))
+		# The camera lives in arena space, so frame a local-space point.
+		var focus := _framing(Vector3(3.5, 3.0, 10.5), to_local(world_pos(target_uid)) + Vector3.UP * (0.5 if not self_cast else 1.2))
 		move_camera(focus, 0.35)
 	AudioManager.play_sfx("cast_" + element if not style == "melee" else "enemy_attack", -2.0)
 	if style == "melee":
