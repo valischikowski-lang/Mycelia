@@ -58,6 +58,19 @@ func _build_visual() -> void:
 	add_child(sb)
 
 
+func _process(delta: float) -> void:
+	super._process(delta)
+	# Treasure Sense (Learning Path perk): unopened chests glow through walls.
+	if _marker and not _opened:
+		var sense := Game.profile != null and Game.profile.has_perk("treasure_sense")
+		var p := get_tree().get_first_node_in_group("player") as Node3D
+		var near := p != null and p.global_position.distance_to(global_position) < 40.0
+		_marker.no_depth_test = sense and near
+		if sense and near:
+			_marker.modulate = Color(1.0, 0.85, 0.35, 0.9)
+			_marker.font_size = 110
+
+
 func can_interact(by: Node) -> bool:
 	return super.can_interact(by) and not _opened and (seal == null or seal.is_open())
 

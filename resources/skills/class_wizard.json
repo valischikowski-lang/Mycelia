@@ -1,0 +1,368 @@
+{
+	"id": "class_wizard",
+	"name": "The Spiral Curriculum",
+	"description": "Seven floors of library, five of them reachable by stairs.",
+	"color": "#8ab4ff",
+	"class": "wizard",
+	"currency": "mana_essence",
+	"branches": [
+		{
+			"id": "elemental_magic",
+			"name": "Elemental Magic"
+		},
+		{
+			"id": "arcane_power",
+			"name": "Arcane Power"
+		},
+		{
+			"id": "spell_control",
+			"name": "Spell Control"
+		},
+		{
+			"id": "reality_manipulation",
+			"name": "Reality Manipulation"
+		},
+		{
+			"id": "mana_mastery",
+			"name": "Mana Mastery"
+		}
+	],
+	"nodes": [
+		{
+			"id": "cold_hands",
+			"branch": "elemental_magic",
+			"tier": 1,
+			"name": "Cold Hands",
+			"description": "Frost Nova +30% damage, slows 50% longer.",
+			"cost": 2,
+			"min_level": 1,
+			"requires": [],
+			"bonuses": {},
+			"ability_mods": {
+				"frost_nova": {
+					"power": 0.3,
+					"duration": 0.5
+				}
+			}
+		},
+		{
+			"id": "hotter_flames",
+			"branch": "elemental_magic",
+			"tier": 2,
+			"name": "Hotter Flames",
+			"description": "Flame Spiral +35% damage.",
+			"cost": 3,
+			"min_level": 2,
+			"requires": [
+				"cold_hands"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"flame_spiral": {
+					"power": 0.35
+				}
+			}
+		},
+		{
+			"id": "wide_frost",
+			"branch": "elemental_magic",
+			"tier": 3,
+			"name": "Winter's Reach",
+			"description": "Frost Nova radius +30%.",
+			"cost": 5,
+			"min_level": 3,
+			"requires": [
+				"hotter_flames"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"frost_nova": {
+					"radius": 0.3
+				}
+			}
+		},
+		{
+			"id": "firestorm",
+			"branch": "elemental_magic",
+			"tier": 4,
+			"name": "Firestorm",
+			"description": "Flame Spiral lasts 60% longer and is 30% wider.",
+			"cost": 7,
+			"min_level": 5,
+			"requires": [
+				"wide_frost"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"flame_spiral": {
+					"duration": 0.6,
+					"radius": 0.3
+				}
+			}
+		},
+		{
+			"id": "focused_bolt",
+			"branch": "arcane_power",
+			"tier": 1,
+			"name": "Focused Bolt",
+			"description": "Arcane Bolt +25% damage.",
+			"cost": 2,
+			"min_level": 1,
+			"requires": [],
+			"bonuses": {},
+			"ability_mods": {
+				"arcane_bolt": {
+					"power": 0.25
+				}
+			}
+		},
+		{
+			"id": "arcane_mind",
+			"branch": "arcane_power",
+			"tier": 2,
+			"name": "Arcane Mind",
+			"description": "+10 spell power.",
+			"cost": 3,
+			"min_level": 2,
+			"requires": [
+				"focused_bolt"
+			],
+			"bonuses": {
+				"spell_power": 10
+			}
+		},
+		{
+			"id": "early_rift",
+			"branch": "arcane_power",
+			"tier": 3,
+			"name": "Early Rift",
+			"description": "Learn Reality Rift now, whatever your level.",
+			"cost": 5,
+			"min_level": 3,
+			"requires": [
+				"arcane_mind"
+			],
+			"bonuses": {},
+			"unlock_ability": "reality_rift"
+		},
+		{
+			"id": "archmage",
+			"branch": "arcane_power",
+			"tier": 4,
+			"name": "Archmage",
+			"description": "+15 spell power, +5% crit.",
+			"cost": 7,
+			"min_level": 5,
+			"requires": [
+				"early_rift"
+			],
+			"bonuses": {
+				"spell_power": 15,
+				"crit_chance": 5
+			}
+		},
+		{
+			"id": "heavy_well",
+			"branch": "spell_control",
+			"tier": 1,
+			"name": "Heavy Well",
+			"description": "Gravity Well lasts 50% longer.",
+			"cost": 2,
+			"min_level": 1,
+			"requires": [],
+			"bonuses": {},
+			"ability_mods": {
+				"gravity_well": {
+					"duration": 0.5
+				}
+			}
+		},
+		{
+			"id": "quick_hands",
+			"branch": "spell_control",
+			"tier": 2,
+			"name": "Quick Hands",
+			"description": "Frost Nova and Gravity Well cooldowns -25%.",
+			"cost": 3,
+			"min_level": 2,
+			"requires": [
+				"heavy_well"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"frost_nova": {
+					"cooldown": -0.25
+				},
+				"gravity_well": {
+					"cooldown": -0.25
+				}
+			}
+		},
+		{
+			"id": "binding_circle",
+			"branch": "spell_control",
+			"tier": 3,
+			"name": "Binding Circle",
+			"description": "Gravity Well radius +30%, +40% damage.",
+			"cost": 5,
+			"min_level": 3,
+			"requires": [
+				"quick_hands"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"gravity_well": {
+					"radius": 0.3,
+					"power": 0.4
+				}
+			}
+		},
+		{
+			"id": "composure",
+			"branch": "spell_control",
+			"tier": 4,
+			"name": "Composure",
+			"description": "+5 defense, +15% magic resistance.",
+			"cost": 7,
+			"min_level": 5,
+			"requires": [
+				"binding_circle"
+			],
+			"bonuses": {
+				"defense": 5,
+				"magic_resist": 15
+			}
+		},
+		{
+			"id": "rune_reader",
+			"branch": "reality_manipulation",
+			"tier": 1,
+			"name": "Rune Reader",
+			"description": "Arcane Bolt cooldown -30%.",
+			"cost": 2,
+			"min_level": 1,
+			"requires": [],
+			"bonuses": {},
+			"ability_mods": {
+				"arcane_bolt": {
+					"cooldown": -0.3
+				}
+			}
+		},
+		{
+			"id": "wider_rift",
+			"branch": "reality_manipulation",
+			"tier": 2,
+			"name": "Wider Rift",
+			"description": "Reality Rift radius +30%.",
+			"cost": 3,
+			"min_level": 2,
+			"requires": [
+				"rune_reader"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"reality_rift": {
+					"radius": 0.3
+				}
+			}
+		},
+		{
+			"id": "treasure_sense_w",
+			"branch": "reality_manipulation",
+			"tier": 3,
+			"name": "Divination",
+			"description": "Chests within 40 m glow through walls.",
+			"cost": 5,
+			"min_level": 3,
+			"requires": [
+				"wider_rift"
+			],
+			"bonuses": {},
+			"perk": "treasure_sense"
+		},
+		{
+			"id": "unmake",
+			"branch": "reality_manipulation",
+			"tier": 4,
+			"name": "Unmake",
+			"description": "Reality Rift +50% damage.",
+			"cost": 7,
+			"min_level": 5,
+			"requires": [
+				"treasure_sense_w"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"reality_rift": {
+					"power": 0.5
+				}
+			}
+		},
+		{
+			"id": "deep_well",
+			"branch": "mana_mastery",
+			"tier": 1,
+			"name": "Deep Well",
+			"description": "+2 maximum mana.",
+			"cost": 2,
+			"min_level": 1,
+			"requires": [],
+			"bonuses": {
+				"max_mana": 2
+			}
+		},
+		{
+			"id": "flow",
+			"branch": "mana_mastery",
+			"tier": 2,
+			"name": "Flow",
+			"description": "+30% mana regeneration.",
+			"cost": 3,
+			"min_level": 2,
+			"requires": [
+				"deep_well"
+			],
+			"bonuses": {
+				"mana_regen": 0.3
+			}
+		},
+		{
+			"id": "thrift",
+			"branch": "mana_mastery",
+			"tier": 3,
+			"name": "Thrift",
+			"description": "Flame Spiral and Reality Rift cost 1 less mana.",
+			"cost": 5,
+			"min_level": 3,
+			"requires": [
+				"flow"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"flame_spiral": {
+					"mana": -1
+				},
+				"reality_rift": {
+					"mana": -1
+				}
+			}
+		},
+		{
+			"id": "overflow",
+			"branch": "mana_mastery",
+			"tier": 4,
+			"name": "Overflow",
+			"description": "+3 maximum mana, +30% mana regeneration.",
+			"cost": 7,
+			"min_level": 5,
+			"requires": [
+				"thrift"
+			],
+			"bonuses": {
+				"max_mana": 3,
+				"mana_regen": 0.3
+			}
+		}
+	]
+}

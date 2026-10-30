@@ -1,0 +1,356 @@
+{
+	"id": "class_spirit",
+	"name": "The Choir's Teachings",
+	"description": "Lessons sung by the dead to those who still have voices.",
+	"color": "#7ef9ff",
+	"class": "spirit",
+	"currency": "mana_essence",
+	"branches": [
+		{
+			"id": "soul_magic",
+			"name": "Soul Magic"
+		},
+		{
+			"id": "protection",
+			"name": "Protection"
+		},
+		{
+			"id": "summoning",
+			"name": "Summoning"
+		},
+		{
+			"id": "astral_travel",
+			"name": "Astral Travel"
+		},
+		{
+			"id": "ancient_knowledge",
+			"name": "Ancient Knowledge"
+		}
+	],
+	"nodes": [
+		{
+			"id": "bright_soul",
+			"branch": "soul_magic",
+			"tier": 1,
+			"name": "Bright Soul",
+			"description": "Soul Pulse +25% damage and range.",
+			"cost": 2,
+			"min_level": 1,
+			"requires": [],
+			"bonuses": {},
+			"ability_mods": {
+				"soul_pulse": {
+					"power": 0.25,
+					"radius": 0.25
+				}
+			}
+		},
+		{
+			"id": "soul_well",
+			"branch": "soul_magic",
+			"tier": 2,
+			"name": "Soul Well",
+			"description": "+2 maximum mana.",
+			"cost": 3,
+			"min_level": 2,
+			"requires": [
+				"bright_soul"
+			],
+			"bonuses": {
+				"max_mana": 2
+			}
+		},
+		{
+			"id": "echo_pulse",
+			"branch": "soul_magic",
+			"tier": 3,
+			"name": "Echoing Pulse",
+			"description": "Soul Pulse cooldown -30%.",
+			"cost": 5,
+			"min_level": 3,
+			"requires": [
+				"soul_well"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"soul_pulse": {
+					"cooldown": -0.3
+				}
+			}
+		},
+		{
+			"id": "choir_voice",
+			"branch": "soul_magic",
+			"tier": 4,
+			"name": "Voice of the Choir",
+			"description": "+12 spell power.",
+			"cost": 7,
+			"min_level": 5,
+			"requires": [
+				"echo_pulse"
+			],
+			"bonuses": {
+				"spell_power": 12
+			}
+		},
+		{
+			"id": "ward_skin",
+			"branch": "protection",
+			"tier": 1,
+			"name": "Ward Skin",
+			"description": "+15% magic resistance.",
+			"cost": 2,
+			"min_level": 1,
+			"requires": [],
+			"bonuses": {
+				"magic_resist": 15
+			}
+		},
+		{
+			"id": "stronger_shield",
+			"branch": "protection",
+			"tier": 2,
+			"name": "Remembered Courage",
+			"description": "Soul Shield absorbs 50% more.",
+			"cost": 3,
+			"min_level": 2,
+			"requires": [
+				"ward_skin"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"soul_shield": {
+					"power": 0.5
+				}
+			}
+		},
+		{
+			"id": "guardian",
+			"branch": "protection",
+			"tier": 3,
+			"name": "Guardian",
+			"description": "+5 defense, +20 health.",
+			"cost": 5,
+			"min_level": 3,
+			"requires": [
+				"stronger_shield"
+			],
+			"bonuses": {
+				"defense": 5,
+				"max_health": 20
+			}
+		},
+		{
+			"id": "undying",
+			"branch": "protection",
+			"tier": 4,
+			"name": "Undying Hymn",
+			"description": "Soul Shield lasts twice as long.",
+			"cost": 7,
+			"min_level": 5,
+			"requires": [
+				"guardian"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"soul_shield": {
+					"duration": 1.0
+				}
+			}
+		},
+		{
+			"id": "kind_ghost",
+			"branch": "summoning",
+			"tier": 1,
+			"name": "Kind Ghosts",
+			"description": "Spirit Companions hit 30% harder.",
+			"cost": 2,
+			"min_level": 1,
+			"requires": [],
+			"bonuses": {},
+			"ability_mods": {
+				"spirit_companion": {
+					"power": 0.3
+				}
+			}
+		},
+		{
+			"id": "long_vigil",
+			"branch": "summoning",
+			"tier": 2,
+			"name": "Long Vigil",
+			"description": "Spirit Companions stay 50% longer.",
+			"cost": 3,
+			"min_level": 2,
+			"requires": [
+				"kind_ghost"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"spirit_companion": {
+					"duration": 0.5
+				}
+			}
+		},
+		{
+			"id": "beast_calm",
+			"branch": "summoning",
+			"tier": 3,
+			"name": "Beast Whisperer",
+			"description": "Wild creatures are calmer around you: they notice you from 40% closer.",
+			"cost": 5,
+			"min_level": 3,
+			"requires": [
+				"long_vigil"
+			],
+			"bonuses": {},
+			"perk": "quiet_steps"
+		},
+		{
+			"id": "host",
+			"branch": "summoning",
+			"tier": 4,
+			"name": "The Host",
+			"description": "Spirit Companion cooldown -40%.",
+			"cost": 7,
+			"min_level": 5,
+			"requires": [
+				"beast_calm"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"spirit_companion": {
+					"cooldown": -0.4
+				}
+			}
+		},
+		{
+			"id": "far_shift",
+			"branch": "astral_travel",
+			"tier": 1,
+			"name": "Far Shift",
+			"description": "Astral Shift travels 40% further.",
+			"cost": 2,
+			"min_level": 1,
+			"requires": [],
+			"bonuses": {},
+			"ability_mods": {
+				"astral_shift": {
+					"range": 0.4
+				}
+			}
+		},
+		{
+			"id": "light_soul",
+			"branch": "astral_travel",
+			"tier": 2,
+			"name": "Light Soul",
+			"description": "+8% movement speed, +20 stamina.",
+			"cost": 3,
+			"min_level": 2,
+			"requires": [
+				"far_shift"
+			],
+			"bonuses": {
+				"move_speed": 0.08,
+				"max_stamina": 20
+			}
+		},
+		{
+			"id": "featherfall",
+			"branch": "astral_travel",
+			"tier": 3,
+			"name": "Featherfall",
+			"description": "Jump 20% higher and land softly.",
+			"cost": 5,
+			"min_level": 3,
+			"requires": [
+				"light_soul"
+			],
+			"bonuses": {},
+			"perk": "high_jump"
+		},
+		{
+			"id": "free_shift",
+			"branch": "astral_travel",
+			"tier": 4,
+			"name": "Unbound",
+			"description": "Astral Shift costs no mana.",
+			"cost": 7,
+			"min_level": 5,
+			"requires": [
+				"featherfall"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"astral_shift": {
+					"mana": -1
+				}
+			}
+		},
+		{
+			"id": "long_memory",
+			"branch": "ancient_knowledge",
+			"tier": 1,
+			"name": "Long Memory",
+			"description": "Echo of the Ancients reveals 50% further.",
+			"cost": 2,
+			"min_level": 1,
+			"requires": [],
+			"bonuses": {},
+			"ability_mods": {
+				"echo_of_the_ancients": {
+					"radius": 0.5
+				}
+			}
+		},
+		{
+			"id": "treasure_sense",
+			"branch": "ancient_knowledge",
+			"tier": 2,
+			"name": "Treasure Sense",
+			"description": "Chests within 40 m glow through walls.",
+			"cost": 3,
+			"min_level": 2,
+			"requires": [
+				"long_memory"
+			],
+			"bonuses": {},
+			"perk": "treasure_sense"
+		},
+		{
+			"id": "old_tongues",
+			"branch": "ancient_knowledge",
+			"tier": 3,
+			"name": "Old Tongues",
+			"description": "+10% mana regeneration, +4 spell power.",
+			"cost": 5,
+			"min_level": 3,
+			"requires": [
+				"treasure_sense"
+			],
+			"bonuses": {
+				"mana_regen": 0.1,
+				"spell_power": 4
+			}
+		},
+		{
+			"id": "seer",
+			"branch": "ancient_knowledge",
+			"tier": 4,
+			"name": "Seer",
+			"description": "Echo of the Ancients exposes enemies for its whole duration.",
+			"cost": 7,
+			"min_level": 5,
+			"requires": [
+				"old_tongues"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"echo_of_the_ancients": {
+					"power": 1.0
+				}
+			}
+		}
+	]
+}

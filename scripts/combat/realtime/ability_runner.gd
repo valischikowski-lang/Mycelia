@@ -104,7 +104,7 @@ static func cast(pc: PlayerCombat, a: AbilityData, mult: float = 1.0) -> bool:
 				var wc := e as WorldCreature
 				if wc and wc.global_position.distance_to(p.global_position) < a.radius:
 					wc.statuses["revealed"] = a.duration
-					wc.statuses["exposed"] = minf(3.0, a.duration)
+					wc.statuses["exposed"] = a.duration if a.power > 0.0 else minf(3.0, a.duration)
 			_ring(world, p.global_position, a.radius, col)
 		# ------------------------------------------------ WIZARD
 		"bolt":

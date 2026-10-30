@@ -214,7 +214,8 @@ func _physics_process(delta: float) -> void:
 				_timer = 2.0
 				hp = minf(max_hp, hp + max_hp * 0.5)
 				_bar.set_ratio(hp / max_hp)
-	if is_hostile() and state in [State.IDLE, State.WANDER] and to_player < aggro_radius and _cooldown <= 0.0 and Game.session_active:
+	var notice_range := aggro_radius * (0.6 if Game.profile and Game.profile.has_perk("quiet_steps") else 1.0)
+	if is_hostile() and state in [State.IDLE, State.WANDER] and to_player < notice_range and _cooldown <= 0.0 and Game.session_active:
 		if _player is PlayerController and (_player as PlayerController).input_enabled and not _player_hidden():
 			notice()
 	if _hover > 0.0:
@@ -652,6 +653,8 @@ func _check_pack_done() -> void:
 			prof.grant_rewards({"xp": enc.bonus_xp, "glimmer": enc.bonus_glimmer, "items": enc.bonus_items})
 		if enc.unique:
 			prof.world.won_encounters[enc.id] = true
+			prof.add_mana_essence(5 if is_boss() else 3)
+			EventBus.notify("+%d Mana Essence" % (5 if is_boss() else 3), "level")
 	if unique_id != "" and prof:
 		prof.world.won_encounters[unique_id] = true
 	EventBus.encounter_won.emit(encounter_id)

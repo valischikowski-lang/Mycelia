@@ -117,15 +117,70 @@ func choose_class(id: String) -> bool:
 	return true
 
 
-## Abilities the player can currently use (class abilities, gated by level).
+## Abilities the player can currently use (class abilities, gated by level
+## or unlocked early through a Learning Path).
 func usable_abilities() -> Array[AbilityData]:
 	var out: Array[AbilityData] = []
 	if not content.has_method("ability"):
 		return out
+	var early := _path_values("unlock_ability")
 	for id: String in hotbar:
 		var a: AbilityData = content.ability(id)
-		if a and (a.unlock_level <= stats.level or skills.is_unlocked("ability:" + id)):
+		if a and (a.unlock_level <= stats.level or id in early):
 			out.append(a)
+	return out
+
+
+# ------------------------------------------------------------------ learning paths
+## The calling's Learning Paths as one tree (branches = paths).
+func learning_tree() -> Dictionary:
+	if class_id == "":
+		return {}
+	return content.skill_tree("class_" + class_id)
+
+
+## Returns "" on success, otherwise why it can't be learned.
+func unlock_path_node(node_id: String) -> String:
+	var tree := learning_tree()
+	var reason := skills.check(tree, node_id, mana_essence, stats.level)
+	if reason == "Not enough skill points":
+		return "Not enough Mana Essence"
+	if reason != "":
+		return reason
+	var node := SkillTreeState.find_node(tree, node_id)
+	spend_mana_essence(int(node.get("cost", 1)))
+	skills.unlock(node_id)
+	return ""
+
+
+func _unlocked_path_nodes() -> Array:
+	var out: Array = []
+	var tree := learning_tree()
+	for n: Variant in tree.get("nodes", []):
+		if skills.is_unlocked(String((n as Dictionary).get("id", ""))):
+			out.append(n)
+	return out
+
+
+func _path_values(key: String) -> Array:
+	var out: Array = []
+	for n: Dictionary in _unlocked_path_nodes():
+		if n.has(key):
+			out.append(n[key])
+	return out
+
+
+func has_perk(perk: String) -> bool:
+	return perk in _path_values("perk")
+
+
+## Summed upgrades for one ability: {"power", "cooldown", "mana", "radius", "duration", "range"}.
+func ability_mods(ability_id: String) -> Dictionary:
+	var out: Dictionary = {}
+	for mods: Variant in _path_values("ability_mods"):
+		var m: Dictionary = (mods as Dictionary).get(ability_id, {})
+		for k: String in m.keys():
+			out[k] = float(out.get(k, 0.0)) + float(m[k])
 	return out
 
 

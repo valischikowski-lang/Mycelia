@@ -25,7 +25,10 @@ func _ready() -> void:
 	EventBus.npc_talked.connect(func(id: String) -> void: _quest_event(QType.TALK, id))
 	EventBus.location_visited.connect(func(id: String) -> void: _quest_event(QType.VISIT, id))
 	EventBus.object_activated.connect(func(id: String) -> void: _quest_event(QType.ACTIVATE, id))
-	EventBus.area_discovered.connect(func(id: String) -> void: _quest_event(QType.DISCOVER, id))
+	EventBus.area_discovered.connect(func(id: String) -> void:
+		_quest_event(QType.DISCOVER, id)
+		if profile:
+			profile.add_mana_essence(1))
 	EventBus.enemy_defeated.connect(func(id: String) -> void: _quest_event(QType.DEFEAT, id))
 	EventBus.encounter_won.connect(func(id: String) -> void: _quest_event(QType.DEFEAT, id))
 
@@ -104,7 +107,8 @@ func grant_xp(amount: int) -> void:
 
 func _on_level_up(level: int) -> void:
 	EventBus.level_up.emit(level)
-	EventBus.notify("Level %d! Your connection to the Mycelium deepens. (+1 skill point)" % level, "level")
+	EventBus.notify("Level %d! Your connection to the Mycelium deepens. (+2 Mana Essence)" % level, "level")
+	profile.add_mana_essence(2)
 	AudioManager.play_sfx("level_up")
 	# Level-based spell unlocks keep progression rewarding.
 	var unlocks := {2: "rootbind", 3: "shardstorm", 4: "gravity_well", 5: "starfall_seed", 6: "kaleidoscope_rift"}
@@ -146,6 +150,7 @@ func _on_quest_completed(qid: String) -> void:
 	var summary := profile.grant_rewards({
 		"xp": q.reward_xp, "glimmer": q.reward_glimmer, "items": q.reward_items,
 		"spells": Array(q.reward_spells), "skill_points": q.reward_skill_points,
+		"mana_essence": 3 + q.reward_skill_points * 2 if q.category == QuestData.Category.MAIN else 2 + q.reward_skill_points,
 	})
 	if int(summary.get("xp", 0)) > 0:
 		EventBus.xp_gained.emit(int(summary["xp"]))

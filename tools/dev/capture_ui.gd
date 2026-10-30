@@ -24,6 +24,9 @@ func _ready() -> void:
 		Game.profile.learn_spell(id)
 	Game.profile.inventory.add("dewdrop_tonic", 3)
 	Game.profile.inventory.add("keeper_staff", 1)
+	Game.profile.choose_class("wizard")
+	Game.profile.add_mana_essence(9)
+	Game.profile.unlock_path_node("focused_bolt")
 	game = load("res://scenes/main/game.tscn").instantiate()
 	add_child(game)
 	while game.get("player") == null:
@@ -41,46 +44,4 @@ func _ready() -> void:
 		game.open_grimoire(tab)
 		await _shot("grimoire_" + tab, 15)
 	game.get("grimoire").close()
-	# Combat.
-	var cm: CombatManager = game.get("combat")
-	var shots := {"card": false, "target": false}
-	cm.state_changed.connect(func(s: int) -> void: _auto(cm, s, shots))
-	EventBus.combat_requested.emit("enc_sporelings", null)
-	while not Game.in_combat:
-		await get_tree().process_frame
-	while Game.in_combat:
-		await get_tree().process_frame
-	await _shot("after_combat", 30)
 	get_tree().quit()
-
-
-func _auto(cm: CombatManager, s: int, shots: Dictionary) -> void:
-	await get_tree().process_frame
-	if cm.hud == null:
-		return
-	match s:
-		CombatManager.State.CARD_SELECTION:
-			if not shots["card"]:
-				shots["card"] = true
-				await _shot("combat_cards", 40)
-			var b := cm.battle
-			var pick := -1
-			for i in b.deck.hand.size():
-				if b.can_cast(i) == "" and b.spell(b.deck.hand[i]).base_damage > 0:
-					pick = i
-			if pick >= 0:
-				cm.hud.action.emit({"type": "card", "index": pick})
-			else:
-				cm.hud.action.emit({"type": "meditate"})
-		CombatManager.State.TARGET_SELECTION:
-			if not shots["target"]:
-				shots["target"] = true
-				await _shot("combat_target", 10)
-			cm.hud.action.emit({"type": "target", "uid": cm.battle.living_enemies()[0].uid})
-		CombatManager.State.SPELL_RESOLUTION:
-			await _shot("combat_spell_%d" % cm.battle.round_number, 22)
-		CombatManager.State.VICTORY, CombatManager.State.DEFEAT:
-			while cm.hud and cm.hud._result_panel == null:
-				await get_tree().process_frame
-			await _shot("combat_result", 60)
-			cm.hud.action.emit({"type": "continue"})

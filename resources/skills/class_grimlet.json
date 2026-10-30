@@ -1,0 +1,355 @@
+{
+	"id": "class_grimlet",
+	"name": "The Rootborn Ways",
+	"description": "Grm. We teach what the soil taught us.",
+	"color": "#9cff4a",
+	"class": "grimlet",
+	"currency": "mana_essence",
+	"branches": [
+		{
+			"id": "nature_magic",
+			"name": "Nature Magic"
+		},
+		{
+			"id": "heavy_combat",
+			"name": "Heavy Combat"
+		},
+		{
+			"id": "regeneration",
+			"name": "Regeneration"
+		},
+		{
+			"id": "spore_arts",
+			"name": "Spore Arts"
+		},
+		{
+			"id": "ancient_growth",
+			"name": "Ancient Growth"
+		}
+	],
+	"nodes": [
+		{
+			"id": "thick_roots",
+			"branch": "nature_magic",
+			"tier": 1,
+			"name": "Thick Roots",
+			"description": "Root Snare holds 50% longer.",
+			"cost": 2,
+			"min_level": 1,
+			"requires": [],
+			"bonuses": {},
+			"ability_mods": {
+				"root_snare": {
+					"duration": 0.5
+				}
+			}
+		},
+		{
+			"id": "green_mind",
+			"branch": "nature_magic",
+			"tier": 2,
+			"name": "Green Mind",
+			"description": "+8 spell power.",
+			"cost": 3,
+			"min_level": 2,
+			"requires": [
+				"thick_roots"
+			],
+			"bonuses": {
+				"spell_power": 8
+			}
+		},
+		{
+			"id": "quick_roots",
+			"branch": "nature_magic",
+			"tier": 3,
+			"name": "Quick Roots",
+			"description": "Root Snare cooldown -35%.",
+			"cost": 5,
+			"min_level": 3,
+			"requires": [
+				"green_mind"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"root_snare": {
+					"cooldown": -0.35
+				}
+			}
+		},
+		{
+			"id": "forest_wrath",
+			"branch": "nature_magic",
+			"tier": 4,
+			"name": "Forest Wrath",
+			"description": "Root Snare deals triple damage.",
+			"cost": 7,
+			"min_level": 5,
+			"requires": [
+				"quick_roots"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"root_snare": {
+					"power": 2.0
+				}
+			}
+		},
+		{
+			"id": "heavy_hands",
+			"branch": "heavy_combat",
+			"tier": 1,
+			"name": "Heavy Hands",
+			"description": "Melee damage +12%.",
+			"cost": 2,
+			"min_level": 1,
+			"requires": [],
+			"bonuses": {
+				"melee_power": 0.12
+			}
+		},
+		{
+			"id": "iron_lungs",
+			"branch": "heavy_combat",
+			"tier": 2,
+			"name": "Iron Lungs",
+			"description": "+30 stamina.",
+			"cost": 3,
+			"min_level": 2,
+			"requires": [
+				"heavy_hands"
+			],
+			"bonuses": {
+				"max_stamina": 30
+			}
+		},
+		{
+			"id": "bulwark",
+			"branch": "heavy_combat",
+			"tier": 3,
+			"name": "Bulwark",
+			"description": "+6 defense.",
+			"cost": 5,
+			"min_level": 3,
+			"requires": [
+				"iron_lungs"
+			],
+			"bonuses": {
+				"defense": 6
+			}
+		},
+		{
+			"id": "earthshaker",
+			"branch": "heavy_combat",
+			"tier": 4,
+			"name": "Earthshaker",
+			"description": "Melee damage +20%, +30 health.",
+			"cost": 7,
+			"min_level": 5,
+			"requires": [
+				"bulwark"
+			],
+			"bonuses": {
+				"melee_power": 0.2,
+				"max_health": 30
+			}
+		},
+		{
+			"id": "green_blood",
+			"branch": "regeneration",
+			"tier": 1,
+			"name": "Green Blood",
+			"description": "+0.8 health regeneration per second.",
+			"cost": 2,
+			"min_level": 1,
+			"requires": [],
+			"bonuses": {
+				"health_regen": 0.8
+			}
+		},
+		{
+			"id": "thick_bark",
+			"branch": "regeneration",
+			"tier": 2,
+			"name": "Thick Bark",
+			"description": "Barkskin lasts 50% longer.",
+			"cost": 3,
+			"min_level": 2,
+			"requires": [
+				"green_blood"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"barkskin": {
+					"duration": 0.5
+				}
+			}
+		},
+		{
+			"id": "deep_link",
+			"branch": "regeneration",
+			"tier": 3,
+			"name": "Deep Link",
+			"description": "Mycelium Link lasts 50% longer.",
+			"cost": 5,
+			"min_level": 3,
+			"requires": [
+				"thick_bark"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"mycelium_link": {
+					"duration": 0.5
+				}
+			}
+		},
+		{
+			"id": "evergreen",
+			"branch": "regeneration",
+			"tier": 4,
+			"name": "Evergreen",
+			"description": "+1.5 health regeneration per second, +40 health.",
+			"cost": 7,
+			"min_level": 5,
+			"requires": [
+				"deep_link"
+			],
+			"bonuses": {
+				"health_regen": 1.5,
+				"max_health": 40
+			}
+		},
+		{
+			"id": "thick_spores",
+			"branch": "spore_arts",
+			"tier": 1,
+			"name": "Thick Spores",
+			"description": "Spore Burst +30% damage.",
+			"cost": 2,
+			"min_level": 1,
+			"requires": [],
+			"bonuses": {},
+			"ability_mods": {
+				"spore_burst": {
+					"power": 0.3
+				}
+			}
+		},
+		{
+			"id": "cloud_burst",
+			"branch": "spore_arts",
+			"tier": 2,
+			"name": "Cloud Burst",
+			"description": "Spore Burst radius +30%.",
+			"cost": 3,
+			"min_level": 2,
+			"requires": [
+				"thick_spores"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"spore_burst": {
+					"radius": 0.3
+				}
+			}
+		},
+		{
+			"id": "spore_sense",
+			"branch": "spore_arts",
+			"tier": 3,
+			"name": "Spore Sense",
+			"description": "Chests within 40 m glow through walls.",
+			"cost": 5,
+			"min_level": 3,
+			"requires": [
+				"cloud_burst"
+			],
+			"bonuses": {},
+			"perk": "treasure_sense"
+		},
+		{
+			"id": "rot_bloom",
+			"branch": "spore_arts",
+			"tier": 4,
+			"name": "Rot Bloom",
+			"description": "Spore Burst cooldown -35%, spores last twice as long.",
+			"cost": 7,
+			"min_level": 5,
+			"requires": [
+				"spore_sense"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"spore_burst": {
+					"cooldown": -0.35,
+					"duration": 1.0
+				}
+			}
+		},
+		{
+			"id": "elder_memory",
+			"branch": "ancient_growth",
+			"tier": 1,
+			"name": "Elder Memory",
+			"description": "+25 health.",
+			"cost": 2,
+			"min_level": 1,
+			"requires": [],
+			"bonuses": {
+				"max_health": 25
+			}
+		},
+		{
+			"id": "early_colossus",
+			"branch": "ancient_growth",
+			"tier": 2,
+			"name": "Early Growth",
+			"description": "Learn Colossus Growth now, whatever your level.",
+			"cost": 3,
+			"min_level": 2,
+			"requires": [
+				"elder_memory"
+			],
+			"bonuses": {},
+			"unlock_ability": "colossus_growth"
+		},
+		{
+			"id": "longer_growth",
+			"branch": "ancient_growth",
+			"tier": 3,
+			"name": "Long Growth",
+			"description": "Colossus Growth lasts 50% longer.",
+			"cost": 5,
+			"min_level": 3,
+			"requires": [
+				"early_colossus"
+			],
+			"bonuses": {},
+			"ability_mods": {
+				"colossus_growth": {
+					"duration": 0.5
+				}
+			}
+		},
+		{
+			"id": "world_tree",
+			"branch": "ancient_growth",
+			"tier": 4,
+			"name": "World Tree",
+			"description": "Colossus Growth cooldown -35%, +6 defense.",
+			"cost": 7,
+			"min_level": 5,
+			"requires": [
+				"longer_growth"
+			],
+			"bonuses": {
+				"defense": 6
+			},
+			"ability_mods": {
+				"colossus_growth": {
+					"cooldown": -0.35
+				}
+			}
+		}
+	]
+}

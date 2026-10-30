@@ -6,8 +6,8 @@ extends Control
 signal closed()
 
 const TABS: Array = [
-	["character", "Character"], ["inventory", "Inventory"], ["spellbook", "Spellbook"],
-	["skills", "Skills"], ["journal", "Journal"], ["map", "Map"], ["settings", "Settings"],
+	["character", "Character"], ["inventory", "Inventory"], ["spellbook", "Abilities"],
+	["skills", "Learning Paths"], ["journal", "Journal"], ["map", "Map"], ["settings", "Settings"],
 ]
 
 var current_tab: String = "inventory"
@@ -99,7 +99,7 @@ func show_tab(tab: String) -> void:
 		"inventory":
 			node = _build_inventory()
 		"spellbook":
-			node = _build_spellbook()
+			node = _build_abilities()
 		"skills":
 			node = _build_skills()
 		"journal":
@@ -378,10 +378,56 @@ func _build_spellbook() -> Control:
 	return v
 
 
-# ------------------------------------------------------------------ skills
+# ------------------------------------------------------------------ abilities
+func _build_abilities() -> Control:
+	var prof := Game.profile
+	var cls := prof.player_class()
+	var box := _box(cls.color if cls else UiTheme.EDGE)
+	var v := VBoxContainer.new()
+	v.add_theme_constant_override("separation", 10)
+	box.add_child(_scroll(v))
+	if cls == null:
+		v.add_child(_wrap_label("Cross the Fourfold Threshold to learn your calling's abilities.", 18))
+		return box
+	v.add_child(UiTheme.title("%s  %s Abilities" % [cls.glyph, cls.display_name], 26, cls.color))
+	v.add_child(_wrap_label("Use them with the round buttons at the bottom of the screen (touch) or keys 1–5. Abilities cost mana, which refills over time; Learning Paths make them stronger.", 15, UiTheme.TEXT_DIM))
+	var usable := prof.usable_abilities()
+	for i in cls.abilities.size():
+		var a := Database.ability(cls.abilities[i])
+		if a == null:
+			continue
+		var mods := prof.ability_mods(a.id)
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 14)
+		var icon := UiTheme.label(a.glyph, 34, a.color, UiTheme.bold_font())
+		icon.custom_minimum_size = Vector2(54, 54)
+		icon.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		row.add_child(icon)
+		var info := VBoxContainer.new()
+		info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		var known := a in usable
+		var head := "%d · %s" % [i + 1, a.display_name] + ("" if known else "   (level %d or a Learning Path)" % a.unlock_level)
+		info.add_child(UiTheme.label(head, 19, a.color if known else UiTheme.TEXT_DIM, UiTheme.bold_font()))
+		info.add_child(_wrap_label(a.description, 15))
+		var facts := "Mana %d · Cooldown %.0fs" % [maxi(0, int(a.mana_cost + float(mods.get("mana", 0.0)))), a.cooldown * maxf(0.2, 1.0 + float(mods.get("cooldown", 0.0)))]
+		if not mods.is_empty():
+			facts += "   ✦ upgraded by your Learning Paths"
+		if a.world_tag != "":
+			facts += "   ⚿ also opens %s" % String(ClassSeal.INFO.get(a.world_tag, {}).get("name", "seals"))
+		info.add_child(UiTheme.label(facts, 14, UiTheme.GLOW))
+		row.add_child(info)
+		v.add_child(row)
+	return box
+
+
+# ------------------------------------------------------------------ learning paths
 func _build_skills() -> Control:
 	var prof := Game.profile
-	var tree: Dictionary = Database.skill_tree("fungal")
+	var tree := prof.learning_tree()
+	if tree.is_empty():
+		var b := _box()
+		b.add_child(_wrap_label("Cross the Fourfold Threshold first: every calling has its own Learning Paths.", 18))
+		return b
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 14)
 	var left := _box(Color(tree.get("color", "#c44dff")))
@@ -390,33 +436,33 @@ func _build_skills() -> Control:
 	var lv := VBoxContainer.new()
 	lv.add_theme_constant_override("separation", 10)
 	left.add_child(_scroll(lv))
-	lv.add_child(UiTheme.title(String(tree.get("name", "Skills")), 26))
-	lv.add_child(UiTheme.label("Skill points available: %d" % prof.stats.skill_points, 19, UiTheme.GOLD, UiTheme.bold_font()))
+	lv.add_child(UiTheme.title(String(tree.get("name", "Learning Paths")), 26))
+	lv.add_child(UiTheme.label("✧ Mana Essence: %d   — earned from quests, chests, bosses, discoveries and levels" % prof.mana_essence, 17, UiTheme.GOLD, UiTheme.bold_font()))
 	var cols := HBoxContainer.new()
-	cols.add_theme_constant_override("separation", 12)
+	cols.add_theme_constant_override("separation", 8)
 	lv.add_child(cols)
 	for br: Variant in tree.get("branches", []):
 		var branch: Dictionary = br
 		var col := VBoxContainer.new()
-		col.add_theme_constant_override("separation", 6)
+		col.add_theme_constant_override("separation", 4)
 		col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		col.add_child(UiTheme.label(String(branch["name"]), 17, UiTheme.GLOW, UiTheme.bold_font()))
+		var bl := UiTheme.label(String(branch["name"]), 16, UiTheme.GLOW, UiTheme.bold_font())
+		bl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		bl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		col.add_child(bl)
 		var nodes: Array = (tree.get("nodes", []) as Array).filter(func(n: Dictionary) -> bool: return n.get("branch") == branch["id"])
 		nodes.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return int(a.get("tier", 1)) < int(b.get("tier", 1)))
 		for i in nodes.size():
 			var node: Dictionary = nodes[i]
 			var nid := String(node["id"])
-			if i > 0:
-				var link := UiTheme.label("│", 20, UiTheme.SUCCESS if prof.skills.is_unlocked(nid) else Color(0.4, 0.35, 0.55))
-				link.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-				col.add_child(link)
 			var learned := prof.skills.is_unlocked(nid)
-			var reason := prof.skills.check(tree, nid, prof.stats.skill_points, prof.stats.level)
-			var b := UiTheme.button(("✓ " if learned else "") + String(node["name"]), func() -> void:
+			var reason := prof.skills.check(tree, nid, prof.mana_essence, prof.stats.level)
+			var kind := "◆" if node.has("unlock_ability") or node.has("ability_mods") else ("✦" if node.has("perk") else "●")
+			var b := UiTheme.button(("✓ " if learned else kind + " ") + String(node["name"]) + ("" if learned else "\n✧%d" % int(node.get("cost", 1))), func() -> void:
 				_selected_skill = nid
 				show_tab("skills"))
-			b.custom_minimum_size = Vector2(0, 58)
-			b.add_theme_font_size_override("font_size", 16)
+			b.custom_minimum_size = Vector2(0, 62)
+			b.add_theme_font_size_override("font_size", 14)
 			b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			var style := "selected" if learned else ("normal" if reason == "" else "disabled")
 			b.add_theme_stylebox_override("normal", UiTheme.button_style(style))
@@ -424,26 +470,39 @@ func _build_skills() -> Control:
 				b.add_theme_stylebox_override("normal", UiTheme.button_style("hover"))
 			col.add_child(b)
 		cols.add_child(col)
+	lv.add_child(UiTheme.label("● passive bonus   ◆ ability upgrade / new ability   ✦ world talent", 14, UiTheme.TEXT_DIM))
 	var right := _box(UiTheme.GOLD)
-	right.custom_minimum_size.x = 380
+	right.custom_minimum_size.x = 340
 	row.add_child(right)
 	var rv := VBoxContainer.new()
 	rv.add_theme_constant_override("separation", 10)
 	right.add_child(rv)
-	if _selected_skill == "":
+	if _selected_skill == "" or SkillTreeState.find_node(tree, _selected_skill).is_empty():
 		rv.add_child(_wrap_label(String(tree.get("description", "")), 18, UiTheme.TEXT_DIM))
-		rv.add_child(_wrap_label("Earn a skill point each level. Choose a branch: spore damage, defense, healing or creature summoning.", 16, UiTheme.TEXT_DIM))
+		rv.add_child(_wrap_label("Pick a step in any path. Each path grows from top to bottom: learn a step to open the one below it.", 16, UiTheme.TEXT_DIM))
 		return row
 	var sel := SkillTreeState.find_node(tree, _selected_skill)
 	rv.add_child(UiTheme.title(String(sel.get("name", "")), 24))
+	var what := "Passive bonus"
+	if sel.has("unlock_ability"):
+		what = "New ability"
+	elif sel.has("ability_mods"):
+		what = "Ability upgrade"
+	elif sel.has("perk"):
+		what = "World talent (also works outside fights)"
+	rv.add_child(UiTheme.label(what, 15, UiTheme.GLOW, UiTheme.bold_font()))
 	rv.add_child(_wrap_label(String(sel.get("description", "")), 18))
-	rv.add_child(UiTheme.label("Cost: %d point(s) · Requires level %d" % [int(sel.get("cost", 1)), int(sel.get("min_level", 1))], 15, UiTheme.TEXT_DIM))
+	var req: Array = sel.get("requires", [])
+	var req_txt := ""
+	if not req.is_empty():
+		req_txt = " · after " + String(SkillTreeState.find_node(tree, String(req[0])).get("name", ""))
+	rv.add_child(UiTheme.label("Cost ✧%d Mana Essence · level %d%s" % [int(sel.get("cost", 1)), int(sel.get("min_level", 1)), req_txt], 15, UiTheme.TEXT_DIM))
 	if prof.skills.is_unlocked(_selected_skill):
 		rv.add_child(UiTheme.label("✓ Learned", 20, UiTheme.SUCCESS, UiTheme.bold_font()))
 	else:
-		var reason2 := prof.skills.check(tree, _selected_skill, prof.stats.skill_points, prof.stats.level)
+		var reason2 := prof.skills.check(tree, _selected_skill, prof.mana_essence, prof.stats.level)
 		var learn := UiTheme.button("Learn", func() -> void:
-			var err := prof.unlock_skill("fungal", _selected_skill)
+			var err := prof.unlock_path_node(_selected_skill)
 			if err == "":
 				EventBus.notify("Learned %s" % String(sel.get("name", "")), "spell")
 				AudioManager.play_sfx("level_up", -6.0)
@@ -454,11 +513,10 @@ func _build_skills() -> Control:
 		learn.disabled = reason2 != ""
 		rv.add_child(learn)
 		if reason2 != "":
-			rv.add_child(UiTheme.label(reason2, 16, UiTheme.DANGER))
+			rv.add_child(UiTheme.label(reason2.replace("skill points", "Mana Essence"), 16, UiTheme.DANGER))
 	return row
 
 
-# ------------------------------------------------------------------ journal
 func _build_journal() -> Control:
 	var prof := Game.profile
 	var v := VBoxContainer.new()

@@ -212,7 +212,7 @@ func _physics_process(delta: float) -> void:
 		_fall_speed = maxf(_fall_speed, -velocity.y)
 
 	if _jump_buffer > 0.0 and _coyote > 0.0:
-		velocity.y = jump_velocity
+		velocity.y = jump_velocity * (1.1 if Game.profile and Game.profile.has_perk("high_jump") else 1.0)
 		_jump_buffer = 0.0
 		_coyote = 0.0
 		AudioManager.play_sfx("jump", -6.0)
@@ -227,7 +227,7 @@ func _physics_process(delta: float) -> void:
 	if TouchInput.move.length() > 0.01 and not sprint:
 		target_speed = lerpf(walk_speed, run_speed, smoothstep(0.35, 0.9, mag))
 	if combat:
-		target_speed *= combat.feel("move", 1.0)
+		target_speed *= combat.feel("move", 1.0) * (1.0 + combat.stat("move_speed"))
 		if combat.is_blocking():
 			target_speed = minf(target_speed, walk_speed)
 		elif combat.draw >= 0.0:

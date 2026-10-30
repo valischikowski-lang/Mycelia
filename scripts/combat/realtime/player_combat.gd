@@ -53,12 +53,13 @@ func _ready() -> void:
 	name = "Combat"
 	EventBus.rt_enemy_aggro.connect(func(_e: Node) -> void: _combat_linger = COMBAT_LINGER)
 	EventBus.equipment_changed.connect(_on_equipment)
+	EventBus.skill_unlocked.connect(func(_id: String) -> void: refresh_class())
 	refresh_class()
 
 
 func refresh_class() -> void:
 	var c := Game.profile.player_class() if Game.profile else null
-	max_stamina = float(c.feel.get("stamina", 100.0)) if c else 100.0
+	max_stamina = (float(c.feel.get("stamina", 100.0)) if c else 100.0) + stat("max_stamina")
 	stamina = max_stamina
 	changed.emit()
 
@@ -269,7 +270,7 @@ func light_attack() -> void:
 	_combo = (_combo % (4 if kind == "dagger" else 3)) + 1
 	_combo_timer = 1.0 / speed + 0.5
 	_combat_linger = COMBAT_LINGER
-	var dmg: float = (w.damage if w and w.damage > 0.0 else 5.0 + stat("spell_power") * 0.1) * [1.0, 1.0, 1.12, 1.4, 1.6][_combo] * power_mult()
+	var dmg: float = (w.damage if w and w.damage > 0.0 else 5.0 + stat("spell_power") * 0.1) * [1.0, 1.0, 1.12, 1.4, 1.6][_combo] * power_mult() * (1.0 + stat("melee_power"))
 	if is_instance_valid(avatar):
 		avatar.swing(false, speed)
 	AudioManager.play_sfx("card_select", -4.0, randf_range(1.2, 1.5))
@@ -289,7 +290,7 @@ func heavy_attack() -> void:
 	_attack_cd = 1.4 / speed
 	_combo = 0
 	_combat_linger = COMBAT_LINGER
-	var dmg := (w.damage if w and w.damage > 0.0 else 5.0) * 2.2 * power_mult()
+	var dmg := (w.damage if w and w.damage > 0.0 else 5.0) * 2.2 * power_mult() * (1.0 + stat("melee_power"))
 	if is_instance_valid(avatar):
 		avatar.swing(true, speed)
 	AudioManager.play_sfx("enemy_attack", -2.0, 0.8)
@@ -392,7 +393,7 @@ func _release_arrow() -> void:
 			at = ARROW_TYPES[0]
 		else:
 			Game.profile.inventory.remove(String(at["item"]), 1)
-	var dmg := b.damage * (0.35 + 0.65 * charge) * power_mult()
+	var dmg := b.damage * (0.35 + 0.65 * charge) * power_mult() * (1.0 + stat("bow_power"))
 	var extra := {"stagger": 0.6 if charge >= 1.0 else 0.0}
 	if at.has("status"):
 		extra["status"] = at["status"]
@@ -492,6 +493,16 @@ func cast_ability(a: AbilityData) -> bool:
 	if float(cooldowns.get(a.id, 0.0)) > 0.0:
 		AudioManager.play_ui("ui_error")
 		return false
+	# Learning-Path upgrades make a tuned copy of the ability.
+	var mods := prof.ability_mods(a.id)
+	if not mods.is_empty():
+		a = a.duplicate() as AbilityData
+		a.power *= 1.0 + float(mods.get("power", 0.0))
+		a.cooldown *= maxf(0.2, 1.0 + float(mods.get("cooldown", 0.0)))
+		a.mana_cost = maxf(0.0, a.mana_cost + float(mods.get("mana", 0.0)))
+		a.radius *= 1.0 + float(mods.get("radius", 0.0))
+		a.duration *= 1.0 + float(mods.get("duration", 0.0))
+		a.ability_range *= 1.0 + float(mods.get("range", 0.0))
 	_casts += 1
 	var free := has_special("astral_echo") and _casts % 4 == 0
 	var cost := 0.0 if free else a.mana_cost
@@ -516,7 +527,10 @@ func cast_ability(a: AbilityData) -> bool:
 
 
 func cooldown_ratio(a: AbilityData) -> float:
-	return clampf(float(cooldowns.get(a.id, 0.0)) / maxf(0.01, a.cooldown), 0.0, 1.0)
+	var cd := a.cooldown
+	if Game.profile:
+		cd *= maxf(0.2, 1.0 + float(Game.profile.ability_mods(a.id).get("cooldown", 0.0)))
+	return clampf(float(cooldowns.get(a.id, 0.0)) / maxf(0.01, cd), 0.0, 1.0)
 
 
 func _on_buff_end(b: String) -> void:

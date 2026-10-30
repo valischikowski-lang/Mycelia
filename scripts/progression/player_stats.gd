@@ -11,6 +11,7 @@ const BASE: Dictionary = {
 	"max_health": 100.0, "max_mana": 6.0, "magic_power": 10.0,
 	"defense": 4.0, "crit_chance": 5.0, "spell_power": 0.0,
 	"evasion": 0.0, "magic_resist": 0.0, "health_regen": 0.0, "mana_regen": 0.0,
+	"melee_power": 0.0, "bow_power": 0.0, "move_speed": 0.0, "max_stamina": 0.0,
 }
 const GROWTH: Dictionary = {
 	"max_health": 14.0, "max_mana": 0.5, "magic_power": 2.0,
@@ -20,6 +21,7 @@ const STAT_NAMES: Dictionary = {
 	"max_health": "Health", "max_mana": "Mana", "magic_power": "Magic Power",
 	"defense": "Defense", "crit_chance": "Critical Chance", "spell_power": "Spell Power",
 	"evasion": "Evasion %", "magic_resist": "Magic Resist %", "health_regen": "Health Regen /s", "mana_regen": "Mana Regen",
+	"melee_power": "Melee Damage", "bow_power": "Bow Damage", "move_speed": "Move Speed", "max_stamina": "Stamina",
 }
 
 var level: int = 1
