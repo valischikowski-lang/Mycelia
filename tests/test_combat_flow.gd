@@ -67,6 +67,11 @@ func _autoplay(s: int) -> void:
 
 
 func test_full_battle_victory() -> void:
+	# The battle seed is time-based; make the automated player strong enough
+	# that the FSM test never depends on the dice.
+	Game.profile.stats.bonuses["spell_power"] = 150.0
+	Game.profile.stats.bonuses["max_health"] = 200.0
+	Game.profile.stats.full_restore()
 	_manager = CombatManager.new()
 	host.add_child(_manager)
 	_manager.state_changed.connect(func(s: int) -> void: _autoplay(s))
@@ -91,6 +96,9 @@ func test_full_battle_victory() -> void:
 
 
 func test_targeting_with_two_enemies() -> void:
+	# Tough enough to survive several targeting turns, weak enough to need them.
+	Game.profile.stats.bonuses["max_health"] = 400.0
+	Game.profile.stats.full_restore()
 	_manager = CombatManager.new()
 	host.add_child(_manager)
 	_manager.state_changed.connect(func(s: int) -> void: _autoplay(s))
