@@ -60,6 +60,19 @@ func _ready() -> void:
 	refresh_vitals()
 	refresh_tracker()
 	_on_target("", false)
+	resized.connect(_layout_tracker)
+	_ignore_non_buttons(self)
+
+
+## Only real buttons (and the modal lore panel) may take pointer input; every
+## decorative panel, label and container lets touches through to the game.
+func _ignore_non_buttons(c: Control) -> void:
+	for ch in c.get_children():
+		if ch == _lore_panel or not ch is Control:
+			continue
+		if not ch is BaseButton:
+			(ch as Control).mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_ignore_non_buttons(ch as Control)
 
 
 # ------------------------------------------------------------------ vitals
@@ -148,36 +161,71 @@ func _build_buttons() -> void:
 		var b := UiTheme.button(String(e[0]), func() -> void: menu_button.emit(tab))
 		b.custom_minimum_size = Vector2(0, 48)
 		b.add_theme_font_size_override("font_size", 17)
+		b.add_to_group("hud_button")
 		bar.add_child(b)
 	var pb := UiTheme.button("☰", func() -> void: pause_button.emit())
 	pb.custom_minimum_size = Vector2(52, 48)
+	pb.add_to_group("hud_button")
 	bar.add_child(pb)
 
 
 # ------------------------------------------------------------------ tracker
+## The tracker is display-only: it never takes input (the Journal button
+## opens the quest log). It shows at most the tracked quest's title, current
+## objective and progress plus one compact secondary title, is height-capped,
+## and is kept clear of every rect the touch controls reserve.
+const TRACKER_WIDTH := 330.0
+const TRACKER_MAX_HEIGHT := 190.0
+const TRACKER_FADE_DELAY := 8.0
+
+var _tracker_objective: Label
+var _tracker_progress: Label
+var _tracker_second: Label
+var _tracker_idle: float = 0.0
+## Screen rects (HUD-local) that HUD elements must never cover; supplied by
+## TouchControls whenever its layout changes.
+var reserved_rects: Array[Rect2] = []
+
+
 func _build_tracker() -> void:
 	_tracker_panel = UiTheme.panel(Color(0.06, 0.02, 0.12, 0.7), Color(0.55, 0.35, 1.0, 0.5))
 	_tracker_panel.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	_tracker_panel.offset_left = -380
+	_tracker_panel.offset_left = -TRACKER_WIDTH - 20
 	_tracker_panel.offset_right = -20
 	_tracker_panel.offset_top = 80
 	_tracker_panel.offset_bottom = 80
-	_tracker_panel.grow_vertical = Control.GROW_DIRECTION_END
-	_tracker_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-	_tracker_panel.gui_input.connect(func(ev: InputEvent) -> void:
-		if ev is InputEventMouseButton and (ev as InputEventMouseButton).pressed:
-			menu_button.emit("journal"))
+	_tracker_panel.clip_contents = true
 	add_child(_tracker_panel)
 	var v := VBoxContainer.new()
-	v.add_theme_constant_override("separation", 4)
+	v.add_theme_constant_override("separation", 3)
 	_tracker_panel.add_child(v)
-	_tracker_title = UiTheme.label("", 19, UiTheme.GOLD, UiTheme.title_font())
-	_tracker_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_tracker_title = _tracker_label(19, UiTheme.GOLD, UiTheme.title_font(), 1)
 	v.add_child(_tracker_title)
-	_tracker_body = VBoxContainer.new()
-	_tracker_body.add_theme_constant_override("separation", 2)
-	_tracker_body.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	v.add_child(_tracker_body)
+	_tracker_objective = _tracker_label(16, UiTheme.TEXT, null, 2)
+	v.add_child(_tracker_objective)
+	_tracker_progress = _tracker_label(15, UiTheme.TEXT_DIM, null, 1)
+	v.add_child(_tracker_progress)
+	_tracker_second = _tracker_label(15, Color("#c9b8ff"), UiTheme.bold_font(), 1)
+	v.add_child(_tracker_second)
+	_tracker_body = v
+	_set_ignore_recursive(_tracker_panel)
+
+
+func _tracker_label(font_size: int, color: Color, font: Font, lines: int) -> Label:
+	var l := UiTheme.label("", font_size, color, font)
+	l.custom_minimum_size.x = TRACKER_WIDTH - 28
+	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART if lines > 1 else TextServer.AUTOWRAP_OFF
+	l.max_lines_visible = lines
+	l.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	l.clip_text = true
+	return l
+
+
+static func _set_ignore_recursive(c: Control) -> void:
+	c.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	for ch in c.get_children():
+		if ch is Control:
+			_set_ignore_recursive(ch as Control)
 
 
 func refresh_tracker() -> void:
@@ -185,44 +233,71 @@ func refresh_tracker() -> void:
 	if p == null:
 		return
 	var q := p.quests
-	for c in _tracker_body.get_children():
-		c.queue_free()
-	var shown := 0
-	var main_title := ""
 	var ids: Array[String] = q.active_quests()
 	if q.tracked != "" and q.tracked in ids:
 		ids.erase(q.tracked)
 		ids.push_front(q.tracked)
+	var lines: Array[Dictionary] = []
 	for qid: String in ids:
-		if shown >= 2:
-			break
 		var data := Database.quest(qid)
 		var cur := q.current_objective(qid)
-		if data == null or cur == null:
-			continue
-		if shown == 0:
-			main_title = data.title
-		else:
-			_tracker_line(data.title, 17, Color("#c9b8ff"), UiTheme.bold_font())
-		if data.sequential:
-			_tracker_line(_objective_line(qid, cur), 16, UiTheme.TEXT)
-		else:
-			var remaining := 0
-			for o: QuestObjectiveData in data.objectives:
-				if not q.is_objective_done(qid, o.id):
-					remaining += 1
-			_tracker_line("◇ %d of %d remaining" % [remaining, data.objectives.size()], 16, UiTheme.TEXT_DIM)
-		shown += 1
-	_tracker_panel.visible = shown > 0
-	_tracker_title.text = main_title
+		if data != null and cur != null:
+			lines.append({"id": qid, "data": data, "cur": cur})
+	_tracker_panel.visible = not lines.is_empty()
+	if lines.is_empty():
+		return
+	var main: Dictionary = lines[0]
+	var data: QuestData = main["data"]
+	var qid0 := String(main["id"])
+	_tracker_title.text = data.title
+	var cur: QuestObjectiveData = main["cur"]
+	_tracker_objective.text = "◆ " + cur.description
+	var prog := ""
+	if cur.required_amount > 1:
+		prog = "%d / %d" % [q.get_progress(qid0, cur.id), cur.required_amount]
+	if not data.sequential or data.objectives.size() > 1:
+		var done := 0
+		for o: QuestObjectiveData in data.objectives:
+			if q.is_objective_done(qid0, o.id):
+				done += 1
+		prog += ("   ·   " if prog != "" else "") + "step %d of %d" % [mini(done + 1, data.objectives.size()), data.objectives.size()]
+	_tracker_progress.text = prog
+	_tracker_progress.visible = prog != ""
+	_tracker_second.visible = lines.size() > 1
+	if lines.size() > 1:
+		_tracker_second.text = "◇ " + (lines[1]["data"] as QuestData).title + ("  +%d" % (lines.size() - 2) if lines.size() > 2 else "")
+	_tracker_idle = 0.0
+	_tracker_panel.modulate.a = 1.0
+	_layout_tracker()
+
+
+## Caps the tracker height and keeps it clear of reserved touch areas.
+func _layout_tracker() -> void:
+	if _tracker_panel == null:
+		return
 	_tracker_panel.reset_size()
+	var want := minf(_tracker_panel.get_combined_minimum_size().y, TRACKER_MAX_HEIGHT)
+	var top := _tracker_panel.offset_top
+	var x0 := size.x + _tracker_panel.offset_left
+	var limit := minf(TRACKER_MAX_HEIGHT, size.y * 0.3)
+	for r: Rect2 in reserved_rects:
+		if r.position.x + r.size.x > x0 and r.position.x < size.x:
+			limit = minf(limit, r.position.y - 12.0 - top)
+	if want > limit and _tracker_second.visible:
+		_tracker_second.visible = false
+		_tracker_panel.reset_size()
+		want = minf(_tracker_panel.get_combined_minimum_size().y, TRACKER_MAX_HEIGHT)
+	_tracker_panel.offset_bottom = top + clampf(minf(want, limit), 0.0, TRACKER_MAX_HEIGHT)
+	_tracker_panel.visible = _tracker_panel.visible and limit > 40.0
 
 
-func _tracker_line(text: String, size: int, color: Color, font: Font = null) -> void:
-	var l := UiTheme.label(text, size, color, font)
-	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	l.custom_minimum_size.x = 320
-	_tracker_body.add_child(l)
+func tracker_rect() -> Rect2:
+	return _tracker_panel.get_global_rect() if _tracker_panel.visible else Rect2()
+
+
+func set_reserved_rects(rects: Array[Rect2]) -> void:
+	reserved_rects = rects
+	_layout_tracker()
 
 
 func _objective_line(qid: String, o: QuestObjectiveData) -> String:
@@ -389,7 +464,11 @@ func is_lore_open() -> bool:
 	return _lore_panel.visible
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	# Auto-dim the tracker when nothing changes; it brightens again on updates.
+	_tracker_idle += delta
+	if _tracker_panel and _tracker_idle > TRACKER_FADE_DELAY:
+		_tracker_panel.modulate.a = move_toward(_tracker_panel.modulate.a, 0.45, delta)
 	_fps_label.visible = Settings.show_fps
 	if Settings.show_fps:
 		_fps_label.text = "%d FPS · %d draws · %d objs · %.0f MB" % [

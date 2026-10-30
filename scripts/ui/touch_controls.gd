@@ -17,6 +17,10 @@ var _buttons: Dictionary = {}
 var _pressed: Dictionary = {}
 var _sprint_toggle: bool = false
 var interact_available: bool = false
+## Touch indices currently owned by these controls (joystick, look, buttons).
+var _owned: Dictionary = {}
+
+signal reserved_changed(rects: Array[Rect2])
 
 
 func _ready() -> void:
@@ -38,6 +42,19 @@ func _layout() -> void:
 		"interact": {"pos": Vector2(s.x - 140 * unit, s.y - 290 * unit), "r": 54 * unit, "label": "✋"},
 	}
 	queue_redraw()
+	reserved_changed.emit(reserved_rects())
+
+
+## Screen areas other UI must keep clear: every button (with a margin) and
+## the joystick's home zone.
+func reserved_rects() -> Array[Rect2]:
+	var out: Array[Rect2] = []
+	for k: String in _buttons.keys():
+		var b: Dictionary = _buttons[k]
+		var r := float(b["r"]) * 1.25
+		out.append(Rect2((b["pos"] as Vector2) - Vector2(r, r), Vector2(r, r) * 2.0))
+	out.append(Rect2(Vector2(0, size.y - 340), Vector2(340, 340)))
+	return out
 
 
 func _button_at(p: Vector2) -> String:
@@ -53,22 +70,35 @@ func _button_at(p: Vector2) -> String:
 func _input(event: InputEvent) -> void:
 	if not is_visible_in_tree():
 		return
+	# Godot emulates a mouse from the first finger. When that finger belongs
+	# to the stick, a button or the look drag, the emulated click must never
+	# reach GUI controls underneath (it used to open the journal through the
+	# quest tracker and freeze jump/sprint).
+	if event is InputEventMouse and event.device == InputEvent.DEVICE_ID_EMULATION:
+		if _owned.has(0):
+			get_viewport().set_input_as_handled()
+		return
 	if event is InputEventScreenTouch:
 		var t := event as InputEventScreenTouch
 		if t.pressed:
 			var b := _button_at(t.position)
 			if b != "":
 				_press(b, t.index)
+				_owned[t.index] = true
 				get_viewport().set_input_as_handled()
-			elif t.position.x < size.x * 0.42 and _joy_index == -1:
+			elif t.position.x < size.x * 0.42 and _joy_index == -1 and t.position.y > 140:
 				_joy_index = t.index
 				_joy_origin = t.position
 				_joy_pos = t.position
+				_owned[t.index] = true
 				get_viewport().set_input_as_handled()
-			elif t.position.x >= size.x * 0.42 and _look_index == -1 and t.position.y > 90:
+			elif t.position.x >= size.x * 0.42 and _look_index == -1 and t.position.y > 90 and not _over_gui_button(t.position):
 				_look_index = t.index
 				_look_last = t.position
+				_owned[t.index] = true
+				get_viewport().set_input_as_handled()
 		else:
+			_owned.erase(t.index)
 			if t.index == _joy_index:
 				_joy_index = -1
 				TouchInput.move = Vector2.ZERO
@@ -110,7 +140,18 @@ func _press(b: String, index: int) -> void:
 			TouchInput.sprint_held = _sprint_toggle
 
 
+## True when a real GUI button (e.g. the HUD's top bar) sits under `p`, so the
+## touch should go to it instead of starting a camera drag.
+func _over_gui_button(p: Vector2) -> bool:
+	for b in get_tree().get_nodes_in_group("hud_button"):
+		var c := b as Control
+		if c and c.is_visible_in_tree() and c.get_global_rect().has_point(p):
+			return true
+	return false
+
+
 func release_all() -> void:
+	_owned.clear()
 	_joy_index = -1
 	_look_index = -1
 	_pressed.clear()

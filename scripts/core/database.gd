@@ -96,6 +96,14 @@ func skill_tree_ids() -> Array:
 	return _skill_trees.keys()
 
 
+## Adds or replaces a resource at runtime (used by tests and dev tools; a
+## reload() restores the on-disk content).
+func register(table: String, res: Resource) -> void:
+	if not _tables.has(table):
+		_tables[table] = {}
+	(_tables[table] as Dictionary)[String(res.get("id"))] = res
+
+
 func _lookup(table: String, id: String) -> Resource:
 	var t: Dictionary = _tables.get(table, {})
 	if not t.has(id):
