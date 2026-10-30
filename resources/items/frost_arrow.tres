@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_mb8it"]
+
+[resource]
+script = ExtResource("1_mb8it")
+id = "frost_arrow"
+display_name = "Frost Arrow"
+description = "Slows what it hits to a dreamy crawl. Draw your bow and press Switch to choose arrows."
+category = 2
+rarity = 1
+max_stack = 60
+value = 3
+icon_color = Color(0.623529, 0.941176, 1, 1)
+icon_glyph = "➶"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {}
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = "Treasure chests, Ollo and Mother Grizzleroot."

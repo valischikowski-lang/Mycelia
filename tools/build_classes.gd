@@ -195,6 +195,21 @@ func build_items() -> void:
 	it("gnarlwood_shield", "Gnarlwood Shield", "", "offhand", R.COMMON, "⛨", "#8a6a4a",
 		"Knotted wood. It has stopped worse than you.", "Ollo's shop.",
 		{"kind": "shield", "block": 0.5, "parry": 0.18})
+	for ar: Array in [["ember_arrow", "Ember Arrow", "#ff7a3a", "Sets what it hits on fire for a few seconds."],
+			["frost_arrow", "Frost Arrow", "#9ff0ff", "Slows what it hits to a dreamy crawl."],
+			["spore_arrow", "Spore Arrow", "#c44dff", "Bursts into clinging spores that eat away at the target."]]:
+		var a := ItemData.new()
+		a.id = ar[0]
+		a.display_name = ar[1]
+		a.category = C.INGREDIENT
+		a.rarity = R.UNCOMMON
+		a.icon_glyph = "➶"
+		a.icon_color = Color(String(ar[2]))
+		a.description = String(ar[3]) + " Draw your bow and press Switch to choose arrows."
+		a.source = "Treasure chests, Ollo and Mother Grizzleroot."
+		a.max_stack = 60
+		a.value = 3
+		save(a, "res://resources/items/%s.tres" % a.id)
 	it("twig_bow", "Twig Bow", "", "ranged", R.COMMON, "➹", "#c48d5a",
 		"A bent branch with ideas.", "Starting gear of every Dreamer.",
 		{"kind": "bow", "damage": 9, "speed": 1.0, "reach": 30.0})

@@ -257,13 +257,38 @@ func _on_shop_requested(shop_id: String) -> void:
 	shop.call("open", shop_id)
 
 
+## Encounters requested by dialogue or scripts are fought in real time: the
+## encounter's creatures appear in front of the player and attack. (The old
+## turn-based CombatManager stays available as `legacy_card_duel`.)
 func _on_combat_requested(encounter_id: String, source: Node) -> void:
-	if combat == null or "combat" in _modals or Game.in_combat:
-		return
 	if dialogue_box.is_open():
 		dialogue_box.close()
 	if hud.is_lore_open():
 		hud.hide_lore()
+	if source is WorldCreature:
+		(source as WorldCreature).hostile_override = true
+		(source as WorldCreature).notice()
+		return
+	var enc := Database.encounter(encounter_id)
+	if enc == null or enc.enemies.is_empty() or player == null:
+		return
+	var c := WorldCreature.new()
+	c.creature_id = enc.enemies[0].id
+	c.encounter_id = encounter_id
+	c.terrain = region.terrain if region else null
+	c.hostile_override = true
+	world_root.add_child(c)
+	var p := player.global_position - player.global_basis.z * 6.0
+	if region:
+		p.y = region.ground(p.x, p.z)
+	c.global_position = p
+	c.home = p
+	c.notice()
+
+
+func legacy_card_duel(encounter_id: String, source: Node) -> void:
+	if combat == null or "combat" in _modals or Game.in_combat:
+		return
 	open_modal("combat")
 	await combat.call("start_encounter", encounter_id, source)
 	close_modal("combat")

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_35q7e"]
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_3fp67"]
 
 [resource]
-script = ExtResource("1_35q7e")
+script = ExtResource("1_3fp67")
 id = "smoke_veil"
 display_name = "Smoke Veil"
 description = "A cloud of night-smoke. Enemies inside lose track of you and miss 60% of their attacks."

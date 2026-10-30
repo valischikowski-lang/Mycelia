@@ -36,11 +36,25 @@ func _ready() -> void:
 func _layout() -> void:
 	var s := size
 	var unit := clampf(minf(s.x, s.y) / 720.0, 0.7, 1.6)
+	var br := func(x: float, y: float) -> Vector2: return Vector2(s.x - x * unit, s.y - y * unit)
 	_buttons = {
-		"jump": {"pos": Vector2(s.x - 120 * unit, s.y - 130 * unit), "r": 62 * unit, "label": "⤒"},
-		"sprint": {"pos": Vector2(s.x - 255 * unit, s.y - 95 * unit), "r": 46 * unit, "label": "»"},
-		"interact": {"pos": Vector2(s.x - 140 * unit, s.y - 290 * unit), "r": 54 * unit, "label": "✋"},
+		"attack": {"pos": br.call(120, 135), "r": 64 * unit, "label": "⚔", "hold": true},
+		"jump": {"pos": br.call(245, 68), "r": 44 * unit, "label": "⤒"},
+		"dodge": {"pos": br.call(258, 188), "r": 42 * unit, "label": "↯"},
+		"block": {"pos": br.call(128, 272), "r": 42 * unit, "label": "⛨", "hold": true},
+		"bow": {"pos": br.call(365, 128), "r": 38 * unit, "label": "➹", "hold": true},
+		"sprint": {"pos": br.call(360, 238), "r": 34 * unit, "label": "»"},
+		"lock": {"pos": br.call(252, 300), "r": 30 * unit, "label": "◎"},
+		"switch": {"pos": br.call(45, 360), "r": 26 * unit, "label": "⇄"},
+		"interact": {"pos": br.call(240, 410), "r": 46 * unit, "label": "✋"},
 	}
+	# Ability row along the bottom, between the stick zone and the cluster.
+	var row_left := 300.0 * unit
+	var row_right := s.x - 415.0 * unit
+	var step := minf(78.0 * unit, (row_right - row_left) / 5.0)
+	var r := minf(32.0 * unit, step * 0.46)
+	for i in 5:
+		_buttons["ability_%d" % (i + 1)] = {"pos": Vector2(row_left + step * (i + 0.5), s.y - 52 * unit), "r": r, "label": "", "ability": i}
 	queue_redraw()
 	reserved_changed.emit(reserved_rects())
 
@@ -53,7 +67,8 @@ func reserved_rects() -> Array[Rect2]:
 		var b: Dictionary = _buttons[k]
 		var r := float(b["r"]) * 1.25
 		out.append(Rect2((b["pos"] as Vector2) - Vector2(r, r), Vector2(r, r) * 2.0))
-	out.append(Rect2(Vector2(0, size.y - 340), Vector2(340, 340)))
+	var u := clampf(minf(size.x, size.y) / 720.0, 0.7, 1.6)
+	out.append(Rect2(Vector2(0, size.y - 300 * u), Vector2(300 * u, 300 * u)))
 	return out
 
 
@@ -61,6 +76,8 @@ func _button_at(p: Vector2) -> String:
 	for k: String in _buttons.keys():
 		var b: Dictionary = _buttons[k]
 		if k == "interact" and not interact_available:
+			continue
+		if b.has("ability") and _ability(int(b["ability"])) == null:
 			continue
 		if p.distance_to(b["pos"]) <= float(b["r"]) * 1.15:
 			return k
@@ -107,6 +124,7 @@ func _input(event: InputEvent) -> void:
 			for k: String in _pressed.keys():
 				if _pressed[k] == t.index:
 					_pressed.erase(k)
+					_release(k)
 		queue_redraw()
 	elif event is InputEventScreenDrag:
 		var d := event as InputEventScreenDrag
@@ -138,6 +156,27 @@ func _press(b: String, index: int) -> void:
 		"sprint":
 			_sprint_toggle = not _sprint_toggle
 			TouchInput.sprint_held = _sprint_toggle
+		"attack":
+			TouchInput.attack_held = true
+		"block":
+			TouchInput.block_held = true
+		"bow":
+			TouchInput.bow_held = true
+		"dodge", "lock", "switch":
+			TouchInput.queue(b)
+		_:
+			if b.begins_with("ability_"):
+				TouchInput.queue(b)
+
+
+func _release(b: String) -> void:
+	match b:
+		"attack":
+			TouchInput.attack_held = false
+		"block":
+			TouchInput.block_held = false
+		"bow":
+			TouchInput.bow_held = false
 
 
 ## True when a real GUI button (e.g. the HUD's top bar) sits under `p`, so the
@@ -148,6 +187,24 @@ func _over_gui_button(p: Vector2) -> bool:
 		if c and c.is_visible_in_tree() and c.get_global_rect().has_point(p):
 			return true
 	return false
+
+
+func _combat() -> PlayerCombat:
+	var p := get_tree().get_first_node_in_group("player")
+	return p.get("combat") if p else null
+
+
+func _ability(i: int) -> AbilityData:
+	if Game.profile == null:
+		return null
+	var list := Game.profile.usable_abilities()
+	return list[i] if i < list.size() else null
+
+
+func _process(_delta: float) -> void:
+	# Cooldown sweeps and bow draw need continuous redraws.
+	if is_visible_in_tree():
+		queue_redraw()
 
 
 func release_all() -> void:
@@ -169,18 +226,36 @@ func _draw() -> void:
 	var knob := _joy_pos if _joy_index != -1 else base
 	draw_circle(knob, 34, Color(0.4, 1.0, 0.95, 0.55 * alpha))
 	var font := UiTheme.bold_font()
+	var pc := _combat()
 	for k: String in _buttons.keys():
 		var b: Dictionary = _buttons[k]
 		if k == "interact" and not interact_available:
 			continue
-		var pressed := _pressed.has(k) or (k == "sprint" and _sprint_toggle)
+		var ab: AbilityData = null
+		if b.has("ability"):
+			ab = _ability(int(b["ability"]))
+			if ab == null:
+				continue
+		var pressed := _pressed.has(k) or (k == "sprint" and _sprint_toggle) or (k == "lock" and pc and is_instance_valid(pc.lock_target))
 		var r := float(b["r"])
 		var col := Color(0.45, 0.2, 0.8, 0.55) if not pressed else Color(0.3, 1.0, 0.9, 0.7)
 		if k == "interact":
 			col = Color(1.0, 0.75, 0.3, 0.75)
+		elif k == "attack":
+			col = Color(0.75, 0.2, 0.35, 0.6) if not pressed else Color(1.0, 0.5, 0.4, 0.8)
+		elif ab:
+			col = Color(ab.color.r * 0.5, ab.color.g * 0.5, ab.color.b * 0.5, 0.65)
 		draw_circle(b["pos"], r, col)
 		draw_arc(b["pos"], r, 0, TAU, 40, Color(1, 1, 1, 0.6), 2.5, true)
-		var label := String(b["label"])
+		if ab and pc:
+			var cd := pc.cooldown_ratio(ab)
+			if cd > 0.0:
+				draw_arc(b["pos"], r * 0.5, -PI * 0.5, -PI * 0.5 + TAU * cd, 32, Color(0.0, 0.0, 0.0, 0.6), r, true)
+			if Game.profile and Game.profile.stats.mana < ab.mana_cost:
+				draw_circle(b["pos"], r, Color(0.1, 0.1, 0.3, 0.5))
+		if k == "bow" and pc and pc.draw >= 0.0:
+			draw_arc(b["pos"], r + 6, -PI * 0.5, -PI * 0.5 + TAU * pc.draw, 32, UiTheme.GOLD, 5.0, true)
+		var label := String(b["label"]) if ab == null else ab.glyph
 		var fs := int(r * 0.8)
 		var ts := font.get_string_size(label, HORIZONTAL_ALIGNMENT_CENTER, -1, fs)
 		draw_string(font, (b["pos"] as Vector2) - Vector2(ts.x * 0.5, -fs * 0.35), label, HORIZONTAL_ALIGNMENT_CENTER, -1, fs, Color.WHITE)

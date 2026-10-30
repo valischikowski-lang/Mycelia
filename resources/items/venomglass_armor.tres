@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_f2r1x"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_icwuy"]
 
 [resource]
-script = ExtResource("1_f2r1x")
+script = ExtResource("1_icwuy")
 id = "venomglass_armor"
 display_name = "Venomglass Armor"
 description = "Light plates of green glass. +12% chance to evade a blow entirely."

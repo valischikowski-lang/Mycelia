@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_6hwpt"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_tqklf"]
 
 [resource]
-script = ExtResource("1_6hwpt")
+script = ExtResource("1_tqklf")
 id = "dreamsteel_sword"
 display_name = "Dreamsteel Sword"
 description = "A plain, honest sword. In a dream, that's rare."

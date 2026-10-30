@@ -44,6 +44,7 @@ func _ready() -> void:
 	_build_toasts()
 	_build_banner()
 	_build_lore()
+	_build_combat()
 	_fps_label = UiTheme.label("", 16, UiTheme.SUCCESS)
 	_fps_label.position = Vector2(24, 0)
 	_fps_label.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
@@ -217,8 +218,19 @@ func _tracker_label(font_size: int, color: Color, font: Font, lines: int) -> Lab
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART if lines > 1 else TextServer.AUTOWRAP_OFF
 	l.max_lines_visible = lines
 	l.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	l.clip_text = true
+	# clip_text collapses wrapped labels to zero height; single lines only.
+	l.clip_text = lines == 1
 	return l
+
+
+## Labels that trim with an ellipsis report no text height, so reserve one or
+## two lines explicitly depending on how long the text is.
+func _fit_lines(l: Label, max_lines: int) -> void:
+	var f := l.get_theme_font("font")
+	var fs := l.get_theme_font_size("font_size")
+	var w := f.get_string_size(l.text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
+	var lines := clampi(int(ceil(w / maxf(1.0, l.custom_minimum_size.x - 8.0))), 1, max_lines)
+	l.custom_minimum_size.y = (f.get_height(fs) + 2.0) * lines
 
 
 static func _set_ignore_recursive(c: Control) -> void:
@@ -252,6 +264,8 @@ func refresh_tracker() -> void:
 	_tracker_title.text = data.title
 	var cur: QuestObjectiveData = main["cur"]
 	_tracker_objective.text = "◆ " + cur.description
+	_tracker_objective.visible = true
+	_fit_lines(_tracker_objective, 2)
 	var prog := ""
 	if cur.required_amount > 1:
 		prog = "%d / %d" % [q.get_progress(qid0, cur.id), cur.required_amount]
@@ -283,8 +297,19 @@ func _layout_tracker() -> void:
 	for r: Rect2 in reserved_rects:
 		if r.position.x + r.size.x > x0 and r.position.x < size.x:
 			limit = minf(limit, r.position.y - 12.0 - top)
-	if want > limit and _tracker_second.visible:
-		_tracker_second.visible = false
+	# Degrade gracefully on short screens: drop the secondary quest, then
+	# squeeze the objective to one line, then the progress line, then the
+	# objective (the title always stays).
+	var steps: Array[Callable] = [
+		func() -> void: _tracker_second.visible = false,
+		func() -> void: _fit_lines(_tracker_objective, 1),
+		func() -> void: _tracker_progress.visible = false,
+		func() -> void: _tracker_objective.visible = false,
+	]
+	for step in steps:
+		if want <= limit:
+			break
+		step.call()
 		_tracker_panel.reset_size()
 		want = minf(_tracker_panel.get_combined_minimum_size().y, TRACKER_MAX_HEIGHT)
 	_tracker_panel.offset_bottom = top + clampf(minf(want, limit), 0.0, TRACKER_MAX_HEIGHT)
@@ -305,6 +330,138 @@ func _objective_line(qid: String, o: QuestObjectiveData) -> String:
 	if o.required_amount > 1:
 		prog = "  (%d/%d)" % [Game.profile.quests.get_progress(qid, o.id), o.required_amount]
 	return "◆ %s%s" % [o.description, prog]
+
+
+# ------------------------------------------------------------------ combat
+var _stamina_bar: ProgressBar
+var _boss_panel: PanelContainer
+var _boss_name: Label
+var _boss_bar: ProgressBar
+var _ability_bar: HBoxContainer
+var _vignette: ColorRect
+var _status_label: Label
+var _boss: WorldCreature
+
+
+func _build_combat() -> void:
+	# Stamina under the vitals.
+	_stamina_bar = UiTheme.bar(Color(1.0, 0.85, 0.35), Vector2(210, 6))
+	_stamina_bar.position = Vector2(108, 134)
+	_stamina_bar.size = Vector2(210, 6)
+	add_child(_stamina_bar)
+	_status_label = UiTheme.label("", 15, UiTheme.GLOW, UiTheme.bold_font())
+	_status_label.position = Vector2(108, 142)
+	add_child(_status_label)
+	# Boss bar, top centre.
+	_boss_panel = UiTheme.panel(Color(0.08, 0.0, 0.05, 0.8), Color(1.0, 0.4, 0.3, 0.8))
+	_boss_panel.set_anchors_preset(Control.PRESET_CENTER_TOP)
+	_boss_panel.offset_left = -260
+	_boss_panel.offset_right = 260
+	_boss_panel.offset_top = 12
+	_boss_panel.visible = false
+	add_child(_boss_panel)
+	var bv := VBoxContainer.new()
+	_boss_panel.add_child(bv)
+	_boss_name = UiTheme.label("", 18, Color(1.0, 0.75, 0.6), UiTheme.title_font())
+	_boss_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	bv.add_child(_boss_name)
+	_boss_bar = UiTheme.bar(Color(1.0, 0.3, 0.35), Vector2(490, 14))
+	bv.add_child(_boss_bar)
+	# PC ability bar (touch players use the on-screen ability buttons).
+	_ability_bar = HBoxContainer.new()
+	_ability_bar.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
+	_ability_bar.offset_left = -230
+	_ability_bar.offset_right = 230
+	_ability_bar.offset_top = -86
+	_ability_bar.offset_bottom = -16
+	_ability_bar.alignment = BoxContainer.ALIGNMENT_CENTER
+	_ability_bar.add_theme_constant_override("separation", 10)
+	add_child(_ability_bar)
+	for i in 5:
+		_ability_bar.add_child(AbilitySlot.new(i))
+	# Red edge flash when hurt.
+	_vignette = ColorRect.new()
+	_vignette.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_vignette.color = Color(0.8, 0.0, 0.1, 0.0)
+	add_child(_vignette)
+	EventBus.player_hit.connect(func(amount: float, blocked: bool) -> void:
+		if amount <= 0.0:
+			return
+		_vignette.color.a = 0.08 if blocked else 0.28
+		create_tween().tween_property(_vignette, "color:a", 0.0, 0.45))
+	EventBus.rt_enemy_aggro.connect(func(e: Node) -> void:
+		var wc := e as WorldCreature
+		if wc and (wc.is_boss() or bool(wc.profile.get("elite", false))):
+			_boss = wc)
+
+
+func _update_combat() -> void:
+	var p := get_tree().get_first_node_in_group("player")
+	var pc: PlayerCombat = p.get("combat") if p else null
+	_ability_bar.visible = not touch_mode and Game.profile != null and Game.profile.class_id != ""
+	if pc == null:
+		_stamina_bar.visible = false
+		return
+	_stamina_bar.max_value = pc.max_stamina
+	_stamina_bar.value = pc.stamina
+	_stamina_bar.visible = pc.stamina < pc.max_stamina - 0.5 or pc.combat_mode
+	var st := PackedStringArray()
+	for b: String in pc.buffs.keys():
+		st.append(b.capitalize())
+	if pc.shield_hp > 0.0:
+		st.append("Shield %d" % int(pc.shield_hp))
+	if pc.draw >= 0.0:
+		st.append(String(PlayerCombat.ARROW_TYPES[pc.arrow_type]["name"]))
+	if is_instance_valid(pc.lock_target):
+		st.append("◎ " + String((pc.lock_target as WorldCreature).data.display_name if pc.lock_target is WorldCreature else "target"))
+	_status_label.text = "  ".join(st)
+	if is_instance_valid(_boss) and not _boss.dead and _boss.aware:
+		_boss_panel.visible = true
+		_boss_name.text = _boss.data.display_name + ("   ◆ %d" % int(_boss.shield_hp) if _boss.shield_hp > 0.0 else "")
+		_boss_bar.max_value = _boss.max_hp
+		_boss_bar.value = _boss.hp
+	else:
+		_boss_panel.visible = false
+	for c in _ability_bar.get_children():
+		(c as AbilitySlot).refresh(pc)
+
+
+## One PC hotbar slot: glyph, key number and a cooldown overlay.
+class AbilitySlot extends Control:
+	var index: int
+	var _ability: AbilityData
+	var _cd: float = 0.0
+	var _usable: bool = true
+
+	func _init(i: int) -> void:
+		index = i
+		custom_minimum_size = Vector2(64, 64)
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	func refresh(pc: PlayerCombat) -> void:
+		var list := Game.profile.usable_abilities() if Game.profile else ([] as Array[AbilityData])
+		_ability = list[index] if index < list.size() else null
+		_cd = pc.cooldown_ratio(_ability) if _ability else 0.0
+		_usable = _ability != null and Game.profile.stats.mana >= _ability.mana_cost
+		tooltip_text = (_ability.display_name + " — " + _ability.description) if _ability else ""
+		queue_redraw()
+
+	func _draw() -> void:
+		var c := size * 0.5
+		var r := minf(size.x, size.y) * 0.5 - 2.0
+		if _ability == null:
+			draw_arc(c, r, 0, TAU, 32, Color(1, 1, 1, 0.15), 2.0, true)
+			return
+		var col := _ability.color
+		draw_circle(c, r, Color(col.r * 0.35, col.g * 0.35, col.b * 0.35, 0.85))
+		draw_arc(c, r, 0, TAU, 32, Color(col, 0.9), 2.5, true)
+		var f := UiTheme.bold_font()
+		var ts := f.get_string_size(_ability.glyph, HORIZONTAL_ALIGNMENT_CENTER, -1, 28)
+		draw_string(f, c - Vector2(ts.x * 0.5, -10), _ability.glyph, HORIZONTAL_ALIGNMENT_CENTER, -1, 28, Color.WHITE if _usable else Color(0.6, 0.6, 0.8))
+		if _cd > 0.0:
+			draw_arc(c, r * 0.5, -PI * 0.5, -PI * 0.5 + TAU * _cd, 32, Color(0, 0, 0, 0.65), r, true)
+		draw_string(f, Vector2(4, 16), str(index + 1), HORIZONTAL_ALIGNMENT_LEFT, -1, 14, UiTheme.GOLD)
+		draw_string(f, Vector2(size.x - 18, size.y - 4), "%d" % int(_ability.mana_cost), HORIZONTAL_ALIGNMENT_LEFT, -1, 13, UiTheme.MANA)
 
 
 # ------------------------------------------------------------------ center
@@ -465,6 +622,7 @@ func is_lore_open() -> bool:
 
 
 func _process(delta: float) -> void:
+	_update_combat()
 	# Auto-dim the tracker when nothing changes; it brightens again on updates.
 	_tracker_idle += delta
 	if _tracker_panel and _tracker_idle > TRACKER_FADE_DELAY:

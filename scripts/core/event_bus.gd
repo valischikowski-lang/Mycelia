@@ -20,6 +20,11 @@ signal combat_started(encounter_id: String)
 signal combat_finished(result: Dictionary)
 signal enemy_defeated(creature_id: String)
 signal encounter_won(encounter_id: String)
+## Real-time combat: an enemy noticed the player / the player was hit.
+signal rt_enemy_aggro(enemy: Node)
+signal player_hit(amount: float, blocked: bool)
+signal player_died()
+signal ability_used(ability_id: String)
 
 # --- Progression -----------------------------------------------------------
 signal xp_gained(amount: int)

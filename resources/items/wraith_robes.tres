@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_ymtld"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_i0os0"]
 
 [resource]
-script = ExtResource("1_ymtld")
+script = ExtResource("1_i0os0")
 id = "wraith_robes"
 display_name = "Wraith Robes"
 description = "Woven from mist that remembers being cloth. Magic damage taken -25%."

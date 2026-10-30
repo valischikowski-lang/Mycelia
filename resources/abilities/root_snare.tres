@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_mtjif"]
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_3fquu"]
 
 [resource]
-script = ExtResource("1_mtjif")
+script = ExtResource("1_3fquu")
 id = "root_snare"
 display_name = "Root Snare"
 description = "Roots burst up under your target and hold it fast. Wakes sleeping Root Gates."

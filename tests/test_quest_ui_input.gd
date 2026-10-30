@@ -78,6 +78,17 @@ func _check_layout(label: String) -> void:
 	check(tr.size.y > 20.0, "%s: tracker still shows something" % label)
 	for r: Rect2 in touch.reserved_rects():
 		check(not tr.intersects(r), "%s: tracker %s clear of control %s" % [label, tr, r])
+	check(hud._tracker_objective.size.y >= 18.0 or tr.size.y < 90.0, "%s: objective line visible when there is room (h=%.0f)" % [label, hud._tracker_objective.size.y])
+	# Touch buttons never overlap each other and stay on screen.
+	var keys: Array = touch._buttons.keys()
+	for i in keys.size():
+		var a: Dictionary = touch._buttons[keys[i]]
+		var pa: Vector2 = a["pos"]
+		check(Rect2(Vector2.ZERO, touch.size).grow(-2).has_point(pa), "%s: %s on screen" % [label, keys[i]])
+		for j in range(i + 1, keys.size()):
+			var b: Dictionary = touch._buttons[keys[j]]
+			var d := pa.distance_to(b["pos"])
+			check(d >= float(a["r"]) + float(b["r"]) - 1.0, "%s: %s and %s don't overlap (%.0f < %.0f)" % [label, keys[i], keys[j], d, float(a["r"]) + float(b["r"])])
 	# Nothing but real buttons may take pointer input inside the HUD.
 	var blockers := _input_takers(hud)
 	for c: Control in blockers:

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_am4mj"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_svd16"]
 
 [resource]
-script = ExtResource("1_am4mj")
+script = ExtResource("1_svd16")
 id = "cloak_of_vanishing"
 display_name = "Cloak of Vanishing"
 description = "When your health falls below a third, the cloak swallows you: 3 seconds of true invisibility (once every 30s)."

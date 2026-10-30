@@ -54,6 +54,9 @@ func _ready() -> void:
 	v.add_child(_check("Invert Look Y", Settings.invert_y, func(on: bool) -> void:
 		Settings.invert_y = on
 		Settings.notify_changed("controls")))
+	v.add_child(_check("Over-the-Shoulder Combat Camera", Settings.combat_camera_third_person, func(on: bool) -> void:
+		Settings.combat_camera_third_person = on
+		Settings.notify_changed("controls")))
 	v.add_child(_check("Head Bobbing", Settings.head_bob, func(on: bool) -> void:
 		Settings.head_bob = on
 		Settings.notify_changed("controls")))

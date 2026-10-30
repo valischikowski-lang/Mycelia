@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_bt2t1"]
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_e42bt"]
 
 [resource]
-script = ExtResource("1_bt2t1")
+script = ExtResource("1_e42bt")
 id = "reality_rift"
 display_name = "Reality Rift"
 description = "Tear the world open at your target. After a heartbeat, the rift snaps shut on everything inside."

@@ -24,6 +24,24 @@ const DEFAULT_KEYS: Dictionary = {
 	"ui_card_2": [KEY_2],
 	"ui_card_3": [KEY_3],
 	"ui_card_4": [KEY_4],
+	"attack": [],
+	"block": [],
+	"aim_bow": [KEY_F],
+	"dodge": [KEY_Q, KEY_ALT],
+	"lock_on": [KEY_T],
+	"switch_weapon": [KEY_X],
+	"ability_1": [KEY_1],
+	"ability_2": [KEY_2],
+	"ability_3": [KEY_3],
+	"ability_4": [KEY_4],
+	"ability_5": [KEY_5],
+}
+
+## Mouse buttons per action (added on top of the keys).
+const DEFAULT_MOUSE: Dictionary = {
+	"attack": [MOUSE_BUTTON_LEFT],
+	"block": [MOUSE_BUTTON_RIGHT],
+	"lock_on": [MOUSE_BUTTON_MIDDLE],
 }
 
 const DEFAULT_JOY_BUTTONS: Dictionary = {
@@ -32,6 +50,11 @@ const DEFAULT_JOY_BUTTONS: Dictionary = {
 	"sprint": [JOY_BUTTON_LEFT_STICK],
 	"pause": [JOY_BUTTON_START],
 	"menu_inventory": [JOY_BUTTON_BACK],
+	"attack": [JOY_BUTTON_RIGHT_SHOULDER],
+	"block": [JOY_BUTTON_LEFT_SHOULDER],
+	"dodge": [JOY_BUTTON_B],
+	"lock_on": [JOY_BUTTON_RIGHT_STICK],
+	"switch_weapon": [JOY_BUTTON_Y],
 }
 
 const DEFAULT_JOY_AXES: Dictionary = {
@@ -39,6 +62,7 @@ const DEFAULT_JOY_AXES: Dictionary = {
 	"move_back": [JOY_AXIS_LEFT_Y, 1.0],
 	"move_left": [JOY_AXIS_LEFT_X, -1.0],
 	"move_right": [JOY_AXIS_LEFT_X, 1.0],
+	"aim_bow": [JOY_AXIS_TRIGGER_RIGHT, 1.0],
 }
 
 
@@ -64,6 +88,10 @@ static func apply(overrides: Dictionary = {}) -> void:
 			ja.axis = int(data[0]) as JoyAxis
 			ja.axis_value = float(data[1])
 			InputMap.action_add_event(action, ja)
+		for mb: Variant in DEFAULT_MOUSE.get(action, []):
+			var me := InputEventMouseButton.new()
+			me.button_index = int(mb) as MouseButton
+			InputMap.action_add_event(action, me)
 
 
 static func key_name(action: String) -> String:

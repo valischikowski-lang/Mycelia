@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/classes/class_data.gd" id="1_ko6nk"]
+[ext_resource type="Script" path="res://scripts/classes/class_data.gd" id="1_0nbqb"]
 
 [resource]
-script = ExtResource("1_ko6nk")
+script = ExtResource("1_0nbqb")
 id = "assassin"
 display_name = "Assassin"
 tagline = "Swift. Silent. Already behind you."

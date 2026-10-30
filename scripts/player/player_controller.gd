@@ -46,6 +46,12 @@ var _was_on_floor: bool = true
 var _fall_speed: float = 0.0
 var _launch_lock: float = 0.0
 var _probe_timer: float = 0.0
+## Real-time combat and the visible body used by the combat camera.
+var combat: PlayerCombat
+var avatar: PlayerAvatar
+## 0 = first person, 1 = over-the-shoulder combat camera.
+var cam_blend: float = 0.0
+const COMBAT_CAM := Vector3(0.75, 0.62, 3.5)
 
 
 func _ready() -> void:
@@ -85,6 +91,32 @@ func _ready() -> void:
 	ray.collide_with_bodies = false
 	camera.add_child(ray)
 	Settings.changed.connect(_on_settings_changed)
+	combat = PlayerCombat.new()
+	combat.player = self
+	add_child(combat)
+	build_avatar()
+	EventBus.class_chosen.connect(func(_id: String) -> void:
+		build_avatar()
+		combat.refresh_class())
+
+
+## (Re)builds the visible body from the chosen class and equipment.
+func build_avatar() -> void:
+	if is_instance_valid(avatar):
+		avatar.queue_free()
+	var prof := Game.profile
+	var cls := prof.player_class() if prof else null
+	avatar = PlayerAvatar.create(cls, prof.inventory.equipment if prof else {})
+	avatar.rotation.y = PI
+	avatar.visible = false
+	add_child(avatar)
+	combat.avatar = avatar
+
+
+## Enemies, projectiles and zones damage the player through this.
+func take_hit(hit: Dictionary) -> void:
+	if combat:
+		combat.receive_hit(hit)
 
 
 func _on_settings_changed(section: String) -> void:
@@ -156,6 +188,12 @@ func _physics_process(delta: float) -> void:
 		jump_pressed = Input.is_action_just_pressed("jump") or TouchInput.consume_jump()
 		if Input.is_action_just_pressed("interact") or TouchInput.consume_interact():
 			try_interact()
+	if combat:
+		if input_enabled:
+			combat.process_input(CombatInput.gather(transform.basis, move), delta)
+		else:
+			combat.process_input(CombatInput.new(), delta)
+		_update_lock_on(delta)
 
 	var on_floor := is_on_floor()
 	if on_floor:
@@ -188,6 +226,12 @@ func _physics_process(delta: float) -> void:
 		target_speed = sprint_speed
 	if TouchInput.move.length() > 0.01 and not sprint:
 		target_speed = lerpf(walk_speed, run_speed, smoothstep(0.35, 0.9, mag))
+	if combat:
+		target_speed *= combat.feel("move", 1.0)
+		if combat.is_blocking():
+			target_speed = minf(target_speed, walk_speed)
+		elif combat.draw >= 0.0:
+			target_speed = minf(target_speed, walk_speed * 1.2)
 	var dir := (transform.basis * Vector3(move.x, 0, move.y))
 	dir.y = 0
 	if dir.length() > 1.0:
@@ -201,6 +245,9 @@ func _physics_process(delta: float) -> void:
 	horiz = horiz.move_toward(wanted, accel * delta)
 	velocity.x = horiz.x
 	velocity.z = horiz.z
+	if combat and combat._dodge_time > 0.0:
+		velocity.x = combat._dodge_dir.x
+		velocity.z = combat._dodge_dir.z
 
 	move_and_slide()
 	_keep_in_bounds()
@@ -214,11 +261,52 @@ func _physics_process(delta: float) -> void:
 	_was_on_floor = now_on_floor
 
 	_update_head_bob(delta, horiz.length(), now_on_floor)
+	_update_camera(delta)
 	DreamFlower.focus_point = global_position
 	_probe_timer -= delta
 	if _probe_timer <= 0.0:
 		_probe_timer = 0.08
 		_update_target()
+
+
+## Soft lock-on: while a target is locked the view turns towards it.
+func _update_lock_on(delta: float) -> void:
+	var t := combat.lock_target
+	if not is_instance_valid(t) or not look_enabled:
+		return
+	var to := t.global_position - global_position
+	to.y = 0.0
+	if to.length() < 0.5:
+		return
+	var want := atan2(-to.x, -to.z)
+	rotation.y = lerp_angle(rotation.y, want, minf(1.0, delta * 7.0))
+	_pitch = lerpf(_pitch, deg_to_rad(-12.0), minf(1.0, delta * 3.0))
+	head.rotation.x = _pitch
+
+
+## First person while exploring; an over-the-shoulder camera in combat (it
+## pulls in when a wall is behind the player).
+func _update_camera(delta: float) -> void:
+	var want := 1.0 if combat and combat.combat_mode and Settings.combat_camera_third_person else 0.0
+	cam_blend = move_toward(cam_blend, want, delta * 2.5)
+	var k := smoothstep(0.0, 1.0, cam_blend)
+	var offset := COMBAT_CAM * k
+	if k > 0.01:
+		var from := head.global_position
+		var to := head.global_transform * offset
+		var q := PhysicsRayQueryParameters3D.create(from, to, 1)
+		q.exclude = [get_rid()]
+		var res := get_world_3d().direct_space_state.intersect_ray(q)
+		if not res.is_empty():
+			var d := from.distance_to(res["position"]) - 0.3
+			offset = offset.normalized() * maxf(0.0, d)
+	camera.position = offset
+	if is_instance_valid(avatar):
+		avatar.visible = offset.length() > 0.9 and not (combat and combat._buff("vanish"))
+	if combat and combat.draw >= 0.0:
+		camera.fov = lerpf(camera.fov, Settings.fov - 12.0 * combat.draw, minf(1.0, delta * 8.0))
+	else:
+		camera.fov = lerpf(camera.fov, Settings.fov, minf(1.0, delta * 6.0))
 
 
 func _keep_in_bounds() -> void:

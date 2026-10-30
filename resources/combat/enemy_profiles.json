@@ -1,0 +1,47 @@
+{
+	"_doc": "Real-time behaviour per creature id. kinds: melee, leap, projectile, aoe_self, aoe_target, zone, shockwave, summon, blink, heal, stealth, shield. range = distance at which the attack is chosen; windup = telegraph time; recover = vulnerable time after.",
+	"sporeling": {"speed": 4.6, "aggro": 10, "weak": "none", "attacks": [
+		{"id": "bite", "name": "Nibble", "kind": "melee", "damage": 6, "range": 1.7, "windup": 0.45, "recover": 0.7, "cooldown": 1.1}
+	]},
+	"hollow_sporeling": {"speed": 5.0, "aggro": 13, "weak": "none", "attacks": [
+		{"id": "glitch_bite", "name": "Glitch Bite", "kind": "melee", "damage": 9, "range": 1.8, "windup": 0.45, "recover": 0.6, "cooldown": 1.0},
+		{"id": "void_puff", "name": "Hollow Puff", "kind": "projectile", "damage": 7, "range": 9, "windup": 0.6, "recover": 0.5, "cooldown": 3.5, "speed": 11, "color": "#b0a0c8"}
+	]},
+	"crystal_beetle": {"speed": 3.2, "aggro": 9, "weak": "back", "front_guard": 0.7, "attacks": [
+		{"id": "snap", "name": "Mandible Snap", "kind": "melee", "damage": 9, "range": 1.9, "windup": 0.55, "recover": 0.7, "cooldown": 1.2},
+		{"id": "charge", "name": "Refracting Charge", "kind": "leap", "damage": 14, "range": 9, "min_range": 4, "windup": 0.9, "recover": 1.4, "cooldown": 5}
+	]},
+	"dream_fox": {"speed": 6.5, "aggro": 11, "weak": "none", "stealthy": true, "attacks": [
+		{"id": "pounce", "name": "Starlit Pounce", "kind": "leap", "damage": 11, "range": 7, "windup": 0.5, "recover": 0.8, "cooldown": 2.4},
+		{"id": "veil", "name": "Moon Veil", "kind": "stealth", "range": 12, "windup": 0.2, "recover": 0.2, "cooldown": 9, "duration": 3}
+	]},
+	"hollow_crone": {"speed": 3.0, "aggro": 14, "weak": "none", "keep_distance": 7, "attacks": [
+		{"id": "hex_bolt", "name": "Hex Bolt", "kind": "projectile", "damage": 9, "range": 14, "windup": 0.7, "recover": 0.6, "cooldown": 2.2, "speed": 13, "color": "#9dff3a", "effect": "hexed"},
+		{"id": "two_tooth_bite", "name": "Two-Tooth Bite", "kind": "melee", "damage": 12, "range": 1.9, "windup": 0.5, "recover": 0.8, "cooldown": 2},
+		{"id": "cackle_blink", "name": "Cackle", "kind": "blink", "range": 3.2, "windup": 0.3, "recover": 0.3, "cooldown": 6},
+		{"id": "brew_sip", "name": "Sip of the Brew", "kind": "heal", "damage": 14, "range": 30, "windup": 1.2, "recover": 0.4, "cooldown": 12, "below": 0.5}
+	]},
+	"cackling_crone": {"speed": 3.4, "aggro": 14, "weak": "none", "keep_distance": 6, "attacks": [
+		{"id": "hex_bolt", "name": "Hex Bolt", "kind": "projectile", "damage": 10, "range": 14, "windup": 0.6, "recover": 0.5, "cooldown": 2.0, "speed": 14, "color": "#9dff3a", "effect": "hexed", "count": 2, "spread": 14},
+		{"id": "two_tooth_bite", "name": "Three-Tooth Bite", "kind": "melee", "damage": 13, "range": 1.9, "windup": 0.5, "recover": 0.8, "cooldown": 2},
+		{"id": "cackle_blink", "name": "Cackle", "kind": "blink", "range": 3.2, "windup": 0.3, "recover": 0.3, "cooldown": 5}
+	]},
+	"gnasher_gremlin": {"speed": 5.4, "aggro": 13, "weak": "none", "flying": 2.2, "attacks": [
+		{"id": "spark_bomb", "name": "Spark Bomb", "kind": "aoe_target", "damage": 12, "range": 12, "min_range": 3, "windup": 1.1, "recover": 0.6, "cooldown": 3.2, "radius": 2.4, "color": "#ffd23a"},
+		{"id": "wrench_dive", "name": "Wrench Dive", "kind": "leap", "damage": 9, "range": 5, "windup": 0.55, "recover": 1.0, "cooldown": 2.5}
+	]},
+	"bloom_guardian": {"speed": 2.6, "aggro": 14, "weak": "none", "elite": true, "attacks": [
+		{"id": "thorn_crush", "name": "Thorn Crush", "kind": "melee", "damage": 18, "range": 2.8, "windup": 0.9, "recover": 1.0, "cooldown": 2.2},
+		{"id": "petal_storm", "name": "Petal Storm", "kind": "projectile", "damage": 8, "range": 14, "windup": 0.8, "recover": 0.6, "cooldown": 4, "speed": 12, "count": 5, "spread": 40, "color": "#ff5fae"},
+		{"id": "root_eruption", "name": "Root Eruption", "kind": "aoe_target", "damage": 16, "range": 12, "windup": 1.3, "recover": 0.8, "cooldown": 6, "radius": 2.8, "color": "#9cff4a"},
+		{"id": "photosynthesis", "name": "Photosynthesis", "kind": "heal", "damage": 30, "range": 40, "windup": 1.8, "recover": 0.5, "cooldown": 14, "below": 0.55}
+	]},
+	"spore_golem": {"speed": 2.4, "aggro": 16, "weak": "back", "boss": true, "exposed_after": "slam", "attacks": [
+		{"id": "slam", "name": "Fungal Slam", "kind": "aoe_self", "damage": 22, "range": 4.5, "windup": 1.4, "recover": 2.4, "cooldown": 3.5, "radius": 5.5, "color": "#ff7a3a"},
+		{"id": "spore_cloud", "name": "Spore Cloud", "kind": "zone", "damage": 4, "range": 14, "windup": 1.0, "recover": 0.8, "cooldown": 9, "radius": 3.5, "duration": 6, "color": "#c44dff"},
+		{"id": "charge", "name": "Rolling Charge", "kind": "leap", "damage": 18, "range": 14, "min_range": 6, "windup": 1.2, "recover": 1.6, "cooldown": 7},
+		{"id": "network_pulse", "name": "Network Pulse", "kind": "shockwave", "damage": 20, "range": 16, "windup": 1.6, "recover": 1.6, "cooldown": 8, "radius": 16, "phase": 1, "color": "#36fff0"},
+		{"id": "call_sporelings", "name": "Call the Sporelings", "kind": "summon", "range": 30, "windup": 1.4, "recover": 1.0, "cooldown": 20, "phase": 1, "summon": "hollow_sporeling", "count": 2},
+		{"id": "mycelial_armor", "name": "Mycelial Armor", "kind": "shield", "damage": 60, "range": 30, "windup": 1.0, "recover": 0.6, "cooldown": 22, "phase": 1}
+	]}
+}

@@ -25,6 +25,7 @@ var detail_nodes: Array[Node3D] = []
 
 
 func build() -> void:
+	add_to_group("region")
 	rng.seed = world_seed
 	biome = Database.biome(biome_id)
 	if biome == null:

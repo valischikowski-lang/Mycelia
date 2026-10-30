@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_se1n6"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_g2iwh"]
 
 [resource]
-script = ExtResource("1_se1n6")
+script = ExtResource("1_g2iwh")
 id = "spiritcaller_bell"
 display_name = "Spiritcaller Bell"
 description = "Ring it and the dead remember you. Spirit Companions last 50% longer and come in pairs."

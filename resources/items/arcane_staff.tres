@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_hxltk"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_8y8fs"]
 
 [resource]
-script = ExtResource("1_hxltk")
+script = ExtResource("1_8y8fs")
 id = "arcane_staff"
 display_name = "Arcane Staff"
 description = "A spiral of living crystal. Every light attack also flings an arcane spark; heavy attacks fire a full bolt."

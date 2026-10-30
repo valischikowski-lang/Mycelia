@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_la5kd"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_xs1yy"]
 
 [resource]
-script = ExtResource("1_la5kd")
+script = ExtResource("1_xs1yy")
 id = "eldercap_helm"
 display_name = "Eldercap Helm"
 description = "An elder grimlet's cap, given back. Nature abilities +25%, and you slowly regrow health."

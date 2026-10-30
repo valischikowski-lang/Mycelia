@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_jgort"]
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_7verf"]
 
 [resource]
-script = ExtResource("1_jgort")
+script = ExtResource("1_7verf")
 id = "soul_shield"
 display_name = "Soul Shield"
 description = "Wrap yourself in a shield of remembered courage that absorbs damage."

@@ -17,6 +17,8 @@ var invert_y: bool = false
 var head_bob: bool = true
 var fov: float = 78.0
 var force_touch_controls: bool = false
+## Over-the-shoulder camera during fights (off = stay in first person).
+var combat_camera_third_person: bool = true
 var volumes: Dictionary = {"Master": 0.85, "Music": 0.6, "Ambient": 0.8, "Effects": 0.85, "UI": 0.7}
 var key_overrides: Dictionary = {}
 
@@ -97,6 +99,7 @@ func save_settings() -> void:
 	cfg.set_value("controls", "invert_y", invert_y)
 	cfg.set_value("controls", "head_bob", head_bob)
 	cfg.set_value("controls", "force_touch_controls", force_touch_controls)
+	cfg.set_value("controls", "combat_camera_third_person", combat_camera_third_person)
 	cfg.set_value("controls", "key_overrides", key_overrides)
 	cfg.set_value("audio", "volumes", volumes)
 	var err := cfg.save(PATH)
@@ -117,6 +120,7 @@ func load_settings() -> void:
 	invert_y = bool(cfg.get_value("controls", "invert_y", invert_y))
 	head_bob = bool(cfg.get_value("controls", "head_bob", head_bob))
 	force_touch_controls = bool(cfg.get_value("controls", "force_touch_controls", force_touch_controls))
+	combat_camera_third_person = bool(cfg.get_value("controls", "combat_camera_third_person", combat_camera_third_person))
 	var ko: Variant = cfg.get_value("controls", "key_overrides", {})
 	key_overrides = ko if ko is Dictionary else {}
 	var vols: Variant = cfg.get_value("audio", "volumes", volumes)
