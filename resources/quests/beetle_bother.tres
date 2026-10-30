@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="QuestData" load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_e3ofq"]
-[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_ohtaa"]
+[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_epo8a"]
+[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_r4ooh"]
 
-[sub_resource type="Resource" id="Resource_3n3mh"]
-script = ExtResource("1_e3ofq")
+[sub_resource type="Resource" id="Resource_d27ec"]
+script = ExtResource("1_epo8a")
 id = "defeat_beetles"
 description = "Defeat Crystal Beetles"
 type = 2
@@ -13,8 +13,8 @@ required_amount = 3
 map_hint = Vector3(0, 0, 0)
 hint_region = "dreaming_meadow"
 
-[sub_resource type="Resource" id="Resource_ekatw"]
-script = ExtResource("1_e3ofq")
+[sub_resource type="Resource" id="Resource_jcqu5"]
+script = ExtResource("1_epo8a")
 id = "return_ollo"
 description = "Return to Ollo"
 type = 0
@@ -24,14 +24,14 @@ map_hint = Vector3(-8, 0, 30)
 hint_region = "dreaming_meadow"
 
 [resource]
-script = ExtResource("2_ohtaa")
+script = ExtResource("2_r4ooh")
 id = "beetle_bother"
 title = "Beetle Bother"
 description = "Ollo the snail-merchant's wares keep getting eaten by Crystal Beetles. He would deal with them himself, but he would get there next week."
 category = 4
 prerequisites = PackedStringArray()
 min_level = 1
-objectives = Array[ExtResource("1_e3ofq")]([SubResource("Resource_3n3mh"), SubResource("Resource_ekatw")])
+objectives = Array[ExtResource("1_epo8a")]([SubResource("Resource_d27ec"), SubResource("Resource_jcqu5")])
 sequential = true
 auto_start = false
 reward_xp = 100

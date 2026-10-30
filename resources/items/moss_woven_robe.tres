@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_cy3q4"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_teojo"]
 
 [resource]
-script = ExtResource("1_cy3q4")
+script = ExtResource("1_teojo")
 id = "moss_woven_robe"
 display_name = "Moss-Woven Robe"
 description = "Soft, warm, and slightly alive."
@@ -19,3 +19,12 @@ stat_bonuses = {
 "max_health": 15
 }
 use_effect = {}
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = ""

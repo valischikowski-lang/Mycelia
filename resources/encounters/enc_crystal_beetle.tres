@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="EncounterData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_eo65h"]
-[ext_resource type="Resource" path="res://resources/creatures/crystal_beetle.tres" id="2_kyl4g"]
-[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="3_g5wbt"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_453fa"]
+[ext_resource type="Resource" path="res://resources/creatures/crystal_beetle.tres" id="2_16aex"]
+[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="3_rv2tm"]
 
 [resource]
-script = ExtResource("3_g5wbt")
+script = ExtResource("3_rv2tm")
 id = "enc_crystal_beetle"
 display_name = "Crystal Beetle"
-enemies = Array[ExtResource("1_eo65h")]([ExtResource("2_kyl4g")])
+enemies = Array[ExtResource("1_453fa")]([ExtResource("2_16aex")])
 arena_theme = "meadow"
 music = "music_combat"
 can_flee = true

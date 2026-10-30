@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_wtewd"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_hrg81"]
 
 [resource]
-script = ExtResource("1_wtewd")
+script = ExtResource("1_hrg81")
 id = "dewdrop_tonic"
 display_name = "Dewdrop Tonic"
 description = "Morning dew from a flower that never sleeps. Restores 40 health."
@@ -18,3 +18,12 @@ stat_bonuses = {}
 use_effect = {
 "heal": 40
 }
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = ""

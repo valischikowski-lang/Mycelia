@@ -13,6 +13,7 @@ func _init() -> void:
 	build_abilities()
 	build_items()
 	build_classes()
+	build_faction_content()
 	print("build_classes: wrote %d resources" % _count)
 	quit()
 
@@ -282,3 +283,58 @@ func build_classes() -> void:
 		["rootbreaker_axe", "sporeguard_shield", "mycelium_hammer", "thornhide_armor", "eldercap_helm"],
 		["root_snare", "spore_burst", "barkskin", "mycelium_link", "colossus_growth"],
 		["nature_magic", "heavy_combat", "regeneration", "spore_arts", "ancient_growth"], "grimlet")
+
+
+# ------------------------------------------------------------------ factions
+func build_faction_content() -> void:
+	var F := [
+		["unseen_covenant", "assassin", "Covenant", "#9a7bff", "covenant_veil", "Covenant Veil", "duskglass_signet", "Duskglass Signet", {"crit_chance": 6, "evasion": 4}],
+		["lantern_choir", "spirit", "Choir", "#7ef9ff", "choir_shroud", "Choir Shroud", "lantern_signet", "Lantern Signet", {"max_mana": 1, "magic_resist": 10}],
+		["spiral_concordance", "wizard", "Concordance", "#8ab4ff", "concordance_mantle", "Concordance Mantle", "spiral_signet", "Spiral Signet", {"spell_power": 8, "mana_regen": 0.2}],
+		["rootborn_hold", "grimlet", "Hold", "#9cff4a", "rootmoss_cloak", "Rootmoss Cloak", "loam_signet", "Loam Signet", {"max_health": 25, "health_regen": 0.5}],
+	]
+	for f: Array in F:
+		var v := ItemData.new()
+		v.id = f[4]
+		v.display_name = f[5]
+		v.category = C.CONSUMABLE
+		v.rarity = R.RARE
+		v.icon_glyph = "☖"
+		v.icon_color = Color(String(f[3]))
+		v.description = "Wear it and the %s's guards take you for one of their own — mostly. Lasts 8 minutes. Use it from the satchel." % String(f[2])
+		v.use_effect = {"disguise": f[0], "minutes": 8.0}
+		v.source = "Ollo's crossing (neutral ground)."
+		v.max_stack = 5
+		v.value = 30
+		save(v, "res://resources/items/%s.tres" % v.id)
+		it(f[6], f[7], f[1], "ring", R.EPIC, "◯", f[3],
+			"A signet only the %s gives to those it trusts. (Needs a friendly standing to buy.)" % String(f[2]), "%s weapon master, friendly standing." % String(f[2]),
+			{"stats": f[8], "value": 90})
+	# Faction guards fight in real time (enemy_profiles.json).
+	var nib: SpellData = load("res://resources/creatures/abilities/nibble.tres")
+	var G := [
+		["covenant_guard", "Covenant Blade", "assassin", 70, 4],
+		["choir_warden", "Choir Warden", "spirit", 80, 6],
+		["concordance_sentinel", "Concordance Sentinel", "dreamer", 70, 5],
+		["hold_guardian", "Hold Guardian", "grimlet", 110, 9],
+	]
+	for g: Array in G:
+		var cr := CreatureData.new()
+		cr.id = g[0]
+		cr.display_name = g[1]
+		cr.element = "chaos"
+		cr.max_health = g[3]
+		cr.defense = g[4]
+		cr.power = 8
+		cr.speed = 12
+		var ab: Array[SpellData] = [nib]
+		cr.abilities = ab
+		cr.personality = CreatureData.Personality.TACTICAL
+		cr.xp_reward = 30
+		cr.glimmer_min = 0
+		cr.glimmer_max = 4
+		cr.visual_kind = g[2]
+		cr.level = 4
+		cr.world_behavior = "hostile"
+		cr.description = "A guard defending their village."
+		save(cr, "res://resources/creatures/%s.tres" % cr.id)

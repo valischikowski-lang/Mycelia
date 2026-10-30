@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/classes/class_data.gd" id="1_ertcy"]
+[ext_resource type="Script" path="res://scripts/classes/class_data.gd" id="1_vbr10"]
 
 [resource]
-script = ExtResource("1_ertcy")
+script = ExtResource("1_vbr10")
 id = "grimlet"
 display_name = "Grimlet"
 tagline = "Grm. We are the forest's fist."

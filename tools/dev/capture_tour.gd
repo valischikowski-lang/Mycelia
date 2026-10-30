@@ -20,6 +20,10 @@ const SHOTS := {
 	"crook_square": [Vector3(-27, 0, 54), 1.4, 0.0],
 	"crone": [Vector3(-53, 0, 41), 1.4, -4.0],
 	"castle": [Vector3(2, 0, -112), 0.0, 14.0],
+	"duskhollow": [Vector3(-90, 0, 40), 1.5, 2.0],
+	"gnarlhollow": [Vector3(-84, 0, 2), 1.4, 6.0],
+	"lanternhome": [Vector3(78, 0, 52), -1.6, 8.0],
+	"spireholm": [Vector3(66, 0, -60), -1.4, 14.0],
 }
 
 var _out := "user://tour"
@@ -33,6 +37,7 @@ func _ready() -> void:
 		wanted = args.slice(1)
 	DirAccess.make_dir_recursive_absolute(_out)
 	Game.start_new_game()
+	Game.profile.choose_class("wizard")
 	Game.pending_spawn = {"spawn": "default"}
 	var game: Node = load("res://scenes/main/game.tscn").instantiate()
 	add_child(game)

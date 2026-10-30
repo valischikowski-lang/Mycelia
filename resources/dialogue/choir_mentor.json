@@ -1,0 +1,142 @@
+{
+	"id": "choir_mentor",
+	"speaker": "Elder Ondine",
+	"entry": [
+		{
+			"if": [
+				"quest_completed:class_spirit",
+				"!flag:choir_mentor_rewarded"
+			],
+			"goto": "rewarded"
+		},
+		{
+			"if": [
+				"class:spirit"
+			],
+			"goto": "kin"
+		},
+		{
+			"goto": "stranger"
+		}
+	],
+	"nodes": {
+		"kin": {
+			"text": "Be welcome, little lantern. The dead have been asking after you. The Fourfold Threshold chose you for us. Now the Hollowing is chewing at the edges of the dream, and The Lantern Choir needs hands that can do what yours can.",
+			"options": [
+				{
+					"text": "What do you need?",
+					"if": [
+						"quest_state:class_spirit:AVAILABLE"
+					],
+					"goto": "offer"
+				},
+				{
+					"text": "I'm working on it.",
+					"if": [
+						"quest_state:class_spirit:ACTIVE"
+					],
+					"goto": "progress"
+				},
+				{
+					"text": "Tell me about The Lantern Choir.",
+					"goto": "lore"
+				},
+				{
+					"text": "Farewell.",
+					"goto": "end"
+				}
+			]
+		},
+		"offer": {
+			"text": "Use what you are. There are seals in this meadow only our calling can open, and things out there that need answering. Do it, then come back.",
+			"options": [
+				{
+					"text": "I'll do it.",
+					"actions": [
+						"start_quest:class_spirit"
+					],
+					"goto": "end"
+				},
+				{
+					"text": "Not yet.",
+					"goto": "end"
+				}
+			]
+		},
+		"progress": {
+			"text": "Check your journal, then go. The seals won't open themselves.",
+			"options": [
+				{
+					"text": "Right.",
+					"goto": "end"
+				}
+			]
+		},
+		"rewarded": {
+			"text": "Well done. You are one of us in more than name now. Take this — and the vault of The Lantern Choir is yours to open.",
+			"actions": [
+				"set_flag:choir_mentor_rewarded",
+				"rep:lantern_choir:25",
+				"give_essence:4"
+			],
+			"options": [
+				{
+					"text": "Thank you.",
+					"goto": "end"
+				}
+			]
+		},
+		"lore": {
+			"text": "The Choir keeps the Key of Souls, and every song they sing is a memory someone forgot.",
+			"options": [
+				{
+					"text": "I see.",
+					"goto": "kin"
+				}
+			]
+		},
+		"stranger": {
+			"text": "A living stranger. The echoes are... curious about you. You are not of our calling. But the dream is wide, and goodwill is a kind of door.",
+			"options": [
+				{
+					"text": "How do I earn your trust?",
+					"goto": "goodwill"
+				},
+				{
+					"text": "Here — I brought what you asked.",
+					"if": [
+						"has_item:dream_mote:2"
+					],
+					"goto": "goodwill_done"
+				},
+				{
+					"text": "Farewell.",
+					"goto": "end"
+				}
+			]
+		},
+		"goodwill": {
+			"text": "Bring us 2 dream motes. Small things build bridges. Large things build bigger ones.",
+			"options": [
+				{
+					"text": "I'll see what I can find.",
+					"goto": "end"
+				}
+			]
+		},
+		"goodwill_done": {
+			"text": "...You actually did it. The Lantern Choir will remember.",
+			"actions": [
+				"take_item:dream_mote:2",
+				"rep:lantern_choir:25",
+				"give_essence:2"
+			],
+			"options": [
+				{
+					"text": "Glad to help.",
+					"goto": "end"
+				}
+			]
+		}
+	}
+}

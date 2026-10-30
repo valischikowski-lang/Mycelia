@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_e0bn2"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_kqwdk"]
-[ext_resource type="Resource" path="res://resources/status_effects/golem_rot.tres" id="3_kbqci"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_yg2kd"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_iqs4j"]
+[ext_resource type="Resource" path="res://resources/status_effects/golem_rot.tres" id="3_skhte"]
 
 [resource]
-script = ExtResource("1_e0bn2")
+script = ExtResource("1_yg2kd")
 id = "spore_cloud"
 display_name = "Spore Cloud"
 description = "Ancient spores fill the air."
@@ -17,7 +17,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 0
 target_count = 1
-status_effects = Array[ExtResource("2_kqwdk")]([ExtResource("3_kbqci")])
+status_effects = Array[ExtResource("2_iqs4j")]([ExtResource("3_skhte")])
 duration = 3
 rarity = 0
 armor_pierce = 0.0

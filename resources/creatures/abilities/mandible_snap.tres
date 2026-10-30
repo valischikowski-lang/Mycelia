@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_oxu6r"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_x2s2r"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_byd50"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_r18jg"]
 
 [resource]
-script = ExtResource("1_oxu6r")
+script = ExtResource("1_byd50")
 id = "mandible_snap"
 display_name = "Mandible Snap"
 description = "Crystal jaws close with a chime."
@@ -16,7 +16,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 0
 target_count = 1
-status_effects = Array[ExtResource("2_x2s2r")]([])
+status_effects = Array[ExtResource("2_r18jg")]([])
 duration = 0
 rarity = 0
 armor_pierce = 0.0

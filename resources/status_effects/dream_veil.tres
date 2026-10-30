@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_8sr1r"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_q5ix5"]
 
 [resource]
-script = ExtResource("1_8sr1r")
+script = ExtResource("1_q5ix5")
 id = "dream_veil"
 display_name = "Dream Veil"
 description = "Half-real: 45% chance to avoid attacks."

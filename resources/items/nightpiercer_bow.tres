@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_agtjm"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_bl80g"]
 
 [resource]
-script = ExtResource("1_agtjm")
+script = ExtResource("1_bl80g")
 id = "nightpiercer_bow"
 display_name = "Nightpiercer Bow"
 description = "A silent bow. Arrows never alert the target, and fully drawn shots against unaware foes always crit."

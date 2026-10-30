@@ -1,0 +1,18 @@
+{
+	"id": "faction_folk",
+	"speaker": "Villager",
+	"entry": [{"goto": "greet"}],
+	"nodes": {
+		"greet": {
+			"text": "Hm? Oh. Talk to our mentor if you want something done, or the merchant if you want something sold. I'm just... living here.",
+			"options": [
+				{"text": "What's happening in the meadow?", "goto": "rumour"},
+				{"text": "Sorry to bother you.", "goto": "end"}
+			]
+		},
+		"rumour": {
+			"text": "Things go hollow. Sporelings, crones, now even the gremlins. Something under the meadow is drinking the dreams, and nobody knows what. The Keeper might. The Keeper always might.",
+			"options": [{"text": "Thanks.", "goto": "end"}]
+		}
+	}
+}

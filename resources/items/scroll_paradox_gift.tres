@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_3ooud"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_c3emo"]
 
 [resource]
-script = ExtResource("1_3ooud")
+script = ExtResource("1_c3emo")
 id = "scroll_paradox_gift"
 display_name = "Scroll: Paradox Gift"
 description = "Written tomorrow. Teaches Paradox Gift."
@@ -18,3 +18,12 @@ stat_bonuses = {}
 use_effect = {
 "unlock_spell": "paradox_gift"
 }
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = ""

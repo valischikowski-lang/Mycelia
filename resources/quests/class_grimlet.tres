@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_x72ce"]
+[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_8lsrx"]
+
+[sub_resource type="Resource" id="Resource_gnhed"]
+script = ExtResource("1_x72ce")
+id = "gate"
+description = "Wake the Root Gate near Crookhollow"
+type = 4
+target_id = "seal_chest_root_gate"
+required_amount = 1
+map_hint = Vector3(-50, 0, 70)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_1agik"]
+script = ExtResource("1_x72ce")
+id = "node"
+description = "Wake the Mycelium Node south of the lake"
+type = 4
+target_id = "seal_chest_mycelium"
+required_amount = 1
+map_hint = Vector3(40, 0, 72)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_5ouvx"]
+script = ExtResource("1_x72ce")
+id = "return"
+description = "Return to Barkmother Grum in Gnarlhollow"
+type = 0
+target_id = "hold_mentor"
+required_amount = 1
+map_hint = Vector3(-100, 0, 6)
+hint_region = "dreaming_meadow"
+
+[resource]
+script = ExtResource("2_8lsrx")
+id = "class_grimlet"
+title = "Roots Remember"
+description = "Barkmother Grum of the Rootborn Hold wants the old roots woken. Grm."
+category = 7
+prerequisites = PackedStringArray()
+min_level = 1
+objectives = Array[ExtResource("1_x72ce")]([SubResource("Resource_gnhed"), SubResource("Resource_1agik"), SubResource("Resource_5ouvx")])
+sequential = true
+auto_start = false
+reward_xp = 160
+reward_glimmer = 60
+reward_items = {
+"toadstool_tea": 2,
+"wanderkey": 1
+}
+reward_spells = PackedStringArray()
+reward_skill_points = 0
+completion_text = "Grum thumps the ground. Somewhere, a root thumps back."

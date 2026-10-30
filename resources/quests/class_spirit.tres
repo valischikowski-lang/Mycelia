@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_fa46d"]
+[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_3rxlm"]
+
+[sub_resource type="Resource" id="Resource_sg0u0"]
+script = ExtResource("1_fa46d")
+id = "echo"
+description = "Hear the Echo at the Rootstone Circle"
+type = 4
+target_id = "seal_chest_circle_echo"
+required_amount = 1
+map_hint = Vector3(-64, 0, -8)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_w61te"]
+script = ExtResource("1_fa46d")
+id = "astral"
+description = "Astral Shift through the barrier by the lake shrine"
+type = 4
+target_id = "seal_chest_astral_shrine"
+required_amount = 1
+map_hint = Vector3(84, 0, 36)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_7u718"]
+script = ExtResource("1_fa46d")
+id = "return"
+description = "Return to Elder Ondine in Lanternhome"
+type = 0
+target_id = "choir_mentor"
+required_amount = 1
+map_hint = Vector3(96, 0, 48)
+hint_region = "dreaming_meadow"
+
+[resource]
+script = ExtResource("2_3rxlm")
+id = "class_spirit"
+title = "Songs of the Departed"
+description = "Elder Ondine of the Lantern Choir asks you to listen where the dead still speak."
+category = 7
+prerequisites = PackedStringArray()
+min_level = 1
+objectives = Array[ExtResource("1_fa46d")]([SubResource("Resource_sg0u0"), SubResource("Resource_w61te"), SubResource("Resource_7u718")])
+sequential = true
+auto_start = false
+reward_xp = 160
+reward_glimmer = 60
+reward_items = {
+"night_ink": 2,
+"wanderkey": 1
+}
+reward_spells = PackedStringArray()
+reward_skill_points = 0
+completion_text = "The lanterns brighten as you arrive. They were listening too."

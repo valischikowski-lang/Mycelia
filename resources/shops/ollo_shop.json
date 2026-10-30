@@ -47,6 +47,22 @@
 		{
 			"item_id": "frost_arrow",
 			"price": 4
+		},
+		{
+			"item_id": "covenant_veil",
+			"price": 45
+		},
+		{
+			"item_id": "choir_shroud",
+			"price": 45
+		},
+		{
+			"item_id": "concordance_mantle",
+			"price": 45
+		},
+		{
+			"item_id": "rootmoss_cloak",
+			"price": 45
 		}
 	]
 }

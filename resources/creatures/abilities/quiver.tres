@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_5ya8f"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_qlmwd"]
-[ext_resource type="Resource" path="res://resources/status_effects/hollow_quiver.tres" id="3_kilrg"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_xxpo2"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_dk7pb"]
+[ext_resource type="Resource" path="res://resources/status_effects/hollow_quiver.tres" id="3_7o627"]
 
 [resource]
-script = ExtResource("1_5ya8f")
+script = ExtResource("1_xxpo2")
 id = "quiver"
 display_name = "Quiver"
 description = "Its husk hardens and flickers."
@@ -17,7 +17,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 2
 target_count = 1
-status_effects = Array[ExtResource("2_qlmwd")]([ExtResource("3_kilrg")])
+status_effects = Array[ExtResource("2_dk7pb")]([ExtResource("3_7o627")])
 duration = 2
 rarity = 0
 armor_pierce = 0.0

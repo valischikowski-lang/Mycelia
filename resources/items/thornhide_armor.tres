@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_tky2g"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_us1gg"]
 
 [resource]
-script = ExtResource("1_tky2g")
+script = ExtResource("1_us1gg")
 id = "thornhide_armor"
 display_name = "Thornhide Armor"
 description = "Bark and thorn grown, not made. +8 defense; melee attackers take 15% of their damage back."

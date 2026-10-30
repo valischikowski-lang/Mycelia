@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CreatureData" load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_nta5v"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/glitch_bite.tres" id="2_i8c3n"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/void_puff.tres" id="3_ryy8y"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/quiver.tres" id="4_552bs"]
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="5_q4kp2"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_aiajk"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/glitch_bite.tres" id="2_1m7an"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/void_puff.tres" id="3_ngk7m"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/quiver.tres" id="4_d7wa8"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="5_x0psd"]
 
 [resource]
-script = ExtResource("5_q4kp2")
+script = ExtResource("5_x0psd")
 id = "hollow_sporeling"
 display_name = "Hollow-Eyed Sporeling"
 description = "A sporeling whose eyes have gone dark and hollow."
@@ -17,7 +17,7 @@ max_health = 42
 defense = 2
 power = 10
 speed = 14
-abilities = Array[ExtResource("1_nta5v")]([ExtResource("2_i8c3n"), ExtResource("3_ryy8y"), ExtResource("4_552bs")])
+abilities = Array[ExtResource("1_aiajk")]([ExtResource("2_1m7an"), ExtResource("3_ngk7m"), ExtResource("4_d7wa8")])
 personality = 0
 phase_thresholds = PackedFloat32Array()
 xp_reward = 45

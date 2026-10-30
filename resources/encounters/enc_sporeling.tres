@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="EncounterData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_mpv2w"]
-[ext_resource type="Resource" path="res://resources/creatures/sporeling.tres" id="2_0qbdq"]
-[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="3_a5hod"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_xkjos"]
+[ext_resource type="Resource" path="res://resources/creatures/sporeling.tres" id="2_nfgt3"]
+[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="3_2odkf"]
 
 [resource]
-script = ExtResource("3_a5hod")
+script = ExtResource("3_2odkf")
 id = "enc_sporeling"
 display_name = "Curious Sporeling"
-enemies = Array[ExtResource("1_mpv2w")]([ExtResource("2_0qbdq")])
+enemies = Array[ExtResource("1_xkjos")]([ExtResource("2_nfgt3")])
 arena_theme = "meadow"
 music = "music_combat"
 can_flee = true

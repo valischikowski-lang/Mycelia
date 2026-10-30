@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_ah74b"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_fyra7"]
 
 [resource]
-script = ExtResource("1_ah74b")
+script = ExtResource("1_fyra7")
 id = "beetle_shard"
 display_name = "Beetle Shard"
 description = "A sliver of crystal carapace, still faintly singing."
@@ -16,3 +16,12 @@ icon_glyph = "◆"
 equip_slot = ""
 stat_bonuses = {}
 use_effect = {}
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = ""

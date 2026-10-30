@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_gnf3u"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_4n8sc"]
-[ext_resource type="Resource" path="res://resources/status_effects/gremlin_giggle.tres" id="3_punyd"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_a1l6g"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_fi60n"]
+[ext_resource type="Resource" path="res://resources/status_effects/gremlin_giggle.tres" id="3_m0jmy"]
 
 [resource]
-script = ExtResource("1_gnf3u")
+script = ExtResource("1_a1l6g")
 id = "giggle"
 display_name = "Giggle"
 description = "Hee. Hee hee. HEE."
@@ -17,7 +17,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 2
 target_count = 1
-status_effects = Array[ExtResource("2_4n8sc")]([ExtResource("3_punyd")])
+status_effects = Array[ExtResource("2_fi60n")]([ExtResource("3_m0jmy")])
 duration = 2
 rarity = 0
 armor_pierce = 0.0

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_bnst8"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_uhb0f"]
 
 [resource]
-script = ExtResource("1_bnst8")
+script = ExtResource("1_uhb0f")
 id = "grimoire_of_forgotten_worlds"
 display_name = "Grimoire of Forgotten Worlds"
 description = "Half its pages describe places that no longer exist. Ability cooldowns -15%, +10 spell power."

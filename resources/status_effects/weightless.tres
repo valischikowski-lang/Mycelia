@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_is7g1"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_bvbj5"]
 
 [resource]
-script = ExtResource("1_is7g1")
+script = ExtResource("1_bvbj5")
 id = "weightless"
 display_name = "Weightless"
 description = "Gravity forgets the target: its attacks deal 30% less."

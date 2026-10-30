@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="EncounterData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_155x0"]
-[ext_resource type="Resource" path="res://resources/creatures/gnasher_gremlin.tres" id="2_sfb26"]
-[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="3_6hcsx"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_youtb"]
+[ext_resource type="Resource" path="res://resources/creatures/gnasher_gremlin.tres" id="2_afr6t"]
+[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="3_tdapq"]
 
 [resource]
-script = ExtResource("3_6hcsx")
+script = ExtResource("3_tdapq")
 id = "enc_gremlin"
 display_name = "Gnasher Gremlin"
-enemies = Array[ExtResource("1_155x0")]([ExtResource("2_sfb26")])
+enemies = Array[ExtResource("1_youtb")]([ExtResource("2_afr6t")])
 arena_theme = "meadow"
 music = "music_combat"
 can_flee = true

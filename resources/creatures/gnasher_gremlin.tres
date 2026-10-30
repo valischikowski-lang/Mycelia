@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CreatureData" load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_0b883"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/wrench_whack.tres" id="2_vsbae"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/spark_bomb.tres" id="3_rfwrn"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/giggle.tres" id="4_15785"]
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="5_tq806"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_wp24a"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/wrench_whack.tres" id="2_txin6"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/spark_bomb.tres" id="3_fopvb"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/giggle.tres" id="4_ueywn"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="5_d1tds"]
 
 [resource]
-script = ExtResource("5_tq806")
+script = ExtResource("5_d1tds")
 id = "gnasher_gremlin"
 display_name = "Gnasher Gremlin"
 description = "Goggles, propeller, grin. In that order."
@@ -17,7 +17,7 @@ max_health = 40
 defense = 3
 power = 6
 speed = 16
-abilities = Array[ExtResource("1_0b883")]([ExtResource("2_vsbae"), ExtResource("3_rfwrn"), ExtResource("4_15785")])
+abilities = Array[ExtResource("1_wp24a")]([ExtResource("2_txin6"), ExtResource("3_fopvb"), ExtResource("4_ueywn")])
 personality = 0
 phase_thresholds = PackedFloat32Array()
 xp_reward = 40

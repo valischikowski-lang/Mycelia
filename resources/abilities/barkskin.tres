@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_xaiqj"]
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_n1y6u"]
 
 [resource]
-script = ExtResource("1_xaiqj")
+script = ExtResource("1_n1y6u")
 id = "barkskin"
 display_name = "Barkskin"
 description = "Your hide thickens to bark: +12 defense and steady regeneration."

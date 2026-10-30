@@ -2,7 +2,7 @@ class_name QuestData
 extends Resource
 ## Static definition of a quest. Runtime state lives in QuestLog.
 
-enum Category { MAIN, SIDE, EXPLORATION, COLLECTION, COMBAT, DISCOVERY, DUNGEON }
+enum Category { MAIN, SIDE, EXPLORATION, COLLECTION, COMBAT, DISCOVERY, DUNGEON, CLASS }
 enum State { LOCKED, AVAILABLE, ACTIVE, COMPLETED, FAILED }
 
 @export var id: String = ""

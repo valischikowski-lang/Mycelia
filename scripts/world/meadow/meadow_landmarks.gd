@@ -776,3 +776,163 @@ static func lantern_row(region: Region, points: PackedVector2Array, spacing: flo
 	_commit(root, iron, MaterialLib.organic("lantern_iron", {"emission": 0.0, "pulse": 0.0, "rim_strength": 0.3}), false)
 	_commit(root, glow, MaterialLib.organic("lantern_glow", {"emission": 6.0, "pulse": 0.3, "pulse_speed": 4.0}), false)
 	return root
+
+
+# ------------------------------------------------------------------ faction villages
+## Builds one of the four callings' settlements around `center`. Returns
+## {"node", "spots": {"mentor","merchant","vault","rest","lore","cache"}: Vector2,
+## "patrol": PackedVector3Array, "villagers": Array[Vector2]}.
+static func faction_village(region: Region, center: Vector2, faction_id: String) -> Dictionary:
+	var root := Node3D.new()
+	root.name = "Village_" + faction_id
+	region.add_child(root)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(faction_id)
+	var c3 := Vector3(center.x, region.ground(center.x, center.y), center.y)
+	var walls := MeshKit.new()
+	var roofs := MeshKit.new()
+	var glow := MeshKit.new()
+	var body := StaticBody3D.new()
+	root.add_child(body)
+	var col: Color = Color(String(FactionState.info(faction_id).get("color", "#ffffff")))
+	match faction_id:
+		"unseen_covenant":
+			# Low crooked houses and black tents, ringed so the square is hidden.
+			for i in 5:
+				var a := TAU * i / 5.0 + 0.3
+				var pos := c3 + Vector3(cos(a), 0, sin(a)) * rng.randf_range(10.0, 12.0)
+				pos.y = region.ground(pos.x, pos.z)
+				var yaw := atan2(c3.x - pos.x, c3.z - pos.z)
+				if i % 2 == 0:
+					var h := CrookedArchitecture.crooked_house(rng, Transform3D(Basis(Vector3.UP, yaw), pos))
+					walls.merge(h["walls"])
+					roofs.merge(h["roof"])
+					glow.merge(h["glow"])
+					var sz: Vector3 = h["size"]
+					Props.add_box(body, pos + Vector3.UP * sz.y * 0.5, sz * 0.95, Basis(Vector3.UP, yaw))
+				else:
+					CrookedArchitecture.witch_roof(roofs, pos + Vector3(0, -0.2, 0), 2.6, 4.2, Vector3(rng.randf_range(-0.6, 0.6), 0, 0), 0.6, 9)
+					glow.ellipsoid(pos + Vector3(0, 0.8, 0) + Vector3(sin(yaw), 0, cos(yaw)) * 2.3, Vector3(0.4, 0.7, 0.1), Color(col.r, col.g, col.b, 1.0), 4, 8, Basis(Vector3.UP, yaw))
+					Props.add_cylinder(body, pos + Vector3.UP * 1.2, 2.0, 2.4)
+		"lantern_choir":
+			# Shrine-houses on stilts and a cloud of floating lanterns.
+			for i in 4:
+				var a := TAU * i / 4.0 + 0.6
+				var pos := c3 + Vector3(cos(a), 0, sin(a)) * 11.0
+				pos.y = region.ground(pos.x, pos.z) + 1.6
+				var yaw := atan2(c3.x - pos.x, c3.z - pos.z)
+				var h := CrookedArchitecture.crooked_house(rng, Transform3D(Basis(Vector3.UP, yaw), pos))
+				walls.merge(h["walls"])
+				roofs.merge(h["roof"])
+				glow.merge(h["glow"])
+				var sz: Vector3 = h["size"]
+				for sx: float in [-0.4, 0.4]:
+					for sz2: float in [-0.4, 0.4]:
+						var leg := pos + Basis(Vector3.UP, yaw) * Vector3(sx * sz.x, 0, sz2 * sz.z)
+						walls.tube(PackedVector3Array([leg, leg - Vector3(0, 2.2, 0)]), PackedFloat32Array([0.12, 0.14]), 5, func(_t: float) -> Color: return Color("#1c1426"), false, false)
+				Props.add_box(body, pos + Vector3.UP * (sz.y * 0.5 - 0.8), Vector3(sz.x, sz.y + 1.6, sz.z) * 0.95, Basis(Vector3.UP, yaw))
+			for i in 14:
+				var lp := c3 + Vector3(rng.randf_range(-12, 12), rng.randf_range(3.0, 9.0), rng.randf_range(-12, 12))
+				var lantern := MeshInstance3D.new()
+				var lk := MeshKit.new()
+				lk.ellipsoid(Vector3.ZERO, Vector3(0.22, 0.3, 0.22), Color(1.0, 0.9, 0.6, 1.0), 4, 8)
+				lantern.mesh = lk.commit(MaterialLib.organic("choir_lantern", {"emission": 5.0, "pulse": 0.5, "pulse_speed": 1.3}))
+				root.add_child(lantern)
+				lantern.global_position = lp
+				var fb := FloatBob.new()
+				fb.amplitude = 0.4
+				fb.speed = rng.randf_range(0.4, 0.9)
+				lantern.add_child(fb)
+		"spiral_concordance":
+			# A leaning tower of floors, three studies and orbiting crystals.
+			var tower := c3 + Vector3(0, -0.5, -6)
+			var path := PackedVector3Array()
+			var radii := PackedFloat32Array()
+			for k in 8:
+				var t := float(k) / 7.0
+				path.append(tower + Vector3(sin(t * 2.2) * 0.8, t * 20.0, 0))
+				radii.append(3.2 - t * 0.9 + 0.3 * sin(t * 12.0))
+			walls.tube(path, radii, 10, func(t: float) -> Color: return CrookedArchitecture.STONE.lerp(CrookedArchitecture.STONE_TOP, t), true, false)
+			CrookedArchitecture.witch_roof(roofs, path[7], 3.2, 7.0, Vector3(1.5, 0, 0.5), 1.5, 10)
+			for w in 9:
+				var t2 := rng.randf_range(0.15, 0.95)
+				var idx := clampi(int(t2 * 7), 0, 6)
+				var a2 := rng.randf() * TAU
+				var n := Vector3(cos(a2), 0, sin(a2))
+				glow.ellipsoid(path[idx] + n * radii[idx] * 1.02, Vector3(0.45, 0.8, 0.2), Color(0.55, 0.7, 1.0, 1.0), 4, 6, Basis.looking_at(n, Vector3.UP))
+			Props.add_cylinder(body, tower + Vector3.UP * 10.0, 3.0, 20.0)
+			for i in 3:
+				var a := PI * 0.6 + PI * 0.4 * i
+				var pos := c3 + Vector3(cos(a), 0, sin(a)) * 11.0
+				pos.y = region.ground(pos.x, pos.z)
+				var yaw := atan2(c3.x - pos.x, c3.z - pos.z)
+				var h := CrookedArchitecture.crooked_house(rng, Transform3D(Basis(Vector3.UP, yaw), pos))
+				walls.merge(h["walls"])
+				roofs.merge(h["roof"])
+				glow.merge(h["glow"])
+				var sz: Vector3 = h["size"]
+				Props.add_box(body, pos + Vector3.UP * sz.y * 0.5, sz * 0.95, Basis(Vector3.UP, yaw))
+			var orbit := Node3D.new()
+			root.add_child(orbit)
+			orbit.global_position = tower + Vector3.UP * 14.0
+			var ck := MeshKit.new()
+			for i in 6:
+				var a := TAU * i / 6.0
+				ck.crystal_prism(Vector3(cos(a) * 6.0, sin(a * 2.0), sin(a) * 6.0), Basis(Vector3.FORWARD, 0.3), 1.6, 0.35, 5, Color(0.5, 0.7, 1.0, 0.9), 0.4)
+			var cmi := MeshInstance3D.new()
+			cmi.mesh = ck.commit(MaterialLib.crystal(2.0))
+			orbit.add_child(cmi)
+			var tw := orbit.create_tween().set_loops()
+			tw.tween_property(orbit, "rotation:y", TAU, 30.0).from(0.0)
+		"rootborn_hold":
+			# Hollow giant mushrooms with doors and windows, and root arches.
+			var mk := MeshKit.new()
+			for i in 5:
+				var a := TAU * i / 5.0 + 0.2
+				var pos := c3 + Vector3(cos(a), 0, sin(a)) * rng.randf_range(10.0, 12.5)
+				pos.y = region.ground(pos.x, pos.z) - 0.3
+				var p := MushroomGenerator.random_params(rng, region.biome, "giant")
+				p.stem_height = rng.randf_range(6.0, 9.0)
+				p.stem_width = rng.randf_range(1.6, 2.2)
+				p.cap_radius = rng.randf_range(4.0, 5.5)
+				p.cap_color = Color("#6a1f14").lerp(Color("#3a5a1a"), rng.randf())
+				p.cap_segments = 18
+				MushroomGenerator.build_into(mk, p, Transform3D(Basis(Vector3.UP, rng.randf() * TAU), pos))
+				var to_c := (c3 - pos)
+				to_c.y = 0.0
+				var dn := to_c.normalized()
+				walls.ellipsoid(pos + dn * (p.stem_width * 0.98) + Vector3.UP * 1.2, Vector3(0.7, 1.2, 0.15), Color(0.03, 0.02, 0.02, 0.0), 5, 8, Basis.looking_at(dn, Vector3.UP))
+				for wdw in 3:
+					var wa := atan2(dn.x, dn.z) + rng.randf_range(-1.2, 1.2)
+					var wn := Vector3(sin(wa), 0, cos(wa))
+					glow.ellipsoid(pos + wn * p.stem_width * 1.0 + Vector3.UP * rng.randf_range(2.8, p.stem_height - 1.0), Vector3(0.35, 0.5, 0.12), Color(1.0, 0.75, 0.35, 1.0), 4, 6, Basis.looking_at(wn, Vector3.UP))
+				Props.add_cylinder(body, pos + Vector3.UP * p.stem_height * 0.5, p.stem_width, p.stem_height)
+			for i in 3:
+				var a := TAU * i / 3.0
+				var a0 := c3 + Vector3(cos(a), 0, sin(a)) * 6.0
+				var a1 := c3 + Vector3(cos(a + 0.7), 0, sin(a + 0.7)) * 6.0
+				walls.tube(MeshKit.spline(PackedVector3Array([a0 - Vector3.UP * 0.5, (a0 + a1) * 0.5 + Vector3.UP * 4.5, a1 - Vector3.UP * 0.5]), 4), PackedFloat32Array([0.35, 0.3, 0.28, 0.25, 0.25, 0.28, 0.3, 0.35, 0.35, 0.35]), 6, func(_t: float) -> Color: return Color("#2a1c12"), false, false)
+			var mmi := MeshInstance3D.new()
+			mmi.mesh = mk.commit(MaterialLib.mushroom())
+			root.add_child(mmi)
+	_commit(root, walls, MaterialLib.organic("crook_walls", {}), true)
+	if roofs.vertex_count() > 0:
+		_commit(root, roofs, MaterialLib.organic("crook_roofs", {}), true)
+	if glow.vertex_count() > 0:
+		_commit(root, glow, MaterialLib.organic("crook_windows", {}), false)
+	# A faction banner-stone in the square.
+	var bk := MeshKit.new()
+	bk.crystal_prism(c3 + Vector3(0, -0.2, 0), Basis.IDENTITY, 3.2, 0.5, 6, Color(col.r * 0.4, col.g * 0.4, col.b * 0.4, 0.2), 0.25)
+	bk.ellipsoid(c3 + Vector3(0, 3.3, 0), Vector3.ONE * 0.35, Color(col.r, col.g, col.b, 1.0), 5, 8)
+	_commit(root, bk, MaterialLib.stone(), true)
+	Props.add_cylinder(body, c3 + Vector3.UP * 1.5, 0.6, 3.0)
+	glow_light(root, c3 + Vector3.UP * 3.5, col, 1.6, 10.0)
+	var f := func(dx: float, dz: float) -> Vector2: return center + Vector2(dx, dz)
+	var patrol := PackedVector3Array()
+	for i in 4:
+		var a := TAU * i / 4.0 + 0.4
+		var pp := Vector2(center.x + cos(a) * 15.0, center.y + sin(a) * 15.0)
+		patrol.append(Vector3(pp.x, region.ground(pp.x, pp.y), pp.y))
+	return {"node": root, "patrol": patrol,
+		"spots": {"mentor": f.call(0, 3.5), "merchant": f.call(-4.5, -2.0), "vault": f.call(4.0, -3.0), "rest": f.call(-3.0, 5.0), "lore": f.call(5.5, 3.0), "cache": f.call(0, -16.5)},
+		"villagers": [f.call(-6, 6), f.call(6, -6)]}

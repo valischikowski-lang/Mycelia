@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="CreatureData" load_steps=8 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_evoc7"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/fungal_slam.tres" id="2_vyoya"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/spore_cloud.tres" id="3_43eln"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/network_pulse.tres" id="4_j110k"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/mycelial_armor_up.tres" id="5_2fl32"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/awakening_roar.tres" id="6_yhwig"]
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="7_hj2f0"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_clvuh"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/fungal_slam.tres" id="2_mtanr"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/spore_cloud.tres" id="3_ppfru"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/network_pulse.tres" id="4_r0h3c"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/mycelial_armor_up.tres" id="5_qubed"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/awakening_roar.tres" id="6_nc8x2"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="7_u1aje"]
 
 [resource]
-script = ExtResource("7_hj2f0")
+script = ExtResource("7_u1aje")
 id = "spore_golem"
 display_name = "Ancient Spore Golem"
 description = "A hill that stood up."
@@ -19,7 +19,7 @@ max_health = 260
 defense = 8
 power = 10
 speed = 4
-abilities = Array[ExtResource("1_evoc7")]([ExtResource("2_vyoya"), ExtResource("3_43eln"), ExtResource("4_j110k"), ExtResource("5_2fl32"), ExtResource("6_yhwig")])
+abilities = Array[ExtResource("1_clvuh")]([ExtResource("2_mtanr"), ExtResource("3_ppfru"), ExtResource("4_r0h3c"), ExtResource("5_qubed"), ExtResource("6_nc8x2")])
 personality = 3
 phase_thresholds = PackedFloat32Array(0.5)
 xp_reward = 300

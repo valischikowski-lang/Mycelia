@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_vjfof"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_ngna7"]
 
 [resource]
-script = ExtResource("1_vjfof")
+script = ExtResource("1_ngna7")
 id = "spore_arrow"
 display_name = "Spore Arrow"
 description = "Bursts into clinging spores that eat away at the target. Draw your bow and press Switch to choose arrows."

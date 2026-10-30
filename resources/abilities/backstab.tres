@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_lc2aq"]
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_bet75"]
 
 [resource]
-script = ExtResource("1_lc2aq")
+script = ExtResource("1_bet75")
 id = "backstab"
 display_name = "Backstab"
 description = "A brutal strike at the nearest foe. Triple damage from behind or against an enemy that hasn't noticed you."

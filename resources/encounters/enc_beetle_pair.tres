@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="EncounterData" load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_w6l8v"]
-[ext_resource type="Resource" path="res://resources/creatures/crystal_beetle.tres" id="2_6pg14"]
-[ext_resource type="Resource" path="res://resources/creatures/sporeling.tres" id="3_e4ocn"]
-[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="4_sm5ww"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_dqc7g"]
+[ext_resource type="Resource" path="res://resources/creatures/crystal_beetle.tres" id="2_s4xjm"]
+[ext_resource type="Resource" path="res://resources/creatures/sporeling.tres" id="3_xloo3"]
+[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="4_5h4fn"]
 
 [resource]
-script = ExtResource("4_sm5ww")
+script = ExtResource("4_5h4fn")
 id = "enc_beetle_pair"
 display_name = "Glittering Nest"
-enemies = Array[ExtResource("1_w6l8v")]([ExtResource("2_6pg14"), ExtResource("3_e4ocn")])
+enemies = Array[ExtResource("1_dqc7g")]([ExtResource("2_s4xjm"), ExtResource("3_xloo3")])
 arena_theme = "meadow"
 music = "music_combat"
 can_flee = true

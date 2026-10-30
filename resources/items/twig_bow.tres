@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_ybnjh"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_ufquh"]
 
 [resource]
-script = ExtResource("1_ybnjh")
+script = ExtResource("1_ufquh")
 id = "twig_bow"
 display_name = "Twig Bow"
 description = "A bent branch with ideas."

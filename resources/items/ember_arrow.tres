@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_pkwgk"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_0joxk"]
 
 [resource]
-script = ExtResource("1_pkwgk")
+script = ExtResource("1_0joxk")
 id = "ember_arrow"
 display_name = "Ember Arrow"
 description = "Sets what it hits on fire for a few seconds. Draw your bow and press Switch to choose arrows."

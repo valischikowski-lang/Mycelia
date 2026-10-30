@@ -1,0 +1,30 @@
+{
+	"id": "hold_smith",
+	"name": "Knuckle's Root-Forge",
+	"faction": "rootborn_hold",
+	"greeting": "Prices depend on who's asking.",
+	"sell_ratio": 0.5,
+	"stock": [
+		{
+			"item_id": "toadstool_tea",
+			"price": 24
+		},
+		{
+			"item_id": "gnarlwood_shield",
+			"price": 35
+		},
+		{
+			"item_id": "dewdrop_tonic",
+			"price": 11
+		},
+		{
+			"item_id": "spore_arrow",
+			"price": 4
+		},
+		{
+			"item_id": "loam_signet",
+			"price": 160,
+			"min_standing": "friendly"
+		}
+	]
+}

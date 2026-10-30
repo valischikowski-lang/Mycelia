@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="BiomeData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/world/biome_data.gd" id="1_ma35n"]
+[ext_resource type="Script" path="res://scripts/world/biome_data.gd" id="1_jm14x"]
 
 [resource]
-script = ExtResource("1_ma35n")
+script = ExtResource("1_jm14x")
 id = "dream_arena"
 display_name = "The Dreaming Arena"
 sky_top = Color(0.00392157, 0.00392157, 0.0235294, 1)

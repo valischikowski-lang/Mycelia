@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_ew3k4"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_kuq4v"]
 
 [resource]
-script = ExtResource("1_ew3k4")
+script = ExtResource("1_kuq4v")
 id = "dream_mote"
 display_name = "Dream Mote"
 description = "A drifting speck of someone's forgotten dream. Madame Petalune collects them."
@@ -16,3 +16,12 @@ icon_glyph = "✦"
 equip_slot = ""
 stat_bonuses = {}
 use_effect = {}
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = ""

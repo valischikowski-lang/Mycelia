@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CreatureData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_e7sk7"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/nibble.tres" id="2_6vtmn"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="3_p1avi"]
+
+[resource]
+script = ExtResource("3_p1avi")
+id = "choir_warden"
+display_name = "Choir Warden"
+description = "A guard defending their village."
+element = "chaos"
+level = 4
+max_health = 80
+defense = 6
+power = 8
+speed = 12
+abilities = Array[ExtResource("1_e7sk7")]([ExtResource("2_6vtmn")])
+personality = 2
+phase_thresholds = PackedFloat32Array()
+xp_reward = 30
+glimmer_min = 0
+glimmer_max = 4
+loot_table = Array[Dictionary]([])
+visual_kind = "spirit"
+visual_scale = 1.0
+tint = Color(1, 1, 1, 1)
+world_behavior = "hostile"
+lore = ""

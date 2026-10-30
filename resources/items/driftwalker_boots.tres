@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_fl1yi"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_isy2g"]
 
 [resource]
-script = ExtResource("1_fl1yi")
+script = ExtResource("1_isy2g")
 id = "driftwalker_boots"
 display_name = "Driftwalker Boots"
 description = "They remember how to float, a little."
@@ -19,3 +19,12 @@ stat_bonuses = {
 "max_mana": 1
 }
 use_effect = {}
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = ""

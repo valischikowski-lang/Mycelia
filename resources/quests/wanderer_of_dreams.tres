@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="QuestData" load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_djud2"]
-[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_bwaiu"]
+[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_7mrnk"]
+[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_og16a"]
 
-[sub_resource type="Resource" id="Resource_ptdbs"]
-script = ExtResource("1_djud2")
+[sub_resource type="Resource" id="Resource_1rqpi"]
+script = ExtResource("1_7mrnk")
 id = "d_lantern"
 description = "Discover the Lantern Cap"
 type = 5
@@ -13,8 +13,8 @@ required_amount = 1
 map_hint = Vector3(-28, 0, -2)
 hint_region = "dreaming_meadow"
 
-[sub_resource type="Resource" id="Resource_w3ihu"]
-script = ExtResource("1_djud2")
+[sub_resource type="Resource" id="Resource_d145d"]
+script = ExtResource("1_7mrnk")
 id = "d_lake"
 description = "Discover Glimmermere"
 type = 5
@@ -23,8 +23,8 @@ required_amount = 1
 map_hint = Vector3(68, 0, 12)
 hint_region = "dreaming_meadow"
 
-[sub_resource type="Resource" id="Resource_vk5as"]
-script = ExtResource("1_djud2")
+[sub_resource type="Resource" id="Resource_sgym8"]
+script = ExtResource("1_7mrnk")
 id = "d_circle"
 description = "Discover the Rootstone Circle"
 type = 5
@@ -33,8 +33,8 @@ required_amount = 1
 map_hint = Vector3(-72, 0, -18)
 hint_region = "dreaming_meadow"
 
-[sub_resource type="Resource" id="Resource_6q4qo"]
-script = ExtResource("1_djud2")
+[sub_resource type="Resource" id="Resource_d62ni"]
+script = ExtResource("1_7mrnk")
 id = "d_hollow"
 description = "Discover the Hidden Hollow"
 type = 5
@@ -43,8 +43,8 @@ required_amount = 1
 map_hint = Vector3(0, 0, 0)
 hint_region = "dreaming_meadow"
 
-[sub_resource type="Resource" id="Resource_a6vqr"]
-script = ExtResource("1_djud2")
+[sub_resource type="Resource" id="Resource_h6jga"]
+script = ExtResource("1_7mrnk")
 id = "d_isle"
 description = "Reach the Drift Isle"
 type = 5
@@ -53,8 +53,8 @@ required_amount = 1
 map_hint = Vector3(0, 0, 0)
 hint_region = "dreaming_meadow"
 
-[sub_resource type="Resource" id="Resource_ob40e"]
-script = ExtResource("1_djud2")
+[sub_resource type="Resource" id="Resource_epyij"]
+script = ExtResource("1_7mrnk")
 id = "d_gate"
 description = "Find the Northern Gate"
 type = 5
@@ -64,14 +64,14 @@ map_hint = Vector3(0, 0, -124)
 hint_region = "dreaming_meadow"
 
 [resource]
-script = ExtResource("2_bwaiu")
+script = ExtResource("2_og16a")
 id = "wanderer_of_dreams"
 title = "Wanderer of Dreams"
 description = "The meadow is bigger than it looks, and it looks enormous. Discover its hidden places."
 category = 5
 prerequisites = PackedStringArray()
 min_level = 1
-objectives = Array[ExtResource("1_djud2")]([SubResource("Resource_ptdbs"), SubResource("Resource_w3ihu"), SubResource("Resource_vk5as"), SubResource("Resource_6q4qo"), SubResource("Resource_a6vqr"), SubResource("Resource_ob40e")])
+objectives = Array[ExtResource("1_7mrnk")]([SubResource("Resource_1rqpi"), SubResource("Resource_d145d"), SubResource("Resource_sgym8"), SubResource("Resource_d62ni"), SubResource("Resource_h6jga"), SubResource("Resource_epyij")])
 sequential = false
 auto_start = true
 reward_xp = 120

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_uwngi"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_3e2ix"]
 
 [resource]
-script = ExtResource("1_uwngi")
+script = ExtResource("1_3e2ix")
 id = "lumen_ring"
 display_name = "Lumen Ring"
 description = "A ring of hardened moonlight from a beetle's nest."
@@ -19,3 +19,12 @@ stat_bonuses = {
 "magic_power": 2
 }
 use_effect = {}
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = ""

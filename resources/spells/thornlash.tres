@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_swb2k"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_nybff"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_3ufsh"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_dt76t"]
 
 [resource]
-script = ExtResource("1_swb2k")
+script = ExtResource("1_3ufsh")
 id = "thornlash"
 display_name = "Thornlash"
 description = "A whip of dream-thorns, always within reach. Costs nothing."
@@ -16,7 +16,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 0
 target_count = 1
-status_effects = Array[ExtResource("2_nybff")]([])
+status_effects = Array[ExtResource("2_dt76t")]([])
 duration = 0
 rarity = 0
 armor_pierce = 0.0

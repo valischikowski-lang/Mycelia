@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_1iac3"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_d2trg"]
 
 [resource]
-script = ExtResource("1_1iac3")
+script = ExtResource("1_d2trg")
 id = "lantern_of_whispers"
 display_name = "Lantern of Whispers"
 description = "Its light shows what the living can't see: spirit echoes, hidden paths and invisible foes within 12 m."

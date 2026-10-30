@@ -1,0 +1,27 @@
+{
+	"id": "choir_keeper",
+	"speaker": "Brother Wick",
+	"entry": [
+		{
+			"goto": "greet"
+		}
+	],
+	"nodes": {
+		"greet": {
+			"text": "Weapons, brews, arrows. Friends of The Lantern Choir pay less; strangers pay more; enemies pay nothing, because they get nothing.",
+			"options": [
+				{
+					"text": "Show me your wares.",
+					"actions": [
+						"open_shop:choir_keeper"
+					],
+					"goto": "end"
+				},
+				{
+					"text": "Goodbye.",
+					"goto": "end"
+				}
+			]
+		}
+	}
+}

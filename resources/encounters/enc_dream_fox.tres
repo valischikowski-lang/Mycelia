@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="EncounterData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_vtouw"]
-[ext_resource type="Resource" path="res://resources/creatures/dream_fox.tres" id="2_ho0x3"]
-[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="3_4oxih"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_qisah"]
+[ext_resource type="Resource" path="res://resources/creatures/dream_fox.tres" id="2_toyda"]
+[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="3_b2dhl"]
 
 [resource]
-script = ExtResource("3_4oxih")
+script = ExtResource("3_b2dhl")
 id = "enc_dream_fox"
 display_name = "The Dream Fox"
-enemies = Array[ExtResource("1_vtouw")]([ExtResource("2_ho0x3")])
+enemies = Array[ExtResource("1_qisah")]([ExtResource("2_toyda")])
 arena_theme = "meadow"
 music = "music_combat"
 can_flee = true

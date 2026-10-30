@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_rdten"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_nbcvp"]
-[ext_resource type="Resource" path="res://resources/status_effects/regrowth.tres" id="3_br54y"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_kk1b8"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_rhudu"]
+[ext_resource type="Resource" path="res://resources/status_effects/regrowth.tres" id="3_buckc"]
 
 [resource]
-script = ExtResource("1_rdten")
+script = ExtResource("1_kk1b8")
 id = "wild_bloom"
 display_name = "Wild Bloom"
 description = "A flower opens inside your chest. Heals now and every turn after."
@@ -17,7 +17,7 @@ healing_value = 8
 accuracy = 0.95
 target_type = 2
 target_count = 1
-status_effects = Array[ExtResource("2_nbcvp")]([ExtResource("3_br54y")])
+status_effects = Array[ExtResource("2_rhudu")]([ExtResource("3_buckc")])
 duration = 3
 rarity = 1
 armor_pierce = 0.0

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_edgrj"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_5ca6v"]
 
 [resource]
-script = ExtResource("1_edgrj")
+script = ExtResource("1_5ca6v")
 id = "wanderkey"
 display_name = "Wanderkey"
 description = "A key with no teeth that fits every Class Seal once. For Dreamers who want to see what the other callings hide."

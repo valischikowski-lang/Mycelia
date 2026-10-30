@@ -8,6 +8,9 @@ extends Interactable
 @export var loot: Dictionary = {}
 ## "common", "rare" or "legendary" — only changes the look.
 @export var grade: String = "common"
+## Faction vaults: only open at this standing or better (or with a Wanderkey).
+@export var vault_faction: String = ""
+@export var vault_tier: String = "friendly"
 
 var seal: ClassSeal
 var _lid: Node3D
@@ -75,11 +78,28 @@ func can_interact(by: Node) -> bool:
 	return super.can_interact(by) and not _opened and (seal == null or seal.is_open())
 
 
+func _vault_ok() -> bool:
+	if vault_faction == "" or Game.profile == null:
+		return true
+	var p := Game.profile
+	return FactionState.TIERS.find(p.factions.standing(vault_faction, p.play_time)) >= FactionState.TIERS.find(vault_tier)
+
+
 func get_prompt() -> String:
+	if not _vault_ok():
+		return "Faction Vault (needs %s standing — or a Wanderkey)" % vault_tier
 	return super.get_prompt()
 
 
 func _on_interact(_by: Node) -> void:
+	if not _vault_ok():
+		var prof0 := Game.profile
+		if prof0 and prof0.inventory.has("wanderkey"):
+			prof0.inventory.remove("wanderkey", 1)
+			EventBus.notify("The Wanderkey slips past the vault's wards.", "success")
+		else:
+			EventBus.notify("The vault of %s stays shut. Earn their trust (their mentor knows how) or bring a Wanderkey." % String(FactionState.info(vault_faction).get("name", vault_faction)), "warning")
+			return
 	_set_open(false)
 	var prof := Game.profile
 	if prof == null:

@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="EncounterData" load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_scfam"]
-[ext_resource type="Resource" path="res://resources/creatures/hollow_crone.tres" id="2_28yva"]
-[ext_resource type="Resource" path="res://resources/creatures/cackling_crone.tres" id="3_ew562"]
-[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="4_jyl36"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_7wdwl"]
+[ext_resource type="Resource" path="res://resources/creatures/hollow_crone.tres" id="2_kfjfr"]
+[ext_resource type="Resource" path="res://resources/creatures/cackling_crone.tres" id="3_jiovl"]
+[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="4_ss1iu"]
 
 [resource]
-script = ExtResource("4_jyl36")
+script = ExtResource("4_ss1iu")
 id = "enc_coven"
 display_name = "A Little Coven"
-enemies = Array[ExtResource("1_scfam")]([ExtResource("2_28yva"), ExtResource("3_ew562")])
+enemies = Array[ExtResource("1_7wdwl")]([ExtResource("2_kfjfr"), ExtResource("3_jiovl")])
 arena_theme = "meadow"
 music = "music_combat"
 can_flee = true

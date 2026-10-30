@@ -37,6 +37,11 @@ func open(shop_id: String) -> void:
 	if shop.is_empty():
 		closed.emit()
 		return
+	var fid := String(shop.get("faction", ""))
+	if fid != "" and Game.profile and Game.profile.factions.standing(fid, Game.profile.play_time) == "hostile":
+		EventBus.notify("\"I don't trade with your kind.\"", "warning")
+		closed.emit()
+		return
 	_mode = "buy"
 	visible = true
 	AudioManager.play_ui("ui_open")
@@ -93,7 +98,14 @@ func _rebuild() -> void:
 		for entry: Variant in shop.get("stock", []):
 			var e: Dictionary = entry
 			var id := String(e["item_id"])
-			var price := int(e["price"])
+			if e.has("min_standing") and String(shop.get("faction", "")) != "":
+				var tiers := FactionState.TIERS
+				if tiers.find(prof.factions.standing(String(shop["faction"]), prof.play_time)) < tiers.find(String(e["min_standing"])):
+					continue
+			# Faction merchants: reputation changes the price.
+			var fid := String(shop.get("faction", ""))
+			var mult := prof.factions.price_mult(fid, prof.play_time) if fid != "" else 1.0
+			var price := int(ceil(int(e["price"]) * mult))
 			var d := Database.item(id)
 			if d == null:
 				continue

@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="CreatureData" load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_jo0rr"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/hex_bolt.tres" id="2_eqo8k"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/cackle.tres" id="3_hvekq"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/two_tooth_bite.tres" id="4_sfeqg"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/brew_sip.tres" id="5_eb5nc"]
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="6_y8hvw"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_po12w"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/hex_bolt.tres" id="2_j6y1h"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/cackle.tres" id="3_mmb5b"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/two_tooth_bite.tres" id="4_82mnx"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/brew_sip.tres" id="5_jh65i"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="6_6llu8"]
 
 [resource]
-script = ExtResource("6_y8hvw")
+script = ExtResource("6_6llu8")
 id = "hollow_crone"
 display_name = "Hollow Crone"
 description = "A crooked witch with two teeth and too many opinions."
@@ -18,7 +18,7 @@ max_health = 58
 defense = 4
 power = 8
 speed = 10
-abilities = Array[ExtResource("1_jo0rr")]([ExtResource("2_eqo8k"), ExtResource("3_hvekq"), ExtResource("4_sfeqg"), ExtResource("5_eb5nc")])
+abilities = Array[ExtResource("1_po12w")]([ExtResource("2_j6y1h"), ExtResource("3_mmb5b"), ExtResource("4_82mnx"), ExtResource("5_jh65i")])
 personality = 4
 phase_thresholds = PackedFloat32Array()
 xp_reward = 60

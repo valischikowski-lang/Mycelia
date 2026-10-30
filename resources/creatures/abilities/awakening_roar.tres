@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_xugay"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_8nr50"]
-[ext_resource type="Resource" path="res://resources/status_effects/golem_roar.tres" id="3_c7c8w"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_68oa4"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_hvxyy"]
+[ext_resource type="Resource" path="res://resources/status_effects/golem_roar.tres" id="3_77bs6"]
 
 [resource]
-script = ExtResource("1_xugay")
+script = ExtResource("1_68oa4")
 id = "awakening_roar"
 display_name = "Awakening Roar"
 description = "Every mushroom in the arena turns to face you."
@@ -17,7 +17,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 2
 target_count = 1
-status_effects = Array[ExtResource("2_8nr50")]([ExtResource("3_c7c8w")])
+status_effects = Array[ExtResource("2_hvxyy")]([ExtResource("3_77bs6")])
 duration = 3
 rarity = 0
 armor_pierce = 0.0

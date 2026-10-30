@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_3c3r5"]
+
+[resource]
+script = ExtResource("1_3c3r5")
+id = "rootmoss_cloak"
+display_name = "Rootmoss Cloak"
+description = "Wear it and the Hold's guards take you for one of their own — mostly. Lasts 8 minutes. Use it from the satchel."
+category = 6
+rarity = 2
+max_stack = 5
+value = 30
+icon_color = Color(0.611765, 1, 0.290196, 1)
+icon_glyph = "☖"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {
+"disguise": "rootborn_hold",
+"minutes": 8.0
+}
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = "Ollo's crossing (neutral ground)."

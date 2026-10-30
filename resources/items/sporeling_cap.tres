@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_m1qcx"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_b67nm"]
 
 [resource]
-script = ExtResource("1_m1qcx")
+script = ExtResource("1_b67nm")
 id = "sporeling_cap"
 display_name = "Sporeling Cap"
 description = "A shed cap. Sporelings grow a new one by morning."
@@ -16,3 +16,12 @@ icon_glyph = "◒"
 equip_slot = ""
 stat_bonuses = {}
 use_effect = {}
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = ""

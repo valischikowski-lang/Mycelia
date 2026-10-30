@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_qkxfk"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_2bjfl"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_rf4d4"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_ymxwd"]
 
 [resource]
-script = ExtResource("1_qkxfk")
+script = ExtResource("1_rf4d4")
 id = "starlit_pounce"
 display_name = "Starlit Pounce"
 description = "A leap that leaves footprints of light in the air."
@@ -16,7 +16,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 0
 target_count = 1
-status_effects = Array[ExtResource("2_2bjfl")]([])
+status_effects = Array[ExtResource("2_ymxwd")]([])
 duration = 0
 rarity = 0
 armor_pierce = 0.0

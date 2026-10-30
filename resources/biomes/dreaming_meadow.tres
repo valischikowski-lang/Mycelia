@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="BiomeData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/world/biome_data.gd" id="1_q1gjf"]
+[ext_resource type="Script" path="res://scripts/world/biome_data.gd" id="1_hy3tv"]
 
 [resource]
-script = ExtResource("1_q1gjf")
+script = ExtResource("1_hy3tv")
 id = "dreaming_meadow"
 display_name = "The Dreaming Meadow"
 sky_top = Color(0.00784314, 0.00784314, 0.0313726, 1)

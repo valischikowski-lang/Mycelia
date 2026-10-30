@@ -47,6 +47,14 @@ static func check(cond: String, profile: PlayerProfile) -> bool:
 			result = profile.stats.level >= int(parts[1])
 		"seen":
 			result = profile.world.has_seen(parts[1], parts[2])
+		"class":
+			result = profile.class_id == parts[1]
+		"standing":
+			# standing:<faction>:<tier> — true at that tier or better.
+			var tiers := FactionState.TIERS
+			result = tiers.find(profile.factions.standing(parts[1], profile.play_time)) >= tiers.find(parts[2])
+		"own_faction":
+			result = FactionState.faction_of_class(profile.class_id) == parts[1]
 		"knows_spell":
 			result = profile.spellbook.knows(parts[1])
 		_:
@@ -75,6 +83,13 @@ static func run(action: String, profile: PlayerProfile) -> void:
 			var removed := profile.inventory.remove(parts[1], n2)
 			if removed > 0:
 				EventBus.item_removed.emit(parts[1], removed)
+		"rep":
+			profile.factions.change(parts[1], int(parts[2]))
+			var fname := String(FactionState.info(parts[1]).get("name", parts[1]))
+			EventBus.notify("%s %s%d reputation" % [fname, "+" if int(parts[2]) >= 0 else "", int(parts[2])], "success" if int(parts[2]) >= 0 else "warning")
+		"give_essence":
+			profile.add_mana_essence(int(parts[1]))
+			EventBus.notify("+%s Mana Essence" % parts[1], "level")
 		"give_glimmer":
 			profile.inventory.add_glimmer(int(parts[1]))
 			EventBus.notify("+%s glimmer" % parts[1], "item")

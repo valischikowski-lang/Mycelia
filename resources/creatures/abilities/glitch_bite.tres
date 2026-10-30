@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_futtt"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_aqq3t"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_vel20"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_5gl8s"]
 
 [resource]
-script = ExtResource("1_futtt")
+script = ExtResource("1_vel20")
 id = "glitch_bite"
 display_name = "Glitch Bite"
 description = "Its mouth opens wider than it should."
@@ -16,7 +16,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 0
 target_count = 1
-status_effects = Array[ExtResource("2_aqq3t")]([])
+status_effects = Array[ExtResource("2_5gl8s")]([])
 duration = 0
 rarity = 0
 armor_pierce = 0.0

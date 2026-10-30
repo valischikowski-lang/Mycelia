@@ -23,6 +23,7 @@ var hotbar: PackedStringArray = []
 ## Mana Essence: the currency spent on Learning Paths. Earned from quests,
 ## exploration, chests, bosses and discoveries (not from the combat pool).
 var mana_essence: int = 0
+var factions := FactionState.new()
 
 signal mana_essence_changed(amount: int)
 
@@ -102,6 +103,7 @@ func choose_class(id: String) -> bool:
 		return false
 	class_id = id
 	hotbar = c.abilities.duplicate()
+	factions.start(id)
 	for item_id: String in c.start_items:
 		inventory.add(item_id, 1)
 		var d: ItemData = content.item(item_id)
@@ -255,6 +257,10 @@ func use_item(id: String) -> String:
 	if fx.has("xp"):
 		stats.add_xp(int(fx["xp"]))
 		parts.append("+%d XP" % int(fx["xp"]))
+	if fx.has("disguise"):
+		var fid := String(fx["disguise"])
+		factions.disguise = {"faction": fid, "until": play_time + 60.0 * float(fx.get("minutes", 8.0))}
+		parts.append("disguised as one of %s for %d minutes" % [String(FactionState.info(fid).get("name", fid)), int(fx.get("minutes", 8.0))])
 	inventory.remove(id, 1)
 	return "%s: %s" % [d.display_name, ", ".join(parts)]
 
@@ -277,6 +283,7 @@ func to_dict() -> Dictionary:
 	return {
 		"player_id": player_id, "display_name": display_name, "play_time": play_time,
 		"class_id": class_id, "hotbar": Array(hotbar), "mana_essence": mana_essence,
+		"factions": factions.to_dict(),
 		"stats": stats.to_dict(), "inventory": inventory.to_dict(), "spellbook": spellbook.to_dict(),
 		"skills": skills.to_dict(), "quests": quests.to_dict(), "world": world.to_dict(),
 	}
@@ -288,6 +295,9 @@ func from_dict(d: Dictionary) -> void:
 	play_time = float(d.get("play_time", 0.0))
 	class_id = String(d.get("class_id", ""))
 	mana_essence = int(d.get("mana_essence", 0))
+	factions.from_dict(d.get("factions", {}))
+	if class_id != "" and factions.rep.is_empty():
+		factions.start(class_id)
 	hotbar = PackedStringArray(d.get("hotbar", []))
 	if class_id != "" and hotbar.is_empty() and player_class():
 		hotbar = player_class().abilities.duplicate()

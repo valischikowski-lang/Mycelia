@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_v1xgx"]
+
+[resource]
+script = ExtResource("1_v1xgx")
+id = "concordance_mantle"
+display_name = "Concordance Mantle"
+description = "Wear it and the Concordance's guards take you for one of their own — mostly. Lasts 8 minutes. Use it from the satchel."
+category = 6
+rarity = 2
+max_stack = 5
+value = 30
+icon_color = Color(0.541176, 0.705882, 1, 1)
+icon_glyph = "☖"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {
+"disguise": "spiral_concordance",
+"minutes": 8.0
+}
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = "Ollo's crossing (neutral ground)."

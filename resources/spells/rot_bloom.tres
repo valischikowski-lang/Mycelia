@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_61dhm"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_cwbya"]
-[ext_resource type="Resource" path="res://resources/status_effects/spore_rot.tres" id="3_cu38m"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_tbkpv"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_pjjdy"]
+[ext_resource type="Resource" path="res://resources/status_effects/spore_rot.tres" id="3_ujrei"]
 
 [resource]
-script = ExtResource("1_61dhm")
+script = ExtResource("1_tbkpv")
 id = "rot_bloom"
 display_name = "Rot Bloom"
 description = "The meadow remembers every fallen leaf. Damages all enemies and infects them with Spore Rot."
@@ -17,7 +17,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 1
 target_count = 1
-status_effects = Array[ExtResource("2_cwbya")]([ExtResource("3_cu38m")])
+status_effects = Array[ExtResource("2_pjjdy")]([ExtResource("3_ujrei")])
 duration = 3
 rarity = 3
 armor_pierce = 0.0

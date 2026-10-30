@@ -1,0 +1,54 @@
+{
+	"unseen_covenant": {
+		"name": "The Unseen Covenant", "class": "assassin", "village": "Duskhollow", "color": "#9a7bff", "glyph": "☾",
+		"disguise": "covenant_veil",
+		"barks": {
+			"honored": ["The shadows make room for you, sister-blade.", "Walk soft, kin. You're one of us."],
+			"friendly": ["Kin.", "Quiet steps, friend.", "The Covenant sees you. Kindly, for once."],
+			"neutral": ["Keep your hands where I can see them.", "You may pass. Slowly."],
+			"wary": ["You're loud for someone so far from home.", "Outsider. Mind the shadows — they mind you."],
+			"hostile": ["You should not have come back.", "The Covenant remembers."]
+		},
+		"warn": "Turn back, outsider. Duskhollow is not for your kind.",
+		"lore": "The Covenant was the first to wake when the Root closed her eyes. They keep the Key of Shadows in a place that doesn't exist on maps."
+	},
+	"lantern_choir": {
+		"name": "The Lantern Choir", "class": "spirit", "village": "Lanternhome", "color": "#7ef9ff", "glyph": "♅",
+		"disguise": "choir_shroud",
+		"barks": {
+			"honored": ["The dead sing your name gladly.", "Your lantern burns bright, sibling."],
+			"friendly": ["Be welcome. The echoes are calm today.", "Light and memory, friend."],
+			"neutral": ["The dead are listening. Be polite.", "Hm. A living visitor."],
+			"wary": ["Your footsteps are too heavy here, stranger.", "The echoes whisper about you."],
+			"hostile": ["You have disturbed the dead once too often.", "Leave, or join them."]
+		},
+		"warn": "Lanternhome is a place of rest. Your kind brings noise. Turn back.",
+		"lore": "The Choir keeps the Key of Souls, and every song they sing is a memory someone forgot."
+	},
+	"spiral_concordance": {
+		"name": "The Spiral Concordance", "class": "wizard", "village": "Spireholm", "color": "#8ab4ff", "glyph": "✶",
+		"disguise": "concordance_mantle",
+		"barks": {
+			"honored": ["Magister! The library is yours.", "Your theorems are cited in the lower floors."],
+			"friendly": ["Colleague.", "Mind the floating stairs, they're shy."],
+			"neutral": ["Visitors sign the ledger. Visitors also don't touch anything.", "Hm. Unlettered, but harmless?"],
+			"wary": ["You are interrupting an experiment simply by existing.", "Non-academics are... tolerated. Barely."],
+			"hostile": ["Security protocol seven. Leave.", "You are a variable we intend to remove."]
+		},
+		"warn": "Spireholm's inner circle is restricted. Turn back before the runes decide for you.",
+		"lore": "The Concordance believes the dream has rules, and that rules can be rewritten. They keep the Key of Laws behind seven locks."
+	},
+	"rootborn_hold": {
+		"name": "The Rootborn Hold", "class": "grimlet", "village": "Gnarlhollow", "color": "#9cff4a", "glyph": "⚘",
+		"disguise": "rootmoss_cloak",
+		"barks": {
+			"honored": ["Grm! Elder-sprout! We are honoured.", "We share our loam with you, kin."],
+			"friendly": ["Grm. Welcome, sprout.", "We smell friend on you."],
+			"neutral": ["Hrm. We watch you.", "Soft-skin. Step lightly on our roots."],
+			"wary": ["We do not like your smell, soft-skin.", "Grrrm. Not one of us."],
+			"hostile": ["We will make loam of you!", "Out! OUT of our hold!"]
+		},
+		"warn": "Grrm. Gnarlhollow is for the Rootborn. Turn back, soft-skin, or be planted.",
+		"lore": "The Hold guards the Key of Growth deep in the roots, where even sunlight has to ask permission."
+	}
+}

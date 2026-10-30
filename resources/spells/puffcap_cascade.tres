@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_a74gh"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_sa1ph"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_8xuvv"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_6m5lh"]
 
 [resource]
-script = ExtResource("1_a74gh")
+script = ExtResource("1_8xuvv")
 id = "puffcap_cascade"
 display_name = "Puffcap Cascade"
 description = "Mushrooms erupt beneath every enemy at once."
@@ -16,7 +16,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 1
 target_count = 1
-status_effects = Array[ExtResource("2_sa1ph")]([])
+status_effects = Array[ExtResource("2_6m5lh")]([])
 duration = 0
 rarity = 1
 armor_pierce = 0.0

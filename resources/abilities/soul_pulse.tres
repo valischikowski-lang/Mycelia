@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_tym3l"]
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_koic8"]
 
 [resource]
-script = ExtResource("1_tym3l")
+script = ExtResource("1_koic8")
 id = "soul_pulse"
 display_name = "Soul Pulse"
 description = "A ring of soul-light bursts out from you, damaging and hurling back every enemy nearby."

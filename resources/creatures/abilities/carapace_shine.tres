@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_agg3g"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_rl5u2"]
-[ext_resource type="Resource" path="res://resources/status_effects/carapace.tres" id="3_jcuu6"]
-[ext_resource type="Resource" path="res://resources/status_effects/beetle_glint.tres" id="4_b6jqt"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_sv0ba"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_x2e8j"]
+[ext_resource type="Resource" path="res://resources/status_effects/carapace.tres" id="3_mjpjx"]
+[ext_resource type="Resource" path="res://resources/status_effects/beetle_glint.tres" id="4_qspeb"]
 
 [resource]
-script = ExtResource("1_agg3g")
+script = ExtResource("1_sv0ba")
 id = "carapace_shine"
 display_name = "Carapace Shine"
 description = "Its shell catches the moonlight and hardens."
@@ -18,7 +18,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 2
 target_count = 1
-status_effects = Array[ExtResource("2_rl5u2")]([ExtResource("3_jcuu6"), ExtResource("4_b6jqt")])
+status_effects = Array[ExtResource("2_x2e8j")]([ExtResource("3_mjpjx"), ExtResource("4_qspeb")])
 duration = 2
 rarity = 0
 armor_pierce = 0.0

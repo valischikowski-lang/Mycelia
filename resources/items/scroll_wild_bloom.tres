@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_7y0a1"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_hj7k8"]
 
 [resource]
-script = ExtResource("1_7y0a1")
+script = ExtResource("1_hj7k8")
 id = "scroll_wild_bloom"
 display_name = "Scroll: Wild Bloom"
 description = "Reading it aloud makes your palms smell like spring. Teaches Wild Bloom."
@@ -18,3 +18,12 @@ stat_bonuses = {}
 use_effect = {
 "unlock_spell": "wild_bloom"
 }
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = ""

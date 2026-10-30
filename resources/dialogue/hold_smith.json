@@ -1,0 +1,27 @@
+{
+	"id": "hold_smith",
+	"speaker": "Old Knuckle",
+	"entry": [
+		{
+			"goto": "greet"
+		}
+	],
+	"nodes": {
+		"greet": {
+			"text": "Weapons, brews, arrows. Friends of The Rootborn Hold pay less; strangers pay more; enemies pay nothing, because they get nothing.",
+			"options": [
+				{
+					"text": "Show me your wares.",
+					"actions": [
+						"open_shop:hold_smith"
+					],
+					"goto": "end"
+				},
+				{
+					"text": "Goodbye.",
+					"goto": "end"
+				}
+			]
+		}
+	}
+}

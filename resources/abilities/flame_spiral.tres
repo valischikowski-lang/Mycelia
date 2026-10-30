@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_arw2p"]
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_6ghpm"]
 
 [resource]
-script = ExtResource("1_arw2p")
+script = ExtResource("1_6ghpm")
 id = "flame_spiral"
 display_name = "Flame Spiral"
 description = "Three fire-motes spin around you, scorching anything they touch."

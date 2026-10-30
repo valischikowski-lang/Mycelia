@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_6wxkq"]
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_5d3r8"]
 
 [resource]
-script = ExtResource("1_6wxkq")
+script = ExtResource("1_5d3r8")
 id = "gravity_well"
 display_name = "Gravity Well"
 description = "Open a point of crushing gravity ahead that drags enemies together and grinds them."

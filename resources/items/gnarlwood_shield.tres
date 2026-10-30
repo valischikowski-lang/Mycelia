@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_opryp"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_kgf08"]
 
 [resource]
-script = ExtResource("1_opryp")
+script = ExtResource("1_kgf08")
 id = "gnarlwood_shield"
 display_name = "Gnarlwood Shield"
 description = "Knotted wood. It has stopped worse than you."

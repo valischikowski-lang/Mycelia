@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_5b8hd"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_wcv3r"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_nfxsm"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_qceaf"]
 
 [resource]
-script = ExtResource("1_5b8hd")
+script = ExtResource("1_nfxsm")
 id = "kaleidoscope_rift"
 display_name = "Kaleidoscope Rift"
 description = "Tear a hole in what is real. Deals 4–30 damage. Something else may happen."
@@ -16,7 +16,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 0
 target_count = 1
-status_effects = Array[ExtResource("2_wcv3r")]([])
+status_effects = Array[ExtResource("2_qceaf")]([])
 duration = 0
 rarity = 2
 armor_pierce = 0.0

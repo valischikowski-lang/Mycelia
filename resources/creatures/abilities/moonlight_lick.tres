@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_nphwi"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_ekqf0"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_p6u0a"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_f88sf"]
 
 [resource]
-script = ExtResource("1_nphwi")
+script = ExtResource("1_p6u0a")
 id = "moonlight_lick"
 display_name = "Moonlight Lick"
 description = "It licks its paw; the paw glows; the wound closes."
@@ -16,7 +16,7 @@ healing_value = 14
 accuracy = 0.95
 target_type = 2
 target_count = 1
-status_effects = Array[ExtResource("2_ekqf0")]([])
+status_effects = Array[ExtResource("2_f88sf")]([])
 duration = 0
 rarity = 0
 armor_pierce = 0.0

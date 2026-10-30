@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_wrobj"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_53vwb"]
 
 [resource]
-script = ExtResource("1_wrobj")
+script = ExtResource("1_53vwb")
 id = "mana_moss"
 display_name = "Mana Moss"
 description = "Chew slowly. Restores 4 mana."
@@ -18,3 +18,12 @@ stat_bonuses = {}
 use_effect = {
 "mana": 4
 }
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = ""

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_5cg0e"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_5w3h5"]
 
 [resource]
-script = ExtResource("1_5cg0e")
+script = ExtResource("1_5w3h5")
 id = "toadstool_tea"
 display_name = "Toadstool Tea"
 description = "Mother Grizzleroot's brew. Tastes like a swamp at midnight. Restores 70 health."
@@ -18,3 +18,12 @@ stat_bonuses = {}
 use_effect = {
 "heal": 70
 }
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = ""

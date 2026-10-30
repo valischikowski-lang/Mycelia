@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_f04hq"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_q23a6"]
-[ext_resource type="Resource" path="res://resources/status_effects/spore_rot_weak.tres" id="3_rwb6c"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_33aas"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_s6ecl"]
+[ext_resource type="Resource" path="res://resources/status_effects/spore_rot_weak.tres" id="3_f5prb"]
 
 [resource]
-script = ExtResource("1_f04hq")
+script = ExtResource("1_33aas")
 id = "spore_puff"
 display_name = "Spore Puff"
 description = "A sneeze of spores."
@@ -17,7 +17,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 0
 target_count = 1
-status_effects = Array[ExtResource("2_q23a6")]([ExtResource("3_rwb6c")])
+status_effects = Array[ExtResource("2_s6ecl")]([ExtResource("3_f5prb")])
 duration = 2
 rarity = 0
 armor_pierce = 0.0

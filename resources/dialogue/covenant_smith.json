@@ -1,0 +1,27 @@
+{
+	"id": "covenant_smith",
+	"speaker": "Silk",
+	"entry": [
+		{
+			"goto": "greet"
+		}
+	],
+	"nodes": {
+		"greet": {
+			"text": "Weapons, brews, arrows. Friends of The Unseen Covenant pay less; strangers pay more; enemies pay nothing, because they get nothing.",
+			"options": [
+				{
+					"text": "Show me your wares.",
+					"actions": [
+						"open_shop:covenant_smith"
+					],
+					"goto": "end"
+				},
+				{
+					"text": "Goodbye.",
+					"goto": "end"
+				}
+			]
+		}
+	}
+}

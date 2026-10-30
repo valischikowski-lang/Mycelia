@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/classes/class_data.gd" id="1_1bh4h"]
+[ext_resource type="Script" path="res://scripts/classes/class_data.gd" id="1_bbpnb"]
 
 [resource]
-script = ExtResource("1_1bh4h")
+script = ExtResource("1_bbpnb")
 id = "wizard"
 display_name = "Wizard"
 tagline = "Reality is a suggestion."

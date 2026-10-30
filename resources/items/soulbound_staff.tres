@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_b3rgq"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_cf7sl"]
 
 [resource]
-script = ExtResource("1_b3rgq")
+script = ExtResource("1_cf7sl")
 id = "soulbound_staff"
 display_name = "Soulbound Staff"
 description = "A staff with a sleeping soul inside. Heavy attacks release a homing soul bolt."

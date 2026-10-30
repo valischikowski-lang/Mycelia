@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_fat46"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_m843v"]
-[ext_resource type="Resource" path="res://resources/status_effects/weightless.tres" id="3_vcwo7"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_rs0il"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_3d7wc"]
+[ext_resource type="Resource" path="res://resources/status_effects/weightless.tres" id="3_0bhn5"]
 
 [resource]
-script = ExtResource("1_fat46")
+script = ExtResource("1_rs0il")
 id = "gravity_well"
 display_name = "Gravity Well"
 description = "Open a tiny collapsing star. All enemies become Weightless (deal 30% less)."
@@ -17,7 +17,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 1
 target_count = 1
-status_effects = Array[ExtResource("2_m843v")]([ExtResource("3_vcwo7")])
+status_effects = Array[ExtResource("2_3d7wc")]([ExtResource("3_0bhn5")])
 duration = 2
 rarity = 2
 armor_pierce = 0.0

@@ -447,6 +447,35 @@ func build_quests() -> void:
 			objective("collect_motes", "Collect Dream Motes for Madame Petalune", T.COLLECT, "dream_mote", 5),
 			objective("return_petalune", "Return to Madame Petalune", T.TALK, "madame_petalune", 1, Vector3(52, 0, 44)),
 		], {"xp": 90, "glimmer": 40, "items": {"driftwalker_boots": 1}, "done": "Madame Petalune is radiant. Mostly with smugness."})
+	# Class quests — given by each faction's mentor to their own calling.
+	quest("class_assassin", "The Unseen Path",
+		"Vesper Nightwhisk of the Unseen Covenant wants proof that you move like one of them.",
+		Q.CLASS, [
+			objective("open_veil", "Shadow Dash through the Shadow Veil in the western woods", T.ACTIVATE, "seal_chest_shadow_nook", 1, Vector3(-90, 0, -42)),
+			objective("crones", "Silence two Hollow Crones", T.DEFEAT, "hollow_crone", 2),
+			objective("return", "Return to Vesper in Duskhollow", T.TALK, "covenant_mentor", 1, Vector3(-106, 0, 42)),
+		], {"xp": 160, "glimmer": 60, "items": {"wanderkey": 1, "ember_arrow": 10}, "done": "Vesper nods once. From the Covenant, that's a parade."})
+	quest("class_spirit", "Songs of the Departed",
+		"Elder Ondine of the Lantern Choir asks you to listen where the dead still speak.",
+		Q.CLASS, [
+			objective("echo", "Hear the Echo at the Rootstone Circle", T.ACTIVATE, "seal_chest_circle_echo", 1, Vector3(-64, 0, -8)),
+			objective("astral", "Astral Shift through the barrier by the lake shrine", T.ACTIVATE, "seal_chest_astral_shrine", 1, Vector3(84, 0, 36)),
+			objective("return", "Return to Elder Ondine in Lanternhome", T.TALK, "choir_mentor", 1, Vector3(96, 0, 48)),
+		], {"xp": 160, "glimmer": 60, "items": {"wanderkey": 1, "night_ink": 2}, "done": "The lanterns brighten as you arrive. They were listening too."})
+	quest("class_wizard", "The Forgotten Rune",
+		"Magister Quillon of the Spiral Concordance has a rune that forgot its name — and gremlins in the workshop.",
+		Q.CLASS, [
+			objective("rune", "Wake the Sleeping Rune north of the Keeper's grove", T.ACTIVATE, "seal_chest_rune_north", 1, Vector3(22, 0, -104)),
+			objective("gremlins", "Chase off three Gnasher Gremlins", T.DEFEAT, "gnasher_gremlin", 3),
+			objective("return", "Report to Magister Quillon in Spireholm", T.TALK, "concordance_mentor", 1, Vector3(86, 0, -62)),
+		], {"xp": 160, "glimmer": 60, "items": {"wanderkey": 1, "night_ink": 2}, "done": "Quillon writes your name in the ledger. In the margin. In ink."})
+	quest("class_grimlet", "Roots Remember",
+		"Barkmother Grum of the Rootborn Hold wants the old roots woken. Grm.",
+		Q.CLASS, [
+			objective("gate", "Wake the Root Gate near Crookhollow", T.ACTIVATE, "seal_chest_root_gate", 1, Vector3(-50, 0, 70)),
+			objective("node", "Wake the Mycelium Node south of the lake", T.ACTIVATE, "seal_chest_mycelium", 1, Vector3(40, 0, 72)),
+			objective("return", "Return to Barkmother Grum in Gnarlhollow", T.TALK, "hold_mentor", 1, Vector3(-100, 0, 6)),
+		], {"xp": 160, "glimmer": 60, "items": {"wanderkey": 1, "toadstool_tea": 2}, "done": "Grum thumps the ground. Somewhere, a root thumps back."})
 	quest("beetle_bother", "Beetle Bother",
 		"Ollo the snail-merchant's wares keep getting eaten by Crystal Beetles. He would deal with them himself, but he would get there next week.",
 		Q.COMBAT, [

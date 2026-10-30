@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_h5qh4"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_tvl2j"]
 
 [resource]
-script = ExtResource("1_h5qh4")
+script = ExtResource("1_tvl2j")
 id = "hexed"
 display_name = "Hexed"
 description = "A crone's curse sours your strength: attacks deal 25% less."

@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="CreatureData" load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_yk5ry"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/thorn_crush.tres" id="2_vnwyl"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/petal_storm.tres" id="3_thwxy"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/photosynthesis.tres" id="4_3kmcc"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/bark_up.tres" id="5_6twvu"]
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="6_5i8t0"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_10y77"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/thorn_crush.tres" id="2_njppl"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/petal_storm.tres" id="3_3ejg5"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/photosynthesis.tres" id="4_bko6c"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/bark_up.tres" id="5_g74jl"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="6_r8whl"]
 
 [resource]
-script = ExtResource("6_5i8t0")
+script = ExtResource("6_r8whl")
 id = "bloom_guardian"
 display_name = "Bloom Guardian"
 description = "An ancient flower that guards the Rootstone Circle."
@@ -18,7 +18,7 @@ max_health = 120
 defense = 6
 power = 8
 speed = 6
-abilities = Array[ExtResource("1_yk5ry")]([ExtResource("2_vnwyl"), ExtResource("3_thwxy"), ExtResource("4_3kmcc"), ExtResource("5_6twvu")])
+abilities = Array[ExtResource("1_10y77")]([ExtResource("2_njppl"), ExtResource("3_3ejg5"), ExtResource("4_bko6c"), ExtResource("5_g74jl")])
 personality = 2
 phase_thresholds = PackedFloat32Array()
 xp_reward = 120

@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CreatureData" load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_plvgj"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/hex_bolt.tres" id="2_ndyim"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/cackle.tres" id="3_8o0y6"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/two_tooth_bite.tres" id="4_rvtr5"]
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="5_tdrtt"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_frwsr"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/hex_bolt.tres" id="2_b6k8o"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/cackle.tres" id="3_3m2c4"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/two_tooth_bite.tres" id="4_5bi0u"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="5_uxjkd"]
 
 [resource]
-script = ExtResource("5_tdrtt")
+script = ExtResource("5_uxjkd")
 id = "cackling_crone"
 display_name = "Cackling Crone"
 description = "Three teeth. She is very proud of the third."
@@ -17,7 +17,7 @@ max_health = 50
 defense = 3
 power = 10
 speed = 13
-abilities = Array[ExtResource("1_plvgj")]([ExtResource("2_ndyim"), ExtResource("3_8o0y6"), ExtResource("4_rvtr5")])
+abilities = Array[ExtResource("1_frwsr")]([ExtResource("2_b6k8o"), ExtResource("3_3m2c4"), ExtResource("4_5bi0u")])
 personality = 4
 phase_thresholds = PackedFloat32Array()
 xp_reward = 55

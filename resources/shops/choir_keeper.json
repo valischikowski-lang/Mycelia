@@ -1,0 +1,30 @@
+{
+	"id": "choir_keeper",
+	"name": "Wick's Lantern Stall",
+	"faction": "lantern_choir",
+	"greeting": "Prices depend on who's asking.",
+	"sell_ratio": 0.5,
+	"stock": [
+		{
+			"item_id": "night_ink",
+			"price": 22
+		},
+		{
+			"item_id": "dewdrop_tonic",
+			"price": 12
+		},
+		{
+			"item_id": "frost_arrow",
+			"price": 4
+		},
+		{
+			"item_id": "mana_moss",
+			"price": 9
+		},
+		{
+			"item_id": "lantern_signet",
+			"price": 160,
+			"min_standing": "friendly"
+		}
+	]
+}

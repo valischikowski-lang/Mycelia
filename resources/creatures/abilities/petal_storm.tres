@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_6ooft"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_lmvxb"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_c5nfi"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_qkqh7"]
 
 [resource]
-script = ExtResource("1_6ooft")
+script = ExtResource("1_c5nfi")
 id = "petal_storm"
 display_name = "Petal Storm"
 description = "A whirlwind of razor petals."
@@ -16,7 +16,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 0
 target_count = 1
-status_effects = Array[ExtResource("2_lmvxb")]([])
+status_effects = Array[ExtResource("2_qkqh7")]([])
 duration = 0
 rarity = 0
 armor_pierce = 0.0

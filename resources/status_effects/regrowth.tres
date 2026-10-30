@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_lo2eb"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_vf2of"]
 
 [resource]
-script = ExtResource("1_lo2eb")
+script = ExtResource("1_vf2of")
 id = "regrowth"
 display_name = "Regrowth"
 description = "Living sap restores health each turn."

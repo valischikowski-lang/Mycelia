@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_u3jfw"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_ey1ln"]
 
 [resource]
-script = ExtResource("1_u3jfw")
+script = ExtResource("1_ey1ln")
 id = "beetle_glint"
 display_name = "Shell Glint"
 description = "Absorbs damage."

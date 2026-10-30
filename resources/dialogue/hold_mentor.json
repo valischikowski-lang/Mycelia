@@ -1,0 +1,142 @@
+{
+	"id": "hold_mentor",
+	"speaker": "Barkmother Grum",
+	"entry": [
+		{
+			"if": [
+				"quest_completed:class_grimlet",
+				"!flag:hold_mentor_rewarded"
+			],
+			"goto": "rewarded"
+		},
+		{
+			"if": [
+				"class:grimlet"
+			],
+			"goto": "kin"
+		},
+		{
+			"goto": "stranger"
+		}
+	],
+	"nodes": {
+		"kin": {
+			"text": "Grm! Sprout! We feel you through the roots. The Fourfold Threshold chose you for us. Now the Hollowing is chewing at the edges of the dream, and The Rootborn Hold needs hands that can do what yours can.",
+			"options": [
+				{
+					"text": "What do you need?",
+					"if": [
+						"quest_state:class_grimlet:AVAILABLE"
+					],
+					"goto": "offer"
+				},
+				{
+					"text": "I'm working on it.",
+					"if": [
+						"quest_state:class_grimlet:ACTIVE"
+					],
+					"goto": "progress"
+				},
+				{
+					"text": "Tell me about The Rootborn Hold.",
+					"goto": "lore"
+				},
+				{
+					"text": "Farewell.",
+					"goto": "end"
+				}
+			]
+		},
+		"offer": {
+			"text": "Use what you are. There are seals in this meadow only our calling can open, and things out there that need answering. Do it, then come back.",
+			"options": [
+				{
+					"text": "I'll do it.",
+					"actions": [
+						"start_quest:class_grimlet"
+					],
+					"goto": "end"
+				},
+				{
+					"text": "Not yet.",
+					"goto": "end"
+				}
+			]
+		},
+		"progress": {
+			"text": "Check your journal, then go. The seals won't open themselves.",
+			"options": [
+				{
+					"text": "Right.",
+					"goto": "end"
+				}
+			]
+		},
+		"rewarded": {
+			"text": "Well done. You are one of us in more than name now. Take this — and the vault of The Rootborn Hold is yours to open.",
+			"actions": [
+				"set_flag:hold_mentor_rewarded",
+				"rep:rootborn_hold:25",
+				"give_essence:4"
+			],
+			"options": [
+				{
+					"text": "Thank you.",
+					"goto": "end"
+				}
+			]
+		},
+		"lore": {
+			"text": "The Hold guards the Key of Growth deep in the roots, where even sunlight has to ask permission.",
+			"options": [
+				{
+					"text": "I see.",
+					"goto": "kin"
+				}
+			]
+		},
+		"stranger": {
+			"text": "Hrrm. Soft-skin. We smell you from the loam. You are not of our calling. But the dream is wide, and goodwill is a kind of door.",
+			"options": [
+				{
+					"text": "How do I earn your trust?",
+					"goto": "goodwill"
+				},
+				{
+					"text": "Here — I brought what you asked.",
+					"if": [
+						"has_item:sporeling_cap:4"
+					],
+					"goto": "goodwill_done"
+				},
+				{
+					"text": "Farewell.",
+					"goto": "end"
+				}
+			]
+		},
+		"goodwill": {
+			"text": "Bring us 4 sporeling caps. Small things build bridges. Large things build bigger ones.",
+			"options": [
+				{
+					"text": "I'll see what I can find.",
+					"goto": "end"
+				}
+			]
+		},
+		"goodwill_done": {
+			"text": "...You actually did it. The Rootborn Hold will remember.",
+			"actions": [
+				"take_item:sporeling_cap:4",
+				"rep:rootborn_hold:25",
+				"give_essence:2"
+			],
+			"options": [
+				{
+					"text": "Glad to help.",
+					"goto": "end"
+				}
+			]
+		}
+	}
+}

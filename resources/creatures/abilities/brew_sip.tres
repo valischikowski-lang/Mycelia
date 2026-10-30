@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_74a21"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_3pfnj"]
-[ext_resource type="Resource" path="res://resources/status_effects/crone_brew.tres" id="3_mg4ae"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_2kyqe"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_63htc"]
+[ext_resource type="Resource" path="res://resources/status_effects/crone_brew.tres" id="3_bcqej"]
 
 [resource]
-script = ExtResource("1_74a21")
+script = ExtResource("1_2kyqe")
 id = "brew_sip"
 display_name = "Sip of the Brew"
 description = "She sips from a cauldron-cup. It smokes."
@@ -17,7 +17,7 @@ healing_value = 12
 accuracy = 0.95
 target_type = 2
 target_count = 1
-status_effects = Array[ExtResource("2_3pfnj")]([ExtResource("3_mg4ae")])
+status_effects = Array[ExtResource("2_63htc")]([ExtResource("3_bcqej")])
 duration = 2
 rarity = 0
 armor_pierce = 0.0

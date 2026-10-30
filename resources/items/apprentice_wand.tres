@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_be06a"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_okyhc"]
 
 [resource]
-script = ExtResource("1_be06a")
+script = ExtResource("1_okyhc")
 id = "apprentice_wand"
 display_name = "Twig of Beginnings"
 description = "A crooked twig that happens to be magic."
@@ -18,3 +18,12 @@ stat_bonuses = {
 "spell_power": 3
 }
 use_effect = {}
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = ""

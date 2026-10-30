@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_iadky"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_obh81"]
 
 [resource]
-script = ExtResource("1_iadky")
+script = ExtResource("1_obh81")
 id = "night_ink"
 display_name = "Bottled Night"
 description = "A cork, a bottle, and a little piece of sky. Restores 7 mana."
@@ -18,3 +18,12 @@ stat_bonuses = {}
 use_effect = {
 "mana": 7
 }
+class_id = ""
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = ""

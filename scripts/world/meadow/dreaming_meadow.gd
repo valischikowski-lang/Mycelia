@@ -26,6 +26,19 @@ const PETALUNE_POS := Vector2(48, 46)
 const SIGHTING := Vector2(-16, -62)
 const CRYSTAL_GROVE := Vector2(98, -26)
 const CROOK := Vector2(-36, 54)
+## The four callings' settlements: faction id -> centre.
+const VILLAGES := {
+	"unseen_covenant": Vector2(-106, 42),
+	"rootborn_hold": Vector2(-100, 6),
+	"lantern_choir": Vector2(96, 48),
+	"spiral_concordance": Vector2(86, -62),
+}
+const VILLAGE_NPCS := {
+	"unseen_covenant": {"mentor": ["covenant_mentor", "Vesper Nightwhisk", "mentor of the Unseen Covenant"], "merchant": ["covenant_smith", "Silk", "blades & quiet things"], "kind": "assassin", "guards": ["Shade Kestrel", "Shade Morrow"], "folk": ["Wren", "Ash-Eyes"]},
+	"lantern_choir": {"mentor": ["choir_mentor", "Elder Ondine", "voice of the Lantern Choir"], "merchant": ["choir_keeper", "Brother Wick", "lanterns & remedies"], "kind": "spirit", "guards": ["Warden Ilse", "Warden Pale"], "folk": ["Little Moth", "Hush"]},
+	"spiral_concordance": {"mentor": ["concordance_mentor", "Magister Quillon", "of the Spiral Concordance"], "merchant": ["concordance_quartermaster", "Archivist Penna", "reagents & scrolls"], "kind": "dreamer", "guards": ["Sentinel Ferro", "Sentinel Vane"], "folk": ["Apprentice Dot", "Apprentice Lisp"]},
+	"rootborn_hold": {"mentor": ["hold_mentor", "Barkmother Grum", "elder of the Rootborn Hold"], "merchant": ["hold_smith", "Old Knuckle", "root-forged gear"], "kind": "grimlet", "guards": ["Guardian Thorne", "Guardian Burl"], "folk": ["Sprout Pim", "Mossy"]},
+}
 const GRIZZLE_POS := Vector2(-31, 56)
 ## Treasure nooks: [position, chest id, loot, grade, seal tag ("" = none), echo text]
 const TREASURES := [
@@ -79,6 +92,7 @@ func _build_content() -> void:
 	_build_life()
 	_build_interactables()
 	_build_treasures()
+	_build_factions()
 	_build_npcs()
 	_build_creatures()
 	await report(0.96, "The meadow is dreaming of you...")
@@ -116,6 +130,7 @@ func _build_terrain() -> void:
 		Vector4(HOLLOW_GATE.x, HOLLOW_GATE.y + 6, 10, 3.0), Vector4(DRIFT_START.x, DRIFT_START.y, 8, 0.5),
 		Vector4(CIRCLE.x, CIRCLE.y, 14, 4.0), Vector4(OLLO_POS.x, OLLO_POS.y, 7, 0.2),
 		Vector4(CROOK.x, CROOK.y, 20, 0.8),
+		Vector4(-106, 42, 19, 1.0), Vector4(-100, 6, 19, 2.0), Vector4(96, 48, 19, 2.5), Vector4(86, -62, 19, 3.0),
 	]
 	terrain.basins = [Vector4(LAKE.x, LAKE.y, LAKE_R, 2.8)]
 	terrain.paths = [
@@ -126,6 +141,9 @@ func _build_terrain() -> void:
 		{"points": PackedVector2Array([Vector2(-6, -14), Vector2(-30, -58), Vector2(HOLLOW_GATE.x, HOLLOW_GATE.y + 8)]), "width": 2.2},
 		{"points": PackedVector2Array([Vector2(6, -76), Vector2(26, -74), Vector2(DRIFT_START.x - 2, DRIFT_START.y)]), "width": 2.0},
 		{"points": PackedVector2Array([Vector2(1, 58), Vector2(-14, 56), Vector2(CROOK.x, CROOK.y)]), "width": 2.8},
+		{"points": PackedVector2Array([Vector2(-60, -14), Vector2(-84, -4), Vector2(-100, 6), Vector2(-106, 24), Vector2(-106, 42)]), "width": 2.4},
+		{"points": PackedVector2Array([Vector2(52, 44), Vector2(76, 52), Vector2(96, 48)]), "width": 2.4},
+		{"points": PackedVector2Array([Vector2(26, -74), Vector2(56, -70), Vector2(86, -62)]), "width": 2.4},
 	]
 	terrain.water_level = -0.9
 	add_child(terrain)
@@ -271,6 +289,9 @@ func _scatter() -> Scatter:
 	s.exclude_circle(Vector3(PETALUNE_POS.x, 0, PETALUNE_POS.y), 5.0)
 	s.exclude_circle(Vector3(SIGHTING.x, 0, SIGHTING.y), 8.0)
 	s.exclude_circle(Vector3(CROOK.x, 0, CROOK.y), 19.0)
+	for fid: String in VILLAGES.keys():
+		var vc: Vector2 = VILLAGES[fid]
+		s.exclude_circle(Vector3(vc.x, 0, vc.y), 19.0)
 	for t: Array in TREASURES:
 		var tp: Vector2 = t[0]
 		s.exclude_circle(Vector3(tp.x, 0, tp.y), 5.0)
@@ -848,6 +869,70 @@ func _build_treasures() -> void:
 	sky.global_position = DRIFT_ISLE + Vector3(1.5, 0.2, 1.5)
 
 
+# ------------------------------------------------------------------ factions
+func _build_factions() -> void:
+	for fid: String in VILLAGES.keys():
+		var center: Vector2 = VILLAGES[fid]
+		var v := MeadowLandmarks.faction_village(self, center, fid)
+		var spots: Dictionary = v["spots"]
+		var info: Dictionary = VILLAGE_NPCS[fid]
+		var fi := FactionState.info(fid)
+		var kind := String(info["kind"])
+		var core := Vector3(center.x, ground(center.x, center.y), center.y)
+		var m: Array = info["mentor"]
+		_faction_npc(fid, "mentor", m[0], m[1], m[2], m[0], kind, spots["mentor"], core)
+		var sm: Array = info["merchant"]
+		_faction_npc(fid, "merchant", sm[0], sm[1], sm[2], sm[0], kind, spots["merchant"], core)
+		var patrol: PackedVector3Array = v["patrol"]
+		for gi in 2:
+			var g := _faction_npc(fid, "guard", "%s_guard_%d" % [fid, gi], info["guards"][gi], "guard of " + String(fi.get("village", "")), "", kind, Vector2(patrol[gi * 2].x, patrol[gi * 2].z), core)
+			var route := PackedVector3Array()
+			for k in 4:
+				route.append(patrol[(gi * 2 + k) % 4])
+			g.patrol = route
+		for vi in 2:
+			_faction_npc(fid, "villager", "%s_folk_%d" % [fid, vi], info["folk"][vi], "of " + String(fi.get("village", "")), "", kind, info.get("folk_spots", v["villagers"])[vi], core)
+		# Five discoveries per village: the vault, a rival's hidden cache,
+		# a lore stone, a rest pool and the village itself.
+		var vault := TreasureChest.new()
+		vault.chest_id = "vault_" + fid
+		vault.loot = {"items": {"wanderkey": 1, "dewdrop_tonic": 3}, "glimmer": 120, "mana_essence": 6}
+		vault.grade = "legendary"
+		vault.vault_faction = fid
+		_add(vault, spots["vault"])
+		var rival_tag: String = {"unseen_covenant": "rune", "rootborn_hold": "astral", "lantern_choir": "root", "spiral_concordance": "shadow"}[fid]
+		var cache := TreasureChest.new()
+		cache.chest_id = "cache_" + fid
+		cache.loot = {"items": {"ember_arrow": 8, "frost_arrow": 8}, "glimmer": 45, "mana_essence": 3}
+		cache.grade = "rare"
+		_add(cache, spots["cache"])
+		var seal := ClassSeal.new()
+		seal.seal_id = "seal_cache_" + fid
+		seal.tag = rival_tag
+		seal.radius = 2.3
+		_add(seal, spots["cache"])
+		cache.seal = seal
+		_lore("lore_" + fid, String(fi.get("name", fid)), String(fi.get("lore", "")), spots["lore"])
+		_rest_pool(spots["rest"])
+		_discovery("village_" + fid, String(fi.get("village", fid)), center, 14.0, 25)
+
+
+func _faction_npc(fid: String, role: String, npc_id: String, display: String, title: String, dialogue: String, kind: String, xz: Vector2, core: Vector3) -> FactionNPC:
+	var n := FactionNPC.new()
+	n.faction_id = fid
+	n.role = role
+	n.npc_id = npc_id
+	n.display_name = display
+	n.title = title
+	n.dialogue_id = dialogue if dialogue != "" else "faction_folk"
+	n.visual_kind = kind
+	n.talk_radius = 1.8
+	n.core_center = core
+	n.core_radius = 13.0
+	_add(n, xz)
+	return n
+
+
 # ------------------------------------------------------------------ creatures
 func _creature(creature_id: String, encounter_id: String, xz: Vector2, unique_id: String = "", opts: Dictionary = {}) -> WorldCreature:
 	var c := WorldCreature.new()
@@ -869,7 +954,7 @@ func _build_creatures() -> void:
 	_creature("sporeling", "enc_sporeling", Vector2(-40, 30))
 	_creature("sporeling", "enc_sporeling", Vector2(40, -20))
 	_creature("crystal_beetle", "enc_crystal_beetle", CRYSTAL_GROVE + Vector2(6, -4))
-	_creature("crystal_beetle", "enc_crystal_beetle", Vector2(92, 42))
+	_creature("crystal_beetle", "enc_crystal_beetle", Vector2(26, 64))
 	_creature("crystal_beetle", "enc_beetle_pair", Vector2(-38, -52))
 	_creature("hollow_crone", "enc_crone", Vector2(-58, 40), "", {"home_radius": 8.0})
 	_creature("hollow_crone", "enc_coven", Vector2(-50, 76), "", {"home_radius": 6.0})

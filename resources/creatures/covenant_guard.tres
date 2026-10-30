@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CreatureData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_wh5st"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/nibble.tres" id="2_2v2f0"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="3_43mee"]
+
+[resource]
+script = ExtResource("3_43mee")
+id = "covenant_guard"
+display_name = "Covenant Blade"
+description = "A guard defending their village."
+element = "chaos"
+level = 4
+max_health = 70
+defense = 4
+power = 8
+speed = 12
+abilities = Array[ExtResource("1_wh5st")]([ExtResource("2_2v2f0")])
+personality = 2
+phase_thresholds = PackedFloat32Array()
+xp_reward = 30
+glimmer_min = 0
+glimmer_max = 4
+loot_table = Array[Dictionary]([])
+visual_kind = "assassin"
+visual_scale = 1.0
+tint = Color(1, 1, 1, 1)
+world_behavior = "hostile"
+lore = ""

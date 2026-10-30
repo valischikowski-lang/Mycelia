@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_nlx8v"]
+[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_1awnn"]
+
+[sub_resource type="Resource" id="Resource_e7re7"]
+script = ExtResource("1_nlx8v")
+id = "rune"
+description = "Wake the Sleeping Rune north of the Keeper's grove"
+type = 4
+target_id = "seal_chest_rune_north"
+required_amount = 1
+map_hint = Vector3(22, 0, -104)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_f4phr"]
+script = ExtResource("1_nlx8v")
+id = "gremlins"
+description = "Chase off three Gnasher Gremlins"
+type = 2
+target_id = "gnasher_gremlin"
+required_amount = 3
+map_hint = Vector3(0, 0, 0)
+hint_region = "dreaming_meadow"
+
+[sub_resource type="Resource" id="Resource_lemo1"]
+script = ExtResource("1_nlx8v")
+id = "return"
+description = "Report to Magister Quillon in Spireholm"
+type = 0
+target_id = "concordance_mentor"
+required_amount = 1
+map_hint = Vector3(86, 0, -62)
+hint_region = "dreaming_meadow"
+
+[resource]
+script = ExtResource("2_1awnn")
+id = "class_wizard"
+title = "The Forgotten Rune"
+description = "Magister Quillon of the Spiral Concordance has a rune that forgot its name — and gremlins in the workshop."
+category = 7
+prerequisites = PackedStringArray()
+min_level = 1
+objectives = Array[ExtResource("1_nlx8v")]([SubResource("Resource_e7re7"), SubResource("Resource_f4phr"), SubResource("Resource_lemo1")])
+sequential = true
+auto_start = false
+reward_xp = 160
+reward_glimmer = 60
+reward_items = {
+"night_ink": 2,
+"wanderkey": 1
+}
+reward_spells = PackedStringArray()
+reward_skill_points = 0
+completion_text = "Quillon writes your name in the ledger. In the margin. In ink."

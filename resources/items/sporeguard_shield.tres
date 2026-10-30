@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_vt1gp"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_f13pc"]
 
 [resource]
-script = ExtResource("1_vt1gp")
+script = ExtResource("1_f13pc")
 id = "sporeguard_shield"
 display_name = "Sporeguard Shield"
 description = "A living shield. Blocks 80% of blows, and every blocked hit puffs spores into the attacker's face."

@@ -1,0 +1,142 @@
+{
+	"id": "concordance_mentor",
+	"speaker": "Magister Quillon",
+	"entry": [
+		{
+			"if": [
+				"quest_completed:class_wizard",
+				"!flag:concordance_mentor_rewarded"
+			],
+			"goto": "rewarded"
+		},
+		{
+			"if": [
+				"class:wizard"
+			],
+			"goto": "kin"
+		},
+		{
+			"goto": "stranger"
+		}
+	],
+	"nodes": {
+		"kin": {
+			"text": "Ah, a colleague! Do mind the stairs; they're shy. The Fourfold Threshold chose you for us. Now the Hollowing is chewing at the edges of the dream, and The Spiral Concordance needs hands that can do what yours can.",
+			"options": [
+				{
+					"text": "What do you need?",
+					"if": [
+						"quest_state:class_wizard:AVAILABLE"
+					],
+					"goto": "offer"
+				},
+				{
+					"text": "I'm working on it.",
+					"if": [
+						"quest_state:class_wizard:ACTIVE"
+					],
+					"goto": "progress"
+				},
+				{
+					"text": "Tell me about The Spiral Concordance.",
+					"goto": "lore"
+				},
+				{
+					"text": "Farewell.",
+					"goto": "end"
+				}
+			]
+		},
+		"offer": {
+			"text": "Use what you are. There are seals in this meadow only our calling can open, and things out there that need answering. Do it, then come back.",
+			"options": [
+				{
+					"text": "I'll do it.",
+					"actions": [
+						"start_quest:class_wizard"
+					],
+					"goto": "end"
+				},
+				{
+					"text": "Not yet.",
+					"goto": "end"
+				}
+			]
+		},
+		"progress": {
+			"text": "Check your journal, then go. The seals won't open themselves.",
+			"options": [
+				{
+					"text": "Right.",
+					"goto": "end"
+				}
+			]
+		},
+		"rewarded": {
+			"text": "Well done. You are one of us in more than name now. Take this — and the vault of The Spiral Concordance is yours to open.",
+			"actions": [
+				"set_flag:concordance_mentor_rewarded",
+				"rep:spiral_concordance:25",
+				"give_essence:4"
+			],
+			"options": [
+				{
+					"text": "Thank you.",
+					"goto": "end"
+				}
+			]
+		},
+		"lore": {
+			"text": "The Concordance believes the dream has rules, and that rules can be rewritten. They keep the Key of Laws behind seven locks.",
+			"options": [
+				{
+					"text": "I see.",
+					"goto": "kin"
+				}
+			]
+		},
+		"stranger": {
+			"text": "Visitor. You haven't signed the ledger. Nobody ever signs the ledger. You are not of our calling. But the dream is wide, and goodwill is a kind of door.",
+			"options": [
+				{
+					"text": "How do I earn your trust?",
+					"goto": "goodwill"
+				},
+				{
+					"text": "Here — I brought what you asked.",
+					"if": [
+						"has_item:gremlin_cog:3"
+					],
+					"goto": "goodwill_done"
+				},
+				{
+					"text": "Farewell.",
+					"goto": "end"
+				}
+			]
+		},
+		"goodwill": {
+			"text": "Bring us 3 gremlin cogs. Small things build bridges. Large things build bigger ones.",
+			"options": [
+				{
+					"text": "I'll see what I can find.",
+					"goto": "end"
+				}
+			]
+		},
+		"goodwill_done": {
+			"text": "...You actually did it. The Spiral Concordance will remember.",
+			"actions": [
+				"take_item:gremlin_cog:3",
+				"rep:spiral_concordance:25",
+				"give_essence:2"
+			],
+			"options": [
+				{
+					"text": "Glad to help.",
+					"goto": "end"
+				}
+			]
+		}
+	}
+}

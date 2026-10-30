@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_6ij5r"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_furm6"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_ntblv"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_jielc"]
 
 [resource]
-script = ExtResource("1_6ij5r")
+script = ExtResource("1_ntblv")
 id = "starfall_seed"
 display_name = "Starfall Seed"
 description = "Plant a seed in the sky. A star grows from it — and falls."
@@ -16,7 +16,7 @@ healing_value = 0
 accuracy = 0.85
 target_type = 0
 target_count = 1
-status_effects = Array[ExtResource("2_furm6")]([])
+status_effects = Array[ExtResource("2_jielc")]([])
 duration = 0
 rarity = 3
 armor_pierce = 0.0

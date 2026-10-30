@@ -70,6 +70,14 @@ func _label_height() -> float:
 			return 2.6
 		"witch":
 			return 3.1
+		"assassin":
+			return 2.3
+		"spirit":
+			return 2.6
+		"dreamer":
+			return 2.8
+		"grimlet":
+			return 2.0
 	return 2.2
 
 
