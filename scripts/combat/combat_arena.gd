@@ -194,6 +194,14 @@ func show_target_rings(on: bool, uids: Array = []) -> void:
 		ring.visible = on and (uids.is_empty() or uid in uids) and (rigs[uid] as Node3D).visible
 
 
+## Makes the given enemies pulse with a golden glow (target selection).
+func highlight_targets(uids: Array) -> void:
+	for uid: int in rigs.keys():
+		if uid == 0:
+			continue
+		(rigs[uid] as CreatureRig).set_highlight(uid in uids)
+
+
 ## Screen position for UI overlays (target buttons, plates).
 func screen_pos(uid: int, height: float = 1.6) -> Vector2:
 	if camera == null:

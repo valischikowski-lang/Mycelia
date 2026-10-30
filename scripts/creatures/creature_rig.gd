@@ -173,3 +173,31 @@ func _flash(color: Color) -> void:
 		for mi in meshes:
 			if is_instance_valid(mi):
 				(mi as MeshInstance3D).material_overlay = null)
+
+
+var _highlight_mat: StandardMaterial3D
+var _highlight_tween: Tween
+
+
+## Persistent pulsing golden glow (used to mark selectable targets).
+func set_highlight(on: bool) -> void:
+	if body == null:
+		return
+	if _highlight_tween:
+		_highlight_tween.kill()
+		_highlight_tween = null
+	var meshes := body.find_children("*", "MeshInstance3D", true, false)
+	if not on:
+		for mi in meshes:
+			(mi as MeshInstance3D).material_overlay = null
+		return
+	_highlight_mat = StandardMaterial3D.new()
+	_highlight_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_highlight_mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	_highlight_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_highlight_mat.albedo_color = Color(1.0, 0.75, 0.25, 0.35)
+	for mi in meshes:
+		(mi as MeshInstance3D).material_overlay = _highlight_mat
+	_highlight_tween = create_tween().set_loops()
+	_highlight_tween.tween_property(_highlight_mat, "albedo_color:a", 0.6, 0.45).set_trans(Tween.TRANS_SINE)
+	_highlight_tween.tween_property(_highlight_mat, "albedo_color:a", 0.15, 0.45).set_trans(Tween.TRANS_SINE)

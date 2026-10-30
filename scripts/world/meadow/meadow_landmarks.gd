@@ -133,8 +133,18 @@ static func keeper_house(region: Region, xz: Vector2) -> Node3D:
 	# Balcony bounce pad up onto the cap.
 	var last_a := PI * 0.5 + TAU * 1.15
 	var balcony := stem_path[stem_path.size() - 1] + Vector3(cos(last_a) * 5.6, -0.6, sin(last_a) * 5.6)
-	var bp := bounce_mushroom(root, balcony, Vector3(0, 13.0, 0), Color("#36fff0"))
+	# The roof is reached from a bounce mushroom outside the rim (south-east),
+	# aimed ballistically at the top of the cap.
+	var pad_pos := Vector3(13.5, region.ground(xz.x + 13.5, xz.y + 13.5) - root.global_position.y - 0.3, 13.5)
+	var bp := bounce_mushroom(root, pad_pos, Vector3.UP * 15.0, Color("#36fff0"), 1.5)
 	bp.name = "CapBounce"
+	var cap_top: Vector3 = root.global_position + Vector3(0, -0.4, 0) + (info["stem_top"] as Vector3) + Vector3(0, p.cap_height * 0.8, 0)
+	var toward := Vector3(pad_pos.x, 0, pad_pos.z).normalized()
+	var pad := bp.get_node("Pad") as BouncePad
+	pad.has_target = true
+	# Land on the dome about 6 m from its centre, on the side facing the pad.
+	pad.target_point = Vector3(root.global_position.x + toward.x * 6.0, cap_top.y - 0.8, root.global_position.z + toward.z * 6.0)
+	pad.clearance = 3.5
 	region.landmarks["keeper_cap_top"] = root.global_position + info["cap_center"] + Vector3(0, 3.0, 0)
 	region.landmarks["keeper_door"] = root.global_position + Vector3(0, 0, door_z + 3.5)
 	var spores := SpellFX.ambient_motes(Color(0.4, 1.0, 0.9), 40, Vector3(12, 4, 12), 0.14)
@@ -171,6 +181,7 @@ static func bounce_mushroom(parent: Node3D, pos: Vector3, launch: Vector3, glow:
 	Props.add_cylinder(body, Vector3(0, 0.45, 0), cap_radius * 0.9, 0.9)
 	holder.add_child(body)
 	var pad := BouncePad.new()
+	pad.name = "Pad"
 	pad.launch_velocity = launch
 	pad.radius = cap_radius * 0.85
 	pad.position = Vector3(0, 1.1, 0)

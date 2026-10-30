@@ -195,8 +195,9 @@ func _physics_process(delta: float) -> void:
 	var wanted := dir * target_speed
 	var horiz := Vector3(velocity.x, 0, velocity.z)
 	var accel := acceleration if on_floor else air_acceleration
-	if wanted.length() < 0.01 and on_floor:
-		accel = deceleration
+	if wanted.length() < 0.01:
+		# On the ground stop quickly; in the air keep momentum (bounce arcs, long jumps).
+		accel = deceleration if on_floor else 0.8
 	horiz = horiz.move_toward(wanted, accel * delta)
 	velocity.x = horiz.x
 	velocity.z = horiz.z

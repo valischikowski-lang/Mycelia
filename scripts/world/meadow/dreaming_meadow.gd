@@ -176,13 +176,28 @@ func _build_drift_route() -> void:
 	holder.name = "DriftRoute"
 	add_child(holder)
 	holder.global_position = base
-	# Ground pad -> floating cap 1 -> floating cap 2 -> Drift Isle.
-	var steps: Array[Vector3] = [Vector3(0, 0, 0), Vector3(6, 9, -7), Vector3(12, 18.5, -13)]
-	var launches: Array[Vector3] = [Vector3(2.2, 15.5, -2.6), Vector3(2.3, 15.8, -2.4), Vector3(2.6, 15.5, -3.4)]
-	for i in steps.size():
+	# Ground pad -> floating cap 1 -> floating cap 2 -> Drift Isle. Every pad is
+	# aimed at a landing spot beside the next pad, so each hop is reliable.
+	var tops: Array[Vector3] = [Vector3(0, 0, 0), Vector3(6, 9, -7), Vector3(12, 18.5, -13), DRIFT_ISLE + Vector3(0, 0.1, 0) - base]
+	for i in 3:
+		var here := tops[i]
+		var nxt := tops[i + 1]
+		var dir := Vector3(nxt.x - here.x, 0, nxt.z - here.z).normalized()
 		if i > 0:
-			_floating_platform(holder, steps[i])
-		MeadowLandmarks.bounce_mushroom(holder, steps[i] + (Vector3(0, -0.4, 0) if i == 0 else Vector3(0, 0.35, 0)), launches[i], Color("#ffe14f") if i == 0 else Color("#36fff0"))
+			_floating_platform(holder, here)
+		var pad_pos := here + dir * (0.0 if i == 0 else 1.6) + (Vector3(0, -0.4, 0) if i == 0 else Vector3(0, 0.3, 0))
+		var bm := MeadowLandmarks.bounce_mushroom(holder, pad_pos, Vector3.UP * 15.0, Color("#ffe14f") if i == 0 else Color("#36fff0"), 1.2)
+		var pad := bm.get_node("Pad") as BouncePad
+		pad.has_target = true
+		# Land on the near side of the next platform, away from its own pad.
+		var next_dir := dir if i == 2 else Vector3(tops[i + 2].x - nxt.x, 0, tops[i + 2].z - nxt.z).normalized()
+		if i < 2:
+			pad.target_point = base + nxt - next_dir * 1.2 + Vector3(0, 0.4, 0)
+			pad.clearance = 2.5
+		else:
+			# The isle is wide: arc high and land well inside so the rise clears its rim.
+			pad.target_point = DRIFT_ISLE + Vector3(0, 0.5, 0) - next_dir * 4.0
+			pad.clearance = 5.0
 	var isle := MeadowLandmarks.floating_island(self, DRIFT_ISLE, 9.0, 7.0, {"walkable": true, "mushrooms": 5, "drift": false, "waterfall": true, "fall_height": 26.0})
 	isle.name = "DriftIsle"
 	landmarks["drift_isle_top"] = DRIFT_ISLE + Vector3(0, 0.6, 0)
@@ -195,7 +210,7 @@ func _floating_platform(parent: Node3D, local_pos: Vector3) -> void:
 	p.floating = true
 	p.stem_height = 0.3
 	p.stem_width = 0.3
-	p.cap_radius = 2.6
+	p.cap_radius = 3.4
 	p.cap_height = 0.9
 	p.tendrils = 7
 	p.cap_color = Color("#9b2cf0")
@@ -211,7 +226,7 @@ func _floating_platform(parent: Node3D, local_pos: Vector3) -> void:
 	var mi := MeshInstance3D.new()
 	mi.mesh = info["mesh"]
 	body.add_child(mi)
-	Props.add_cylinder(body, Vector3(0, 1.0, 0), 2.4, 0.6)
+	Props.add_cylinder(body, Vector3(0, 1.0, 0), 3.2, 0.6)
 	parent.add_child(body)
 
 

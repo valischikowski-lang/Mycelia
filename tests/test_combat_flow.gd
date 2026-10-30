@@ -4,6 +4,9 @@ extends TestCase
 ## rewards and that exploration state is restored.
 
 var _manager: CombatManager
+var _target_turns: int = 0
+var _taps_ok: int = 0
+var _buttons_ok: int = 0
 
 
 func before_each() -> void:
@@ -43,7 +46,18 @@ func _autoplay(s: int) -> void:
 			else:
 				hud.action.emit({"type": "meditate"})
 		CombatManager.State.TARGET_SELECTION:
-			hud.action.emit({"type": "target", "uid": _manager.battle.living_enemies()[0].uid})
+			# Act like a player: alternate tapping the creature in the arena and
+			# pressing one of the big target buttons.
+			_target_turns += 1
+			var uid := _manager.battle.living_enemies()[-1].uid
+			if _target_turns % 2 == 1:
+				if hud._try_tap_target(_manager.arena.screen_pos(uid, 1.0)):
+					_taps_ok += 1
+			else:
+				var row: HBoxContainer = hud._target_row
+				if row.visible and row.get_child_count() > 0:
+					(row.get_child(0) as Button).pressed.emit()
+					_buttons_ok += 1
 		CombatManager.State.VICTORY, CombatManager.State.DEFEAT:
 			for i in 400:
 				await tree.process_frame
@@ -82,4 +96,6 @@ func test_targeting_with_two_enemies() -> void:
 	_manager.state_changed.connect(func(s: int) -> void: _autoplay(s))
 	await _manager.start_encounter("enc_sporelings", null)
 	check(CombatManager.State.TARGET_SELECTION in _manager.history, "multi-enemy fights ask for a target")
+	check(_taps_ok >= 1, "tapping a glowing enemy in the arena selects it")
+	check(_buttons_ok >= 1, "target buttons select an enemy")
 	check(CombatManager.State.VICTORY in _manager.history or CombatManager.State.DEFEAT in _manager.history, "battle concluded")

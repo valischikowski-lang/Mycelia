@@ -30,7 +30,10 @@ var _cancel_btn: Button
 var _hint: Label
 var _log: VBoxContainer
 var _target_layer: Control
-var _target_buttons: Dictionary = {}
+var _target_row: HBoxContainer
+var _targeting: bool = false
+var _valid_targets: Array = []
+var _pulse: float = 0.0
 var _result_panel: PanelContainer
 var _hand_enabled: bool = false
 var _replace_mode: bool = false
@@ -136,6 +139,16 @@ func _build_hand() -> void:
 	_hand.add_theme_constant_override("separation", 14)
 	_hand.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_hand)
+	_target_row = HBoxContainer.new()
+	_target_row.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
+	_target_row.offset_left = -420
+	_target_row.offset_right = 420
+	_target_row.offset_top = -150
+	_target_row.offset_bottom = -30
+	_target_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	_target_row.add_theme_constant_override("separation", 18)
+	_target_row.visible = false
+	add_child(_target_row)
 	_hint = UiTheme.label("", 18, UiTheme.GLOW, UiTheme.bold_font())
 	_hint.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
 	_hint.offset_left = -400
@@ -196,20 +209,6 @@ func setup(s: BattleState, a: CombatArena) -> void:
 		var plate := _make_plate(e)
 		_plates.add_child(plate)
 		_plate_nodes[e.uid] = plate
-		var tb := Button.new()
-		tb.flat = true
-		tb.custom_minimum_size = Vector2(150, 190)
-		tb.add_theme_stylebox_override("normal", UiTheme.button_style("focus"))
-		tb.add_theme_stylebox_override("hover", UiTheme.button_style("hover"))
-		tb.add_theme_stylebox_override("pressed", UiTheme.button_style("pressed"))
-		tb.text = "◎"
-		tb.add_theme_font_size_override("font_size", 40)
-		tb.add_theme_color_override("font_color", UiTheme.GOLD)
-		var uid := e.uid
-		tb.pressed.connect(func() -> void: _emit({"type": "target", "uid": uid}))
-		tb.visible = false
-		_target_layer.add_child(tb)
-		_target_buttons[e.uid] = tb
 	refresh()
 
 
@@ -361,40 +360,87 @@ func set_selected(index: int) -> void:
 	_refresh_hand()
 
 
+## Target selection: every valid enemy glows, big named buttons replace the
+## hand, and enemies can also be tapped directly in the arena or on their plate.
 func begin_targeting(valid: Array) -> void:
-	_hint.text = "Choose a target"
+	_targeting = true
+	_valid_targets = valid.duplicate()
+	_hint.text = "Choose a target — tap a glowing enemy or a button below"
 	_cancel_btn.visible = true
 	_meditate_btn.visible = false
 	_swap_btn.visible = false
 	_flee_btn.visible = false
-	for uid: int in _target_buttons.keys():
-		(_target_buttons[uid] as Button).visible = uid in valid
+	_hand.visible = false
+	for c in _target_row.get_children():
+		c.queue_free()
+	for uid: int in valid:
+		var e := state.get_combatant(uid)
+		var b := UiTheme.button("◎  %s\n%d / %d" % [e.display_name, e.hp, e.max_hp], func() -> void: _emit({"type": "target", "uid": uid}), 250)
+		b.custom_minimum_size.y = 96
+		b.add_theme_font_size_override("font_size", 22)
+		b.add_theme_stylebox_override("normal", UiTheme.button_style("selected"))
+		_target_row.add_child(b)
+	_target_row.visible = true
+	for uid: int in _plate_nodes.keys():
+		var plate: PanelContainer = _plate_nodes[uid]
+		if uid in valid:
+			plate.add_theme_stylebox_override("panel", UiTheme.panel_style(Color(0.25, 0.12, 0.05, 0.92), UiTheme.GOLD, 22, 16))
 	arena.show_target_rings(true, valid)
+	arena.highlight_targets(valid)
 
 
 func end_targeting() -> void:
+	_targeting = false
+	_valid_targets.clear()
 	_cancel_btn.visible = false
 	_meditate_btn.visible = true
 	_swap_btn.visible = true
 	_flee_btn.visible = state.encounter == null or state.encounter.can_flee
-	for b: Button in _target_buttons.values():
-		b.visible = false
+	_target_row.visible = false
+	_hand.visible = true
+	for uid: int in _plate_nodes.keys():
+		var e := state.get_combatant(uid)
+		(_plate_nodes[uid] as PanelContainer).add_theme_stylebox_override("panel", UiTheme.panel_style(Color(0.08, 0.02, 0.14, 0.85), ElementChart.color(e.element)))
 	arena.show_target_rings(false)
+	arena.highlight_targets([])
 
 
-func _process(_delta: float) -> void:
-	if arena == null:
-		return
-	for uid: int in _target_buttons.keys():
-		var b: Button = _target_buttons[uid]
-		if b.visible:
-			var sp := arena.screen_pos(uid, 1.0)
-			b.position = sp - b.size * 0.5
+func _process(delta: float) -> void:
+	if _targeting:
+		_pulse += delta
+		_target_row.modulate = Color(1, 1, 1, 0.85 + 0.15 * sin(_pulse * 6.0))
+
+
+## Direct taps on enemies in the 3D arena (works for mouse and touch).
+func _try_tap_target(pos: Vector2) -> bool:
+	if not _targeting or arena == null:
+		return false
+	var best := -1
+	var best_d := 170.0
+	for uid: int in _valid_targets:
+		for h: float in [0.6, 1.4]:
+			var d := arena.screen_pos(uid, h).distance_to(pos)
+			if d < best_d:
+				best_d = d
+				best = uid
+	if best >= 0:
+		_emit({"type": "target", "uid": best})
+		return true
+	return false
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
 		return
+	if _targeting:
+		var tap := Vector2(-1, -1)
+		if event is InputEventMouseButton and (event as InputEventMouseButton).pressed:
+			tap = (event as InputEventMouseButton).position
+		elif event is InputEventScreenTouch and (event as InputEventScreenTouch).pressed:
+			tap = (event as InputEventScreenTouch).position
+		if tap.x >= 0.0 and _try_tap_target(tap):
+			get_viewport().set_input_as_handled()
+			return
 	if event is InputEventKey and event.pressed and not event.echo:
 		var k := (event as InputEventKey).physical_keycode
 		if _hand_enabled and k >= KEY_1 and k <= KEY_4:
