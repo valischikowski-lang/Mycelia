@@ -10,6 +10,8 @@ var flags: Dictionary = {}
 var consumed: Dictionary = {}
 var discovered_areas: PackedStringArray = []
 var lore: PackedStringArray = []
+## lore id -> {"title", "text"} so the Journal can re-read discovered lore.
+var lore_entries: Dictionary = {}
 var dialogue_seen: Dictionary = {}
 var won_encounters: Dictionary = {}
 var creatures_seen: PackedStringArray = []
@@ -50,7 +52,9 @@ func is_discovered(area_id: String) -> bool:
 	return area_id in discovered_areas
 
 
-func add_lore(lore_id: String) -> bool:
+func add_lore(lore_id: String, title: String = "", text: String = "") -> bool:
+	if title != "":
+		lore_entries[lore_id] = {"title": title, "text": text}
 	if lore_id in lore:
 		return false
 	lore.append(lore_id)
@@ -78,7 +82,7 @@ func has_seen(dialogue_id: String, node_id: String) -> bool:
 func to_dict() -> Dictionary:
 	return {
 		"flags": flags.duplicate(true), "consumed": consumed.keys(),
-		"discovered_areas": Array(discovered_areas), "lore": Array(lore),
+		"discovered_areas": Array(discovered_areas), "lore": Array(lore), "lore_entries": lore_entries.duplicate(true),
 		"dialogue_seen": dialogue_seen.duplicate(true), "won_encounters": won_encounters.keys(),
 		"creatures_seen": Array(creatures_seen),
 	}
@@ -92,6 +96,8 @@ func from_dict(d: Dictionary) -> void:
 		consumed[String(id)] = true
 	discovered_areas = PackedStringArray(d.get("discovered_areas", []))
 	lore = PackedStringArray(d.get("lore", []))
+	var le: Variant = d.get("lore_entries", {})
+	lore_entries = (le as Dictionary).duplicate(true) if le is Dictionary else {}
 	var ds: Variant = d.get("dialogue_seen", {})
 	dialogue_seen = (ds as Dictionary).duplicate(true) if ds is Dictionary else {}
 	won_encounters.clear()

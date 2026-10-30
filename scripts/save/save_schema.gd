@@ -27,6 +27,8 @@ static func upgrade(raw: Variant) -> Dictionary:
 	if not raw is Dictionary:
 		return {}
 	var d: Dictionary = (raw as Dictionary).duplicate(true)
+	if not d.get("profile", {}) is Dictionary:
+		return {}
 	var v := int(d.get("version", 1))
 	if v > CURRENT_VERSION:
 		push_warning("SaveSchema: save from a newer version (%d); loading best-effort." % v)

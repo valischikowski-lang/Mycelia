@@ -17,7 +17,7 @@ func _after_ready() -> void:
 
 func _on_interact(_by: Node) -> void:
 	var prof := Game.profile
-	var first := prof != null and prof.world.add_lore(lore_id)
+	var first := prof != null and prof.world.add_lore(lore_id, lore_title, lore_text)
 	SceneFlow.show_lore(lore_title, lore_text)
 	if first:
 		EventBus.lore_discovered.emit(lore_id)

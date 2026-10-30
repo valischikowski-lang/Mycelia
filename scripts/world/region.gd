@@ -48,6 +48,46 @@ func report(fraction: float, label: String) -> void:
 	await get_tree().process_frame
 
 
+## Builds the shared MYCELIA atmosphere (sky, fog, glow, tonemap) for a biome.
+static func make_environment(b: BiomeData) -> Environment:
+	var e := Environment.new()
+	e.background_mode = Environment.BG_SKY
+	var sky := Sky.new()
+	sky.sky_material = MaterialLib.sky(b)
+	sky.radiance_size = Sky.RADIANCE_SIZE_32
+	sky.process_mode = Sky.PROCESS_MODE_REALTIME
+	e.sky = sky
+	e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	e.ambient_light_color = b.ambient_color
+	e.ambient_light_energy = b.ambient_energy
+	e.reflected_light_source = Environment.REFLECTION_SOURCE_DISABLED
+	e.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	e.tonemap_exposure = 0.92
+	e.tonemap_white = 6.0
+	e.glow_enabled = Settings.glow_enabled()
+	e.glow_intensity = 0.6
+	e.glow_strength = 1.0
+	e.glow_bloom = 0.06
+	e.glow_hdr_threshold = 1.05
+	e.glow_blend_mode = Environment.GLOW_BLEND_MODE_SOFTLIGHT
+	e.set_glow_level(0, 0.0)
+	e.set_glow_level(1, 1.0)
+	e.set_glow_level(2, 0.8)
+	e.set_glow_level(3, 0.6)
+	e.set_glow_level(4, 0.4)
+	e.fog_enabled = true
+	e.fog_light_color = b.fog_color
+	e.fog_light_energy = 1.0
+	e.fog_density = b.fog_density
+	e.fog_sky_affect = 0.18
+	e.fog_height = b.fog_height
+	e.fog_height_density = b.fog_height_density
+	e.adjustment_enabled = true
+	e.adjustment_saturation = 1.18
+	e.adjustment_contrast = 1.06
+	return e
+
+
 func get_spawn(spawn_name: String) -> Dictionary:
 	if spawns.has(spawn_name):
 		return spawns[spawn_name]
@@ -65,41 +105,7 @@ func ground(x: float, z: float) -> float:
 
 
 func _setup_environment() -> void:
-	environment = Environment.new()
-	environment.background_mode = Environment.BG_SKY
-	var sky := Sky.new()
-	sky.sky_material = MaterialLib.sky(biome)
-	sky.radiance_size = Sky.RADIANCE_SIZE_32
-	sky.process_mode = Sky.PROCESS_MODE_REALTIME
-	environment.sky = sky
-	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	environment.ambient_light_color = biome.ambient_color
-	environment.ambient_light_energy = biome.ambient_energy
-	environment.reflected_light_source = Environment.REFLECTION_SOURCE_DISABLED
-	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
-	environment.tonemap_exposure = 0.92
-	environment.tonemap_white = 6.0
-	environment.glow_enabled = true
-	environment.glow_intensity = 0.6
-	environment.glow_strength = 1.0
-	environment.glow_bloom = 0.06
-	environment.glow_hdr_threshold = 1.05
-	environment.glow_blend_mode = Environment.GLOW_BLEND_MODE_SOFTLIGHT
-	environment.set_glow_level(0, 0.0)
-	environment.set_glow_level(1, 1.0)
-	environment.set_glow_level(2, 0.8)
-	environment.set_glow_level(3, 0.6)
-	environment.set_glow_level(4, 0.4)
-	environment.fog_enabled = true
-	environment.fog_light_color = biome.fog_color
-	environment.fog_light_energy = 1.0
-	environment.fog_density = biome.fog_density
-	environment.fog_sky_affect = 0.18
-	environment.fog_height = biome.fog_height
-	environment.fog_height_density = biome.fog_height_density
-	environment.adjustment_enabled = true
-	environment.adjustment_saturation = 1.18
-	environment.adjustment_contrast = 1.06
+	environment = make_environment(biome)
 	world_env = WorldEnvironment.new()
 	world_env.environment = environment
 	add_child(world_env)

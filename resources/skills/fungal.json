@@ -1,0 +1,26 @@
+{
+	"id": "fungal",
+	"name": "Fungal Discipline",
+	"description": "Spores, threads and the patient art of decay and renewal.",
+	"color": "#c44dff",
+	"branches": [
+		{"id": "spore", "name": "Spore Damage"},
+		{"id": "defense", "name": "Fungal Defense"},
+		{"id": "healing", "name": "Mycelium Healing"},
+		{"id": "summon", "name": "Creature Summoning"}
+	],
+	"nodes": [
+		{"id": "spore_affinity", "branch": "spore", "tier": 1, "name": "Spore Affinity", "description": "Your spells bloom fuller. +5 Spell Power.", "cost": 1, "requires": [], "min_level": 1, "bonuses": {"spell_power": 5}},
+		{"id": "virulent_spores", "branch": "spore", "tier": 2, "name": "Virulent Spores", "description": "Damage-over-time effects you apply deal +2 per turn.", "cost": 1, "requires": ["spore_affinity"], "min_level": 2, "bonuses": {"dot_bonus": 2}},
+		{"id": "rot_bloom", "branch": "spore", "tier": 3, "name": "Rot Bloom", "description": "Learn Rot Bloom: damage and infect every enemy at once.", "cost": 2, "requires": ["virulent_spores"], "min_level": 4, "unlock_spell": "rot_bloom", "bonuses": {}},
+		{"id": "fungal_hide", "branch": "defense", "tier": 1, "name": "Fungal Hide", "description": "A thin layer of living felt. +3 Defense, +10 Health.", "cost": 1, "requires": [], "min_level": 1, "bonuses": {"defense": 3, "max_health": 10}},
+		{"id": "mycelial_shell", "branch": "defense", "tier": 2, "name": "Mycelial Shell", "description": "Shields you create are 30% stronger.", "cost": 1, "requires": ["fungal_hide"], "min_level": 2, "bonuses": {"shield_bonus": 0.3}},
+		{"id": "deep_roots", "branch": "defense", "tier": 3, "name": "Deep Roots", "description": "Anchored to the network. +25 Health, +1 Mana.", "cost": 2, "requires": ["mycelial_shell"], "min_level": 4, "bonuses": {"max_health": 25, "max_mana": 1}},
+		{"id": "mending_threads", "branch": "healing", "tier": 1, "name": "Mending Threads", "description": "Healing you perform is 20% stronger.", "cost": 1, "requires": [], "min_level": 1, "bonuses": {"heal_bonus": 0.2}},
+		{"id": "network_communion", "branch": "healing", "tier": 2, "name": "Network Communion", "description": "The Mycelium feeds you. +1 Mana regenerated each turn in combat.", "cost": 1, "requires": ["mending_threads"], "min_level": 2, "bonuses": {"mana_regen": 1}},
+		{"id": "lifebloom", "branch": "healing", "tier": 3, "name": "Lifebloom", "description": "+20 Health and +3% Critical Chance as life overflows.", "cost": 2, "requires": ["network_communion"], "min_level": 4, "bonuses": {"max_health": 20, "crit_chance": 3}},
+		{"id": "sporeling_kin", "branch": "summon", "tier": 1, "name": "Sporeling Kin", "description": "Sporelings recognise you as family. +3 Magic Power.", "cost": 1, "requires": [], "min_level": 1, "bonuses": {"magic_power": 3}},
+		{"id": "spore_sentinel", "branch": "summon", "tier": 2, "name": "Spore Sentinel", "description": "Learn Spore Sentinel: grow a guardian that strikes each turn.", "cost": 1, "requires": ["sporeling_kin"], "min_level": 3, "unlock_spell": "spore_sentinel", "bonuses": {}},
+		{"id": "colony_mind", "branch": "summon", "tier": 3, "name": "Colony Mind", "description": "Many minds, one purpose. +5 Magic Power, +5 Spell Power.", "cost": 2, "requires": ["spore_sentinel"], "min_level": 5, "bonuses": {"magic_power": 5, "spell_power": 5}}
+	]
+}

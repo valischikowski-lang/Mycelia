@@ -16,6 +16,7 @@ var _inside: bool = false
 
 
 func _ready() -> void:
+	add_to_group("discovery_zone")
 	collision_layer = 0
 	collision_mask = 2
 	monitoring = true

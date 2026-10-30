@@ -84,7 +84,9 @@ func _show(id: String) -> void:
 func format_text(t: String) -> String:
 	if profile == null:
 		return t
-	return t.replace("{player}", profile.display_name).replace("{fragments}", str(profile.inventory.count("spore_fragment")))
+	return t.replace("{player}", profile.display_name) \
+		.replace("{fragments}", str(profile.inventory.count("spore_fragment"))) \
+		.replace("{motes}", str(profile.inventory.count("dream_mote")))
 
 
 func close() -> void:

@@ -11,7 +11,7 @@ extends RefCounted
 ##   set_flag:<f>  clear_flag:<f>  give_item:<id>:<n>  take_item:<id>:<n>
 ##   give_glimmer:<n>  give_xp:<n>  learn_spell:<id>  start_quest:<q>
 ##   activate:<object_id>  heal_full  start_encounter:<encounter_id>
-##   open_shop:<shop_id>  lore:<lore_id>  notify:<text>
+##   open_shop:<shop_id>  lore:<lore_id>  notify:<text>  talk:<npc_id>
 
 
 static func check_all(conds: Array, profile: PlayerProfile) -> bool:
@@ -98,5 +98,7 @@ static func run(action: String, profile: PlayerProfile) -> void:
 				EventBus.lore_discovered.emit(parts[1])
 		"notify":
 			EventBus.notify(parts[1], "info")
+		"talk":
+			EventBus.npc_talked.emit(parts[1])
 		_:
 			push_warning("DialogueLogic: unknown action '%s'" % action)

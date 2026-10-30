@@ -1,0 +1,58 @@
+{
+	"id": "petalune",
+	"speaker": "Madame Petalune",
+	"entry": [
+		{"if": ["quest_completed:lights_of_glimmermere", "!flag:petalune_thanked"], "goto": "thanks"},
+		{"if": ["quest_state:lights_of_glimmermere:ACTIVE"], "goto": "progress"},
+		{"if": ["quest_state:lights_of_glimmermere:AVAILABLE"], "goto": "intro"},
+		{"goto": "chat"}
+	],
+	"nodes": {
+		"intro": {
+			"text": "Ah. A visitor. You may admire me. Go on — everyone does.\n\n...You're not admiring. Fine. I am Madame Petalune, the most luminous bloom on Glimmermere's shore, and I am in CRISIS.",
+			"options": [
+				{"text": "What kind of crisis?", "goto": "crisis"},
+				{"text": "You are very luminous.", "goto": "flattered"}
+			]
+		},
+		"flattered": {
+			"text": "I KNOW. Thank you. Finally, someone with taste. Now, my crisis.",
+			"next": "crisis"
+		},
+		"crisis": {
+			"text": "My Dream Motes — my precious collection of other people's forgotten dreams — were blown all over the meadow by a rude gust of wind. Some went high. Some went hidden. Some went somewhere I can't reach, because I am a flower, and flowers do not climb.\n\nFind five and bring them to me. I will reward you with something nearly as beautiful as I am.",
+			"options": [
+				{"text": "I'll find your Dream Motes.", "actions": ["start_quest:lights_of_glimmermere"], "goto": "accepted"},
+				{"text": "Maybe later.", "goto": "end"}
+			]
+		},
+		"accepted": {
+			"text": "Wonderful! Look up, look behind, look inside things. Dreams love awkward places. One drifted towards the sky islands in the north-east, I'm told — by a beetle, who is not a reliable source.",
+			"options": [{"text": "Up, behind and inside. Got it.", "goto": "end"}]
+		},
+		"progress": {
+			"text": "Do you have my motes? I can smell dreams on you... I count about {motes}. Hm. Five, darling. Five.",
+			"options": [
+				{"text": "Any hints?", "goto": "hints"},
+				{"text": "Still looking.", "goto": "end"}
+			]
+		},
+		"hints": {
+			"text": "One fell beneath the great orange Lantern Cap. One danced up onto the roof of the old Keeper's house — it has a staircase, you know. One went north to the ruined gate. The crystals in the eastern grove sometimes sing one down, if touched. And the rest? Shy places. You'll know them.",
+			"options": [{"text": "Thank you, Madame.", "goto": "end"}]
+		},
+		"thanks": {
+			"text": "My motes! My beautiful, borrowed dreams! Oh, this one is someone dreaming about a very large sandwich. Exquisite.\n\nTake these boots. They used to float. They still remember how, a little. Like me after a good rain.",
+			"actions": ["set_flag:petalune_thanked", "take_item:dream_mote:5"],
+			"options": [{"text": "You're welcome, Madame.", "goto": "end"}]
+		},
+		"chat": {
+			"text": "Glimmermere was once a piece of sky that fell asleep in the meadow. If you look into it at night, you can see stars arranged as they were before they learned to dream. Not that I look. I'm busy being looked at.",
+			"options": [{"text": "Fascinating.", "goto": "end"}, {"text": "You really are luminous.", "goto": "luminous"}]
+		},
+		"luminous": {
+			"text": "Stop. No, continue. No, stop. ...Continue.",
+			"options": [{"text": "(Leave her glowing.)", "goto": "end"}]
+		}
+	}
+}

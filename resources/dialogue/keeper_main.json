@@ -1,0 +1,145 @@
+{
+	"id": "keeper_main",
+	"speaker": "Umbel, the Mushroom Keeper",
+	"entry": [
+		{"if": ["quest_completed:sealed_gate"], "goto": "epilogue"},
+		{"if": ["objective_current:sealed_gate:wake_golem"], "goto": "golem_hint"},
+		{"if": ["objective_current:sealed_gate:reach_gate"], "goto": "after_guardian"},
+		{"if": ["objective_current:hum_beneath:defeat_guardian"], "goto": "guardian_hint"},
+		{"if": ["objective_current:hum_beneath:attune_circle"], "goto": "circle_hint"},
+		{"if": ["objective_current:hum_beneath:inspect_rift"], "goto": "after_fight"},
+		{"if": ["objective_current:first_awakening:defeat_creature"], "goto": "go_fight"},
+		{"if": ["objective_current:first_awakening:spot_creature"], "goto": "go_investigate"},
+		{"if": ["objective_current:first_awakening:learn_fungal"], "goto": "fragments_returned"},
+		{"if": ["objective_current:first_awakening:return_keeper"], "goto": "intro_already"},
+		{"if": ["objective_current:first_awakening:collect_fragments", "!seen:keeper_main:intro"], "goto": "intro"},
+		{"if": ["objective_current:first_awakening:collect_fragments"], "goto": "waiting_fragments"},
+		{"if": ["objective_current:first_awakening:find_keeper"], "goto": "intro"},
+		{"goto": "idle"}
+	],
+	"nodes": {
+		"intro": {
+			"text": "Oh! Oh, oh, oh. A new sprout. And awake already — most of you sleep for a week and wake up asking for breakfast.\n\nI am Umbel. I keep the mushrooms. Or they keep me. We have never settled the matter.",
+			"options": [
+				{"text": "Where am I?", "goto": "where"},
+				{"text": "Why do I feel like I've been here before?", "goto": "before"},
+				{"text": "The ground is humming. Is that normal?", "goto": "hum"}
+			]
+		},
+		"where": {
+			"text": "The Dreaming Meadow, first room of the Sporelands. Everything here is connected underneath by the Mycelium — the great thread. Roots, rocks, creatures, the stars on a good night. It all talks.\n\nYou can feel it too, can't you? Your feet are tingling. Don't scratch them, it's rude.",
+			"next": "task"
+		},
+		"before": {
+			"text": "Hm. Hmmm. The meadow remembers everyone who dreams in it. Perhaps it remembers you a little too hard.\n\nThat's a question for later. Questions ripen, like spores. Pick them too early and they're bitter.",
+			"next": "task"
+		},
+		"hum": {
+			"text": "Normal? It used to be. One long, warm note. Lately it's... stuttering. Sporelings wander off and come back with empty eyes. The stones in the west hum out of tune. And three pieces of the network's memory have scattered across the meadow.",
+			"next": "task"
+		},
+		"task": {
+			"text": "Here is what I need, sprout. Three Spore Fragments — little shards of the Mycelium's memory — fell loose when the humming went wrong. Bring them to me and I'll teach you to listen properly.\n\nLook for beams of light rising from the meadow. One by the lake shrine, one in the Rootstone Circle to the west... and one somewhere the meadow is keeping secret.",
+			"options": [
+				{"text": "A secret place? Any hints?", "goto": "secret_hint"},
+				{"text": "I'll find them.", "goto": "end"}
+			]
+		},
+		"secret_hint": {
+			"text": "Southwest, past the tallest mushrooms, there's a curtain of glowing vines. Curtains, as you know, are just doors that are shy.",
+			"options": [{"text": "Doors that are shy. Got it.", "goto": "end"}]
+		},
+		"intro_already": {
+			"text": "Well! You've already been picking things up, haven't you? Three Spore Fragments — I can hear them from here. They're humming the wrong song, poor things.",
+			"options": [{"text": "I found these on my way. Here.", "actions": ["talk:mushroom_keeper"], "goto": "fragments_returned"}]
+		},
+		"waiting_fragments": {
+			"text": "You have {fragments} of the three fragments. The beams of light will lead you to the rest — the lake shrine, the Rootstone Circle in the west, and the hidden hollow behind the vine curtain to the southwest.",
+			"options": [
+				{"text": "How do I reach the lake shrine?", "goto": "lake_hint"},
+				{"text": "I'm on it.", "goto": "end"}
+			]
+		},
+		"lake_hint": {
+			"text": "The lily pads on the south shore are very polite. Jump on them and they'll carry nobody anywhere, but they will hold you up long enough to cross.",
+			"options": [{"text": "Thanks, Umbel.", "goto": "end"}]
+		},
+		"fragments_returned": {
+			"text": "All three. Listen to them — hear how they argue? Let me hold them a moment...\n\nThere. Now hold out your hands. No, palms up. This might tickle. It definitely tickles.",
+			"actions": ["take_item:spore_fragment:3"],
+			"options": [{"text": "(Hold out your hands.)", "goto": "teach"}]
+		},
+		"teach": {
+			"text": "Fungal Magic is not about forcing things. It's about asking the spores very nicely to do what they wanted to do anyway: burst, spread, mend. You now know Sporeburst, Mycelial Mend and Puffcap Cascade.\n\nAnd take this twig. It's a wand. It doesn't know it's a wand yet, so don't tell it.",
+			"actions": ["learn_spell:sporeburst", "learn_spell:mycelial_mend", "learn_spell:puffcap_cascade", "give_item:apprentice_wand:1", "activate:learn_fungal_magic"],
+			"options": [{"text": "I can feel it... like a second heartbeat.", "goto": "chirp"}]
+		},
+		"chirp": {
+			"text": "...Shh. Do you hear that? A sporeling, chirping — but wrong. Flat, like a bell full of sand. It's coming from the west side of the grove.\n\nGo and look. Carefully. If its eyes are empty, it won't listen to reason — but it will listen to magic. Open your Grimoire to see your spells if you need a reminder.",
+			"options": [{"text": "I'll investigate.", "goto": "end"}]
+		},
+		"go_investigate": {
+			"text": "The chirping came from just west of my house. Follow the pink light. Don't be scared. Be careful, which is like scared but with better posture.",
+			"options": [{"text": "On my way.", "goto": "end"}]
+		},
+		"go_fight": {
+			"text": "You saw it? Hollow eyes... I was afraid of that. You must calm it, sprout — with magic. Remember: Fungal spells are strong against Nature, Thornlash costs nothing, and Meditate restores your mana when you run dry.",
+			"options": [{"text": "I'm ready.", "goto": "end"}]
+		},
+		"after_fight": {
+			"text": "You calmed it. Good. Good... but you have that look. The look of someone who saw something they'd rather not have.\n\nThe ground split open where it fell? And the threads inside were grey? Oh dear. Oh dear, dear, dear.",
+			"options": [
+				{"text": "What does it mean?", "goto": "meaning"},
+				{"text": "What was wrong with the sporeling?", "goto": "sporeling"}
+			]
+		},
+		"sporeling": {
+			"text": "Something drank the curiosity out of it. Sporelings are made of curiosity — it's most of their weight. Without it they're just... walking caps.",
+			"next": "meaning"
+		},
+		"meaning": {
+			"text": "The Mycelium is being unwoven. Not cut — unwoven, gently, thread by thread, from somewhere far below. I've only read about this once, in a book that was mostly moss.\n\nInspect the rift where the sporeling fell. Then go west, to the Rootstone Circle. If the stones can be made to sing in tune again, the network might hold.",
+			"options": [{"text": "I'll go.", "goto": "end"}]
+		},
+		"circle_hint": {
+			"text": "Have you looked into the rift yet? It will tell you what the stones need. Then, at the Rootstone Circle, lay your hands on the altar and listen. The stones don't need to be fixed — just reminded.",
+			"options": [{"text": "Understood.", "goto": "end"}]
+		},
+		"guardian_hint": {
+			"text": "The Bloom Guardian woke? Of course it did — it's been guarding that circle so long it forgot the circle is a friend. It's afraid, not wicked. Calm it.\n\nIt's a creature of Nature, so Fungal magic will serve you best. And when it turns its face to the moon, it's healing — hit it hard before it finishes.",
+			"options": [{"text": "I'll calm it.", "goto": "end"}]
+		},
+		"after_guardian": {
+			"text": "The circle sings! I heard it from here — one note, warm as toast. You did that.\n\nAnd yet. The unweaving isn't coming from the meadow. It's coming through the gates. Here, take my lantern staff. Pip has agreed to go with you. Pip is the spore inside. Pip is very brave and very small.",
+			"options": [{"text": "Where do I go next?", "goto": "next_steps"}]
+		},
+		"next_steps": {
+			"text": "North, along the path, is the Northern Gate to the Whispering Forest. See if it will open. And west of it, at the Hollow Gate, sleeps the Ancient Spore Golem — the meadow's first gardener. If anything remembers what lives under the caves, it does. Wake it gently. It does not wake gently.",
+			"options": [{"text": "I'll find out what's below.", "goto": "end"}]
+		},
+		"golem_hint": {
+			"text": "The Golem sleeps at the Hollow Gate, northwest. It's slow, but when it gathers the meadow's power — you'll see it glow — shield yourself or root it in place. And Fungal magic barely tickles it; try Crystal, Cosmic or a bit of Chaos.\n\nGet strong first. There's no shame in it. Mushrooms take years.",
+			"options": [{"text": "I'll be careful.", "goto": "end"}]
+		},
+		"epilogue": {
+			"text": "You woke the gardener, and it gave you its heart to carry. That means it trusts you. I've been trying to get it to trust me for two hundred years. I'm not jealous. I'm a little jealous.\n\nThe gates will open when the threads are rewoven, and you are the only one the Mycelium seems to listen to. Rest now, sprout. The Whispering Forest is waiting — and it's been saying your name.",
+			"options": [{"text": "Thank you, Umbel.", "goto": "end"}]
+		},
+		"idle": {
+			"text": "Ah, sprout. The mushrooms say hello. Well — they say 'mmmm', which is mushroom for hello.",
+			"options": [
+				{"text": "Tell me about the meadow's creatures.", "goto": "creatures"},
+				{"text": "Tell me about the elements of magic.", "goto": "elements"},
+				{"text": "Just passing by.", "goto": "end"}
+			]
+		},
+		"creatures": {
+			"text": "Sporelings are curious and harmless, unless something hollowed them out. Crystal Beetles eat moonlight and sulk. The Dream Fox appears in everyone's dreams — if it challenges you, it only wants to play. Mostly.",
+			"options": [{"text": "And the elements?", "goto": "elements"}, {"text": "Thanks.", "goto": "end"}]
+		},
+		"elements": {
+			"text": "Five disciplines, one cycle. Fungal decays Nature. Nature cracks Crystal. Crystal refracts Cosmic. Cosmic sterilizes Fungal. And Chaos... Chaos doesn't care about cycles. Chaos doesn't care about anything, which is its charm.",
+			"options": [{"text": "Good to know.", "goto": "end"}]
+		}
+	}
+}

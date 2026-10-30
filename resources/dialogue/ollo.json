@@ -1,0 +1,52 @@
+{
+	"id": "ollo",
+	"speaker": "Ollo",
+	"entry": [
+		{"if": ["quest_completed:beetle_bother", "!flag:ollo_thanked"], "goto": "thanks"},
+		{"if": ["quest_state:beetle_bother:AVAILABLE", "!seen:ollo:intro"], "goto": "intro"},
+		{"goto": "greet"}
+	],
+	"nodes": {
+		"intro": {
+			"text": "Ohhh... hello... traveller. I am... Ollo. I sell... things. Slowly. I have been... on my way... to this crossing... since the spring before last.",
+			"options": [
+				{"text": "What do you sell?", "actions": ["open_shop:ollo_shop"], "goto": "end"},
+				{"text": "You seem troubled.", "goto": "beetles"}
+			]
+		},
+		"beetles": {
+			"text": "Crystal Beetles... keep eating... my wares. Tonics. Scrolls. One ate... my hat. I would chase them... but I would arrive... next week. Could you... persuade three of them... to stop?",
+			"options": [
+				{"text": "I'll deal with three beetles.", "actions": ["start_quest:beetle_bother"], "goto": "accepted"},
+				{"text": "Not right now.", "goto": "end"}
+			]
+		},
+		"accepted": {
+			"text": "Wonderful... They nest by the crystals... east of the lake... and in the shadows... northwest. Mind the mandibles. They chime... before they bite.",
+			"options": [{"text": "I'll be back.", "goto": "end"}]
+		},
+		"greet": {
+			"text": "Ohhh... it's you again. How... nice. Did you know... I've moved... almost a whole shell-length... since we last spoke?",
+			"options": [
+				{"text": "Show me your wares.", "actions": ["open_shop:ollo_shop"], "goto": "end"},
+				{"text": "About those beetles...", "if": ["quest_state:beetle_bother:AVAILABLE"], "goto": "beetles"},
+				{"text": "How's the beetle problem?", "if": ["quest_state:beetle_bother:ACTIVE"], "goto": "progress"},
+				{"text": "Where are you headed?", "goto": "journey"},
+				{"text": "Goodbye, Ollo.", "goto": "end"}
+			]
+		},
+		"progress": {
+			"text": "Still... crunching. I can hear them... from here. East of the lake... and northwest. Three of them... and I'll give you... my lucky ring.",
+			"options": [{"text": "On it.", "goto": "end"}]
+		},
+		"journey": {
+			"text": "To Sporehaven... the village beyond the northern gate. My cousin... lives there. I'll arrive... in time for... his grandchildren's... grandchildren. It's important... to have... goals.",
+			"options": [{"text": "Good luck, Ollo.", "goto": "end"}]
+		},
+		"thanks": {
+			"text": "Ohhh... the crunching... has stopped. Bless you. Take my lucky ring. It was... very lucky. Until the beetles. Now it's... your luck.",
+			"actions": ["set_flag:ollo_thanked"],
+			"options": [{"text": "Thanks, Ollo. And browse your shop?", "actions": ["open_shop:ollo_shop"], "goto": "end"}, {"text": "Safe travels.", "goto": "end"}]
+		}
+	}
+}
