@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_se1n6"]
+
+[resource]
+script = ExtResource("1_se1n6")
+id = "spiritcaller_bell"
+display_name = "Spiritcaller Bell"
+description = "Ring it and the dead remember you. Spirit Companions last 50% longer and come in pairs."
+category = 4
+rarity = 2
+max_stack = 1
+value = 40
+icon_color = Color(1, 0.847059, 0.541176, 1)
+icon_glyph = "♫"
+equip_slot = "ring"
+stat_bonuses = {}
+use_effect = {}
+class_id = "spirit"
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = "bell"
+source = "Starting gear of the Lantern Choir."

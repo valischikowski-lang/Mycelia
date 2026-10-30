@@ -11,6 +11,8 @@ const DIRS: Dictionary = {
 	"quests": "res://resources/quests",
 	"status_effects": "res://resources/status_effects",
 	"biomes": "res://resources/biomes",
+	"classes": "res://resources/classes",
+	"abilities": "res://resources/abilities",
 }
 const DIALOGUE_DIR := "res://resources/dialogue"
 const SKILL_DIR := "res://resources/skills"
@@ -62,6 +64,14 @@ func encounter(id: String) -> EncounterData:
 
 func quest(id: String) -> QuestData:
 	return _lookup("quests", id) as QuestData
+
+
+func player_class(id: String) -> ClassData:
+	return _lookup("classes", id) as ClassData
+
+
+func ability(id: String) -> AbilityData:
+	return _lookup("abilities", id) as AbilityData
 
 
 func biome(id: String) -> BiomeData:

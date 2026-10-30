@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/classes/class_data.gd" id="1_vmrgr"]
+
+[resource]
+script = ExtResource("1_vmrgr")
+id = "grimlet"
+display_name = "Grimlet"
+tagline = "Grm. We are the forest's fist."
+lore = "Grimlets grow, they are not born: when an elder cap falls, a grimlet sprouts from it, carrying a little of the elder's memory. They live in hollow mushroom-cities and root-halls deep under the meadow, speak as 'we', and guard the Key of Growth. When a grimlet dies, it 'goes to loam' — and something new grows there."
+trial = "The Stone of Growth asks you to wake a gate of roots that has slept for a thousand years."
+faction_id = "rootborn_hold"
+color = Color(0.611765, 1, 0.290196, 1)
+glyph = "⚘"
+stat_mods = {
+"defense": 6,
+"health_regen": 0.6,
+"max_health": 40,
+"max_mana": -1
+}
+feel = {
+"dodge": 0.85,
+"move": 0.92,
+"stamina": 130
+}
+start_items = PackedStringArray("rootbreaker_axe", "sporeguard_shield", "mycelium_hammer", "thornhide_armor", "eldercap_helm")
+abilities = PackedStringArray("root_snare", "spore_burst", "barkskin", "mycelium_link", "colossus_growth")
+learning_paths = PackedStringArray("nature_magic", "heavy_combat", "regeneration", "spore_arts", "ancient_growth")
+rig_kind = "grimlet"
+rig_opts = {}

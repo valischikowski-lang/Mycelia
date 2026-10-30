@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_nk1s8"]
+
+[resource]
+script = ExtResource("1_nk1s8")
+id = "crystal_orb"
+display_name = "Crystal Orb"
+description = "Hums near hidden things. Treasure, runes and secret doors within 15 m shimmer through walls."
+category = 4
+rarity = 2
+max_stack = 1
+value = 40
+icon_color = Color(0.74902, 0.956863, 1, 1)
+icon_glyph = "◯"
+equip_slot = "offhand"
+stat_bonuses = {
+"magic_power": 2
+}
+use_effect = {}
+class_id = "wizard"
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = "orb_sight"
+source = "Starting gear of the Spiral Concordance."

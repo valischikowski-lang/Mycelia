@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/classes/class_data.gd" id="1_63lho"]
+
+[resource]
+script = ExtResource("1_63lho")
+id = "spirit"
+display_name = "Spirit"
+tagline = "The dead remember. So do you."
+lore = "Everything Ysmera ever dreamed is still somewhere, as an echo. The Lantern Choir hear those echoes. They live in floating villages and old forest shrines, speak with the departed and keep the Key of Souls."
+trial = "The Stone of Souls asks you to find a voice that only the dead can hear."
+faction_id = "lantern_choir"
+color = Color(0.494118, 0.976471, 1, 1)
+glyph = "♅"
+stat_mods = {
+"magic_resist": 15,
+"max_mana": 2
+}
+feel = {
+"dodge": 1.0,
+"move": 1.0,
+"stamina": 100
+}
+start_items = PackedStringArray("soulbound_staff", "lantern_of_whispers", "ethereal_shield", "wraith_robes", "spiritcaller_bell")
+abilities = PackedStringArray("soul_pulse", "spirit_companion", "astral_shift", "soul_shield", "echo_of_the_ancients")
+learning_paths = PackedStringArray("soul_magic", "protection", "summoning", "astral_travel", "ancient_knowledge")
+rig_kind = "spirit"
+rig_opts = {}

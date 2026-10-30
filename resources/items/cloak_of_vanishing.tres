@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_am4mj"]
+
+[resource]
+script = ExtResource("1_am4mj")
+id = "cloak_of_vanishing"
+display_name = "Cloak of Vanishing"
+description = "When your health falls below a third, the cloak swallows you: 3 seconds of true invisibility (once every 30s)."
+category = 4
+rarity = 3
+max_stack = 1
+value = 40
+icon_color = Color(0.352941, 0.290196, 0.541176, 1)
+icon_glyph = "◐"
+equip_slot = "artifact"
+stat_bonuses = {
+"evasion": 5
+}
+use_effect = {}
+class_id = "assassin"
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = "vanish"
+source = "Starting gear of the Unseen Covenant."

@@ -15,6 +15,11 @@ const START_DECK: Dictionary = {"thornlash": 3, "prism_ward": 3}
 
 var player_id: String = ""
 var display_name: String = "Dreamer"
+## Chosen calling ("assassin", "spirit", "wizard", "grimlet"). "" until the
+## Fourfold Threshold has been crossed (old saves load with "").
+var class_id: String = ""
+## Ability ids slotted on the hotbar (defaults to the class's abilities).
+var hotbar: PackedStringArray = []
 var stats := PlayerStats.new()
 var inventory: Inventory
 var spellbook := Spellbook.new()
@@ -40,6 +45,8 @@ func _init(content_source: Object) -> void:
 
 func new_game() -> void:
 	player_id = "local_%d" % (Time.get_unix_time_from_system() as int)
+	class_id = ""
+	hotbar = PackedStringArray()
 	stats.bonuses = {}
 	stats.from_dict({"level": 1, "xp": 0, "skill_points": 0})
 	spellbook.known = START_SPELLS.duplicate()
@@ -60,8 +67,55 @@ func skill_trees() -> Array:
 	return out
 
 
+func player_class() -> ClassData:
+	if class_id == "" or not content.has_method("player_class"):
+		return null
+	return content.player_class(class_id)
+
+
+## Crosses the Threshold: sets the calling, grants and equips its kit.
+## Returns false if the class doesn't exist or one was already chosen.
+func choose_class(id: String) -> bool:
+	if class_id != "" or not content.has_method("player_class"):
+		return false
+	var c: ClassData = content.player_class(id)
+	if c == null:
+		return false
+	class_id = id
+	hotbar = c.abilities.duplicate()
+	for item_id: String in c.start_items:
+		inventory.add(item_id, 1)
+		var d: ItemData = content.item(item_id)
+		# Equip unless the slot is already taken by an earlier kit item (the
+		# grimlet's second weapon stays in the bag for weapon switching).
+		if d and d.equip_slot != "" and not inventory.equipment.has(d.equip_slot):
+			inventory.equip(item_id)
+	if content.item("twig_bow") != null and not inventory.equipment.has("ranged"):
+		inventory.add("twig_bow", 1)
+		inventory.equip("twig_bow")
+	recalculate()
+	stats.full_restore()
+	return true
+
+
+## Abilities the player can currently use (class abilities, gated by level).
+func usable_abilities() -> Array[AbilityData]:
+	var out: Array[AbilityData] = []
+	if not content.has_method("ability"):
+		return out
+	for id: String in hotbar:
+		var a: AbilityData = content.ability(id)
+		if a and (a.unlock_level <= stats.level or skills.is_unlocked("ability:" + id)):
+			out.append(a)
+	return out
+
+
 func recalculate() -> void:
 	var b := inventory.equipment_bonuses()
+	var pc := player_class()
+	if pc:
+		for k: String in pc.stat_mods.keys():
+			b[k] = float(b.get(k, 0.0)) + float(pc.stat_mods[k])
 	var sb := skills.bonuses(skill_trees())
 	for k: String in sb.keys():
 		b[k] = float(b.get(k, 0.0)) + float(sb[k])
@@ -145,6 +199,7 @@ func unlock_skill(tree_id: String, node_id: String) -> String:
 func to_dict() -> Dictionary:
 	return {
 		"player_id": player_id, "display_name": display_name, "play_time": play_time,
+		"class_id": class_id, "hotbar": Array(hotbar),
 		"stats": stats.to_dict(), "inventory": inventory.to_dict(), "spellbook": spellbook.to_dict(),
 		"skills": skills.to_dict(), "quests": quests.to_dict(), "world": world.to_dict(),
 	}
@@ -154,6 +209,10 @@ func from_dict(d: Dictionary) -> void:
 	player_id = String(d.get("player_id", "local"))
 	display_name = String(d.get("display_name", "Dreamer"))
 	play_time = float(d.get("play_time", 0.0))
+	class_id = String(d.get("class_id", ""))
+	hotbar = PackedStringArray(d.get("hotbar", []))
+	if class_id != "" and hotbar.is_empty() and player_class():
+		hotbar = player_class().abilities.duplicate()
 	inventory.from_dict(d.get("inventory", {}))
 	spellbook.from_dict(d.get("spellbook", {}), func(id: String) -> bool: return content.spell(id) != null)
 	if spellbook.known.is_empty():

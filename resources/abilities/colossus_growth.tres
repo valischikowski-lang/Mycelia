@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_5dpnx"]
+
+[resource]
+script = ExtResource("1_5dpnx")
+id = "colossus_growth"
+display_name = "Colossus Growth"
+description = "Grow to a towering colossus: bigger, +60% damage, half damage taken, heavy blows shake the ground."
+class_id = "grimlet"
+glyph = "♜"
+color = Color(1, 0.701961, 0.278431, 1)
+mana_cost = 4.0
+cooldown = 28.0
+kind = "colossus"
+power = 0.6
+radius = 3.0
+ability_range = 8.0
+duration = 10.0
+world_tag = ""
+unlock_level = 3

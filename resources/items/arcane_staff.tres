@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_hxltk"]
+
+[resource]
+script = ExtResource("1_hxltk")
+id = "arcane_staff"
+display_name = "Arcane Staff"
+description = "A spiral of living crystal. Every light attack also flings an arcane spark; heavy attacks fire a full bolt."
+category = 4
+rarity = 2
+max_stack = 1
+value = 40
+icon_color = Color(0.541176, 0.705882, 1, 1)
+icon_glyph = "⚚"
+equip_slot = "staff"
+stat_bonuses = {}
+use_effect = {}
+class_id = "wizard"
+weapon_kind = "wand"
+damage = 8.0
+attack_speed = 1.5
+reach = 26.0
+block_power = 0.0
+parry_window = 0.0
+special = "arcane_missile"
+source = "Starting gear of the Spiral Concordance."

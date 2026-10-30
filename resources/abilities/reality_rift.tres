@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_bt2t1"]
+
+[resource]
+script = ExtResource("1_bt2t1")
+id = "reality_rift"
+display_name = "Reality Rift"
+description = "Tear the world open at your target. After a heartbeat, the rift snaps shut on everything inside."
+class_id = "wizard"
+glyph = "✶"
+color = Color(1, 0.372549, 0.878431, 1)
+mana_cost = 5.0
+cooldown = 24.0
+kind = "rift"
+power = 70.0
+radius = 5.0
+ability_range = 16.0
+duration = 0.0
+world_tag = ""
+unlock_level = 3

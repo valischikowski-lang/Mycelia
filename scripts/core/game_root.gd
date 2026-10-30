@@ -123,9 +123,26 @@ func _load_region(region_id: String) -> void:
 		await player.play_wake_up()
 		EventBus.location_visited.emit("awakening_hollow")
 		_apply_control_state()
-		SaveManager.autosave("force")
 	else:
 		EventBus.notify("Welcome back to %s." % region.biome.display_name, "info")
+	# New games, and saves from before the four callings, cross the Threshold.
+	if Game.profile and Game.profile.class_id == "":
+		await open_class_select()
+	if intro:
+		SaveManager.autosave("force")
+
+
+func open_class_select() -> void:
+	var cs := ClassSelect.new()
+	ui_layer.add_child(cs)
+	open_modal("class_select")
+	var id: String = await cs.chosen
+	Game.profile.choose_class(id)
+	close_modal("class_select")
+	var c := Database.player_class(id)
+	hud.show_banner("The %s's Path" % c.display_name, "— %s —" % c.tagline)
+	EventBus.class_chosen.emit(id)
+	EventBus.notify("Your %s gear is equipped. Open the Grimoire to look at it." % c.display_name, "item")
 
 
 # ------------------------------------------------------------------ modals

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_ju4yw"]
+
+[resource]
+script = ExtResource("1_ju4yw")
+id = "runebound_robes"
+display_name = "Runebound Robes"
+description = "Runes crawl across the cloth. +2 max mana and 50% faster mana regeneration."
+category = 4
+rarity = 1
+max_stack = 1
+value = 40
+icon_color = Color(0.227451, 0.298039, 1, 1)
+icon_glyph = "♜"
+equip_slot = "robe"
+stat_bonuses = {
+"defense": 1,
+"mana_regen": 0.5,
+"max_mana": 2
+}
+use_effect = {}
+class_id = "wizard"
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = "Starting gear of the Spiral Concordance."

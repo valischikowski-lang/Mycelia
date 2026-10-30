@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_0okuu"]
+
+[resource]
+script = ExtResource("1_0okuu")
+id = "nightpiercer_bow"
+display_name = "Nightpiercer Bow"
+description = "A silent bow. Arrows never alert the target, and fully drawn shots against unaware foes always crit."
+category = 4
+rarity = 2
+max_stack = 1
+value = 40
+icon_color = Color(0.415686, 0.360784, 1, 1)
+icon_glyph = "➹"
+equip_slot = "ranged"
+stat_bonuses = {}
+use_effect = {}
+class_id = "assassin"
+weapon_kind = "bow"
+damage = 14.0
+attack_speed = 1.4
+reach = 40.0
+block_power = 0.0
+parry_window = 0.0
+special = "silent"
+source = "Starting gear of the Unseen Covenant."

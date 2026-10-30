@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_n76qk"]
+
+[resource]
+script = ExtResource("1_n76qk")
+id = "astral_crown"
+display_name = "Astral Crown"
+description = "A circlet of captured starlight. Every fourth ability you cast is free and twice as strong — the crown flares when it's ready."
+category = 4
+rarity = 4
+max_stack = 1
+value = 40
+icon_color = Color(1, 0.890196, 0.415686, 1)
+icon_glyph = "♛"
+equip_slot = "hat"
+stat_bonuses = {
+"spell_power": 4
+}
+use_effect = {}
+class_id = "wizard"
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = "astral_echo"
+source = "Starting gear of the Spiral Concordance (an heirloom)."

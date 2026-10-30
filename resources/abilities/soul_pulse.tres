@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_mssnx"]
+
+[resource]
+script = ExtResource("1_mssnx")
+id = "soul_pulse"
+display_name = "Soul Pulse"
+description = "A ring of soul-light bursts out from you, damaging and hurling back every enemy nearby."
+class_id = "spirit"
+glyph = "◎"
+color = Color(0.494118, 0.976471, 1, 1)
+mana_cost = 2.0
+cooldown = 6.0
+kind = "soul_pulse"
+power = 14.0
+radius = 6.0
+ability_range = 8.0
+duration = 0.0
+world_tag = ""
+unlock_level = 1

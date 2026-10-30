@@ -64,6 +64,20 @@ static func build(kind: String, tint: Color = Color.WHITE, opts: Dictionary = {}
 			rig.set("idle_bob", 0.05)
 			rig.set("idle_speed", 2.8)
 			rig.set("squash", 0.04)
+		"assassin":
+			_assassin(body, rng)
+			rig.set("idle_bob", 0.025)
+			rig.set("idle_speed", 1.6)
+		"spirit":
+			_spirit(body, rng)
+			rig.set("idle_bob", 0.09)
+			rig.set("idle_speed", 1.1)
+			rig.set("squash", 0.02)
+		"grimlet":
+			_grimlet(body, rng, opts)
+			rig.set("idle_bob", 0.04)
+			rig.set("idle_speed", 1.4)
+			rig.set("squash", 0.05)
 		"gremlin":
 			_gremlin(body, rng)
 			rig.set("idle_bob", 0.12)
@@ -525,12 +539,17 @@ static func _dreamer(body: Node3D, rng: RandomNumberGenerator, biome: BiomeData,
 	hk.lathe(PackedVector2Array([Vector2(0.3, 1.74), Vector2(0.5, 1.72), Vector2(0.52, 1.69), Vector2(0.28, 1.7)]), 16, Vector3.ZERO, Basis.IDENTITY,
 		func(_t: float, _a: float) -> Color: return Color(hat_color.r, hat_color.g, hat_color.b, 0.05), Callable(), false, false)
 	_mesh(body, hk)
-	# Staff with glowing orb.
+	# Staff with glowing orb (the player avatar holds its real weapon instead).
+	if bool(opts.get("no_staff", false)):
+		_eyes(body, [Vector3(-0.07, 1.66, 0.15), Vector3(0.07, 1.66, 0.15)] as Array[Vector3], 0.04, Color(0.3, 0.6, 1.0))
+		_hand(body, Vector3(0.3, 0.85, 0.3))
+		return
 	var sk := MeshKit.new()
 	sk.tube(PackedVector3Array([Vector3(0.35, 0.05, 0.35), Vector3(0.36, 1.0, 0.35), Vector3(0.33, 1.8, 0.38)]), PackedFloat32Array([0.035, 0.03, 0.025]), 5, func(_t: float) -> Color: return Color(0.4, 0.25, 0.2, 0.05), true, true)
 	sk.ellipsoid(Vector3(0.33, 1.9, 0.38), Vector3.ONE * 0.11, Color(0.3, 1.0, 0.95, 1.0), 6, 10)
 	_mesh(body, sk)
 	_eyes(body, [Vector3(-0.07, 1.66, 0.15), Vector3(0.07, 1.66, 0.15)] as Array[Vector3], 0.04, Color(0.3, 0.6, 1.0))
+	_hand(body, Vector3(0.3, 0.85, 0.3))
 
 
 static func _drifter(body: Node3D, rng: RandomNumberGenerator, biome: BiomeData) -> void:
@@ -729,3 +748,123 @@ static func _gremlin(body: Node3D, rng: RandomNumberGenerator) -> void:
 		ek.ellipsoid(head + Vector3(s * 0.15, 0.1, 0.3), Vector3(0.07, 0.06, 0.03), Color(1.0, 0.75, 0.1, 1.0), 4, 6)
 		ek.ellipsoid(head + Vector3(s * 0.15, 0.1, 0.33), Vector3(0.012, 0.045, 0.01), Color(0.0, 0.0, 0.0, 0.0), 3, 5)
 	_mesh(eyes, ek, null, false)
+
+
+# ---------------------------------------------------------------- dreamer callings
+## Hooded, slim assassin: masked face, glowing violet eyes, layered cloak.
+static func _assassin(body: Node3D, rng: RandomNumberGenerator) -> void:
+	var kit := MeshKit.new()
+	var cloth := Color("#14101f")
+	var trim := Color("#5a3cff")
+	var prof := PackedVector2Array([Vector2(0.14, 1.48), Vector2(0.24, 1.3), Vector2(0.27, 0.95), Vector2(0.3, 0.55), Vector2(0.4, 0.02)])
+	kit.lathe(prof, 12, Vector3.ZERO, Basis.IDENTITY, func(t: float, _a: float) -> Color:
+		var c := cloth.lerp(Color("#221a38"), 1.0 - t)
+		c.a = 0.02
+		if t > 0.9:
+			c = Color(trim.r, trim.g, trim.b, 0.5)
+		return c, func(a: float, t: float) -> float: return 1.0 + 0.22 * maxf(0.0, sin(a * 5.0 + 0.7)) * pow(t, 3.0), true, false)
+	# Hood and mask.
+	var hood := cloth.lightened(0.08)
+	hood.a = 0.02
+	kit.ellipsoid(Vector3(0, 1.64, -0.02), Vector3(0.21, 0.24, 0.22), hood, 7, 12)
+	kit.ellipsoid(Vector3(0, 1.6, 0.12), Vector3(0.15, 0.11, 0.09), Color(0.03, 0.02, 0.05, 0.0), 5, 10)
+	kit.tube(PackedVector3Array([Vector3(0, 1.82, -0.1), Vector3(0, 1.75, -0.32), Vector3(0, 1.5, -0.42)]), PackedFloat32Array([0.09, 0.06, 0.02]), 6, func(_t: float) -> Color: return Color(cloth.r, cloth.g, cloth.b, 0.02), false, true)
+	# Scarf tails.
+	for s: float in [-1.0, 1.0]:
+		kit.tube(PackedVector3Array([Vector3(s * 0.06, 1.48, -0.1), Vector3(s * 0.12, 1.25, -0.32), Vector3(s * 0.18, 0.95, -0.42)]), PackedFloat32Array([0.05, 0.04, 0.02]), 4, func(_t: float) -> Color: return Color(trim.r, trim.g, trim.b, 0.25), false, true)
+		kit.tube(MeshKit.spline(PackedVector3Array([Vector3(s * 0.22, 1.35, 0), Vector3(s * 0.3, 1.1, 0.12), Vector3(s * 0.26, 0.92, 0.3)]), 3), _fit(PackedFloat32Array([0.07, 0.06, 0.05]), 7), 5, func(_t: float) -> Color: return Color(cloth.r, cloth.g, cloth.b, 0.02), false, true)
+	_mesh(body, kit)
+	_eyes(body, [Vector3(-0.06, 1.66, 0.17), Vector3(0.06, 1.66, 0.17)] as Array[Vector3], 0.028, Color(0.65, 0.4, 1.0))
+	_hand(body, Vector3(0.27, 0.95, 0.32))
+
+
+## A floating, half-transparent spirit with a lantern and trailing veils.
+static func _spirit(body: Node3D, rng: RandomNumberGenerator) -> void:
+	var kit := MeshKit.new()
+	var veil := Color("#7ef9ff")
+	var prof := PackedVector2Array([Vector2(0.12, 1.5), Vector2(0.24, 1.3), Vector2(0.3, 0.95), Vector2(0.34, 0.55), Vector2(0.18, 0.18), Vector2(0.03, 0.05)])
+	kit.lathe(prof, 14, Vector3(0, 0.15, 0), Basis.IDENTITY, func(t: float, _a: float) -> Color:
+		var c := Color("#1a2a48").lerp(veil, t * 0.35)
+		c.a = 0.08 + t * 0.35
+		return c, func(a: float, t: float) -> float: return 1.0 + 0.18 * sin(a * 6.0 + t * 5.0) * t, true, true)
+	kit.ellipsoid(Vector3(0, 1.75, 0), Vector3(0.18, 0.21, 0.18), Color("#c9f6ff", 0.35), 7, 12)
+	# A halo of three slow rings.
+	for i in 3:
+		var ring := PackedVector3Array()
+		var rr := PackedFloat32Array()
+		for k in 17:
+			var a := TAU * k / 16.0
+			ring.append(Vector3(cos(a) * (0.26 + i * 0.05), 2.02 + i * 0.03, sin(a) * (0.26 + i * 0.05)))
+			rr.append(0.012)
+		kit.tube(ring, rr, 3, func(_t: float) -> Color: return Color(1.0, 0.92, 0.6, 0.9), false, false)
+	for s: float in [-1.0, 1.0]:
+		kit.tube(MeshKit.spline(PackedVector3Array([Vector3(s * 0.22, 1.42, 0), Vector3(s * 0.4, 1.2, 0.1), Vector3(s * 0.3, 1.05, 0.32)]), 3), _fit(PackedFloat32Array([0.06, 0.05, 0.035]), 7), 5, func(_t: float) -> Color: return Color(veil.r, veil.g, veil.b, 0.3), false, true)
+	# Lantern in the left hand.
+	kit.ellipsoid(Vector3(-0.3, 0.9, 0.34), Vector3(0.09, 0.12, 0.09), Color(1.0, 0.9, 0.55, 1.0), 5, 8)
+	_mesh(body, kit, null, false)
+	_eyes(body, [Vector3(-0.065, 1.77, 0.15), Vector3(0.065, 1.77, 0.15)] as Array[Vector3], 0.03, Color(0.6, 1.0, 1.0))
+	var l := OmniLight3D.new()
+	l.light_color = Color(1.0, 0.85, 0.55)
+	l.light_energy = 0.9
+	l.omni_range = 4.5
+	l.position = Vector3(-0.3, 0.9, 0.34)
+	body.add_child(l)
+	_hand(body, Vector3(0.3, 1.05, 0.32))
+
+
+## Grimlet: a squat, mossy, bark-shouldered being with a living mushroom cap
+## for a head, lantern eyes and long three-fingered root arms.
+static func _grimlet(body: Node3D, rng: RandomNumberGenerator, opts: Dictionary) -> void:
+	var kit := MeshKit.new()
+	var moss := Color("#3a5a2a")
+	var bark := Color("#3a2a1c")
+	var cap_col: Color = opts.get("cap", Color("#a8402a"))
+	# Round body, rooted feet.
+	kit.ellipsoid(Vector3(0, 0.72, 0), Vector3(0.42, 0.46, 0.36), moss, 8, 12, Basis.IDENTITY, null, 0.0, func(d: Vector3) -> Color:
+		var c := moss.lerp(moss.darkened(0.4), clampf(-d.y, 0.0, 1.0))
+		c.a = 0.05
+		return c)
+	for s: float in [-1.0, 1.0]:
+		kit.tube(PackedVector3Array([Vector3(s * 0.18, 0.4, 0), Vector3(s * 0.22, 0.15, 0.04), Vector3(s * 0.3, 0.0, 0.14)]), PackedFloat32Array([0.11, 0.1, 0.07]), 6, func(_t: float) -> Color: return Color(bark.r, bark.g, bark.b, 0.02), false, true)
+		for r in 3:
+			var ra := (r - 1) * 0.6
+			kit.tube(PackedVector3Array([Vector3(s * 0.3, 0.02, 0.14), Vector3(s * 0.3 + sin(ra) * 0.18, 0.0, 0.14 + cos(ra) * 0.18)]), PackedFloat32Array([0.04, 0.015]), 4, func(_t: float) -> Color: return Color(bark.r, bark.g, bark.b, 0.02), false, true)
+		# Bark shoulder plates.
+		kit.ellipsoid(Vector3(s * 0.36, 1.02, -0.02), Vector3(0.2, 0.12, 0.18), Color(bark.r * 1.3, bark.g * 1.2, bark.b, 0.03), 5, 8, Basis(Vector3.FORWARD, s * 0.4))
+		# Long root arms with three fingers.
+		var hand := Vector3(s * 0.52, 0.45, 0.3)
+		kit.tube(MeshKit.spline(PackedVector3Array([Vector3(s * 0.38, 0.98, 0), Vector3(s * 0.55, 0.75, 0.12), hand]), 3), _fit(PackedFloat32Array([0.09, 0.075, 0.06]), 7), 6, func(_t: float) -> Color: return Color(bark.r, bark.g, bark.b, 0.03), false, true)
+		for f in 3:
+			var fd := Vector3(s * 0.05 * (f - 1), -0.12, 0.08 + 0.02 * f)
+			kit.tube(PackedVector3Array([hand, hand + fd, hand + fd * 1.7 + Vector3(0, 0, 0.04)]), PackedFloat32Array([0.03, 0.022, 0.008]), 4, func(_t: float) -> Color: return Color(bark.r, bark.g, bark.b, 0.03), false, true)
+	# Face: a wide flat nose ridge and a grumbly mouth.
+	kit.ellipsoid(Vector3(0, 0.98, 0.33), Vector3(0.08, 0.05, 0.06), moss.darkened(0.25), 4, 8)
+	kit.ellipsoid(Vector3(0, 0.84, 0.32), Vector3(0.16, 0.025, 0.04), Color(0.05, 0.02, 0.02, 0.0), 3, 8)
+	_mesh(body, kit)
+	# The living cap: every grimlet's cap is its name.
+	var ck := MeshKit.new()
+	var p := MushroomParams.new()
+	p.seed = rng.randi()
+	p.cap_shape = MushroomParams.CapShape.DOME
+	p.stem_height = 0.05
+	p.stem_width = 0.18
+	p.cap_radius = 0.52
+	p.cap_height = 0.36
+	p.cap_color = cap_col
+	p.cap_top_color = cap_col.lightened(0.2)
+	p.glow_color = Color("#ffd27a")
+	p.spot_color = Color("#ffe9b0")
+	p.spots = 7
+	p.cap_segments = 16
+	MushroomGenerator.build_into(ck, p, Transform3D(Basis(Vector3.RIGHT, -0.12), Vector3(0, 1.1, -0.04)))
+	_mesh(body, ck, MaterialLib.mushroom())
+	_eyes(body, [Vector3(-0.13, 1.04, 0.3), Vector3(0.13, 1.04, 0.3)] as Array[Vector3], 0.06, Color(1.0, 0.8, 0.3))
+	_hand(body, Vector3(0.52, 0.45, 0.32))
+
+
+## Weapon attachment point ("Hand") used by PlayerAvatar.
+static func _hand(body: Node3D, pos: Vector3) -> void:
+	var h := Node3D.new()
+	h.name = "Hand"
+	h.position = pos
+	body.add_child(h)

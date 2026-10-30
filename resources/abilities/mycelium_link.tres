@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_dneqs"]
+
+[resource]
+script = ExtResource("1_dneqs")
+id = "mycelium_link"
+display_name = "Mycelium Link"
+description = "Plug into the network under your feet. Each hit you land heals you; dormant Mycelium Nodes wake."
+class_id = "grimlet"
+glyph = "⚯"
+color = Color(0.211765, 1, 0.941176, 1)
+mana_cost = 1.0
+cooldown = 10.0
+kind = "link"
+power = 4.0
+radius = 10.0
+ability_range = 8.0
+duration = 8.0
+world_tag = "mycelium"
+unlock_level = 1

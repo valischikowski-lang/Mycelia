@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_v3kj1"]
+
+[resource]
+script = ExtResource("1_v3kj1")
+id = "flame_spiral"
+display_name = "Flame Spiral"
+description = "Three fire-motes spin around you, scorching anything they touch."
+class_id = "wizard"
+glyph = "☀"
+color = Color(1, 0.541176, 0.227451, 1)
+mana_cost = 3.0
+cooldown = 12.0
+kind = "spiral"
+power = 8.0
+radius = 2.6
+ability_range = 8.0
+duration = 6.0
+world_tag = ""
+unlock_level = 1

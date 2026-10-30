@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_y31hd"]
+
+[resource]
+script = ExtResource("1_y31hd")
+id = "echo_of_the_ancients"
+display_name = "Echo of the Ancients"
+description = "Let the past speak. Reveals hidden enemies, weak points and ghostly echoes of what happened here."
+class_id = "spirit"
+glyph = "♅"
+color = Color(1, 0.913725, 0.658824, 1)
+mana_cost = 1.0
+cooldown = 10.0
+kind = "echo"
+power = 0.0
+radius = 18.0
+ability_range = 8.0
+duration = 10.0
+world_tag = "echo"
+unlock_level = 1

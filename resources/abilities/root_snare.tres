@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_mtjif"]
+
+[resource]
+script = ExtResource("1_mtjif")
+id = "root_snare"
+display_name = "Root Snare"
+description = "Roots burst up under your target and hold it fast. Wakes sleeping Root Gates."
+class_id = "grimlet"
+glyph = "⚘"
+color = Color(0.611765, 1, 0.290196, 1)
+mana_cost = 1.0
+cooldown = 7.0
+kind = "snare"
+power = 6.0
+radius = 3.0
+ability_range = 12.0
+duration = 3.0
+world_tag = "root"
+unlock_level = 1

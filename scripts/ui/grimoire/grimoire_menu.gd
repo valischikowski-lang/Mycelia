@@ -207,7 +207,7 @@ func _build_character() -> Control:
 		h.add_child(ItemIcon.new(d, 0, 52))
 		var info := VBoxContainer.new()
 		info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		info.add_child(UiTheme.label(slot.capitalize(), 14, UiTheme.TEXT_DIM))
+		info.add_child(UiTheme.label(String(ItemData.SLOT_NAMES.get(slot, slot.capitalize())), 14, UiTheme.TEXT_DIM))
 		info.add_child(UiTheme.label(d.display_name if d else "— empty —", 18, d.rarity_color() if d else UiTheme.TEXT_DIM, UiTheme.bold_font()))
 		h.add_child(info)
 		if d:
@@ -282,12 +282,30 @@ func _build_inventory() -> Control:
 	head.add_child(ItemIcon.new(item, 0, 72))
 	var hv := VBoxContainer.new()
 	hv.add_child(UiTheme.label(item.display_name, 22, item.rarity_color(), UiTheme.title_font()))
-	hv.add_child(UiTheme.label("%s · %s%s" % [String(ItemData.Rarity.keys()[item.rarity]).capitalize(), item.category_name(), (" · " + item.equip_slot.capitalize()) if item.equip_slot != "" else ""], 15, UiTheme.TEXT_DIM))
+	hv.add_child(UiTheme.label("%s · %s%s" % [String(ItemData.Rarity.keys()[item.rarity]).capitalize(), item.category_name(), (" · " + item.slot_name()) if item.equip_slot != "" else ""], 15, UiTheme.TEXT_DIM))
 	head.add_child(hv)
 	rv.add_child(head)
 	rv.add_child(_wrap_label(item.description, 18))
 	for stat: String in item.stat_bonuses.keys():
 		rv.add_child(UiTheme.label("+%s %s" % [_stat_text(stat, float(item.stat_bonuses[stat])), PlayerStats.STAT_NAMES.get(stat, stat.capitalize())], 17, UiTheme.SUCCESS, UiTheme.bold_font()))
+	if item.weapon_kind != "":
+		var w := PackedStringArray()
+		w.append(item.weapon_kind.capitalize())
+		if item.damage > 0:
+			w.append("%d damage" % int(item.damage))
+		if item.is_weapon():
+			w.append("%.1f attacks/s" % item.attack_speed)
+			w.append("%.1f m reach" % item.reach)
+		if item.block_power > 0:
+			w.append("blocks %d%%" % int(item.block_power * 100))
+			w.append("parry %.2fs" % item.parry_window)
+		rv.add_child(UiTheme.label(" · ".join(w), 17, UiTheme.GLOW, UiTheme.bold_font()))
+	if item.class_id != "":
+		var c := Database.player_class(item.class_id)
+		var mine := Game.profile != null and Game.profile.class_id == item.class_id
+		rv.add_child(UiTheme.label("%s item%s" % [c.display_name if c else item.class_id, "" if mine else " — other callings can carry it, but its special power sleeps"], 15, c.color if c else UiTheme.TEXT_DIM))
+	if item.source != "":
+		rv.add_child(UiTheme.label("Found: " + item.source, 14, UiTheme.TEXT_DIM))
 	rv.add_child(UiTheme.label("Count: %d · Value: %d glimmer" % [int(slot["count"]), item.value], 15, UiTheme.TEXT_DIM))
 	if item.is_usable():
 		rv.add_child(UiTheme.button("Use", func() -> void:

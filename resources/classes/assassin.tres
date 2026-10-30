@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/classes/class_data.gd" id="1_ko6nk"]
+
+[resource]
+script = ExtResource("1_ko6nk")
+id = "assassin"
+display_name = "Assassin"
+tagline = "Swift. Silent. Already behind you."
+lore = "When Ysmera, the Dreaming Root, first closed her eyes, the darkness between her thoughts woke up hungry. The Unseen Covenant are its children: they live in hidden hollows and under the roots, they move between heartbeats, and they guard the Key of Shadows."
+trial = "The Stone of Shadows asks you to cross a room full of watching eyes without being seen."
+faction_id = "unseen_covenant"
+color = Color(0.603922, 0.482353, 1, 1)
+glyph = "☾"
+stat_mods = {
+"crit_chance": 10,
+"evasion": 5,
+"max_health": -10
+}
+feel = {
+"dodge": 1.35,
+"move": 1.12,
+"stamina": 110
+}
+start_items = PackedStringArray("shadowfang_daggers", "cloak_of_vanishing", "nightpiercer_bow", "venomglass_armor", "phantomstep_boots")
+abilities = PackedStringArray("shadow_dash", "backstab", "smoke_veil", "phantom_clone", "nightfall")
+learning_paths = PackedStringArray("shadow_arts", "precision", "mobility", "deception", "lethality")
+rig_kind = "assassin"
+rig_opts = {}

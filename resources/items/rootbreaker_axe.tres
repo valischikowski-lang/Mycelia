@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_oj52s"]
+
+[resource]
+script = ExtResource("1_oj52s")
+id = "rootbreaker_axe"
+display_name = "Rootbreaker Axe"
+description = "A heavy axe of petrified root. Every swing cleaves through all enemies in front of you."
+category = 4
+rarity = 2
+max_stack = 1
+value = 40
+icon_color = Color(0.611765, 1, 0.290196, 1)
+icon_glyph = "⚒"
+equip_slot = "staff"
+stat_bonuses = {}
+use_effect = {}
+class_id = "grimlet"
+weapon_kind = "axe"
+damage = 15.0
+attack_speed = 1.1
+reach = 2.4
+block_power = 0.0
+parry_window = 0.0
+special = "cleave"
+source = "Starting gear of the Rootborn Hold."

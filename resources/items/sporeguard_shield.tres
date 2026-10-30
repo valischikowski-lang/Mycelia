@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_hml7t"]
+
+[resource]
+script = ExtResource("1_hml7t")
+id = "sporeguard_shield"
+display_name = "Sporeguard Shield"
+description = "A living shield. Blocks 80% of blows, and every blocked hit puffs spores into the attacker's face."
+category = 4
+rarity = 2
+max_stack = 1
+value = 40
+icon_color = Color(0.768627, 0.301961, 1, 1)
+icon_glyph = "⛨"
+equip_slot = "offhand"
+stat_bonuses = {}
+use_effect = {}
+class_id = "grimlet"
+weapon_kind = "shield"
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.8
+parry_window = 0.2
+special = "spore_guard"
+source = "Starting gear of the Rootborn Hold."

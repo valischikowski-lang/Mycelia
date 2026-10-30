@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_opqhm"]
+
+[resource]
+script = ExtResource("1_opqhm")
+id = "spore_burst"
+display_name = "Spore Burst"
+description = "You exhale a storm of spores that damages and infects everything near you."
+class_id = "grimlet"
+glyph = "✺"
+color = Color(0.768627, 0.301961, 1, 1)
+mana_cost = 2.0
+cooldown = 8.0
+kind = "burst"
+power = 14.0
+radius = 5.0
+ability_range = 8.0
+duration = 4.0
+world_tag = ""
+unlock_level = 1

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_gstj3"]
+
+[resource]
+script = ExtResource("1_gstj3")
+id = "phantomstep_boots"
+display_name = "Phantomstep Boots"
+description = "Your dodge becomes a 40% longer phantom dash that passes through enemies."
+category = 4
+rarity = 2
+max_stack = 1
+value = 40
+icon_color = Color(0.705882, 0.603922, 1, 1)
+icon_glyph = "♞"
+equip_slot = "boots"
+stat_bonuses = {
+"defense": 1
+}
+use_effect = {}
+class_id = "assassin"
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = "phantom_dash"
+source = "Starting gear of the Unseen Covenant."

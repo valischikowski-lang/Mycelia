@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_mbov8"]
+
+[resource]
+script = ExtResource("1_mbov8")
+id = "backstab"
+display_name = "Backstab"
+description = "A brutal strike at the nearest foe. Triple damage from behind or against an enemy that hasn't noticed you."
+class_id = "assassin"
+glyph = "⚔"
+color = Color(1, 0.309804, 0.478431, 1)
+mana_cost = 1.0
+cooldown = 5.0
+kind = "backstab"
+power = 26.0
+radius = 3.0
+ability_range = 3.0
+duration = 0.0
+world_tag = ""
+unlock_level = 1

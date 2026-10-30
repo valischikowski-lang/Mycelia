@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_4q6yx"]
+
+[resource]
+script = ExtResource("1_4q6yx")
+id = "ethereal_shield"
+display_name = "Ethereal Shield"
+description = "Blocks 65% of physical blows and every magical projectile. Generous parry window."
+category = 4
+rarity = 2
+max_stack = 1
+value = 40
+icon_color = Color(0.658824, 0.941176, 1, 1)
+icon_glyph = "⛨"
+equip_slot = "offhand"
+stat_bonuses = {}
+use_effect = {}
+class_id = "spirit"
+weapon_kind = "shield"
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.65
+parry_window = 0.28
+special = "ethereal"
+source = "Starting gear of the Lantern Choir."

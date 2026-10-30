@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_6hwpt"]
+
+[resource]
+script = ExtResource("1_6hwpt")
+id = "dreamsteel_sword"
+display_name = "Dreamsteel Sword"
+description = "A plain, honest sword. In a dream, that's rare."
+category = 4
+rarity = 1
+max_stack = 1
+value = 40
+icon_color = Color(0.788235, 0.831373, 1, 1)
+icon_glyph = "†"
+equip_slot = "staff"
+stat_bonuses = {}
+use_effect = {}
+class_id = ""
+weapon_kind = "sword"
+damage = 11.0
+attack_speed = 1.8
+reach = 2.2
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = "Treasure chests in the Dreaming Meadow."

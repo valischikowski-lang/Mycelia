@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_72e8m"]
+
+[resource]
+script = ExtResource("1_72e8m")
+id = "shadow_dash"
+display_name = "Shadow Dash"
+description = "Become shadow and streak forward through enemies, cutting each one you pass. Passes through Shadow Veils."
+class_id = "assassin"
+glyph = "➶"
+color = Color(0.603922, 0.482353, 1, 1)
+mana_cost = 1.0
+cooldown = 3.5
+kind = "dash"
+power = 12.0
+radius = 3.0
+ability_range = 8.0
+duration = 0.0
+world_tag = "shadow"
+unlock_level = 1

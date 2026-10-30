@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_gvocu"]
+
+[resource]
+script = ExtResource("1_gvocu")
+id = "arcane_bolt"
+display_name = "Arcane Bolt"
+description = "A fast, homing bolt of pure arcana. Strikes runes to wake them."
+class_id = "wizard"
+glyph = "✦"
+color = Color(0.541176, 0.705882, 1, 1)
+mana_cost = 1.0
+cooldown = 0.9
+kind = "bolt"
+power = 16.0
+radius = 3.0
+ability_range = 30.0
+duration = 0.0
+world_tag = "rune"
+unlock_level = 1

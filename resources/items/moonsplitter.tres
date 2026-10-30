@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_gxyoq"]
+
+[resource]
+script = ExtResource("1_gxyoq")
+id = "moonsplitter"
+display_name = "Moonsplitter"
+description = "A greatsword that remembers the night the moon fell. Heavy attacks throw a crescent of moonlight that cuts everything in its path."
+category = 4
+rarity = 4
+max_stack = 1
+value = 40
+icon_color = Color(1, 0.913725, 0.658824, 1)
+icon_glyph = "†"
+equip_slot = "staff"
+stat_bonuses = {}
+use_effect = {}
+class_id = ""
+weapon_kind = "greatsword"
+damage = 24.0
+attack_speed = 0.9
+reach = 2.8
+block_power = 0.0
+parry_window = 0.0
+special = "moon_arc"
+source = "The Sunken Hollow's deepest vault."

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_la5kd"]
+
+[resource]
+script = ExtResource("1_la5kd")
+id = "eldercap_helm"
+display_name = "Eldercap Helm"
+description = "An elder grimlet's cap, given back. Nature abilities +25%, and you slowly regrow health."
+category = 4
+rarity = 3
+max_stack = 1
+value = 40
+icon_color = Color(1, 0.701961, 0.278431, 1)
+icon_glyph = "♛"
+equip_slot = "hat"
+stat_bonuses = {
+"health_regen": 0.8,
+"max_health": 20
+}
+use_effect = {}
+class_id = "grimlet"
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = "elder"
+source = "Starting gear of the Rootborn Hold."

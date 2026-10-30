@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_qonol"]
+
+[resource]
+script = ExtResource("1_qonol")
+id = "shadowfang_daggers"
+display_name = "Shadowfang Daggers"
+description = "Twin daggers forged from a moonless night. Fast combos; strikes from behind deal double damage."
+category = 4
+rarity = 2
+max_stack = 1
+value = 40
+icon_color = Color(0.603922, 0.482353, 1, 1)
+icon_glyph = "⚔"
+equip_slot = "staff"
+stat_bonuses = {}
+use_effect = {}
+class_id = "assassin"
+weapon_kind = "dagger"
+damage = 7.0
+attack_speed = 3.2
+reach = 1.9
+block_power = 0.0
+parry_window = 0.0
+special = "backstab_bonus"
+source = "Starting gear of the Unseen Covenant."

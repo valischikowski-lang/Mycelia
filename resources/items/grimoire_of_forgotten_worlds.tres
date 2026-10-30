@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_k1hh3"]
+
+[resource]
+script = ExtResource("1_k1hh3")
+id = "grimoire_of_forgotten_worlds"
+display_name = "Grimoire of Forgotten Worlds"
+description = "Half its pages describe places that no longer exist. Ability cooldowns -15%, +10 spell power."
+category = 4
+rarity = 3
+max_stack = 1
+value = 40
+icon_color = Color(0.768627, 0.603922, 1, 1)
+icon_glyph = "❧"
+equip_slot = "artifact"
+stat_bonuses = {
+"spell_power": 10
+}
+use_effect = {}
+class_id = "wizard"
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = "grimoire"
+source = "Starting gear of the Spiral Concordance."

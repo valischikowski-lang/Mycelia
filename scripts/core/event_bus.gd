@@ -30,6 +30,7 @@ signal currency_changed(amount: int)
 signal inventory_changed()
 signal equipment_changed()
 signal skill_unlocked(skill_id: String)
+signal class_chosen(class_id: String)
 
 # --- Quests ----------------------------------------------------------------
 signal quest_state_changed(quest_id: String, state: int)

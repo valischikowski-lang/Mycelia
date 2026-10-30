@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_jgort"]
+
+[resource]
+script = ExtResource("1_jgort")
+id = "soul_shield"
+display_name = "Soul Shield"
+description = "Wrap yourself in a shield of remembered courage that absorbs damage."
+class_id = "spirit"
+glyph = "◈"
+color = Color(0.494118, 0.976471, 1, 1)
+mana_cost = 2.0
+cooldown = 14.0
+kind = "shield"
+power = 40.0
+radius = 3.0
+ability_range = 8.0
+duration = 8.0
+world_tag = ""
+unlock_level = 1

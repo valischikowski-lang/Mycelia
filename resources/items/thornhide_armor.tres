@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_3p6gy"]
+
+[resource]
+script = ExtResource("1_3p6gy")
+id = "thornhide_armor"
+display_name = "Thornhide Armor"
+description = "Bark and thorn grown, not made. +8 defense; melee attackers take 15% of their damage back."
+category = 4
+rarity = 1
+max_stack = 1
+value = 40
+icon_color = Color(0.352941, 0.478431, 0.227451, 1)
+icon_glyph = "♜"
+equip_slot = "robe"
+stat_bonuses = {
+"defense": 8
+}
+use_effect = {}
+class_id = "grimlet"
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = "thorns"
+source = "Starting gear of the Rootborn Hold."

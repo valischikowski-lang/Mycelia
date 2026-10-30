@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_ntntw"]
+
+[resource]
+script = ExtResource("1_ntntw")
+id = "mycelium_hammer"
+display_name = "Mycelium Hammer"
+description = "Slow and enormous. Heavy attacks slam a shockwave through the ground. (Switch weapons to wield it.)"
+category = 4
+rarity = 2
+max_stack = 1
+value = 40
+icon_color = Color(0.211765, 1, 0.941176, 1)
+icon_glyph = "⚒"
+equip_slot = "staff"
+stat_bonuses = {}
+use_effect = {}
+class_id = "grimlet"
+weapon_kind = "hammer"
+damage = 22.0
+attack_speed = 0.75
+reach = 2.5
+block_power = 0.0
+parry_window = 0.0
+special = "shockwave"
+source = "Starting gear of the Rootborn Hold."

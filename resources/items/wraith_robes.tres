@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_ymtld"]
+
+[resource]
+script = ExtResource("1_ymtld")
+id = "wraith_robes"
+display_name = "Wraith Robes"
+description = "Woven from mist that remembers being cloth. Magic damage taken -25%."
+category = 4
+rarity = 1
+max_stack = 1
+value = 40
+icon_color = Color(0.415686, 0.478431, 0.658824, 1)
+icon_glyph = "♜"
+equip_slot = "robe"
+stat_bonuses = {
+"defense": 2,
+"magic_resist": 25
+}
+use_effect = {}
+class_id = "spirit"
+weapon_kind = ""
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.0
+parry_window = 0.0
+special = ""
+source = "Starting gear of the Lantern Choir."

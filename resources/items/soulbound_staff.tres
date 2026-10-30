@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_vnx15"]
+
+[resource]
+script = ExtResource("1_vnx15")
+id = "soulbound_staff"
+display_name = "Soulbound Staff"
+description = "A staff with a sleeping soul inside. Heavy attacks release a homing soul bolt."
+category = 4
+rarity = 2
+max_stack = 1
+value = 40
+icon_color = Color(0.494118, 0.976471, 1, 1)
+icon_glyph = "⚚"
+equip_slot = "staff"
+stat_bonuses = {}
+use_effect = {}
+class_id = "spirit"
+weapon_kind = "staff"
+damage = 9.0
+attack_speed = 1.6
+reach = 2.4
+block_power = 0.0
+parry_window = 0.0
+special = "soul_bolt"
+source = "Starting gear of the Lantern Choir."

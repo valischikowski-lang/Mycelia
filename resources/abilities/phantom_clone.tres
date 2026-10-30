@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_1cwux"]
+
+[resource]
+script = ExtResource("1_1cwux")
+id = "phantom_clone"
+display_name = "Phantom Clone"
+description = "Leave a shadow-double behind. Enemies attack it instead of you; it bursts when it fades."
+class_id = "assassin"
+glyph = "◐"
+color = Color(0.705882, 0.603922, 1, 1)
+mana_cost = 2.0
+cooldown = 14.0
+kind = "clone"
+power = 18.0
+radius = 3.5
+ability_range = 8.0
+duration = 6.0
+world_tag = ""
+unlock_level = 1

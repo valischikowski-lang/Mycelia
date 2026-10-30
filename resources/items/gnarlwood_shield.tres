@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_eqgcp"]
+
+[resource]
+script = ExtResource("1_eqgcp")
+id = "gnarlwood_shield"
+display_name = "Gnarlwood Shield"
+description = "Knotted wood. It has stopped worse than you."
+category = 4
+rarity = 0
+max_stack = 1
+value = 40
+icon_color = Color(0.541176, 0.415686, 0.290196, 1)
+icon_glyph = "⛨"
+equip_slot = "offhand"
+stat_bonuses = {}
+use_effect = {}
+class_id = ""
+weapon_kind = "shield"
+damage = 0.0
+attack_speed = 1.5
+reach = 2.0
+block_power = 0.5
+parry_window = 0.18
+special = ""
+source = "Ollo's shop."
