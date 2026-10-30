@@ -17,5 +17,5 @@
 - Tactical card combat: 14 spells, 6 creatures, a boss with phases and charge attacks, per-discipline VFX, and a finite state machine.
 - The Grimoire (character, inventory, spellbook, skills, journal, map, settings), a shop, the pause menu and the main menu.
 - Save system: four slots, versioned format v3 with migration, backup fallback and autosave.
-- Synthesized original audio: 45 sound effects, 1 ambience loop and 3 music loops (exploration, menu, combat), plus a 4th music loop for the boss.
+- Synthesized original audio: 43 sound effects, 1 ambience loop and 4 music loops (menu, exploration, combat, boss).
 - A test harness with 51 tests, plus visual-QA capture tools.
