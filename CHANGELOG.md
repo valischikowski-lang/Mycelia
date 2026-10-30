@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.3.0] — 2026-10-30: the Deep Fantasy revolution
+
+### Fixed
+
+- **Critical:** the quest tracker could cover the jump/sprint buttons on touch screens. Godot's emulated mouse click then opened the journal and froze the controls. The tracker is now display-only, height-capped and kept clear of every touch control. Non-button HUD elements ignore input, and the touch controls swallow emulated clicks from their own fingers. A regression test covers six screen sizes and every quest state.
+
+### Added
+
+- **Four callings:** Assassin, Spirit, Wizard and Grimlet. The Fourfold Threshold selection is shown on new games and for old saves. Each calling has:
+  - its own avatar
+  - 5 signature items with weapon stats and specials
+  - 5 real-time abilities
+  - stat modifiers
+- **Real-time combat** (`scripts/combat/realtime/`):
+  - player actions: light combos, heavy attacks, dodge, block and parry
+  - bow with ember, frost and spore arrows
+  - weapon switching, lock-on and an over-the-shoulder combat camera (can be turned off in Settings)
+  - stamina and mana regeneration
+  - death and respawn without losing anything
+  - enemy patterns are data (`resources/combat/enemy_profiles.json`): telegraphed melee, leaps, projectiles, area attacks, zones, shockwaves, summons, blinks, heals, stealth and shields
+  - enemy weak spots, statuses, packs, and boss phases
+- **Learning Paths:** 20 paths with 80 steps (`tools/build_learning_paths.py`). Mana Essence is the new currency for them.
+- **Grimoire:** new Abilities and Learning Paths tabs.
+- **Treasure:** 11 chests in the meadow, plus Class Seals (shadow, astral, echo, rune, root, mycelium), the Wanderkey and faction vaults.
+- **Factions:**
+  - reputation with five tiers
+  - four settlements with mentors, merchants, guards and villagers
+  - disguises, goodwill tasks, faction signets, four class quests and four guard types
+
 ## [0.2.0] — 2026-10-30: the dark turn
 
 ### Changed

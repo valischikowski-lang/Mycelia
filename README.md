@@ -1,8 +1,30 @@
 # MYCELIA — The Dreaming Realms
 
-A surreal, psychedelic fantasy RPG for Android, iOS and PC. You explore in first
-person, through glowing mushroom forests, and fight in tactical, turn-based
-battles using collectible spell cards. Built with **Godot 4.3** in typed GDScript.
+A dark, surreal fantasy action-adventure for Android, iOS and PC. You choose
+one of four callings — **Assassin, Spirit, Wizard or Grimlet** — explore a
+dreaming meadow in first person, and fight in real time from an
+over-the-shoulder camera. Built with **Godot 4.3** in typed GDScript.
+
+## New in v0.3 — the Deep Fantasy revolution
+
+- **Four callings** chosen at the Fourfold Threshold, each with its own
+  lore, avatar, five signature items and five real abilities.
+- **Real-time combat**: light combos, charged heavy attacks, dodge with
+  invulnerability, shield block and perfect parry, bow with draw and four
+  arrow types, weapon switching, lock-on, stamina. Enemies telegraph every
+  attack, have weak spots, fight in packs, and the Spore Golem has phases.
+- **Learning Paths**: five per calling (80 steps), bought with Mana Essence
+  earned from quests, chests, bosses, discoveries and levels.
+- **Factions**: four settlements (Duskhollow, Gnarlhollow, Lanternhome,
+  Spireholm) with mentors, merchants, patrolling guards and villagers that
+  react to your reputation; disguises and goodwill tasks keep every village
+  reachable.
+- **Treasure**: chests across the meadow, Class Seals only a certain calling
+  can open (or a Wanderkey), faction vaults.
+- **Fixed**: long quest texts no longer block jump/sprint on touch screens.
+
+The turn-based card duel from v0.1 is still in the code (`legacy_card_duel`)
+but no longer used by the world.
 
 ![Main menu](docs/screenshots/main_menu.png)
 
