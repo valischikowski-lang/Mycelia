@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_lfpfo"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_345og"]
 
 [resource]
-script = ExtResource("1_lfpfo")
+script = ExtResource("1_345og")
 id = "ethereal_shield"
 display_name = "Ethereal Shield"
 description = "Blocks 65% of physical blows and every magical projectile. Generous parry window."

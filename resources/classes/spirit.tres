@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/classes/class_data.gd" id="1_ml2y1"]
+[ext_resource type="Script" path="res://scripts/classes/class_data.gd" id="1_to0lt"]
 
 [resource]
-script = ExtResource("1_ml2y1")
+script = ExtResource("1_to0lt")
 id = "spirit"
 display_name = "Spirit"
 tagline = "The dead remember. So do you."

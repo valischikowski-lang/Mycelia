@@ -210,6 +210,18 @@ func build_items() -> void:
 		a.max_stack = 60
 		a.value = 3
 		save(a, "res://resources/items/%s.tres" % a.id)
+	var wk := ItemData.new()
+	wk.id = "wanderkey"
+	wk.display_name = "Wanderkey"
+	wk.category = C.QUEST
+	wk.rarity = R.EPIC
+	wk.icon_glyph = "⚿"
+	wk.icon_color = Color("#ffe36a")
+	wk.description = "A key with no teeth that fits every Class Seal once. For Dreamers who want to see what the other callings hide."
+	wk.source = "Ollo sells them, slowly. Sometimes found in chests."
+	wk.max_stack = 9
+	wk.value = 60
+	save(wk, "res://resources/items/wanderkey.tres")
 	it("twig_bow", "Twig Bow", "", "ranged", R.COMMON, "➹", "#c48d5a",
 		"A bent branch with ideas.", "Starting gear of every Dreamer.",
 		{"kind": "bow", "damage": 9, "speed": 1.0, "reach": 30.0})

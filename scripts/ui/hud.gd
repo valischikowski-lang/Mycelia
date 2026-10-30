@@ -143,7 +143,8 @@ func refresh_vitals() -> void:
 	_mp_label.text = "%d/%d" % [int(s.mana), s.max_mana()]
 	_xp_bar.max_value = s.xp_to_next()
 	_xp_bar.value = s.xp
-	_glimmer_label.text = "  ◈ %d" % p.inventory.glimmer
+	_glimmer_label.text = "  ◈ %d   ✧ %d" % [p.inventory.glimmer, p.mana_essence]
+	_glimmer_label.tooltip_text = "Glimmer (coins) · Mana Essence (Learning Paths)"
 
 
 # ------------------------------------------------------------------ buttons

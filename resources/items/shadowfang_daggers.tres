@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_84g63"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_g87lx"]
 
 [resource]
-script = ExtResource("1_84g63")
+script = ExtResource("1_g87lx")
 id = "shadowfang_daggers"
 display_name = "Shadowfang Daggers"
 description = "Twin daggers forged from a moonless night. Fast combos; strikes from behind deal double damage."

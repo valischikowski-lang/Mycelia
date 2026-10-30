@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_3q4gw"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_rrxdd"]
 
 [resource]
-script = ExtResource("1_3q4gw")
+script = ExtResource("1_rrxdd")
 id = "rootbreaker_axe"
 display_name = "Rootbreaker Axe"
 description = "A heavy axe of petrified root. Every swing cleaves through all enemies in front of you."

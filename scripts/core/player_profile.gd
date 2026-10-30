@@ -20,6 +20,24 @@ var display_name: String = "Dreamer"
 var class_id: String = ""
 ## Ability ids slotted on the hotbar (defaults to the class's abilities).
 var hotbar: PackedStringArray = []
+## Mana Essence: the currency spent on Learning Paths. Earned from quests,
+## exploration, chests, bosses and discoveries (not from the combat pool).
+var mana_essence: int = 0
+
+signal mana_essence_changed(amount: int)
+
+
+func add_mana_essence(n: int) -> void:
+	mana_essence = maxi(0, mana_essence + n)
+	mana_essence_changed.emit(mana_essence)
+
+
+func spend_mana_essence(n: int) -> bool:
+	if n > mana_essence:
+		return false
+	mana_essence -= n
+	mana_essence_changed.emit(mana_essence)
+	return true
 var stats := PlayerStats.new()
 var inventory: Inventory
 var spellbook := Spellbook.new()
@@ -47,6 +65,7 @@ func new_game() -> void:
 	player_id = "local_%d" % (Time.get_unix_time_from_system() as int)
 	class_id = ""
 	hotbar = PackedStringArray()
+	mana_essence = 0
 	stats.bonuses = {}
 	stats.from_dict({"level": 1, "xp": 0, "skill_points": 0})
 	spellbook.known = START_SPELLS.duplicate()
@@ -149,6 +168,9 @@ func grant_rewards(r: Dictionary) -> Dictionary:
 		if learn_spell(String(sid)):
 			(summary["spells"] as Array).append(String(sid))
 	stats.skill_points += int(r.get("skill_points", 0))
+	if int(r.get("mana_essence", 0)) > 0:
+		add_mana_essence(int(r.get("mana_essence", 0)))
+		summary["mana_essence"] = int(r.get("mana_essence", 0))
 	var xp := int(r.get("xp", 0))
 	if xp > 0:
 		summary["xp"] = xp
@@ -199,7 +221,7 @@ func unlock_skill(tree_id: String, node_id: String) -> String:
 func to_dict() -> Dictionary:
 	return {
 		"player_id": player_id, "display_name": display_name, "play_time": play_time,
-		"class_id": class_id, "hotbar": Array(hotbar),
+		"class_id": class_id, "hotbar": Array(hotbar), "mana_essence": mana_essence,
 		"stats": stats.to_dict(), "inventory": inventory.to_dict(), "spellbook": spellbook.to_dict(),
 		"skills": skills.to_dict(), "quests": quests.to_dict(), "world": world.to_dict(),
 	}
@@ -210,6 +232,7 @@ func from_dict(d: Dictionary) -> void:
 	display_name = String(d.get("display_name", "Dreamer"))
 	play_time = float(d.get("play_time", 0.0))
 	class_id = String(d.get("class_id", ""))
+	mana_essence = int(d.get("mana_essence", 0))
 	hotbar = PackedStringArray(d.get("hotbar", []))
 	if class_id != "" and hotbar.is_empty() and player_class():
 		hotbar = player_class().abilities.duplicate()

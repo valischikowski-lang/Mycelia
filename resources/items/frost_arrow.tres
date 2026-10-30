@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_mb8it"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_mnl2w"]
 
 [resource]
-script = ExtResource("1_mb8it")
+script = ExtResource("1_mnl2w")
 id = "frost_arrow"
 display_name = "Frost Arrow"
 description = "Slows what it hits to a dreamy crawl. Draw your bow and press Switch to choose arrows."

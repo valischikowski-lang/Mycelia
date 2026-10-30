@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_ukjtd"]
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_gxu6d"]
 
 [resource]
-script = ExtResource("1_ukjtd")
+script = ExtResource("1_gxu6d")
 id = "colossus_growth"
 display_name = "Colossus Growth"
 description = "Grow to a towering colossus: bigger, +60% damage, half damage taken, heavy blows shake the ground."

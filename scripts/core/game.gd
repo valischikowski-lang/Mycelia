@@ -72,6 +72,7 @@ func _bind(p: PlayerProfile) -> void:
 	p.inventory.changed.connect(func() -> void: EventBus.inventory_changed.emit())
 	p.inventory.equipment_changed.connect(func() -> void: EventBus.equipment_changed.emit())
 	p.inventory.currency_changed.connect(func(a: int) -> void: EventBus.currency_changed.emit(a))
+	p.mana_essence_changed.connect(func(a: int) -> void: EventBus.currency_changed.emit(a))
 	p.world.flag_changed.connect(func(f: String, v: Variant) -> void: EventBus.flag_changed.emit(f, v))
 
 

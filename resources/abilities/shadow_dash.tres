@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_fyyrj"]
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_ana12"]
 
 [resource]
-script = ExtResource("1_fyyrj")
+script = ExtResource("1_ana12")
 id = "shadow_dash"
 display_name = "Shadow Dash"
 description = "Become shadow and streak forward through enemies, cutting each one you pass. Passes through Shadow Veils."

@@ -27,6 +27,20 @@ const SIGHTING := Vector2(-16, -62)
 const CRYSTAL_GROVE := Vector2(98, -26)
 const CROOK := Vector2(-36, 54)
 const GRIZZLE_POS := Vector2(-31, 56)
+## Treasure nooks: [position, chest id, loot, grade, seal tag ("" = none), echo text]
+const TREASURES := [
+	[Vector2(-90, -42), "chest_shadow_nook", {"items": {"ember_arrow": 10, "dewdrop_tonic": 2}, "glimmer": 40, "mana_essence": 3}, "rare", "shadow", ""],
+	[Vector2(84, 36), "chest_astral_shrine", {"items": {"night_ink": 2, "frost_arrow": 10}, "glimmer": 35, "mana_essence": 3}, "rare", "astral", ""],
+	[Vector2(22, -104), "chest_rune_north", {"items": {"scroll_paradox_gift": 1, "spore_arrow": 8}, "glimmer": 45, "mana_essence": 3}, "rare", "rune", ""],
+	[Vector2(-50, 70), "chest_root_gate", {"items": {"toadstool_tea": 2, "gremlin_cog": 3}, "glimmer": 40, "mana_essence": 3}, "rare", "root", ""],
+	[Vector2(40, 72), "chest_mycelium", {"items": {"mana_moss": 3, "lumen_ring": 1}, "glimmer": 30, "mana_essence": 4}, "rare", "mycelium", ""],
+	[Vector2(-64, -8), "chest_circle_echo", {"items": {"dream_mote": 2}, "glimmer": 25, "mana_essence": 5}, "rare", "echo",
+		"[i]The stones remember a night of falling stars. Four figures stood here — one in shadow, one in lantern-light, one wreathed in runes, one with a cap like a little red moon. They each pressed a hand to a stone, and the meadow fell asleep around them so the Root could keep dreaming.[/i]\n\nSomeone has been pulling those hands away, one by one."],
+	[Vector2(-104, 74), "chest_hidden_hollow", {"items": {"dreamsteel_sword": 1, "dewdrop_tonic": 2}, "glimmer": 50, "mana_essence": 2}, "common", "", ""],
+	[Vector2(102, -30), "chest_crystal_grove", {"items": {"beetle_shard": 3, "frost_arrow": 6}, "glimmer": 30, "mana_essence": 2}, "common", "", ""],
+	[Vector2(26, -50), "chest_keeper_garden", {"items": {"gnarlwood_shield": 1, "ember_arrow": 6}, "glimmer": 20, "mana_essence": 1}, "common", "", ""],
+	[Vector2(-30, 62), "chest_crookhollow_cellar", {"items": {"crooked_hat": 1}, "glimmer": 15, "mana_essence": 2}, "rare", "", ""],
+]
 const MAIN_PATH := [Vector2(0, 92), Vector2(-6, 72), Vector2(4, 50), Vector2(-4, 26), Vector2(-14, 8), Vector2(-6, -14), Vector2(8, -30), Vector2(15, -35)]
 
 var ground_material: ShaderMaterial
@@ -64,6 +78,7 @@ func _build_content() -> void:
 	await report(0.86, "Waking the creatures...")
 	_build_life()
 	_build_interactables()
+	_build_treasures()
 	_build_npcs()
 	_build_creatures()
 	await report(0.96, "The meadow is dreaming of you...")
@@ -256,6 +271,10 @@ func _scatter() -> Scatter:
 	s.exclude_circle(Vector3(PETALUNE_POS.x, 0, PETALUNE_POS.y), 5.0)
 	s.exclude_circle(Vector3(SIGHTING.x, 0, SIGHTING.y), 8.0)
 	s.exclude_circle(Vector3(CROOK.x, 0, CROOK.y), 19.0)
+	for t: Array in TREASURES:
+		var tp: Vector2 = t[0]
+		s.exclude_circle(Vector3(tp.x, 0, tp.y), 5.0)
+	s.exclude_circle(Vector3(DRIFT_ISLE.x, 0, DRIFT_ISLE.z), 4.0)
 	return s
 
 
@@ -799,6 +818,34 @@ func _build_npcs() -> void:
 	grizzle.interact_height = 1.5
 	_add(grizzle, GRIZZLE_POS)
 	grizzle.rotation.y = atan2(CROOK.x - GRIZZLE_POS.x, CROOK.y - GRIZZLE_POS.y) + PI
+
+
+# ------------------------------------------------------------------ treasure
+func _build_treasures() -> void:
+	for t: Array in TREASURES:
+		var xz: Vector2 = t[0]
+		var chest := TreasureChest.new()
+		chest.chest_id = t[1]
+		chest.loot = t[2]
+		chest.grade = t[3]
+		chest.radius = 1.0
+		_add(chest, xz)
+		chest.rotation.y = rng.randf() * TAU
+		if String(t[4]) != "":
+			var seal := ClassSeal.new()
+			seal.seal_id = "seal_" + String(t[1])
+			seal.tag = t[4]
+			seal.echo_text = t[5]
+			seal.radius = 2.3
+			_add(seal, xz)
+			chest.seal = seal
+	# The Drift Isle's reward for the bounce route.
+	var sky := TreasureChest.new()
+	sky.chest_id = "chest_drift_isle"
+	sky.loot = {"items": {"moonsplitter": 1}, "glimmer": 80, "mana_essence": 6}
+	sky.grade = "legendary"
+	add_child(sky)
+	sky.global_position = DRIFT_ISLE + Vector3(1.5, 0.2, 1.5)
 
 
 # ------------------------------------------------------------------ creatures

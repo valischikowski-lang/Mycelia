@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_03ybi"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_di6u0"]
 
 [resource]
-script = ExtResource("1_03ybi")
+script = ExtResource("1_di6u0")
 id = "phantomstep_boots"
 display_name = "Phantomstep Boots"
 description = "Your dodge becomes a 40% longer phantom dash that passes through enemies."

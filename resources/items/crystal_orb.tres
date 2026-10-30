@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_kyp4e"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_oqp0p"]
 
 [resource]
-script = ExtResource("1_kyp4e")
+script = ExtResource("1_oqp0p")
 id = "crystal_orb"
 display_name = "Crystal Orb"
 description = "Hums near hidden things. Treasure, runes and secret doors within 15 m shimmer through walls."

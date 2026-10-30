@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_nmjvb"]
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_1w0hs"]
 
 [resource]
-script = ExtResource("1_nmjvb")
+script = ExtResource("1_1w0hs")
 id = "mycelium_link"
 display_name = "Mycelium Link"
 description = "Plug into the network under your feet. Each hit you land heals you; dormant Mycelium Nodes wake."

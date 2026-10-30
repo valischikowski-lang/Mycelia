@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_rn253"]
+[ext_resource type="Script" path="res://scripts/combat/realtime/ability_data.gd" id="1_3kvl7"]
 
 [resource]
-script = ExtResource("1_rn253")
+script = ExtResource("1_3kvl7")
 id = "arcane_bolt"
 display_name = "Arcane Bolt"
 description = "A fast, homing bolt of pure arcana. Strikes runes to wake them."
