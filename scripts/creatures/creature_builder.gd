@@ -59,6 +59,16 @@ static func build(kind: String, tint: Color = Color.WHITE, opts: Dictionary = {}
 			rig.set("idle_bob", 0.3)
 			rig.set("idle_speed", 0.8)
 			rig.set("squash", 0.12)
+		"witch":
+			_witch(body, rng, opts)
+			rig.set("idle_bob", 0.05)
+			rig.set("idle_speed", 2.8)
+			rig.set("squash", 0.04)
+		"gremlin":
+			_gremlin(body, rng)
+			rig.set("idle_bob", 0.12)
+			rig.set("idle_speed", 4.0)
+			rig.set("squash", 0.08)
 		_:
 			_sporeling(body, rng, biome, tint)
 	return rig as CreatureRig
@@ -547,3 +557,175 @@ static func _drifter(body: Node3D, rng: RandomNumberGenerator, biome: BiomeData)
 			tr.append(0.05 * (1.0 - t * 0.8))
 		kit.tube(tp, tr, 4, func(t: float) -> Color: return Color(col.r, col.g, col.b, 0.4 + t * 0.6), false, true)
 	_mesh(body, kit, null, false)
+
+
+# ---------------------------------------------------------------- dark folk
+## Hunched witch with a crooked hat, hooked nose, mismatched eyes and only
+## two or three crooked teeth. opts: teeth (2|3), skin (Color), hat (Color).
+static func _witch(body: Node3D, rng: RandomNumberGenerator, opts: Dictionary) -> void:
+	var teeth: int = int(opts.get("teeth", 2 + rng.randi() % 2))
+	var skins := [Color("#6f8f4a"), Color("#8a7aa8"), Color("#9aa07a"), Color("#5f7a6a")]
+	var skin: Color = opts.get("skin", skins[rng.randi() % skins.size()])
+	var robe := Color("#160d22")
+	var kit := MeshKit.new()
+	# Hunched robe with a ragged hem.
+	var prof := PackedVector2Array([Vector2(0.16, 1.5), Vector2(0.3, 1.3), Vector2(0.36, 0.9), Vector2(0.48, 0.4), Vector2(0.62, 0.02)])
+	kit.lathe(prof, 14, Vector3.ZERO, Basis(Vector3.RIGHT, 0.22), func(t: float, _a: float) -> Color:
+		var c := robe.lerp(Color("#2a1838"), 1.0 - t)
+		c.a = 0.02
+		return c, func(a: float, t: float) -> float: return 1.0 + 0.28 * sin(a * 9.0 + 1.3) * pow(t, 4.0) + 0.06 * sin(a * 3.0), true, false)
+	kit.ellipsoid(Vector3(0, 1.35, -0.18), Vector3(0.36, 0.3, 0.3), robe.lightened(0.05), 6, 10)
+	# Head, chin and the long hooked nose with a wart.
+	var head := Vector3(0, 1.62, 0.42)
+	kit.ellipsoid(head, Vector3(0.24, 0.27, 0.24), skin, 8, 12, Basis.IDENTITY, null, 0.0, func(d: Vector3) -> Color:
+		var c := skin.lerp(skin.darkened(0.35), clampf(-d.y, 0.0, 1.0))
+		c.a = 0.03
+		return c)
+	var chin := skin.darkened(0.15)
+	chin.a = 0.03
+	kit.ellipsoid(head + Vector3(0.03, -0.27, 0.12), Vector3(0.09, 0.1, 0.09), chin, 4, 8)
+	var nose := PackedVector3Array([head + Vector3(0, 0.02, 0.2), head + Vector3(0.02, -0.02, 0.42), head + Vector3(0.05, -0.12, 0.55), head + Vector3(0.06, -0.22, 0.56)])
+	kit.tube(MeshKit.spline(nose, 3), _fit(PackedFloat32Array([0.075, 0.06, 0.04, 0.015]), 10), 6, func(_t: float) -> Color:
+		var c := skin.darkened(0.08)
+		c.a = 0.03
+		return c, false, true)
+	kit.ellipsoid(head + Vector3(0.06, -0.02, 0.43), Vector3.ONE * 0.035, skin.darkened(0.4), 3, 6)
+	# Wide crooked grin with 2-3 teeth.
+	var mouth := head + Vector3(0.0, -0.13, 0.2)
+	kit.ellipsoid(mouth, Vector3(0.17, 0.055, 0.06), Color(0.06, 0.0, 0.02, 0.0), 4, 10, Basis(Vector3.FORWARD, rng.randf_range(-0.25, 0.25)))
+	var tooth_col := Color("#e6d9a0")
+	for i in teeth:
+		var x := lerpf(-0.08, 0.08, float(i) / maxf(1.0, teeth - 1)) + rng.randf_range(-0.02, 0.02)
+		var tb := Basis(Vector3.FORWARD, rng.randf_range(-0.5, 0.5)) * Basis(Vector3.RIGHT, PI)
+		# One tooth hangs from the top, the next pokes up from below: madness.
+		if i % 2 == 1:
+			tb = Basis(Vector3.FORWARD, rng.randf_range(-0.6, 0.6))
+		var ty := 0.045 if i % 2 == 0 else -0.05
+		kit.crystal_prism(mouth + Vector3(x, ty, 0.05), tb, rng.randf_range(0.08, 0.13), 0.024, 4, Color(tooth_col.r * 0.8, tooth_col.g * 0.8, tooth_col.b * 0.7, 0.05), 0.4)
+	# Wild straggly hair.
+	var hair := Color("#a6a3b8") if rng.randf() < 0.6 else Color("#5a3a7a")
+	for i in 14:
+		var a := PI * 0.15 + PI * 0.7 * float(i) / 13.0 + PI
+		var root := head + Vector3(cos(a) * 0.22, 0.12, sin(a) * 0.18 - 0.05)
+		var hp := PackedVector3Array()
+		var hr := PackedFloat32Array()
+		var length := rng.randf_range(0.45, 0.9)
+		for k in 6:
+			var t := float(k) / 5.0
+			hp.append(root + Vector3(cos(a) * 0.18 * t + sin(t * 7.0 + i) * 0.05, -length * t, sin(a) * 0.1 * t - 0.12 * t))
+			hr.append(0.02 * (1.0 - t * 0.6))
+		kit.tube(hp, hr, 3, func(_t: float) -> Color: return Color(hair.r, hair.g, hair.b, 0.02), false, true)
+	# Bony arms with claws, holding a gnarled staff topped by a sickly orb.
+	var hand := Vector3(0.38, 1.0, 0.55)
+	kit.tube(MeshKit.spline(PackedVector3Array([Vector3(0.3, 1.3, 0.1), Vector3(0.42, 1.1, 0.35), hand]), 3), _fit(PackedFloat32Array([0.08, 0.06, 0.05]), 7), 5, func(_t: float) -> Color: return robe, false, true)
+	for f in 4:
+		var fd := Vector3(0.04 * (f - 1.5), -0.05, 0.12).normalized()
+		kit.tube(PackedVector3Array([hand, hand + fd * 0.12, hand + fd * 0.2 + Vector3(0, -0.06, 0)]), PackedFloat32Array([0.018, 0.014, 0.006]), 3, func(_t: float) -> Color: return Color(skin.r * 0.7, skin.g * 0.7, skin.b * 0.7, 0.02), false, true)
+	var other := Vector3(-0.36, 1.05, 0.5)
+	kit.tube(MeshKit.spline(PackedVector3Array([Vector3(-0.3, 1.3, 0.1), Vector3(-0.42, 1.15, 0.3), other]), 3), _fit(PackedFloat32Array([0.08, 0.06, 0.05]), 7), 5, func(_t: float) -> Color: return robe, false, true)
+	var staff := PackedVector3Array([Vector3(0.4, 0.0, 0.62), Vector3(0.36, 1.0, 0.58), Vector3(0.45, 1.8, 0.6), Vector3(0.3, 2.1, 0.62)])
+	kit.tube(MeshKit.spline(staff, 4), _fit(PackedFloat32Array([0.04, 0.035, 0.03, 0.025]), 13), 5, func(_t: float) -> Color: return Color("#24160e", 0.02), true, true)
+	var orb_col: Color = opts.get("orb", Color("#6dffb0"))
+	kit.ellipsoid(Vector3(0.3, 2.2, 0.62), Vector3.ONE * 0.1, Color(orb_col.r, orb_col.g, orb_col.b, 1.0), 5, 8)
+	_mesh(body, kit)
+	# The hat: a tall bent cone with a floppy brim and a glowing band.
+	var hk := MeshKit.new()
+	var hat_col: Color = opts.get("hat", Color("#120a1e"))
+	var hp2 := PackedVector3Array()
+	var hr2 := PackedFloat32Array()
+	var bend := Vector3(rng.randf_range(-0.4, 0.4), 0, -0.3)
+	for i in 10:
+		var t := float(i) / 9.0
+		hp2.append(head + Vector3(0, 0.17 + t * 0.95, -0.05) + bend * t * t + Vector3(sin(t * 4.0) * 0.06, 0, 0))
+		hr2.append(0.26 * pow(1.0 - t, 1.2) + 0.012)
+	hk.tube(hp2, hr2, 9, func(t: float) -> Color:
+		if absf(t - 0.12) < 0.04:
+			return Color(orb_col.r, orb_col.g, orb_col.b, 0.8)
+		var c := hat_col.lerp(hat_col.lightened(0.15), t)
+		c.a = 0.02
+		return c, true, true)
+	hk.lathe(PackedVector2Array([Vector2(0.25, 0.02), Vector2(0.45, 0.0), Vector2(0.58, -0.06), Vector2(0.24, -0.02)]), 16, head + Vector3(0, 0.17, -0.05), Basis(Vector3.RIGHT, -0.12),
+		func(_t: float, _a: float) -> Color: return Color(hat_col.r, hat_col.g, hat_col.b, 0.02), func(a: float, t: float) -> float: return 1.0 + 0.12 * sin(a * 5.0) * t, false, false)
+	_mesh(body, hk)
+	# Mismatched eyes: one huge and yellow, one small and red.
+	var eyes := Node3D.new()
+	eyes.name = "Eyes"
+	body.add_child(eyes)
+	var ek := MeshKit.new()
+	var le := head + Vector3(-0.1, 0.06, 0.2)
+	var re := head + Vector3(0.1, 0.03, 0.21)
+	ek.ellipsoid(le, Vector3(0.075, 0.085, 0.05), Color(1.0, 0.9, 0.3, 0.9), 5, 8)
+	ek.ellipsoid(le + Vector3(0.0, 0.0, 0.045), Vector3(0.02, 0.05, 0.02), Color(0.02, 0.0, 0.0, 0.0), 4, 6)
+	ek.ellipsoid(re, Vector3(0.04, 0.04, 0.03), Color(1.0, 0.2, 0.15, 1.0), 4, 6)
+	ek.ellipsoid(re + Vector3(0.0, 0.0, 0.028), Vector3.ONE * 0.012, Color(0.02, 0.0, 0.0, 0.0), 3, 5)
+	_mesh(eyes, ek, null, false)
+	var l := OmniLight3D.new()
+	l.light_color = orb_col
+	l.light_energy = 1.2
+	l.omni_range = 4.0
+	l.position = Vector3(0.3, 2.2, 0.62)
+	body.add_child(l)
+
+
+## Goggled gremlin with bat ears, spotted skin and a propeller pack.
+static func _gremlin(body: Node3D, rng: RandomNumberGenerator) -> void:
+	var skin := Color("#4fae3a")
+	var spot := Color("#1d5a18")
+	var noise := FastNoiseLite.new()
+	noise.seed = rng.randi()
+	noise.frequency = 3.0
+	var spotty := func(d: Vector3) -> Color:
+		var c := skin.lerp(skin.darkened(0.3), clampf(-d.y, 0.0, 1.0))
+		if noise.get_noise_3dv(d * 2.0) > 0.35:
+			c = spot
+		c.a = 0.12
+		return c
+	var limb := Color(skin.r, skin.g, skin.b, 0.12)
+	var kit := MeshKit.new()
+	kit.ellipsoid(Vector3(0, 0.55, 0), Vector3(0.28, 0.32, 0.24), skin, 7, 10, Basis.IDENTITY, null, 0.0, spotty)
+	var head := Vector3(0, 1.08, 0.08)
+	kit.ellipsoid(head, Vector3(0.42, 0.34, 0.36), skin, 9, 14, Basis.IDENTITY, null, 0.0, spotty)
+	# Bat ears.
+	for s: float in [-1.0, 1.0]:
+		kit.ellipsoid(head + Vector3(s * 0.48, 0.2, -0.05), Vector3(0.32, 0.05, 0.16), Color(skin.r * 0.8, skin.g * 0.8, skin.b * 0.8, 0.25), 4, 8, Basis(Vector3.FORWARD, s * 0.5) * Basis(Vector3.UP, s * 0.3))
+	# Huge grin full of sharp teeth.
+	var mouth := head + Vector3(0, -0.12, 0.3)
+	kit.ellipsoid(mouth, Vector3(0.3, 0.07, 0.08), Color(0.25, 0.02, 0.05, 0.0), 4, 12)
+	for i in 9:
+		var x := lerpf(-0.24, 0.24, float(i) / 8.0)
+		var up := i % 2 == 0
+		var tb := Basis.IDENTITY if not up else Basis(Vector3.RIGHT, PI)
+		kit.crystal_prism(mouth + Vector3(x, (0.05 if up else -0.05), 0.06 - absf(x) * 0.15), tb, 0.07, 0.02, 3, Color(0.95, 0.95, 0.85, 0.1), 0.5)
+	# Arms, legs and little bat wings.
+	for s: float in [-1.0, 1.0]:
+		kit.tube(PackedVector3Array([Vector3(s * 0.25, 0.7, 0.05), Vector3(s * 0.45, 0.5, 0.2), Vector3(s * 0.4, 0.35, 0.3)]), PackedFloat32Array([0.06, 0.05, 0.04]), 5, func(_t: float) -> Color: return limb, false, true)
+		kit.tube(PackedVector3Array([Vector3(s * 0.12, 0.3, 0.0), Vector3(s * 0.15, 0.12, 0.05), Vector3(s * 0.16, 0.0, 0.12)]), PackedFloat32Array([0.07, 0.06, 0.05]), 5, func(_t: float) -> Color: return limb.darkened(0.2), false, true)
+		kit.ellipsoid(Vector3(s * 0.45, 0.85, -0.2), Vector3(0.35, 0.04, 0.2), Color("#1a1420", 0.02), 3, 8, Basis(Vector3.FORWARD, s * 0.4))
+	# Propeller backpack.
+	kit.ellipsoid(Vector3(0, 0.75, -0.3), Vector3(0.2, 0.22, 0.12), Color("#3a2414", 0.02), 5, 8)
+	_mesh(body, kit)
+	var gk := MeshKit.new()
+	var brass := Color("#9a7a30")
+	for s: float in [-1.0, 1.0]:
+		var c := head + Vector3(s * 0.15, 0.1, 0.32)
+		var ring := PackedVector3Array()
+		var rr := PackedFloat32Array()
+		for k in 13:
+			var a := TAU * k / 12.0
+			ring.append(c + Vector3(cos(a) * 0.12, sin(a) * 0.12, 0))
+			rr.append(0.03)
+		gk.tube(ring, rr, 5, func(_t: float) -> Color: return Color(brass.r, brass.g, brass.b, 0.1), false, false)
+		gk.ellipsoid(c, Vector3(0.11, 0.11, 0.03), Color(0.3, 0.9, 0.85, 0.7), 4, 8)
+		for p in 2:
+			var pc := Vector3(s * 0.35, 0.95 + p * 0.02, -0.38)
+			gk.ellipsoid(pc, Vector3(0.28, 0.015, 0.05), Color(brass.r, brass.g, brass.b, 0.05), 3, 6, Basis(Vector3.UP, p * PI * 0.5))
+	gk.tube(PackedVector3Array([head + Vector3(-0.4, 0.15, 0.1), head + Vector3(0, 0.3, 0.05), head + Vector3(0.4, 0.15, 0.1)]), PackedFloat32Array([0.03, 0.03, 0.03]), 4, func(_t: float) -> Color: return Color("#2a1a10", 0.0), false, false)
+	_mesh(body, gk)
+	var eyes := Node3D.new()
+	eyes.name = "Eyes"
+	body.add_child(eyes)
+	var ek := MeshKit.new()
+	for s: float in [-1.0, 1.0]:
+		ek.ellipsoid(head + Vector3(s * 0.15, 0.1, 0.3), Vector3(0.07, 0.06, 0.03), Color(1.0, 0.75, 0.1, 1.0), 4, 6)
+		ek.ellipsoid(head + Vector3(s * 0.15, 0.1, 0.33), Vector3(0.012, 0.045, 0.01), Color(0.0, 0.0, 0.0, 0.0), 3, 5)
+	_mesh(eyes, ek, null, false)

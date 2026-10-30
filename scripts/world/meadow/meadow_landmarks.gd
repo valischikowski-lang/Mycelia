@@ -658,3 +658,121 @@ static func distant_village(region: Region, center: Vector2) -> Node3D:
 	wmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	root.add_child(wmi)
 	return root
+
+
+# ------------------------------------------------------------------ dark fantasy
+## Crookhollow: a huddle of leaning, half-timbered witch houses around a
+## little cobbled square with a bubbling cauldron.
+static func crookhollow(region: Region, center: Vector2, count: int = 7, ring: float = 12.0) -> Node3D:
+	var root := Node3D.new()
+	root.name = "Crookhollow"
+	region.add_child(root)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 6661
+	var walls := MeshKit.new()
+	var roofs := MeshKit.new()
+	var glow := MeshKit.new()
+	var body := StaticBody3D.new()
+	body.name = "HouseColliders"
+	root.add_child(body)
+	var c3 := Vector3(center.x, 0, center.y)
+	for i in count:
+		# Leave a gap in the ring towards the east, where the path comes in.
+		var a := lerpf(0.55, TAU - 0.55, float(i) / (count - 1)) + rng.randf_range(-0.12, 0.12)
+		var r := ring + rng.randf_range(-1.5, 2.5)
+		var pos := c3 + Vector3(cos(a), 0, sin(a)) * r
+		pos.y = region.ground(pos.x, pos.z)
+		# Door faces the square (local -Z side 0 faces ... the generator's +Z), with a crooked twist.
+		var to_center := (c3 - pos)
+		var yaw := atan2(to_center.x, to_center.z) + rng.randf_range(-0.3, 0.3)
+		var xf := Transform3D(Basis(Vector3.UP, yaw).rotated(Vector3(1, 0, 0).rotated(Vector3.UP, yaw), rng.randf_range(-0.04, 0.04)), pos)
+		var h := CrookedArchitecture.crooked_house(rng, xf)
+		walls.merge(h["walls"], Transform3D.IDENTITY)
+		roofs.merge(h["roof"], Transform3D.IDENTITY)
+		glow.merge(h["glow"], Transform3D.IDENTITY)
+		var sz: Vector3 = h["size"]
+		Props.add_box(body, pos + Vector3.UP * sz.y * 0.5, sz * Vector3(0.95, 1.0, 0.95), Basis(Vector3.UP, yaw))
+		if i % 2 == 0:
+			var smoke := SpellFX.ambient_motes(Color(0.45, 1.0, 0.55), 10, Vector3(0.6, 3.0, 0.6), 0.25)
+			smoke.position = h["chimney"]
+			root.add_child(smoke)
+	_commit(root, walls, MaterialLib.organic("crook_walls", {"emission": 0.35, "pulse": 0.0, "rim": Color(0.35, 0.3, 0.8), "rim_strength": 0.25, "roughness": 0.95}), true)
+	_commit(root, roofs, MaterialLib.organic("crook_roofs", {"emission": 0.55, "pulse": 0.15, "rim": Color(0.3, 0.5, 1.0), "rim_strength": 0.5, "roughness": 0.7}), true)
+	_commit(root, glow, MaterialLib.organic("crook_windows", {"emission": 5.0, "pulse": 0.25, "pulse_speed": 2.3}), false)
+	# The cauldron in the middle of the square.
+	var cpos := Vector3(c3.x, region.ground(c3.x, c3.z), c3.z)
+	var ck := MeshKit.new()
+	ck.ellipsoid(cpos + Vector3.UP * 0.75, Vector3(1.0, 0.8, 1.0), Color("#0d0a12"), 8, 12)
+	var brew := MeshKit.new()
+	brew.ellipsoid(cpos + Vector3.UP * 1.45, Vector3(0.85, 0.12, 0.85), Color("#6dff7a"), 4, 12)
+	for k in 3:
+		var la := TAU * k / 3.0
+		ck.tube(PackedVector3Array([cpos + Vector3(cos(la) * 0.7, 0.4, sin(la) * 0.7), cpos + Vector3(cos(la) * 1.0, -0.1, sin(la) * 1.0)]), PackedFloat32Array([0.08, 0.06]), 4, func(_t: float) -> Color: return Color("#0d0a12"), false, true)
+	_commit(root, ck, MaterialLib.stone(), true)
+	_commit(root, brew, MaterialLib.organic("cauldron_brew", {"emission": 4.0, "pulse": 0.6, "pulse_speed": 3.0}), false)
+	Props.add_cylinder(body, cpos + Vector3.UP * 0.7, 1.0, 1.4)
+	var bubbles := SpellFX.ambient_motes(Color(0.5, 1.0, 0.45), 18, Vector3(0.7, 1.2, 0.7), 0.12)
+	bubbles.position = cpos + Vector3.UP * 1.9
+	root.add_child(bubbles)
+	glow_light(root, cpos + Vector3.UP * 2.0, Color(0.45, 1.0, 0.5), 2.2, 9.0)
+	return root
+
+
+static func _commit(parent: Node3D, kit: MeshKit, mat: Material, shadows: bool) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	mi.mesh = kit.commit(mat)
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON if shadows else GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	parent.add_child(mi)
+	return mi
+
+
+## The dark castle on the far side of the north pass — always visible, never reachable (yet).
+static func dark_castle(region: Region, center: Vector2) -> Node3D:
+	var root := Node3D.new()
+	root.name = "Nightspire"
+	region.add_child(root)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 1313
+	var k := CrookedArchitecture.dark_castle(rng, Vector3(center.x, -4.0, center.y), 1.35)
+	_commit(root, k["stone"], MaterialLib.organic("castle_stone", {"emission": 0.4, "pulse": 0.0, "rim": Color(0.3, 0.3, 0.9), "rim_strength": 0.6, "roughness": 0.95}), false)
+	_commit(root, k["roof"], MaterialLib.organic("castle_roof", {"emission": 1.0, "pulse": 0.2, "rim": Color(0.3, 0.5, 1.0), "rim_strength": 0.6}), false)
+	_commit(root, k["glow"], MaterialLib.organic("castle_windows", {"emission": 7.0, "pulse": 0.3, "pulse_speed": 0.7}), false)
+	return root
+
+
+## Bent iron lantern posts along a polyline. Lights only on every second post
+## and only above low quality.
+static func lantern_row(region: Region, points: PackedVector2Array, spacing: float, offset: float) -> Node3D:
+	var root := Node3D.new()
+	root.name = "Lanterns"
+	region.add_child(root)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 404 + points.size()
+	var iron := MeshKit.new()
+	var glow := MeshKit.new()
+	var carry := spacing * 0.5
+	var n := 0
+	var lights := Settings.quality != Settings.Quality.LOW
+	for i in points.size() - 1:
+		var a := points[i]
+		var b := points[i + 1]
+		var seg := a.distance_to(b)
+		var dir := (b - a) / seg
+		var t := carry
+		while t < seg:
+			var p := a + dir * t
+			var side := 1.0 if n % 2 == 0 else -1.0
+			var perp := Vector2(-dir.y, dir.x) * side
+			var foot2 := p + perp * offset
+			var foot := Vector3(foot2.x, region.ground(foot2.x, foot2.y), foot2.y)
+			var post := CrookedArchitecture.lantern_post(rng, foot, Vector3(-perp.x, 0, -perp.y))
+			iron.merge(post["iron"], Transform3D.IDENTITY)
+			glow.merge(post["glow"], Transform3D.IDENTITY)
+			if lights and n % 2 == 0:
+				glow_light(root, post["lamp"], Color(1.0, 0.66, 0.3), 1.3, 7.0)
+			n += 1
+			t += spacing
+		carry = t - seg
+	_commit(root, iron, MaterialLib.organic("lantern_iron", {"emission": 0.0, "pulse": 0.0, "rim_strength": 0.3}), false)
+	_commit(root, glow, MaterialLib.organic("lantern_glow", {"emission": 6.0, "pulse": 0.3, "pulse_speed": 4.0}), false)
+	return root

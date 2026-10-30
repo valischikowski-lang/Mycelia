@@ -8,9 +8,9 @@ render_mode cull_back;
 uniform sampler2D detail_noise : filter_linear_mipmap, repeat_enable;
 uniform sampler2D vein_noise : filter_linear_mipmap, repeat_enable;
 uniform vec4 vein_color : source_color = vec4(0.2, 1.0, 0.95, 1.0);
-uniform float vein_strength = 1.6;
+uniform float vein_strength = 0.85;
 uniform float vein_scale = 0.045;
-uniform float vein_width = 0.035;
+uniform float vein_width = 0.026;
 uniform vec3 pulse_origin = vec3(0.0);
 uniform float detail_scale = 0.045;
 uniform float detail_amount = 0.22;
@@ -30,6 +30,17 @@ void fragment() {
 	vec3 base = COLOR.rgb;
 	base *= 1.0 + (n1 - 0.5) * detail_amount * 2.0;
 	base = mix(base, base * vec3(1.08, 0.92, 1.12), smoothstep(0.55, 0.8, n2));
+	// Cobblestones on paths (UV.x = path weight): cellular stones with dark
+	// mortar joints and per-stone brightness variation.
+	float path_w = UV.x;
+	if (path_w > 0.01) {
+		float cell = texture(vein_noise, p * 0.2).r;
+		float mortar = 1.0 - smoothstep(0.02, 0.12, cell);
+		float stone_var = texture(detail_noise, floor(p * 0.9) * 0.37).r;
+		vec3 cobble = base * (0.45 + stone_var * 0.45) * (1.0 - mortar * 0.85);
+		cobble *= 0.85 + 0.25 * smoothstep(0.1, 0.5, cell);
+		base = mix(base, cobble, smoothstep(0.0, 0.6, path_w));
+	}
 	ALBEDO = base;
 	ROUGHNESS = 0.9;
 	SPECULAR = 0.1;

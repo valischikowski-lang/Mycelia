@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_7mvtg"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_ew3k4"]
 
 [resource]
-script = ExtResource("1_7mvtg")
+script = ExtResource("1_ew3k4")
 id = "dream_mote"
 display_name = "Dream Mote"
 description = "A drifting speck of someone's forgotten dream. Madame Petalune collects them."

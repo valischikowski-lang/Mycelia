@@ -62,13 +62,13 @@ static func make_environment(b: BiomeData) -> Environment:
 	e.ambient_light_energy = b.ambient_energy
 	e.reflected_light_source = Environment.REFLECTION_SOURCE_DISABLED
 	e.tonemap_mode = Environment.TONE_MAPPER_FILMIC
-	e.tonemap_exposure = 0.92
+	e.tonemap_exposure = 0.95
 	e.tonemap_white = 6.0
 	e.glow_enabled = Settings.glow_enabled()
-	e.glow_intensity = 0.6
+	e.glow_intensity = 0.85
 	e.glow_strength = 1.0
 	e.glow_bloom = 0.06
-	e.glow_hdr_threshold = 1.05
+	e.glow_hdr_threshold = 0.8
 	e.glow_blend_mode = Environment.GLOW_BLEND_MODE_SOFTLIGHT
 	e.set_glow_level(0, 0.0)
 	e.set_glow_level(1, 1.0)
@@ -79,12 +79,12 @@ static func make_environment(b: BiomeData) -> Environment:
 	e.fog_light_color = b.fog_color
 	e.fog_light_energy = 1.0
 	e.fog_density = b.fog_density
-	e.fog_sky_affect = 0.18
+	e.fog_sky_affect = 0.08
 	e.fog_height = b.fog_height
 	e.fog_height_density = b.fog_height_density
 	e.adjustment_enabled = true
-	e.adjustment_saturation = 1.18
-	e.adjustment_contrast = 1.06
+	e.adjustment_saturation = 1.12
+	e.adjustment_contrast = 1.18
 	return e
 
 

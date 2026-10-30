@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_20y3w"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_pvuxh"]
 
 [resource]
-script = ExtResource("1_20y3w")
+script = ExtResource("1_pvuxh")
 id = "glowcap_hat"
 display_name = "Glowcap Hat"
 description = "Purely decorative. Purely magnificent."

@@ -27,6 +27,8 @@ var paths: Array[Dictionary] = []
 var rim_passes: Array[Vector3] = []
 var water_level: float = -0.6
 
+## Path weight of the last _color_at() sample (stored in UV.x for cobbles).
+var _last_path_w: float = 0.0
 var _noise := FastNoiseLite.new()
 var _detail := FastNoiseLite.new()
 var _rim_noise := FastNoiseLite.new()
@@ -127,10 +129,12 @@ func _color_at(x: float, z: float, h: float, n: Vector3) -> Color:
 			c = c.lerp(b.path_color.lerp(b.vein_color, 0.25), shore * 0.55)
 	# Paths.
 	var pd := path_distance(Vector3(x, 0, z))
+	_last_path_w = 0.0
 	if pd < 1.5:
 		var w := smoothstep(1.5, -0.5, pd)
 		c = c.lerp(b.path_color, w)
 		vein_mask -= w
+		_last_path_w = w
 	c.a = clampf(vein_mask, 0.0, 1.0)
 	return c
 
@@ -162,7 +166,8 @@ func build(material: Material) -> void:
 					var z := -half + iz * cell
 					var h := heights[iz * samples + ix]
 					var n := _grid_normal(heights, samples, ix, iz)
-					kit.add_vertex(Vector3(x, h, z), _color_at(x, z, h, n), Vector2(x, z) * 0.05)
+					var col := _color_at(x, z, h, n)
+					kit.add_vertex(Vector3(x, h, z), col, Vector2(_last_path_w, 0.0))
 			for iz in range(z1 - z0):
 				for ix in range(w - 1):
 					var a := iz * w + ix

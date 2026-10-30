@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_h5qh4"]
+
+[resource]
+script = ExtResource("1_h5qh4")
+id = "hexed"
+display_name = "Hexed"
+description = "A crone's curse sours your strength: attacks deal 25% less."
+kind = 4
+magnitude = 0.25
+duration = 2
+element = "chaos"
+color = Color(0.615686, 1, 0.227451, 1)
+glyph = "☠"
+chance = 1.0
+stacks = false
+apply_to_self = false

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="QuestData" load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_njwga"]
-[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_sexpy"]
+[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_1hppr"]
+[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_fnx2v"]
 
-[sub_resource type="Resource" id="Resource_j47nf"]
-script = ExtResource("1_njwga")
+[sub_resource type="Resource" id="Resource_jmxnl"]
+script = ExtResource("1_1hppr")
 id = "inspect_rift"
 description = "Inspect the Mycelial Rift where the sporeling fell"
 type = 4
@@ -13,8 +13,8 @@ required_amount = 1
 map_hint = Vector3(-14, 0, -58)
 hint_region = "dreaming_meadow"
 
-[sub_resource type="Resource" id="Resource_558pu"]
-script = ExtResource("1_njwga")
+[sub_resource type="Resource" id="Resource_f1ftc"]
+script = ExtResource("1_1hppr")
 id = "attune_circle"
 description = "Attune the Rootstone Circle to the west"
 type = 4
@@ -23,8 +23,8 @@ required_amount = 1
 map_hint = Vector3(-72, 0, -18)
 hint_region = "dreaming_meadow"
 
-[sub_resource type="Resource" id="Resource_uqr2n"]
-script = ExtResource("1_njwga")
+[sub_resource type="Resource" id="Resource_ubs8i"]
+script = ExtResource("1_1hppr")
 id = "defeat_guardian"
 description = "Calm the Bloom Guardian"
 type = 2
@@ -33,8 +33,8 @@ required_amount = 1
 map_hint = Vector3(-72, 0, -18)
 hint_region = "dreaming_meadow"
 
-[sub_resource type="Resource" id="Resource_qj5wb"]
-script = ExtResource("1_njwga")
+[sub_resource type="Resource" id="Resource_hqa8a"]
+script = ExtResource("1_1hppr")
 id = "tell_keeper"
 description = "Return to Umbel"
 type = 0
@@ -44,14 +44,14 @@ map_hint = Vector3(12, 0, -40)
 hint_region = "dreaming_meadow"
 
 [resource]
-script = ExtResource("2_sexpy")
+script = ExtResource("2_fnx2v")
 id = "hum_beneath"
 title = "The Hum Beneath"
 description = "Where the hollow-eyed sporeling fell, the ground split open. Something in the Mycelium is wrong, and it seems to be spreading from below."
 category = 0
 prerequisites = PackedStringArray("first_awakening")
 min_level = 1
-objectives = Array[ExtResource("1_njwga")]([SubResource("Resource_j47nf"), SubResource("Resource_558pu"), SubResource("Resource_uqr2n"), SubResource("Resource_qj5wb")])
+objectives = Array[ExtResource("1_1hppr")]([SubResource("Resource_jmxnl"), SubResource("Resource_f1ftc"), SubResource("Resource_ubs8i"), SubResource("Resource_hqa8a")])
 sequential = true
 auto_start = true
 reward_xp = 160

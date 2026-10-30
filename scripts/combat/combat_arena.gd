@@ -103,7 +103,7 @@ func build(state: BattleState, player_opts: Dictionary) -> void:
 	var n := state.enemies.size()
 	for i in n:
 		var e := state.enemies[i]
-		var rig := CreatureBuilder.build(e.data.visual_kind, e.data.tint)
+		var rig := CreatureBuilder.build(e.data.visual_kind, e.data.tint, {"seed": e.data.id.hash() % 1000})
 		rig.scale = Vector3.ONE * e.data.visual_scale * (1.7 if e.data.visual_kind == "sporeling" else 1.0)
 		var x := (i - (n - 1) * 0.5) * 4.2
 		var pos := Vector3(x, 0, -4.5 + absf(x) * 0.15)

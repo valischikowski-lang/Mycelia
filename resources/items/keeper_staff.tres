@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_tvc12"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_02107"]
 
 [resource]
-script = ExtResource("1_tvc12")
+script = ExtResource("1_02107")
 id = "keeper_staff"
 display_name = "Keeper's Lantern Staff"
 description = "A gift from Umbel. The spore inside the lantern is named Pip."

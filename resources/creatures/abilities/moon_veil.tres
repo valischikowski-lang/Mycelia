@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_0wj55"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_3t1an"]
-[ext_resource type="Resource" path="res://resources/status_effects/dream_veil.tres" id="3_kx2ai"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_6t7h4"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_a071k"]
+[ext_resource type="Resource" path="res://resources/status_effects/dream_veil.tres" id="3_6v602"]
 
 [resource]
-script = ExtResource("1_0wj55")
+script = ExtResource("1_6t7h4")
 id = "moon_veil"
 display_name = "Moon Veil"
 description = "The fox becomes mostly a rumour."
@@ -17,7 +17,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 2
 target_count = 1
-status_effects = Array[ExtResource("2_3t1an")]([ExtResource("3_kx2ai")])
+status_effects = Array[ExtResource("2_a071k")]([ExtResource("3_6v602")])
 duration = 2
 rarity = 0
 armor_pierce = 0.0

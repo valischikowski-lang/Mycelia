@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="EncounterData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_bl316"]
-[ext_resource type="Resource" path="res://resources/creatures/spore_golem.tres" id="2_oknc4"]
-[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="3_tr2ub"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_gulyf"]
+[ext_resource type="Resource" path="res://resources/creatures/spore_golem.tres" id="2_yhjqa"]
+[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="3_nqldn"]
 
 [resource]
-script = ExtResource("3_tr2ub")
+script = ExtResource("3_nqldn")
 id = "enc_spore_golem"
 display_name = "Ancient Spore Golem"
-enemies = Array[ExtResource("1_bl316")]([ExtResource("2_oknc4")])
+enemies = Array[ExtResource("1_gulyf")]([ExtResource("2_yhjqa")])
 arena_theme = "meadow"
 music = "music_boss"
 can_flee = true

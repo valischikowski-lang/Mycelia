@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_rixpa"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_m1qcx"]
 
 [resource]
-script = ExtResource("1_rixpa")
+script = ExtResource("1_m1qcx")
 id = "sporeling_cap"
 display_name = "Sporeling Cap"
 description = "A shed cap. Sporelings grow a new one by morning."

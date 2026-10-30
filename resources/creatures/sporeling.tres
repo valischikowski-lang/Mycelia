@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="CreatureData" load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_o3v4l"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/nibble.tres" id="2_cwfys"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/spore_puff.tres" id="3_m6st5"]
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="4_dwrbd"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_b0wrt"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/nibble.tres" id="2_pijjs"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/spore_puff.tres" id="3_w3v40"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="4_3l7li"]
 
 [resource]
-script = ExtResource("4_dwrbd")
+script = ExtResource("4_3l7li")
 id = "sporeling"
 display_name = "Sporeling"
 description = "A curious little walking mushroom."
@@ -16,7 +16,7 @@ max_health = 30
 defense = 2
 power = 0
 speed = 12
-abilities = Array[ExtResource("1_o3v4l")]([ExtResource("2_cwfys"), ExtResource("3_m6st5")])
+abilities = Array[ExtResource("1_b0wrt")]([ExtResource("2_pijjs"), ExtResource("3_w3v40")])
 personality = 0
 phase_thresholds = PackedFloat32Array()
 xp_reward = 22

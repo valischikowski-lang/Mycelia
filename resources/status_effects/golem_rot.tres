@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_brod1"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_u0q26"]
 
 [resource]
-script = ExtResource("1_brod1")
+script = ExtResource("1_u0q26")
 id = "golem_rot"
 display_name = "Ancient Rot"
 description = "Old, patient spores. Damage each turn."

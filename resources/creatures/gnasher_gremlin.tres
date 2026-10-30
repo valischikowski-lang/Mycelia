@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="CreatureData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_0b883"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/wrench_whack.tres" id="2_vsbae"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/spark_bomb.tres" id="3_rfwrn"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/giggle.tres" id="4_15785"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="5_tq806"]
+
+[resource]
+script = ExtResource("5_tq806")
+id = "gnasher_gremlin"
+display_name = "Gnasher Gremlin"
+description = "Goggles, propeller, grin. In that order."
+element = "chaos"
+level = 2
+max_health = 40
+defense = 3
+power = 6
+speed = 16
+abilities = Array[ExtResource("1_0b883")]([ExtResource("2_vsbae"), ExtResource("3_rfwrn"), ExtResource("4_15785")])
+personality = 0
+phase_thresholds = PackedFloat32Array()
+xp_reward = 40
+glimmer_min = 6
+glimmer_max = 12
+loot_table = Array[Dictionary]([{
+"chance": 0.75,
+"item_id": "gremlin_cog",
+"max": 2,
+"min": 1
+}, {
+"chance": 0.2,
+"item_id": "dewdrop_tonic",
+"max": 1,
+"min": 1
+}])
+visual_kind = "gremlin"
+visual_scale = 1.0
+tint = Color(1, 1, 1, 1)
+world_behavior = "hostile"
+lore = "Gremlins took apart the old castle clock to see where the time went. They are still looking."

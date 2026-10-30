@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="EncounterData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_2h5vk"]
-[ext_resource type="Resource" path="res://resources/creatures/bloom_guardian.tres" id="2_lchys"]
-[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="3_i6b7x"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_1p3b0"]
+[ext_resource type="Resource" path="res://resources/creatures/bloom_guardian.tres" id="2_r03gj"]
+[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="3_nbd77"]
 
 [resource]
-script = ExtResource("3_i6b7x")
+script = ExtResource("3_nbd77")
 id = "enc_bloom_guardian"
 display_name = "The Bloom Guardian"
-enemies = Array[ExtResource("1_2h5vk")]([ExtResource("2_lchys")])
+enemies = Array[ExtResource("1_1p3b0")]([ExtResource("2_r03gj")])
 arena_theme = "meadow"
 music = "music_combat"
 can_flee = false

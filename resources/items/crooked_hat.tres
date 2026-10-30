@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_wd63s"]
+
+[resource]
+script = ExtResource("1_wd63s")
+id = "crooked_hat"
+display_name = "Crooked Witch Hat"
+description = "It leans. It whispers. It is, frankly, fabulous."
+category = 4
+rarity = 2
+max_stack = 1
+value = 55
+icon_color = Color(0.227451, 0.164706, 0.415686, 1)
+icon_glyph = "♛"
+equip_slot = "hat"
+stat_bonuses = {
+"max_mana": 1,
+"spell_power": 9
+}
+use_effect = {}

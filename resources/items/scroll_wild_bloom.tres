@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_8odmn"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_7y0a1"]
 
 [resource]
-script = ExtResource("1_8odmn")
+script = ExtResource("1_7y0a1")
 id = "scroll_wild_bloom"
 display_name = "Scroll: Wild Bloom"
 description = "Reading it aloud makes your palms smell like spring. Teaches Wild Bloom."

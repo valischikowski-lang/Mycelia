@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_kkp0t"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_tgkx6"]
-[ext_resource type="Resource" path="res://resources/status_effects/shattered.tres" id="3_1d3ai"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_i8wlx"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_mg7om"]
+[ext_resource type="Resource" path="res://resources/status_effects/shattered.tres" id="3_cvthh"]
 
 [resource]
-script = ExtResource("1_kkp0t")
+script = ExtResource("1_i8wlx")
 id = "shardstorm"
 display_name = "Shardstorm"
 description = "A fan of razor prisms that ignores half of armor and leaves the target Shattered."
@@ -17,7 +17,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 0
 target_count = 1
-status_effects = Array[ExtResource("2_tgkx6")]([ExtResource("3_1d3ai")])
+status_effects = Array[ExtResource("2_mg7om")]([ExtResource("3_cvthh")])
 duration = 2
 rarity = 1
 armor_pierce = 0.5

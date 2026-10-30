@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EncounterData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="1_scfam"]
+[ext_resource type="Resource" path="res://resources/creatures/hollow_crone.tres" id="2_28yva"]
+[ext_resource type="Resource" path="res://resources/creatures/cackling_crone.tres" id="3_ew562"]
+[ext_resource type="Script" path="res://scripts/combat/encounter_data.gd" id="4_jyl36"]
+
+[resource]
+script = ExtResource("4_jyl36")
+id = "enc_coven"
+display_name = "A Little Coven"
+enemies = Array[ExtResource("1_scfam")]([ExtResource("2_28yva"), ExtResource("3_ew562")])
+arena_theme = "meadow"
+music = "music_combat"
+can_flee = true
+ambush = false
+bonus_xp = 25
+bonus_glimmer = 0
+bonus_items = {}
+intro_text = "Two crones, one cauldron, and you look like an ingredient."
+unique = false

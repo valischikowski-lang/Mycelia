@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_onvu2"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_8pynn"]
 
 [resource]
-script = ExtResource("1_onvu2")
+script = ExtResource("1_8pynn")
 id = "spore_fragment"
 display_name = "Spore Fragment"
 description = "A seed-shaped shard of the Mycelium's memory. It hums when you hold it near your ear."

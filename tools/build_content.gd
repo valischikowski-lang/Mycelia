@@ -44,32 +44,34 @@ func build_biomes() -> void:
 	var b := BiomeData.new()
 	b.id = "dreaming_meadow"
 	b.display_name = "The Dreaming Meadow"
-	b.sky_top = c("#170838")
-	b.sky_mid = c("#7a1f86")
-	b.sky_horizon = c("#ff8a5c")
-	b.sky_band = c("#2ff5e0")
-	b.moon_color = c("#ffe9c9")
-	b.sun_color = c("#ffc2d9")
-	b.sun_energy = 1.05
-	b.sun_rotation_deg = Vector3(-24, 205, 0)
-	b.ambient_color = c("#5b49b8")
-	b.ambient_energy = 0.62
-	b.fog_color = c("#8a5cc7")
-	b.fog_density = 0.0042
-	b.fog_height = 0.0
-	b.fog_height_density = 0.018
-	b.grass_color = c("#11806f")
-	b.grass_tip_color = c("#58f0a8")
-	b.moss_color = c("#6a3fc0")
-	b.path_color = c("#d8728a")
-	b.rock_color = c("#3b2466")
-	b.vein_color = c("#36fff0")
-	b.mushroom_caps = [c("#9b2cf0"), c("#e02fb0"), c("#6d2ae0"), c("#ff5fc8"), c("#ff8a2a"), c("#c13cff")]
-	b.mushroom_glow = [c("#36fff0"), c("#3fd8ff"), c("#ffe14f"), c("#8dff5a")]
-	b.flower_colors = [c("#ff5fae"), c("#ff8a5c"), c("#ffd54a"), c("#ff6f91"), c("#c48dff")]
-	b.crystal_colors = [c("#2ff5e0"), c("#43b8ff"), c("#9b7bff"), c("#5effc4")]
-	b.foliage_colors = [c("#18c9a0"), c("#2ae0d0"), c("#7b4dff"), c("#41e07a")]
-	b.bark_colors = [c("#3a1c5c"), c("#4b1f62"), c("#2b1a50")]
+	# Dark fantasy night: indigo and near-black, cold moonlight, sickly green
+	# mycelium, and warm amber as the only cosy colour (windows, lanterns).
+	b.sky_top = c("#020208")
+	b.sky_mid = c("#0b0c33")
+	b.sky_horizon = c("#24124a")
+	b.sky_band = c("#3d63ff")
+	b.moon_color = c("#ffcf73")
+	b.sun_color = c("#8a96ff")
+	b.sun_energy = 0.42
+	b.sun_rotation_deg = Vector3(-38, 205, 0)
+	b.ambient_color = c("#1b1a4a")
+	b.ambient_energy = 0.38
+	b.fog_color = c("#121338")
+	b.fog_density = 0.0085
+	b.fog_height = 0.5
+	b.fog_height_density = 0.05
+	b.grass_color = c("#0a2a28")
+	b.grass_tip_color = c("#1f5a48")
+	b.moss_color = c("#2a1c52")
+	b.path_color = c("#3a3552")
+	b.rock_color = c("#1d1733")
+	b.vein_color = c("#5dffb0")
+	b.mushroom_caps = [c("#2c0f52"), c("#45106a"), c("#191a66"), c("#5c0f38"), c("#0f3046"), c("#3a1a5e")]
+	b.mushroom_glow = [c("#6dffb0"), c("#ffb347"), c("#b18cff"), c("#4ad9ff")]
+	b.flower_colors = [c("#8a1f4a"), c("#c2652a"), c("#5a2a8a"), c("#2a6a8a"), c("#e0a84a")]
+	b.crystal_colors = [c("#3a4cff"), c("#7a3cff"), c("#2ad1ff"), c("#5a2aff")]
+	b.foliage_colors = [c("#0f3a3a"), c("#1d2a5a"), c("#2a1a4a"), c("#12402a")]
+	b.bark_colors = [c("#120c1c"), c("#1c1028"), c("#0e0a14")]
 	b.music = "music_meadow"
 	b.ambience = "meadow_ambience"
 	save(b, "res://resources/biomes/dreaming_meadow.tres")
@@ -77,11 +79,11 @@ func build_biomes() -> void:
 	var a := b.duplicate() as BiomeData
 	a.id = "dream_arena"
 	a.display_name = "The Dreaming Arena"
-	a.sky_top = c("#0a0420")
-	a.sky_mid = c("#3a0f6a")
-	a.sky_horizon = c("#ff4f9a")
-	a.sky_band = c("#ffe14f")
-	a.fog_density = 0.002
+	a.sky_top = c("#010106")
+	a.sky_mid = c("#120a3a")
+	a.sky_horizon = c("#3a0f3a")
+	a.sky_band = c("#5a7aff")
+	a.fog_density = 0.003
 	a.sun_rotation_deg = Vector3(-40, 150, 0)
 	save(a, "res://resources/biomes/dream_arena.tres")
 
@@ -124,6 +126,9 @@ func build_status_effects() -> void:
 	effect("beetle_glint", "Shell Glint", SK.SHIELD, 10, 2, "crystal", "#43b8ff", "◆", "Absorbs damage.", 1.0, true)
 	effect("hollow_quiver", "Quivering Husk", SK.SHIELD, 8, 2, "chaos", "#ff5fc8", "◆", "Absorbs damage.", 1.0, true)
 	effect("mycelial_armor", "Mycelial Armor", SK.SHIELD, 28, 3, "fungal", "#c44dff", "◆", "A lattice of living threads absorbs damage.", 1.0, true)
+	effect("hexed", "Hexed", SK.WEAKEN, 0.25, 2, "chaos", "#9dff3a", "☠", "A crone's curse sours your strength: attacks deal 25% less.")
+	effect("crone_brew", "Bitter Brew", SK.HOT, 5, 2, "chaos", "#7dff5a", "♨", "Something green and bubbling restores health each turn.", 1.0, true)
+	effect("gremlin_giggle", "Giggling", SK.EMPOWER, 0.3, 2, "chaos", "#b6ff3a", "☼", "Giggling madly: +30% damage.", 1.0, true)
 	effect("sentinel", "Spore Sentinel", SK.SUMMON, 7, 3, "fungal", "#e07bff", "♟", "A small fungal guardian strikes an enemy each turn.", 1.0, true)
 
 
@@ -248,6 +253,13 @@ func build_creature_abilities_and_creatures() -> void:
 	ability("network_pulse", "Network Pulse", "fungal", 34, 0, E, "The golem draws power from the whole meadow, then releases it.", {"tags": ["damage", "big", "charge"], "cooldown": 4, "charge": 1, "vfx": "fungal_eruption"})
 	ability("mycelial_armor_up", "Mycelial Armor", "fungal", 0, 0, S, "Threads weave over its body.", {"effects": ["mycelial_armor"], "tags": ["shield"], "cooldown": 4, "phase": 1, "vfx": "crystal_shield"})
 	ability("awakening_roar", "Awakening Roar", "fungal", 0, 0, S, "Every mushroom in the arena turns to face you.", {"effects": ["golem_roar"], "tags": ["buff"], "cooldown": 5, "phase": 1, "vfx": "cosmic_gravity"})
+	ability("hex_bolt", "Hex Bolt", "chaos", 9, 0, E, "A crooked finger points. Something green follows it.", {"effects": ["hexed"], "tags": ["damage", "debuff"], "cooldown": 2, "vfx": "chaos_rift"})
+	ability("cackle", "Cackle", "chaos", 0, 0, S, "A laugh that goes on far too long.", {"effects": ["dream_veil"], "tags": ["buff", "defend"], "cooldown": 3, "vfx": "cosmic_gravity"})
+	ability("two_tooth_bite", "Two-Tooth Bite", "chaos", 11, 0, E, "Only two teeth left. Both of them very, very sharp.", {"tags": ["damage"], "vfx": "melee"})
+	ability("brew_sip", "Sip of the Brew", "chaos", 0, 12, S, "She sips from a cauldron-cup. It smokes.", {"effects": ["crone_brew"], "tags": ["heal"], "cooldown": 4, "vfx": "fungal_heal"})
+	ability("wrench_whack", "Wrench Whack", "chaos", 8, 0, E, "A rusty wrench, swung with joy.", {"tags": ["damage"], "vfx": "melee"})
+	ability("spark_bomb", "Spark Bomb", "cosmic", 13, 0, E, "A tiny bomb with a long fuse and a short temper.", {"effects": ["shattered"], "tags": ["damage", "big"], "cooldown": 3, "vfx": "crystal_shards"})
+	ability("giggle", "Giggle", "chaos", 0, 0, S, "Hee. Hee hee. HEE.", {"effects": ["gremlin_giggle"], "tags": ["buff"], "cooldown": 3, "vfx": "cosmic_gravity"})
 
 	creature("sporeling", "Sporeling", "fungal", 30, 2, 0, 12, ["nibble", "spore_puff"], P.AGGRESSIVE, 22, Vector2i(2, 5),
 		[{"item_id": "sporeling_cap", "chance": 0.6, "min": 1, "max": 2}, {"item_id": "mana_moss", "chance": 0.2, "min": 1, "max": 1}], "sporeling",
@@ -267,6 +279,16 @@ func build_creature_abilities_and_creatures() -> void:
 	creature("spore_golem", "Ancient Spore Golem", "fungal", 260, 8, 10, 4, ["fungal_slam", "spore_cloud", "network_pulse", "mycelial_armor_up", "awakening_roar"], P.BOSS, 300, Vector2i(60, 90),
 		[{"item_id": "golem_heartspore", "chance": 1.0, "min": 1, "max": 1}, {"item_id": "heartspore_amulet", "chance": 1.0, "min": 1, "max": 1}], "spore_golem",
 		{"phases": [0.5], "behavior": "neutral", "desc": "A hill that stood up.", "lore": "The Spore Golem was the meadow's first gardener. It sleeps at the Hollow Gate and dreams of the caves below.", "level": 6, "scale": 1.0})
+
+	creature("hollow_crone", "Hollow Crone", "chaos", 58, 4, 8, 10, ["hex_bolt", "cackle", "two_tooth_bite", "brew_sip"], P.TRICKSTER, 60, Vector2i(9, 16),
+		[{"item_id": "crone_tooth", "chance": 0.7, "min": 1, "max": 1}, {"item_id": "mana_moss", "chance": 0.4, "min": 1, "max": 2}], "witch",
+		{"desc": "A crooked witch with two teeth and too many opinions.", "lore": "The crones of Crookhollow trade in bad dreams. They keep the good ones in jars, and never open them.", "level": 3})
+	creature("cackling_crone", "Cackling Crone", "chaos", 50, 3, 10, 13, ["hex_bolt", "cackle", "two_tooth_bite"], P.TRICKSTER, 55, Vector2i(8, 14),
+		[{"item_id": "crone_tooth", "chance": 0.6, "min": 1, "max": 2}], "witch",
+		{"tint": Color(0.8, 0.95, 0.8), "desc": "Three teeth. She is very proud of the third.", "lore": "Nobody has heard her stop laughing. Nobody has asked her to.", "level": 3})
+	creature("gnasher_gremlin", "Gnasher Gremlin", "chaos", 40, 3, 6, 16, ["wrench_whack", "spark_bomb", "giggle"], P.AGGRESSIVE, 40, Vector2i(6, 12),
+		[{"item_id": "gremlin_cog", "chance": 0.75, "min": 1, "max": 2}, {"item_id": "dewdrop_tonic", "chance": 0.2, "min": 1, "max": 1}], "gremlin",
+		{"desc": "Goggles, propeller, grin. In that order.", "lore": "Gremlins took apart the old castle clock to see where the time went. They are still looking.", "level": 2})
 
 
 # ------------------------------------------------------------------ encounters
@@ -296,6 +318,10 @@ func build_encounters() -> void:
 	encounter("enc_beetle_pair", "Glittering Nest", ["crystal_beetle", "sporeling"])
 	encounter("enc_dream_fox", "The Dream Fox", ["dream_fox"], {"intro": "The fox grins. It wants to play a game whose rules it is inventing."})
 	encounter("enc_bloom_guardian", "The Bloom Guardian", ["bloom_guardian"], {"flee": false, "unique": true, "xp": 40, "intro": "The circle's guardian unfolds, petal by petal, awake and afraid."})
+	encounter("enc_crone", "The Hollow Crone", ["hollow_crone"], {"intro": "She grins. Two teeth. Neither of them friendly."})
+	encounter("enc_coven", "A Little Coven", ["hollow_crone", "cackling_crone"], {"xp": 25, "intro": "Two crones, one cauldron, and you look like an ingredient."})
+	encounter("enc_gremlin", "Gnasher Gremlin", ["gnasher_gremlin"], {"intro": "Something buzzes overhead, giggling."})
+	encounter("enc_gremlin_gang", "Gremlin Gang", ["gnasher_gremlin", "gnasher_gremlin"], {"xp": 15, "intro": "Two propellers. Two wrenches. Zero plans."})
 	encounter("enc_spore_golem", "Ancient Spore Golem", ["spore_golem"], {"unique": true, "music": "music_boss", "xp": 100, "glimmer": 50, "intro": "The hill stands up."})
 
 
@@ -329,6 +355,11 @@ func build_items() -> void:
 	item("fox_starfur", "Fox Starfur", C.INGREDIENT, R.RARE, "A tuft of fur with tiny stars caught in it.", "#b4a0ff", "✶", {"value": 15})
 	item("bloom_petal", "Guardian Petal", C.INGREDIENT, R.UNCOMMON, "Heavy as a shield, soft as a whisper.", "#ff5fae", "✿", {"value": 8})
 	item("golem_heartspore", "Golem Heartspore", C.INGREDIENT, R.EPIC, "The beating, glowing heart of an ancient gardener. Still warm.", "#ff8a2a", "❂", {"value": 60, "stack": 5})
+	item("crone_tooth", "Crone's Tooth", C.INGREDIENT, R.UNCOMMON, "Long, yellow and crooked. It still bites if you're careless.", "#d8d27a", "⚸", {"value": 9})
+	item("gremlin_cog", "Gremlin Cog", C.INGREDIENT, R.COMMON, "A brass cog that ticks backwards.", "#c9a04a", "⚙", {"value": 4})
+	item("toadstool_tea", "Toadstool Tea", C.CONSUMABLE, R.UNCOMMON, "Mother Grizzleroot's brew. Tastes like a swamp at midnight. Restores 70 health.", "#7dff5a", "♨", {"use": {"heal": 70}, "value": 18, "stack": 20})
+	item("night_ink", "Bottled Night", C.CONSUMABLE, R.UNCOMMON, "A cork, a bottle, and a little piece of sky. Restores 7 mana.", "#6a5cff", "❖", {"use": {"mana": 7}, "value": 16, "stack": 20})
+	item("crooked_hat", "Crooked Witch Hat", C.EQUIPMENT, R.RARE, "It leans. It whispers. It is, frankly, fabulous.", "#3a2a6a", "♛", {"slot": "hat", "stats": {"spell_power": 9, "max_mana": 1}, "value": 55, "stack": 1})
 	item("scroll_wild_bloom", "Scroll: Wild Bloom", C.SCROLL, R.UNCOMMON, "Reading it aloud makes your palms smell like spring. Teaches Wild Bloom.", "#7dff5a", "✿", {"use": {"unlock_spell": "wild_bloom"}, "value": 30, "stack": 5})
 	item("scroll_paradox_gift", "Scroll: Paradox Gift", C.SCROLL, R.RARE, "Written tomorrow. Teaches Paradox Gift.", "#ff5fc8", "∞", {"use": {"unlock_spell": "paradox_gift"}, "value": 45, "stack": 5})
 	item("moss_woven_robe", "Moss-Woven Robe", C.EQUIPMENT, R.UNCOMMON, "Soft, warm, and slightly alive.", "#3fd8a0", "♜", {"slot": "robe", "stats": {"max_health": 15, "defense": 2}, "value": 25, "stack": 1})

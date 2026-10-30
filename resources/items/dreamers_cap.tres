@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_el8y6"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_fywgf"]
 
 [resource]
-script = ExtResource("1_el8y6")
+script = ExtResource("1_fywgf")
 id = "dreamers_cap"
 display_name = "Dreamer's Cap"
 description = "A floppy mushroom hat that thinks along with you."

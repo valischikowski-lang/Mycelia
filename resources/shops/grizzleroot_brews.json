@@ -1,0 +1,12 @@
+{
+	"id": "grizzleroot_brews",
+	"name": "Grizzleroot's Bubbling Brews",
+	"greeting": "Heh-heh-heh. Touch nothing that blinks.",
+	"sell_ratio": 0.55,
+	"stock": [
+		{"item_id": "toadstool_tea", "price": 26},
+		{"item_id": "night_ink", "price": 24},
+		{"item_id": "dewdrop_tonic", "price": 13},
+		{"item_id": "crooked_hat", "price": 120}
+	]
+}

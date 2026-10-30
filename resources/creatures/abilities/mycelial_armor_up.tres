@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_2rxen"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_03uqm"]
-[ext_resource type="Resource" path="res://resources/status_effects/mycelial_armor.tres" id="3_g2pxk"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_xtice"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_5nd4s"]
+[ext_resource type="Resource" path="res://resources/status_effects/mycelial_armor.tres" id="3_ii4rk"]
 
 [resource]
-script = ExtResource("1_2rxen")
+script = ExtResource("1_xtice")
 id = "mycelial_armor_up"
 display_name = "Mycelial Armor"
 description = "Threads weave over its body."
@@ -17,7 +17,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 2
 target_count = 1
-status_effects = Array[ExtResource("2_03uqm")]([ExtResource("3_g2pxk")])
+status_effects = Array[ExtResource("2_5nd4s")]([ExtResource("3_ii4rk")])
 duration = 3
 rarity = 0
 armor_pierce = 0.0

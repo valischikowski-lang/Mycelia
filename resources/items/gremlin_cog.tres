@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_6ouwx"]
+
+[resource]
+script = ExtResource("1_6ouwx")
+id = "gremlin_cog"
+display_name = "Gremlin Cog"
+description = "A brass cog that ticks backwards."
+category = 2
+rarity = 0
+max_stack = 99
+value = 4
+icon_color = Color(0.788235, 0.627451, 0.290196, 1)
+icon_glyph = "⚙"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {}

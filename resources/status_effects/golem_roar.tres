@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_plk0y"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_jwt1i"]
 
 [resource]
-script = ExtResource("1_plk0y")
+script = ExtResource("1_jwt1i")
 id = "golem_roar"
 display_name = "Awakened"
 description = "The golem's network roars awake: +40% damage."

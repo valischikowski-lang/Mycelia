@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_0f8eg"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_vlfyc"]
 
 [resource]
-script = ExtResource("1_0f8eg")
+script = ExtResource("1_vlfyc")
 id = "heartspore_amulet"
 display_name = "Heartspore Amulet"
 description = "It beats in time with the meadow."

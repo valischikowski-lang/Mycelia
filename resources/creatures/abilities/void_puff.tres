@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_fbq03"]
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_jwwel"]
-[ext_resource type="Resource" path="res://resources/status_effects/spore_rot_weak.tres" id="3_15h60"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_sunga"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_311la"]
+[ext_resource type="Resource" path="res://resources/status_effects/spore_rot_weak.tres" id="3_dn2pd"]
 
 [resource]
-script = ExtResource("1_fbq03")
+script = ExtResource("1_sunga")
 id = "void_puff"
 display_name = "Hollow Puff"
 description = "Grey spores that smell like forgetting."
@@ -17,7 +17,7 @@ healing_value = 0
 accuracy = 0.95
 target_type = 0
 target_count = 1
-status_effects = Array[ExtResource("2_jwwel")]([ExtResource("3_15h60")])
+status_effects = Array[ExtResource("2_311la")]([ExtResource("3_dn2pd")])
 duration = 2
 rarity = 0
 armor_pierce = 0.0

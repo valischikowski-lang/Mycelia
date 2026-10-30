@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_nug0f"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_6bxxt"]
 
 [resource]
-script = ExtResource("1_nug0f")
+script = ExtResource("1_6bxxt")
 id = "prism_shield"
 display_name = "Prism Ward"
 description = "A refracting barrier absorbs incoming damage."

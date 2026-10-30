@@ -1,0 +1,50 @@
+{
+	"id": "grizzleroot",
+	"speaker": "Mother Grizzleroot",
+	"entry": [
+		{"if": ["!seen:grizzleroot:intro"], "goto": "intro"},
+		{"goto": "greet"}
+	],
+	"nodes": {
+		"intro": {
+			"text": "Heeheehee! A dreamer! Fresh, too — still smells of pillow. Come closer, little one. Closer. I only have two teeth, see? Hardly enough to bite anybody. Hardly.",
+			"options": [
+				{"text": "Who are you?", "goto": "who"},
+				{"text": "(Step back slowly.)", "goto": "back"}
+			]
+		},
+		"back": {
+			"text": "Smart! Smart dreamer. Smart ones live longest in Crookhollow. Come back when you need a brew — Mother Grizzleroot's brews fix everything. Mostly.",
+			"options": [{"text": "...Goodbye.", "goto": "end"}]
+		},
+		"who": {
+			"text": "Mother Grizzleroot, witch of Crookhollow, brewer of the bitter and the bubbling. The houses here lean because they're listening. The other crones? Ooh, they've gone hollow, like the sporelings. They'll hex you for your teeth.",
+			"options": [
+				{"text": "What do you sell?", "actions": ["open_shop:grizzleroot_brews"], "goto": "end"},
+				{"text": "Hollow? Like the sporeling I saw?", "goto": "hollow"},
+				{"text": "I should go.", "goto": "end"}
+			]
+		},
+		"hollow": {
+			"text": "Something under the meadow is drinking the dreams. Crones, gremlins, sporelings — all going empty. Bring me their teeth and cogs, dreamer. A witch can't brew from nothing.",
+			"options": [
+				{"text": "I'll keep my eyes open.", "goto": "end"},
+				{"text": "Show me your brews.", "actions": ["open_shop:grizzleroot_brews"], "goto": "end"}
+			]
+		},
+		"greet": {
+			"text": "Back again, dreamer? The cauldron missed you. It told me. It tells me everything.",
+			"options": [
+				{"text": "Show me your brews.", "actions": ["open_shop:grizzleroot_brews"], "goto": "end"},
+				{"text": "I brought crone teeth.", "if": ["has_item:crone_tooth:3"], "goto": "teeth"},
+				{"text": "What's wrong with the crones?", "goto": "hollow"},
+				{"text": "Goodbye, Mother.", "goto": "end"}
+			]
+		},
+		"teeth": {
+			"text": "Ooooh. Three of them! Long and yellow, just how I like. Here — a tea for your trouble. Don't drink it near the moon. It notices.",
+			"actions": ["take_item:crone_tooth:3", "give_item:toadstool_tea:2", "give_glimmer:15"],
+			"options": [{"text": "Thank you... I think.", "goto": "end"}]
+		}
+	}
+}

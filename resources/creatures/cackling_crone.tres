@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CreatureData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_plvgj"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/hex_bolt.tres" id="2_ndyim"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/cackle.tres" id="3_8o0y6"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/two_tooth_bite.tres" id="4_rvtr5"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="5_tdrtt"]
+
+[resource]
+script = ExtResource("5_tdrtt")
+id = "cackling_crone"
+display_name = "Cackling Crone"
+description = "Three teeth. She is very proud of the third."
+element = "chaos"
+level = 3
+max_health = 50
+defense = 3
+power = 10
+speed = 13
+abilities = Array[ExtResource("1_plvgj")]([ExtResource("2_ndyim"), ExtResource("3_8o0y6"), ExtResource("4_rvtr5")])
+personality = 4
+phase_thresholds = PackedFloat32Array()
+xp_reward = 55
+glimmer_min = 8
+glimmer_max = 14
+loot_table = Array[Dictionary]([{
+"chance": 0.6,
+"item_id": "crone_tooth",
+"max": 2,
+"min": 1
+}])
+visual_kind = "witch"
+visual_scale = 1.0
+tint = Color(0.8, 0.95, 0.8, 1)
+world_behavior = "hostile"
+lore = "Nobody has heard her stop laughing. Nobody has asked her to."

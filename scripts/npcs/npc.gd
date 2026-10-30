@@ -68,6 +68,8 @@ func _label_height() -> float:
 			return 4.1
 		"ollo":
 			return 2.6
+		"witch":
+			return 3.1
 	return 2.2
 
 

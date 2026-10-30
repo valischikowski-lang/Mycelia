@@ -16,6 +16,10 @@ const SHOTS := {
 	"aerial": [Vector3(0, 60, 140), 0.0, -22.0],
 	"hollow": [Vector3(-90, 0, 64), 1.3, 0.0],
 	"drift": [Vector3(30, 0, -60), -0.9, 22.0],
+	"crookhollow": [Vector3(-14, 0, 57), 1.57, 4.0],
+	"crook_square": [Vector3(-27, 0, 54), 1.4, 0.0],
+	"crone": [Vector3(-53, 0, 41), 1.4, -4.0],
+	"castle": [Vector3(2, 0, -112), 0.0, 14.0],
 }
 
 var _out := "user://tour"

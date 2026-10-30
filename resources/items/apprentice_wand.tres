@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_2sut7"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_be06a"]
 
 [resource]
-script = ExtResource("1_2sut7")
+script = ExtResource("1_be06a")
 id = "apprentice_wand"
 display_name = "Twig of Beginnings"
 description = "A crooked twig that happens to be magic."

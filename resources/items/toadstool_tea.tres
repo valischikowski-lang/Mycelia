@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_5cg0e"]
+
+[resource]
+script = ExtResource("1_5cg0e")
+id = "toadstool_tea"
+display_name = "Toadstool Tea"
+description = "Mother Grizzleroot's brew. Tastes like a swamp at midnight. Restores 70 health."
+category = 6
+rarity = 1
+max_stack = 20
+value = 18
+icon_color = Color(0.490196, 1, 0.352941, 1)
+icon_glyph = "♨"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {
+"heal": 70
+}

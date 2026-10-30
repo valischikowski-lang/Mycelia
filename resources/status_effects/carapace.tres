@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_rs680"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_8hiqw"]
 
 [resource]
-script = ExtResource("1_rs680")
+script = ExtResource("1_8hiqw")
 id = "carapace"
 display_name = "Carapace"
 description = "Hardened shell: +8 defense."

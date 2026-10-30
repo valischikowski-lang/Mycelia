@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_n27tt"]
+
+[resource]
+script = ExtResource("1_n27tt")
+id = "gremlin_giggle"
+display_name = "Giggling"
+description = "Giggling madly: +30% damage."
+kind = 6
+magnitude = 0.3
+duration = 2
+element = "chaos"
+color = Color(0.713726, 1, 0.227451, 1)
+glyph = "☼"
+chance = 1.0
+stacks = false
+apply_to_self = true

@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="CreatureData" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_jo0rr"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/hex_bolt.tres" id="2_eqo8k"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/cackle.tres" id="3_hvekq"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/two_tooth_bite.tres" id="4_sfeqg"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/brew_sip.tres" id="5_eb5nc"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="6_y8hvw"]
+
+[resource]
+script = ExtResource("6_y8hvw")
+id = "hollow_crone"
+display_name = "Hollow Crone"
+description = "A crooked witch with two teeth and too many opinions."
+element = "chaos"
+level = 3
+max_health = 58
+defense = 4
+power = 8
+speed = 10
+abilities = Array[ExtResource("1_jo0rr")]([ExtResource("2_eqo8k"), ExtResource("3_hvekq"), ExtResource("4_sfeqg"), ExtResource("5_eb5nc")])
+personality = 4
+phase_thresholds = PackedFloat32Array()
+xp_reward = 60
+glimmer_min = 9
+glimmer_max = 16
+loot_table = Array[Dictionary]([{
+"chance": 0.7,
+"item_id": "crone_tooth",
+"max": 1,
+"min": 1
+}, {
+"chance": 0.4,
+"item_id": "mana_moss",
+"max": 2,
+"min": 1
+}])
+visual_kind = "witch"
+visual_scale = 1.0
+tint = Color(1, 1, 1, 1)
+world_behavior = "hostile"
+lore = "The crones of Crookhollow trade in bad dreams. They keep the good ones in jars, and never open them."

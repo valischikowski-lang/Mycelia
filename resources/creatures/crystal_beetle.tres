@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CreatureData" load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_0nwmq"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/mandible_snap.tres" id="2_nydxm"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/carapace_shine.tres" id="3_r2yqk"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/refracting_charge.tres" id="4_xbs6s"]
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="5_k1vju"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_gunch"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/mandible_snap.tres" id="2_434qp"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/carapace_shine.tres" id="3_81bfj"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/refracting_charge.tres" id="4_1hc6c"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="5_0gyty"]
 
 [resource]
-script = ExtResource("5_k1vju")
+script = ExtResource("5_0gyty")
 id = "crystal_beetle"
 display_name = "Crystal Beetle"
 description = "An armored insect that eats light."
@@ -17,7 +17,7 @@ max_health = 46
 defense = 8
 power = 0
 speed = 8
-abilities = Array[ExtResource("1_0nwmq")]([ExtResource("2_nydxm"), ExtResource("3_r2yqk"), ExtResource("4_xbs6s")])
+abilities = Array[ExtResource("1_gunch")]([ExtResource("2_434qp"), ExtResource("3_81bfj"), ExtResource("4_1hc6c")])
 personality = 1
 phase_thresholds = PackedFloat32Array()
 xp_reward = 34

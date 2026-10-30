@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_b7ksi"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="1_pafbi"]
 
 [resource]
-script = ExtResource("1_b7ksi")
+script = ExtResource("1_pafbi")
 id = "shattered"
 display_name = "Shattered"
 description = "Cracked defenses: takes 25% more damage."

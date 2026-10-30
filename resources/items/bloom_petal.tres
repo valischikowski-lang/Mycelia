@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_m7esm"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_4fa0t"]
 
 [resource]
-script = ExtResource("1_m7esm")
+script = ExtResource("1_4fa0t")
 id = "bloom_petal"
 display_name = "Guardian Petal"
 description = "Heavy as a shield, soft as a whisper."

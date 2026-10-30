@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_wgtaj"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_fl1yi"]
 
 [resource]
-script = ExtResource("1_wgtaj")
+script = ExtResource("1_fl1yi")
 id = "driftwalker_boots"
 display_name = "Driftwalker Boots"
 description = "They remember how to float, a little."

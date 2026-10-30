@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_gnf3u"]
+[ext_resource type="Script" path="res://scripts/combat/status_effect_data.gd" id="2_4n8sc"]
+[ext_resource type="Resource" path="res://resources/status_effects/gremlin_giggle.tres" id="3_punyd"]
+
+[resource]
+script = ExtResource("1_gnf3u")
+id = "giggle"
+display_name = "Giggle"
+description = "Hee. Hee hee. HEE."
+element = "chaos"
+mana_cost = 0
+base_damage = 0
+damage_variance = 0.1
+healing_value = 0
+accuracy = 0.95
+target_type = 2
+target_count = 1
+status_effects = Array[ExtResource("2_4n8sc")]([ExtResource("3_punyd")])
+duration = 2
+rarity = 0
+armor_pierce = 0.0
+mana_gain = 0
+draw_cards = 0
+special = ""
+vfx_style = "cosmic_gravity"
+icon_glyph = "✹"
+sound_cast = "cast_chaos"
+sound_impact = "impact_chaos"
+animation = {
+"cast_time": 0.45,
+"travel_time": 0.5
+}
+cooldown = 3
+ai_tags = PackedStringArray("buff")
+min_phase = 0
+charge_turns = 0

@@ -25,6 +25,9 @@ const OLLO_POS := Vector2(-9, 30)
 const PETALUNE_POS := Vector2(48, 46)
 const SIGHTING := Vector2(-16, -62)
 const CRYSTAL_GROVE := Vector2(98, -26)
+const CROOK := Vector2(-36, 54)
+const GRIZZLE_POS := Vector2(-31, 56)
+const MAIN_PATH := [Vector2(0, 92), Vector2(-6, 72), Vector2(4, 50), Vector2(-4, 26), Vector2(-14, 8), Vector2(-6, -14), Vector2(8, -30), Vector2(15, -35)]
 
 var ground_material: ShaderMaterial
 var circle_node: Node3D
@@ -97,6 +100,7 @@ func _build_terrain() -> void:
 		Vector4(HOLLOW.x, HOLLOW.y, 14, 1.2), Vector4(NORTH_GATE.x, NORTH_GATE.y + 4, 12, 2.5),
 		Vector4(HOLLOW_GATE.x, HOLLOW_GATE.y + 6, 10, 3.0), Vector4(DRIFT_START.x, DRIFT_START.y, 8, 0.5),
 		Vector4(CIRCLE.x, CIRCLE.y, 14, 4.0), Vector4(OLLO_POS.x, OLLO_POS.y, 7, 0.2),
+		Vector4(CROOK.x, CROOK.y, 20, 0.8),
 	]
 	terrain.basins = [Vector4(LAKE.x, LAKE.y, LAKE_R, 2.8)]
 	terrain.paths = [
@@ -106,6 +110,7 @@ func _build_terrain() -> void:
 		{"points": PackedVector2Array([Vector2(KEEPER.x - 4, KEEPER.y - 14), Vector2(6, -76), Vector2(2, -100), Vector2(NORTH_GATE.x, NORTH_GATE.y + 6)]), "width": 3.0},
 		{"points": PackedVector2Array([Vector2(-6, -14), Vector2(-30, -58), Vector2(HOLLOW_GATE.x, HOLLOW_GATE.y + 8)]), "width": 2.2},
 		{"points": PackedVector2Array([Vector2(6, -76), Vector2(26, -74), Vector2(DRIFT_START.x - 2, DRIFT_START.y)]), "width": 2.0},
+		{"points": PackedVector2Array([Vector2(1, 58), Vector2(-14, 56), Vector2(CROOK.x, CROOK.y)]), "width": 2.8},
 	]
 	terrain.water_level = -0.9
 	add_child(terrain)
@@ -123,7 +128,10 @@ func _build_landmarks() -> void:
 	MeadowLandmarks.north_gate(self, NORTH_GATE)
 	MeadowLandmarks.hollow_gate(self, HOLLOW_GATE)
 	MeadowLandmarks.hidden_hollow(self, HOLLOW, HOLLOW_ENTRANCE)
-	MeadowLandmarks.distant_village(self, Vector2(10, -285))
+	MeadowLandmarks.dark_castle(self, Vector2(10, -270))
+	MeadowLandmarks.crookhollow(self, CROOK)
+	MeadowLandmarks.lantern_row(self, PackedVector2Array(MAIN_PATH), 15.0, 2.6)
+	MeadowLandmarks.lantern_row(self, PackedVector2Array([Vector2(1, 58), Vector2(-14, 56), Vector2(-24, 55)]), 9.0, 2.2)
 	_build_awakening_hollow()
 	_build_drift_route()
 
@@ -247,6 +255,7 @@ func _scatter() -> Scatter:
 	s.exclude_circle(Vector3(OLLO_POS.x, 0, OLLO_POS.y), 5.0)
 	s.exclude_circle(Vector3(PETALUNE_POS.x, 0, PETALUNE_POS.y), 5.0)
 	s.exclude_circle(Vector3(SIGHTING.x, 0, SIGHTING.y), 8.0)
+	s.exclude_circle(Vector3(CROOK.x, 0, CROOK.y), 19.0)
 	return s
 
 
@@ -780,6 +789,16 @@ func _build_npcs() -> void:
 	ollo.visual_kind = "ollo"
 	ollo.talk_radius = 1.8
 	_add(ollo, OLLO_POS)
+	var grizzle := NPC.new()
+	grizzle.npc_id = "mother_grizzleroot"
+	grizzle.display_name = "Mother Grizzleroot"
+	grizzle.title = "witch of Crookhollow (mostly harmless)"
+	grizzle.dialogue_id = "grizzleroot"
+	grizzle.visual_kind = "witch"
+	grizzle.talk_radius = 2.0
+	grizzle.interact_height = 1.5
+	_add(grizzle, GRIZZLE_POS)
+	grizzle.rotation.y = atan2(CROOK.x - GRIZZLE_POS.x, CROOK.y - GRIZZLE_POS.y) + PI
 
 
 # ------------------------------------------------------------------ creatures
@@ -805,6 +824,12 @@ func _build_creatures() -> void:
 	_creature("crystal_beetle", "enc_crystal_beetle", CRYSTAL_GROVE + Vector2(6, -4))
 	_creature("crystal_beetle", "enc_crystal_beetle", Vector2(92, 42))
 	_creature("crystal_beetle", "enc_beetle_pair", Vector2(-38, -52))
+	_creature("hollow_crone", "enc_crone", Vector2(-58, 40), "", {"home_radius": 8.0})
+	_creature("hollow_crone", "enc_coven", Vector2(-50, 76), "", {"home_radius": 6.0})
+	_creature("cackling_crone", "enc_crone", Vector2(-22, -40), "", {"home_radius": 8.0})
+	_creature("gnasher_gremlin", "enc_gremlin", Vector2(30, 76), "", {"home_radius": 12.0})
+	_creature("gnasher_gremlin", "enc_gremlin_gang", Vector2(-20, -92), "", {"home_radius": 12.0})
+	_creature("gnasher_gremlin", "enc_gremlin", Vector2(80, -50), "", {"home_radius": 12.0})
 	_creature("dream_fox", "enc_dream_fox", Vector2(48, -8), "", {"home_radius": 16.0})
 	# The Ancient Spore Golem sleeps before the Hollow Gate until challenged.
 	_creature("spore_golem", "enc_spore_golem", HOLLOW_GATE + Vector2(0, 9), "enc_spore_golem", {"home_radius": 0.5})

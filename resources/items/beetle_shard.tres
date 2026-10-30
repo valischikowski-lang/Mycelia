@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_qt3ec"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_ah74b"]
 
 [resource]
-script = ExtResource("1_qt3ec")
+script = ExtResource("1_ah74b")
 id = "beetle_shard"
 display_name = "Beetle Shard"
 description = "A sliver of crystal carapace, still faintly singing."

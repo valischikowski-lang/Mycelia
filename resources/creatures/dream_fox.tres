@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CreatureData" load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_tp4l7"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/starlit_pounce.tres" id="2_0r3is"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/moon_veil.tres" id="3_blwki"]
-[ext_resource type="Resource" path="res://resources/creatures/abilities/moonlight_lick.tres" id="4_qw7hb"]
-[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="5_iejf7"]
+[ext_resource type="Script" path="res://scripts/combat/spell_data.gd" id="1_l6857"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/starlit_pounce.tres" id="2_0rnpt"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/moon_veil.tres" id="3_lswxc"]
+[ext_resource type="Resource" path="res://resources/creatures/abilities/moonlight_lick.tres" id="4_opdhn"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_data.gd" id="5_bbq3n"]
 
 [resource]
-script = ExtResource("5_iejf7")
+script = ExtResource("5_bbq3n")
 id = "dream_fox"
 display_name = "Dream Fox"
 description = "Neither friendly nor not. It is deciding."
@@ -17,7 +17,7 @@ max_health = 52
 defense = 4
 power = 5
 speed = 18
-abilities = Array[ExtResource("1_tp4l7")]([ExtResource("2_0r3is"), ExtResource("3_blwki"), ExtResource("4_qw7hb")])
+abilities = Array[ExtResource("1_l6857")]([ExtResource("2_0rnpt"), ExtResource("3_lswxc"), ExtResource("4_opdhn")])
 personality = 2
 phase_thresholds = PackedFloat32Array()
 xp_reward = 55

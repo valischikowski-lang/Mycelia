@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="QuestData" load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_2gr42"]
-[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_we3q4"]
+[ext_resource type="Script" path="res://scripts/quests/quest_objective_data.gd" id="1_hqq06"]
+[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="2_r5sfd"]
 
-[sub_resource type="Resource" id="Resource_k412e"]
-script = ExtResource("1_2gr42")
+[sub_resource type="Resource" id="Resource_3kqpj"]
+script = ExtResource("1_hqq06")
 id = "collect_motes"
 description = "Collect Dream Motes for Madame Petalune"
 type = 1
@@ -13,8 +13,8 @@ required_amount = 5
 map_hint = Vector3(0, 0, 0)
 hint_region = "dreaming_meadow"
 
-[sub_resource type="Resource" id="Resource_u7x7g"]
-script = ExtResource("1_2gr42")
+[sub_resource type="Resource" id="Resource_j46d4"]
+script = ExtResource("1_hqq06")
 id = "return_petalune"
 description = "Return to Madame Petalune"
 type = 0
@@ -24,14 +24,14 @@ map_hint = Vector3(52, 0, 44)
 hint_region = "dreaming_meadow"
 
 [resource]
-script = ExtResource("2_we3q4")
+script = ExtResource("2_r5sfd")
 id = "lights_of_glimmermere"
 title = "Lights of Glimmermere"
 description = "Madame Petalune has lost her collection of Dream Motes to the wind. They drifted all over the meadow — some to places only the curious will find."
 category = 3
 prerequisites = PackedStringArray()
 min_level = 1
-objectives = Array[ExtResource("1_2gr42")]([SubResource("Resource_k412e"), SubResource("Resource_u7x7g")])
+objectives = Array[ExtResource("1_hqq06")]([SubResource("Resource_3kqpj"), SubResource("Resource_j46d4")])
 sequential = true
 auto_start = false
 reward_xp = 90

@@ -39,7 +39,7 @@ func _ready() -> void:
 	if unique_id != "" and Game.profile and Game.profile.world.won_encounters.has(unique_id):
 		queue_free()
 		return
-	rig = CreatureBuilder.build(data.visual_kind, data.tint)
+	rig = CreatureBuilder.build(data.visual_kind, data.tint, {"seed": data.id.hash() % 1000})
 	rig.scale = Vector3.ONE * data.visual_scale
 	add_child(rig)
 	home = global_position

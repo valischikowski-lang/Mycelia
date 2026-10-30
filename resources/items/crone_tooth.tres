@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_1vnyn"]
+
+[resource]
+script = ExtResource("1_1vnyn")
+id = "crone_tooth"
+display_name = "Crone's Tooth"
+description = "Long, yellow and crooked. It still bites if you're careless."
+category = 2
+rarity = 1
+max_stack = 99
+value = 9
+icon_color = Color(0.847059, 0.823529, 0.478431, 1)
+icon_glyph = "⚸"
+equip_slot = ""
+stat_bonuses = {}
+use_effect = {}

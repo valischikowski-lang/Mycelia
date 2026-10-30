@@ -183,6 +183,7 @@ static func sky(biome: BiomeData) -> ShaderMaterial:
 	m.set_shader_parameter("horizon_color", biome.sky_horizon)
 	m.set_shader_parameter("band_color", biome.sky_band)
 	m.set_shader_parameter("moon_color", biome.moon_color)
+	m.set_shader_parameter("ghost_color", biome.vein_color)
 	return m
 
 

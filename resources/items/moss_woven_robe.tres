@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_on350"]
+[ext_resource type="Script" path="res://scripts/inventory/item_data.gd" id="1_cy3q4"]
 
 [resource]
-script = ExtResource("1_on350")
+script = ExtResource("1_cy3q4")
 id = "moss_woven_robe"
 display_name = "Moss-Woven Robe"
 description = "Soft, warm, and slightly alive."

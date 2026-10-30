@@ -72,6 +72,10 @@ func _build_diorama() -> void:
 	keeper.position = Vector3(3.0, 0.2, 6.0)
 	keeper.rotation.y = 0.6
 	region.add_child(keeper)
+	var crone := CreatureBuilder.build("witch", Color.WHITE, {"seed": 7})
+	crone.position = Vector3(-3.5, 0.2, 5.0)
+	crone.rotation.y = -0.4
+	region.add_child(crone)
 	for i in 3:
 		var dr := CreatureBuilder.build("sky_drifter", Color.WHITE, {"seed": i})
 		dr.position = Vector3(rng.randf_range(-25, 25), rng.randf_range(10, 22), rng.randf_range(-30, 0))
@@ -129,6 +133,10 @@ func _build_ui() -> void:
 	var tm := ShaderMaterial.new()
 	tm.shader = TITLE_SHADER
 	tm.set_shader_parameter("width", 520.0)
+	# Dark fantasy: sickly green, bruise violet and lantern amber.
+	tm.set_shader_parameter("color_a", Color("#7dff8a"))
+	tm.set_shader_parameter("color_b", Color("#8a4dff"))
+	tm.set_shader_parameter("color_c", Color("#ffb347"))
 	title.material = tm
 	left.add_child(title)
 	var sub := UiTheme.label("— THE DREAMING REALMS —", 24, UiTheme.TEXT_DIM, UiTheme.bold_font())
